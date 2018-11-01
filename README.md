@@ -250,37 +250,67 @@ You can select which rule to use in the CONFIG>RULE SELECT screen.
 You can create your own rule by using Rule Editor.
 
 AVALANCHE        : A rule used to play AVALANCHE type games.
+
 AVALANCHE-CLASSIC: A rule used to play AVALANCHE type games, but is less flexible.
+
 CLASSIC0         : A classic rule that many Japanese players played like a monkey. Best suitable for RETRO MANIA mode.
+
 CLASSIC0-68K     : CLASSIC0 with reverse rotation.
+
 CLASSIC1         : Only 1 piece preview, no hold function, no hard drop function, less flexible wallkicks.
                    If you think standard rules are too easy, this rule might be suitable for you.
+
 CLASSIC2         : If you want faster play but dislike standard rules, this rule can help you.
+
 CLASSIC3         : If you dislike standard rules but classic 1-2 is too difficult, this rule is for you.
                    I and T shaped pieces has more flexible wallkicks.
+
 CLASSIC-EASY-A   : It is much easier than other classic rules. Block colors are also different.
+
 CLASSIC-EASY-A2  : Almost same as CLASSIC-EASY-A, but block colors are not different from others.
+
 CLASSIC-EASY-B   : Soft and hard drop behavior is reversed in this rule.
+
 CLASSIC-EASY-B2  : Almost same as CLASSIC-EASY-B, but block colors are not different from others.
+
 CLASSIC-S        : CLASSIC0 with reverse rotation and "Wall Only" wallkick. It can kick wall, but not the already placed blocks.
+
 DTET             : That game was so good that the evil king had to kill it. This rule is a bit tricky. Has ARE/line clear canceling.
+
 NINTENDO-L       : A classical rule that was bundled with a handheld gadget which was made by king of video game.
+
 NINTENDO-R       : A classical rule that was appeared before or after NINTENDO-L. Best suitable for RETRO MARATHON mode.
+
 PHYSICIAN        : A rule used to play PHYSICIAN type games.
+
 SPF              : A rule used to play SPF type games.
+
 SQUARE           : Rule designed to make it easier to build squares. Best suitable for SQUARE mode.
+
 STANDARD         : Suitable for almost all kinds of players.
+
 STANDARD-EXP     : Soft and hard drop behavior is reversed in this rule.
+
 STANDARD-FAST    : Suitable for fast game play.
+
 STANDARD-FAST-B  : Suitable for fast game play. Initial actions (initial rotation/hold) is less detected in this rule.
+
 STANDARD-FRIENDS : Pieces will spawn one space lower than usual, unless that space is occupied.
+
 STANDARD-GIZA    : hebo-MAI's rule. This rule is not too fast; giving you the opportunity to see the opponent's field in VS game.
+
 STANDARD-HARD    : Difficult than normal STANDARD rule.
+
 STANDARD-HARD128 : Slightly easier variant of STANDARD-HARD rule. You can move/rotate the piece 128 times.
+
 STANDARD-HOLDNEXT: A rule created by holdnext. Enjoy the power of orange sticks.
+
 STANDARD-J       : This variant has slow movements, nothing more than that.
+
 STANDARD-PLUS    : A rule created by Blink. STANDARD-FAST with no IRS/IHS and faster softdrop.
+
 STANDARD-SUPER3  : A classical rule with the rotation system of STANDARD rules but no wallkicks. Has ARE canceling.
+
 STANDARD-ZERO    : A rule created by Wojtek. STANDARD-PLUS with 20G Soft Drop and Instant DAS.
 
 ## Game mode
