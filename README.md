@@ -1,4 +1,4 @@
-﻿# NullpoMino (Version 7.5.0)
+﻿# NullpoMino
 
 **NullpoMino** is an open-source action puzzle game that works on the Java platform. It has a wide variety of single-player modes and netplay to allow players to compete over the Internet or LAN.
 
@@ -27,25 +27,25 @@ This game needs Java Runtime Environment 1.5 or newer version to run. <https://w
 
 ### Windows
 
-Double-click "play_swing.bat", "play_slick.bat", "NullpoMino.exe" or "play_sdl.bat".
+Double-click `play_swing.bat`, `play_slick.bat`, `NullpoMino.exe` or `play_sdl.bat`.
 
-* "play_swing.bat" starts Swing version of NullpoMino.
+* `play_swing.bat` starts Swing version of NullpoMino.
   * Does not use any OS-dependent libraries. However, performance and sound quality are poor. There is no support for joysticks. BGM is also missing.
-* "play_slick.bat" or "NullpoMino.exe" starts Slick version of NullpoMino.
+* `play_slick.bat` or `NullpoMino.exe` starts Slick version of NullpoMino.
   * An OpenGL compatible video card required, some PCs may have problems with keyboard. Has limited support of joysticks.
-* "play_sdl.bat" starts SDL version of NullpoMino.
+* `play_sdl.bat` starts SDL version of NullpoMino.
   * Aside from random crashing bug which I can't fix it, it's most stable for 32bit PCs, I think. Has best support of joysticks. Won't work with 64bit PCs.
-* "ruleeditor.bat" runs Rule Editor, where you can create your own ruleset.
-* "sequencer.bat" runs Sequence Viewer, which should be helpful for TASing. (Created by Zircean)
-* "musiclisteditor.bat" runs MusicListEditor, where you can configure which music file to use.
-* "netserver.bat" runs NetServer (ALPHA!), which is a server for netplay feature. More details later.
-* "netadmin.bat" runs NetAdmin, which can be used to manage your running NetServer.
-* "airankstool.bat" runs AI Ranks Tool, which can be used to generate a ranks file used by Ranks AI. (Requires HUGE RAM!)
+* `ruleeditor.bat` runs Rule Editor, where you can create your own ruleset.
+* `sequencer.bat` runs Sequence Viewer, which should be helpful for TASing. (Created by Zircean)
+* `musiclisteditor.bat` runs MusicListEditor, where you can configure which music file to use.
+* `netserver.bat` runs NetServer (ALPHA!), which is a server for netplay feature. More details later.
+* `netadmin.bat` runs NetAdmin, which can be used to manage your running NetServer.
+* `airankstool.bat` runs AI Ranks Tool, which can be used to generate a ranks file used by Ranks AI. (Requires HUGE RAM!)
 
 ### Linux
 
 First, open a X-terminal emulator. Next, navigate to the folder where the archive was extracted.
-(Use "ls" and "cd" command to navigate the folder)
+(Use `ls` and `cd` command to navigate the folder)
 Finally, enter the following commands:
 
 #### To start Swing version
@@ -132,8 +132,8 @@ Depending on your video card and Linux version, you might encounter small or big
 ##### Slick version problems
 
 * Turn off 3D desktop (such as Beryl) to run smoother.
-* Because of a bug (or limitation) of SCIM and LWJGL, the "play_slick" shell script will disable any IME by default.
-* In the "play_slick" shell script, "XMODIFIERS=@im=none" is not needed if your system don't have SCIM.
+* Because of a bug (or limitation) of SCIM and LWJGL, the `play_slick` shell script will disable any IME by default.
+* In the `play_slick` shell script, `XMODIFIERS=@im=none` is not needed if your system don't have SCIM.
 * If you want to run the game with SCIM enabled, try the following commands (you need access of sudo):
 
 ```sh
@@ -143,11 +143,11 @@ java -cp bin:NullpoMino.jar:lib/log4j-1.2.15.jar:lib/slick.jar:lib/lwjgl.jar:lib
 
 The first command will allow everyone (including the game itself) to read keyboard input directly.
 You don't have to execute this command again until you reboot/shutdown your operating system.
-The second command will run the game with "-j" option.
+The second command will run the game with `-j` option.
 Normally, the game will read keyboard input from LWJGL, which conflicts with SCIM.
 However, when this option is used, the game will try to read keyboard input directly from your operating system.
 So you can play the game with SCIM enabled.
-Please note when "-j" option is used, some keys (such as ;) won't be detected.
+Please note when `-j` option is used, some keys (such as ;) won't be detected.
 
 ##### SDL version problems
 
@@ -569,7 +569,7 @@ Only for use with "SPF" rule.
 ## How to add BGM
 
 Well, currently this game does not have any BGM by default.
-However, if you want, you can add any (but must not too big) music file to the game by using MusicListEditor ("musiclisteditor.bat").
+However, if you want, you can add any (but must not too big) music file to the game by using MusicListEditor (`musiclisteditor.bat`).
 If you don't want the BGM to loop, enable the checkbox next to the filename.
 Supported file formats: .ogg .wav .xm .mod .aif .aiff
 
@@ -609,10 +609,10 @@ To enter the netplay mode:
 To add a new server to the list:
 
 1. In the server select screen, click "Add..." button.
-2. You are prompted to enter hostname (or IP address) and the port number (Optional). Server address format is "Hostname:Port". If the server is using default port 9200, you may omit ":9200" part.
+2. You are prompted to enter hostname (or IP address) and the port number (Optional). Server address format is `Hostname:Port`. If the server is using default port 9200, you may omit `:9200` part.
 3. Click OK button if you are done.
 
-To test a netplay in the local, launch the netserver.bat and add "127.0.0.1" to the server list.
+To test a netplay in the local, launch the `netserver.bat` and add `127.0.0.1` to the server list.
 
 harddrop.com is running a netplay server. Thanks harddrop.com members!
 
