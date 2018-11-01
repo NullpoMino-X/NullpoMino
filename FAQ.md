@@ -1,4 +1,4 @@
-## FAQ
+# FAQ
 
 Q: My Joystick/Gamepads doesn't work correctly in Slick version.
 
