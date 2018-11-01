@@ -79,13 +79,13 @@ License: BSD
 
 Sound effects:
 
-	ザ・マッチメイカァズ (The matchmakers)
-	http://osabisi.sakura.ne.jp/m2/
-	(Excite translation: http://www.excite.co.jp/world/english/web/?wb_url=http%3A%2F%2Fosabisi.sakura.ne.jp%2Fm2%2F&wb_lp=JAEN&wb_dis=2)
+ザ・マッチメイカァズ (The matchmakers)
+http://osabisi.sakura.ne.jp/m2/
+(Excite translation: http://www.excite.co.jp/world/english/web/?wb_url=http%3A%2F%2Fosabisi.sakura.ne.jp%2Fm2%2F&wb_lp=JAEN&wb_dis=2)
 
-	TAM Music Factory
-	http://www.tam-music.com/
-	(Excite translation: http://www.excite.co.jp/world/english/web/?wb_url=http%3A%2F%2Fwww.tam%2Dmusic.com%2F&wb_lp=JAEN&wb_dis=2)
+TAM Music Factory
+http://www.tam-music.com/
+(Excite translation: http://www.excite.co.jp/world/english/web/?wb_url=http%3A%2F%2Fwww.tam%2Dmusic.com%2F&wb_lp=JAEN&wb_dis=2)
 
 Background Images (res/graphics/oldbg):
 
