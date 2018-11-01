@@ -42,13 +42,6 @@ before_script:
     - 'mvn $MAVEN_CLI_OPTS test-compile'
 
 # For merge requests do not `deploy` but only run `verify`.
-# See https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
-.verify: &verify
-  stage: test
-  script:
-    - 'mvn $MAVEN_CLI_OPTS verify site site:stage'
-  except:
-    - master
 
 
 # Validate merge requests using JDK8
@@ -71,7 +64,7 @@ verify:jdk8:
 # See https://maven.apache.org/settings.html
 deploy:jdk8:
   # Use stage test here, so the pages job may later pickup the created site.
-  stage: test
+  stage: deploy
   script:
     - 'mvn $MAVEN_CLI_OPTS deploy site site:stage'
   only:
@@ -79,21 +72,5 @@ deploy:jdk8:
   # Archive up the built documentation site.
   artifacts:
     paths:
-    - target/staging
+    - nullpomino/nullpomino-run/target/install
   image: maven:3.3.9-jdk-8
-
-
-pages:
-  image: busybox:latest
-  stage: deploy
-  script:
-    # Because Maven appends the artifactId automatically to the staging path if you did define a parent pom,
-    # you might need to use `mv target/staging/YOUR_ARTIFACT_ID public` instead.
-    - mv target/staging public
-  dependencies:
-    - deploy:jdk8
-  artifacts:
-    paths:
-    - public
-  only:
-    - master
