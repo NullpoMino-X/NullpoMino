@@ -70,10 +70,10 @@ deploy:jdk8:
   # Use stage test here, so the pages job may later pickup the created site.
   stage: test
   script:
-    - 'mvn install'
+    - mvn install
   # Archive up the built documentation site.
   artifacts:
     paths:
-    - nullpomino/nullpomino-run/target/install
+    - nullpomino/nullpomino-run/target/install/
   image: maven:3.3.9-jdk-8
 
