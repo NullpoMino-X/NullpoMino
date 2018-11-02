@@ -74,6 +74,6 @@ deploy:jdk8:
   # Archive up the built documentation site.
   artifacts:
     paths:
-    - nullpomino/nullpomino-run/target/install/
+    - nullpomino/nullpomino-run/target/install
   image: maven:3.3.9-jdk-8
 
