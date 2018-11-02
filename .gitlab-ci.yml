@@ -73,6 +73,7 @@ deploy:jdk8:
     - 'mvn install'
     - cd ..
     - cd nullpomino-core
+    - ls
   only:
     - master
   # Archive up the built documentation site.
