@@ -56,293 +56,325 @@ import org.apache.log4j.Logger;
  * Rules of selection screen frame
  */
 public class RuleSelectFrame extends JFrame implements ActionListener {
-	/** Serial version ID */
-	private static final long serialVersionUID = 1L;
+    /**
+     * Serial version ID
+     */
+    private static final long serialVersionUID = 1L;
 
-	/** Log */
-	static Logger log = Logger.getLogger(RuleSelectFrame.class);
+    /**
+     * Log
+     */
+    static Logger log = Logger.getLogger(RuleSelectFrame.class);
 
-	/** Owner window */
-	protected NullpoMinoSwing owner;
+    /**
+     * Owner window
+     */
+    protected NullpoMinoSwing owner;
 
-	/** Player number */
-	protected int playerID;
+    /**
+     * Player number
+     */
+    protected int playerID;
 
-	/** Filename */
-	private String[] strFileNameList;
+    /**
+     * Filename
+     */
+    private String[] strFileNameList;
 
-	/** Current Rules file */
-	private String[] strCurrentFileName;
+    /**
+     * Current Rules file
+     */
+    private String[] strCurrentFileName;
 
-	/** Current Rule name */
-	private String[] strCurrentRuleName;
+    /**
+     * Current Rule name
+     */
+    private String[] strCurrentRuleName;
 
-	/** Rule entries */
-	private LinkedList<RuleEntry> ruleEntries;
+    /**
+     * Rule entries
+     */
+    private LinkedList<RuleEntry> ruleEntries;
 
-	/** Rule select listbox */
-	private JList[] listboxRule;
+    /**
+     * Rule select listbox
+     */
+    private JList[] listboxRule;
 
-	/** Tab */
-	private JTabbedPane tabPane;
+    /**
+     * Tab
+     */
+    private JTabbedPane tabPane;
 
-	/**
-	 * Constructor
-	 * @param owner Owner window
-	 * @throws HeadlessException If GUI cannot be used
-	 */
-	public RuleSelectFrame(NullpoMinoSwing owner) throws HeadlessException {
-		super();
-		this.owner = owner;
+    /**
+     * Constructor
+     *
+     * @param owner Owner window
+     * @throws HeadlessException If GUI cannot be used
+     */
+    public RuleSelectFrame(NullpoMinoSwing owner) throws HeadlessException {
+        super();
+        this.owner = owner;
 
-		// Get rule list
-		strFileNameList = getRuleFileList();
-		if(strFileNameList == null) {
-			log.error("Rule file directory not found");
-		} else {
-			createRuleEntries(strFileNameList);
-		}
+        // Get rule list
+        strFileNameList = getRuleFileList();
+        if (strFileNameList == null) {
+            log.error("Rule file directory not found");
+        } else {
+            createRuleEntries(strFileNameList);
+        }
 
-		// GUI Initialization
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		initUI();
-		pack();
-	}
+        // GUI Initialization
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        initUI();
+        pack();
+    }
 
-	/**
-	 * Setup rule selector
-	 * @param pl Player number
-	 */
-	public void load(int pl) {
-		this.playerID = pl;
+    /**
+     * Setup rule selector
+     *
+     * @param pl Player number
+     */
+    public void load(int pl) {
+        this.playerID = pl;
 
-		setTitle(NullpoMinoSwing.getUIText("Title_RuleSelect") + " (" + (playerID+1) + "P)");
+        setTitle(NullpoMinoSwing.getUIText("Title_RuleSelect") + " (" + (playerID + 1) + "P)");
 
-		strCurrentFileName = new String[GameEngine.MAX_GAMESTYLE];
-		strCurrentRuleName = new String[GameEngine.MAX_GAMESTYLE];
+        strCurrentFileName = new String[GameEngine.MAX_GAMESTYLE];
+        strCurrentRuleName = new String[GameEngine.MAX_GAMESTYLE];
 
-		for(int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
-			if(i == 0) {
-				strCurrentFileName[i] = NullpoMinoSwing.propGlobal.getProperty(playerID + ".rulefile", "");
-				strCurrentRuleName[i] = NullpoMinoSwing.propGlobal.getProperty(playerID + ".rulename", "");
-			} else {
-				strCurrentFileName[i] = NullpoMinoSwing.propGlobal.getProperty(playerID + ".rulefile." + i, "");
-				strCurrentRuleName[i] = NullpoMinoSwing.propGlobal.getProperty(playerID + ".rulename." + i, "");
-			}
+        for (int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
+            if (i == 0) {
+                strCurrentFileName[i] = NullpoMinoSwing.propGlobal.getProperty(playerID + ".rulefile", "");
+                strCurrentRuleName[i] = NullpoMinoSwing.propGlobal.getProperty(playerID + ".rulename", "");
+            } else {
+                strCurrentFileName[i] = NullpoMinoSwing.propGlobal.getProperty(playerID + ".rulefile." + i, "");
+                strCurrentRuleName[i] = NullpoMinoSwing.propGlobal.getProperty(playerID + ".rulename." + i, "");
+            }
 
-			LinkedList<RuleEntry> subEntries = getSubsetEntries(i);
+            LinkedList<RuleEntry> subEntries = getSubsetEntries(i);
 
-			for(int j = 0; j < subEntries.size(); j++) {
-				if(subEntries.get(j).filename.equals(strCurrentFileName[i])) {
-					listboxRule[i].setSelectedIndex(j);
-				}
-			}
-		}
+            for (int j = 0; j < subEntries.size(); j++) {
+                if (subEntries.get(j).filename.equals(strCurrentFileName[i])) {
+                    listboxRule[i].setSelectedIndex(j);
+                }
+            }
+        }
 
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				listboxRule[0].requestFocusInWindow();
-			}
-		});
-	}
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                listboxRule[0].requestFocusInWindow();
+            }
+        });
+    }
 
-	/**
-	 * GUIAInitialization
-	 */
-	protected void initUI() {
-		this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+    /**
+     * GUIAInitialization
+     */
+    protected void initUI() {
+        this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
-		// Tab
-		tabPane = new JTabbedPane();
-		tabPane.setAlignmentX(LEFT_ALIGNMENT);
-		this.add(tabPane);
+        // Tab
+        tabPane = new JTabbedPane();
+        tabPane.setAlignmentX(LEFT_ALIGNMENT);
+        this.add(tabPane);
 
-		// Rules
-		listboxRule = new JList[GameEngine.MAX_GAMESTYLE];
-		for(int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
-			listboxRule[i] = new JList(extractRuleListFromRuleEntries(i));
-			JScrollPane scpaneRule = new JScrollPane(listboxRule[i]);
-			scpaneRule.setPreferredSize(new Dimension(380, 250));
-			scpaneRule.setAlignmentX(LEFT_ALIGNMENT);
-			tabPane.addTab(GameEngine.GAMESTYLE_NAMES[i], scpaneRule);
-		}
+        // Rules
+        listboxRule = new JList[GameEngine.MAX_GAMESTYLE];
+        for (int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
+            listboxRule[i] = new JList(extractRuleListFromRuleEntries(i));
+            JScrollPane scpaneRule = new JScrollPane(listboxRule[i]);
+            scpaneRule.setPreferredSize(new Dimension(380, 250));
+            scpaneRule.setAlignmentX(LEFT_ALIGNMENT);
+            tabPane.addTab(GameEngine.GAMESTYLE_NAMES[i], scpaneRule);
+        }
 
-		//  default Back to button
-		JButton btnUseDefault = new JButton(NullpoMinoSwing.getUIText("RuleSelect_UseDefault"));
-		btnUseDefault.setMnemonic('D');
-		btnUseDefault.addActionListener(this);
-		btnUseDefault.setActionCommand("RuleSelect_UseDefault");
-		btnUseDefault.setAlignmentX(LEFT_ALIGNMENT);
-		btnUseDefault.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
-		btnUseDefault.setVisible(false);
-		this.add(btnUseDefault);
+        //  default Back to button
+        JButton btnUseDefault = new JButton(NullpoMinoSwing.getUIText("RuleSelect_UseDefault"));
+        btnUseDefault.setMnemonic('D');
+        btnUseDefault.addActionListener(this);
+        btnUseDefault.setActionCommand("RuleSelect_UseDefault");
+        btnUseDefault.setAlignmentX(LEFT_ALIGNMENT);
+        btnUseDefault.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
+        btnUseDefault.setVisible(false);
+        this.add(btnUseDefault);
 
-		//  buttonKind
-		JPanel pButtons = new JPanel();
-		pButtons.setLayout(new BoxLayout(pButtons, BoxLayout.X_AXIS));
-		pButtons.setAlignmentX(LEFT_ALIGNMENT);
-		this.add(pButtons);
+        //  buttonKind
+        JPanel pButtons = new JPanel();
+        pButtons.setLayout(new BoxLayout(pButtons, BoxLayout.X_AXIS));
+        pButtons.setAlignmentX(LEFT_ALIGNMENT);
+        this.add(pButtons);
 
-		JButton btnOK = new JButton(NullpoMinoSwing.getUIText("RuleSelect_OK"));
-		btnOK.setMnemonic('O');
-		btnOK.addActionListener(this);
-		btnOK.setActionCommand("RuleSelect_OK");
-		btnOK.setAlignmentX(LEFT_ALIGNMENT);
-		btnOK.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
-		pButtons.add(btnOK);
-		this.getRootPane().setDefaultButton(btnOK);
+        JButton btnOK = new JButton(NullpoMinoSwing.getUIText("RuleSelect_OK"));
+        btnOK.setMnemonic('O');
+        btnOK.addActionListener(this);
+        btnOK.setActionCommand("RuleSelect_OK");
+        btnOK.setAlignmentX(LEFT_ALIGNMENT);
+        btnOK.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
+        pButtons.add(btnOK);
+        this.getRootPane().setDefaultButton(btnOK);
 
-		JButton btnCancel = new JButton(NullpoMinoSwing.getUIText("RuleSelect_Cancel"));
-		btnCancel.setMnemonic('C');
-		btnCancel.addActionListener(this);
-		btnCancel.setActionCommand("RuleSelect_Cancel");
-		btnCancel.setAlignmentX(LEFT_ALIGNMENT);
-		btnCancel.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
-		pButtons.add(btnCancel);
-	}
+        JButton btnCancel = new JButton(NullpoMinoSwing.getUIText("RuleSelect_Cancel"));
+        btnCancel.setMnemonic('C');
+        btnCancel.addActionListener(this);
+        btnCancel.setActionCommand("RuleSelect_Cancel");
+        btnCancel.setAlignmentX(LEFT_ALIGNMENT);
+        btnCancel.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
+        pButtons.add(btnCancel);
+    }
 
-	/**
-	 * Get rule file list
-	 * @return Rule file list. null if directory doesn't exist.
-	 */
-	private String[] getRuleFileList() {
-		File dir = new File("config/rule");
+    /**
+     * Get rule file list
+     *
+     * @return Rule file list. null if directory doesn't exist.
+     */
+    private String[] getRuleFileList() {
+        File dir = new File("config/rule");
 
-		FilenameFilter filter = new FilenameFilter() {
-			public boolean accept(File dir1, String name) {
-				return name.endsWith(".rul");
-			}
-		};
+        FilenameFilter filter = new FilenameFilter() {
+            public boolean accept(File dir1, String name) {
+                return name.endsWith(".rul");
+            }
+        };
 
-		String[] list = dir.list(filter);
+        String[] list = dir.list(filter);
 
-		if(!System.getProperty("os.name").startsWith("Windows")) {
-			// Sort if not windows
-			Arrays.sort(list);
-		}
+        if (!System.getProperty("os.name").startsWith("Windows")) {
+            // Sort if not windows
+            Arrays.sort(list);
+        }
 
-		return list;
-	}
+        return list;
+    }
 
-	/**
-	 * Create rule entries
-	 * @param filelist Rule file list
-	 */
-	private void createRuleEntries(String[] filelist) {
-		ruleEntries = new LinkedList<RuleEntry>();
+    /**
+     * Create rule entries
+     *
+     * @param filelist Rule file list
+     */
+    private void createRuleEntries(String[] filelist) {
+        ruleEntries = new LinkedList<RuleEntry>();
 
-		for(int i = 0; i < filelist.length; i++) {
-			RuleEntry entry = new RuleEntry();
+        for (int i = 0; i < filelist.length; i++) {
+            RuleEntry entry = new RuleEntry();
 
-			File file = new File("config/rule/" + filelist[i]);
-			entry.filename = filelist[i];
-			entry.filepath = file.getPath();
+            File file = new File("config/rule/" + filelist[i]);
+            entry.filename = filelist[i];
+            entry.filepath = file.getPath();
 
-			CustomProperties prop = new CustomProperties();
-			try {
-				FileInputStream in = new FileInputStream("config/rule/" + filelist[i]);
-				prop.load(in);
-				in.close();
-				entry.rulename = prop.getProperty("0.ruleopt.strRuleName", "");
-				entry.style = prop.getProperty("0.ruleopt.style", 0);
-			} catch (Exception e) {
-				entry.rulename = "";
-				entry.style = -1;
-			}
+            CustomProperties prop = new CustomProperties();
+            try {
+                FileInputStream in = new FileInputStream("config/rule/" + filelist[i]);
+                prop.load(in);
+                in.close();
+                entry.rulename = prop.getProperty("0.ruleopt.strRuleName", "");
+                entry.style = prop.getProperty("0.ruleopt.style", 0);
+            } catch (Exception e) {
+                entry.rulename = "";
+                entry.style = -1;
+            }
 
-			ruleEntries.add(entry);
-		}
-	}
+            ruleEntries.add(entry);
+        }
+    }
 
-	/**
-	 * Get subset of rule entries
-	 * @param currentStyle Current style
-	 * @return Subset of rule entries
-	 */
-	private LinkedList<RuleEntry> getSubsetEntries(int currentStyle) {
-		LinkedList<RuleEntry> subEntries = new LinkedList<RuleEntry>();
-		for(int i = 0; i < ruleEntries.size(); i++) {
-			if(ruleEntries.get(i).style == currentStyle) {
-				subEntries.add(ruleEntries.get(i));
-			}
-		}
-		return subEntries;
-	}
+    /**
+     * Get subset of rule entries
+     *
+     * @param currentStyle Current style
+     * @return Subset of rule entries
+     */
+    private LinkedList<RuleEntry> getSubsetEntries(int currentStyle) {
+        LinkedList<RuleEntry> subEntries = new LinkedList<RuleEntry>();
+        for (int i = 0; i < ruleEntries.size(); i++) {
+            if (ruleEntries.get(i).style == currentStyle) {
+                subEntries.add(ruleEntries.get(i));
+            }
+        }
+        return subEntries;
+    }
 
-	/**
-	 * Get rule name + file name list as String[]
-	 * @param currentStyle Current style
-	 * @return Rule name + file name list
-	 */
-	private String[] extractRuleListFromRuleEntries(int currentStyle) {
-		LinkedList<RuleEntry> subEntries = getSubsetEntries(currentStyle);
+    /**
+     * Get rule name + file name list as String[]
+     *
+     * @param currentStyle Current style
+     * @return Rule name + file name list
+     */
+    private String[] extractRuleListFromRuleEntries(int currentStyle) {
+        LinkedList<RuleEntry> subEntries = getSubsetEntries(currentStyle);
 
-		String[] result = new String[subEntries.size()];
-		for(int i = 0; i < subEntries.size(); i++) {
-			RuleEntry entry = subEntries.get(i);
-			result[i] = entry.rulename + " (" + entry.filename + ")";
-		}
+        String[] result = new String[subEntries.size()];
+        for (int i = 0; i < subEntries.size(); i++) {
+            RuleEntry entry = subEntries.get(i);
+            result[i] = entry.rulename + " (" + entry.filename + ")";
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/*
-	 * Menu What Happens at Runtime
-	 */
-	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand() == "RuleSelect_OK") {
-			for(int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
-				int id = listboxRule[i].getSelectedIndex();
-				LinkedList<RuleEntry> subEntries = getSubsetEntries(i);
-				RuleEntry entry = subEntries.get(id);
+    /*
+     * Menu What Happens at Runtime
+     */
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand() == "RuleSelect_OK") {
+            for (int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
+                int id = listboxRule[i].getSelectedIndex();
+                LinkedList<RuleEntry> subEntries = getSubsetEntries(i);
+                RuleEntry entry = subEntries.get(id);
 
-				if(i == 0) {
-					if(id >= 0) {
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rule", entry.filepath);
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulefile", entry.filename);
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulename", entry.rulename);
-					} else {
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rule", "");
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulefile", "");
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulename", "");
-					}
-				} else {
-					if(id >= 0) {
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rule." + i, entry.filepath);
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulefile." + i, entry.filename);
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulename." + i, entry.rulename);
-					} else {
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rule." + i, "");
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulefile." + i, "");
-						NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulename." + i, "");
-					}
-				}
-			}
-			NullpoMinoSwing.saveConfig();
-			this.setVisible(false);
-		}
-		else if(e.getActionCommand() == "RuleSelect_UseDefault") {
-			int id = tabPane.getSelectedIndex();
-			if((id >= 0) && (id < listboxRule.length)) {
-				listboxRule[id].clearSelection();
-			}
-		}
-		else if(e.getActionCommand() == "RuleSelect_Cancel") {
-			this.setVisible(false);
-		}
-	}
+                if (i == 0) {
+                    if (id >= 0) {
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rule", entry.filepath);
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulefile", entry.filename);
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulename", entry.rulename);
+                    } else {
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rule", "");
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulefile", "");
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulename", "");
+                    }
+                } else {
+                    if (id >= 0) {
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rule." + i, entry.filepath);
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulefile." + i, entry.filename);
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulename." + i, entry.rulename);
+                    } else {
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rule." + i, "");
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulefile." + i, "");
+                        NullpoMinoSwing.propGlobal.setProperty(playerID + ".rulename." + i, "");
+                    }
+                }
+            }
+            NullpoMinoSwing.saveConfig();
+            this.setVisible(false);
+        } else if (e.getActionCommand() == "RuleSelect_UseDefault") {
+            int id = tabPane.getSelectedIndex();
+            if ((id >= 0) && (id < listboxRule.length)) {
+                listboxRule[id].clearSelection();
+            }
+        } else if (e.getActionCommand() == "RuleSelect_Cancel") {
+            this.setVisible(false);
+        }
+    }
 
-	/**
-	 * Rule entry
-	 */
-	private class RuleEntry {
-		/** File name */
-		public String filename;
-		/** File path */
-		public String filepath;
-		/** Rule name */
-		public String rulename;
-		/** Game style */
-		public int style;
-	}
+    /**
+     * Rule entry
+     */
+    private class RuleEntry {
+        /**
+         * File name
+         */
+        public String filename;
+        /**
+         * File path
+         */
+        public String filepath;
+        /**
+         * Rule name
+         */
+        public String rulename;
+        /**
+         * Game style
+         */
+        public int style;
+    }
 }

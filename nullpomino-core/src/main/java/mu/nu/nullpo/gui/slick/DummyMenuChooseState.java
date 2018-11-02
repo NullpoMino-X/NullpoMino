@@ -37,135 +37,140 @@ import org.newdawn.slick.state.StateBasedGame;
  * Dummy class for menus where the player picks from a list of options
  */
 public abstract class DummyMenuChooseState extends BaseGameState {
-	/** Cursor position */
-	protected int cursor = 0;
+    /**
+     * Cursor position
+     */
+    protected int cursor = 0;
 
-	/** Max cursor value */
-	protected int maxCursor;
+    /**
+     * Max cursor value
+     */
+    protected int maxCursor;
 
-	/** Top choice's y-coordinate */
-	protected int minChoiceY;
+    /**
+     * Top choice's y-coordinate
+     */
+    protected int minChoiceY;
 
-	/** Set to false to ignore mouse input */
-	protected boolean mouseEnabled;
+    /**
+     * Set to false to ignore mouse input
+     */
+    protected boolean mouseEnabled;
 
-	public DummyMenuChooseState () {
-		maxCursor = -1;
-		minChoiceY = 3;
-		mouseEnabled = true;
-	}
+    public DummyMenuChooseState() {
+        maxCursor = -1;
+        minChoiceY = 3;
+        mouseEnabled = true;
+    }
 
-	@Override
-	protected void updateImpl(GameContainer container, StateBasedGame game, int delta) throws SlickException
-	{
-		// TTF font load
-		if(ResourceHolderSlick.ttfFont != null) ResourceHolderSlick.ttfFont.loadGlyphs();
+    @Override
+    protected void updateImpl(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+        // TTF font load
+        if (ResourceHolderSlick.ttfFont != null) ResourceHolderSlick.ttfFont.loadGlyphs();
 
-		// Update key input states
-		GameKeySlick.gamekey[0].update(container.getInput());
+        // Update key input states
+        GameKeySlick.gamekey[0].update(container.getInput());
 
-		// Mouse
-		boolean mouseConfirm = false;
-		if (mouseEnabled)
-			mouseConfirm = updateMouseInput(container.getInput());
+        // Mouse
+        boolean mouseConfirm = false;
+        if (mouseEnabled)
+            mouseConfirm = updateMouseInput(container.getInput());
 
-		if (maxCursor >= 0) {
-			// Cursor movement
-			if(GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_UP)) {
-				cursor--;
-				if(cursor < 0) cursor = maxCursor;
-				ResourceHolderSlick.soundManager.play("cursor");
-			}
-			if(GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_DOWN)) {
-			    cursor++;
-				if(cursor > maxCursor) cursor = 0;
-				ResourceHolderSlick.soundManager.play("cursor");
-			}
+        if (maxCursor >= 0) {
+            // Cursor movement
+            if (GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_UP)) {
+                cursor--;
+                if (cursor < 0) cursor = maxCursor;
+                ResourceHolderSlick.soundManager.play("cursor");
+            }
+            if (GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_DOWN)) {
+                cursor++;
+                if (cursor > maxCursor) cursor = 0;
+                ResourceHolderSlick.soundManager.play("cursor");
+            }
 
-			int change = 0;
-			if(GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_LEFT)) change = -1;
-			if(GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_RIGHT)) change = 1;
+            int change = 0;
+            if (GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_LEFT)) change = -1;
+            if (GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_RIGHT)) change = 1;
 
-			if(change != 0)
-				onChange(container, game, delta, change);
+            if (change != 0)
+                onChange(container, game, delta, change);
 
-			// Confirm button
-			if(GameKeySlick.gamekey[0].isPushKey(GameKeySlick.BUTTON_A) || mouseConfirm) {
-				if (onDecide(container, game, delta))
-					return;
-			}
+            // Confirm button
+            if (GameKeySlick.gamekey[0].isPushKey(GameKeySlick.BUTTON_A) || mouseConfirm) {
+                if (onDecide(container, game, delta))
+                    return;
+            }
 
-		}
-		if(GameKeySlick.gamekey[0].isPushKey(GameKeySlick.BUTTON_D)) {
-			if (onPushButtonD(container, game, delta));
-				return;
-		}
+        }
+        if (GameKeySlick.gamekey[0].isPushKey(GameKeySlick.BUTTON_D)) {
+            if (onPushButtonD(container, game, delta)) ;
+            return;
+        }
 
-		// Cancel button
-		if(GameKeySlick.gamekey[0].isPushKey(GameKeySlick.BUTTON_B) || MouseInputSlick.mouseInput.isMouseRightClicked()) {
-			if (onCancel(container, game, delta));
-				return;
-		}
-	}
+        // Cancel button
+        if (GameKeySlick.gamekey[0].isPushKey(GameKeySlick.BUTTON_B) || MouseInputSlick.mouseInput.isMouseRightClicked()) {
+            if (onCancel(container, game, delta)) ;
+            return;
+        }
+    }
 
-	protected boolean updateMouseInput(Input input)
-	{
-		MouseInputSlick.mouseInput.update(input);
-		if (MouseInputSlick.mouseInput.isMouseClicked())
-		{
-			int y = MouseInputSlick.mouseInput.getMouseY() >> 4;
-			int newCursor = y - minChoiceY;
-			if (newCursor >= 0 && newCursor <= maxCursor)
-			{
-				if (newCursor == cursor)
-					return true;
-				ResourceHolderSlick.soundManager.play("cursor");
-				cursor = newCursor;
-			}
-		}
-		return false;
-	}
+    protected boolean updateMouseInput(Input input) {
+        MouseInputSlick.mouseInput.update(input);
+        if (MouseInputSlick.mouseInput.isMouseClicked()) {
+            int y = MouseInputSlick.mouseInput.getMouseY() >> 4;
+            int newCursor = y - minChoiceY;
+            if (newCursor >= 0 && newCursor <= maxCursor) {
+                if (newCursor == cursor)
+                    return true;
+                ResourceHolderSlick.soundManager.play("cursor");
+                cursor = newCursor;
+            }
+        }
+        return false;
+    }
 
-	protected void renderChoices(int x, String[] choices)
-	{
-		renderChoices(x, minChoiceY, choices);
-	}
+    protected void renderChoices(int x, String[] choices) {
+        renderChoices(x, minChoiceY, choices);
+    }
 
-	protected void renderChoices(int x, int y, String[] choices)
-	{
-		NormalFontSlick.printFontGrid(x-1, y+cursor, "b", NormalFontSlick.COLOR_RED);
-		for (int i = 0; i < choices.length; i++)
-			NormalFontSlick.printFontGrid(x, y+i, choices[i], (cursor == i));
-	}
+    protected void renderChoices(int x, int y, String[] choices) {
+        NormalFontSlick.printFontGrid(x - 1, y + cursor, "b", NormalFontSlick.COLOR_RED);
+        for (int i = 0; i < choices.length; i++)
+            NormalFontSlick.printFontGrid(x, y + i, choices[i], (cursor == i));
+    }
 
-	/**
-	 * Called when left or right is pressed.
-	 */
-	protected void onChange(GameContainer container, StateBasedGame game, int delta, int change) {
-	}
+    /**
+     * Called when left or right is pressed.
+     */
+    protected void onChange(GameContainer container, StateBasedGame game, int delta, int change) {
+    }
 
-	/**
-	 * Called on a decide operation (left click on highlighted entry or select button).
-	 * @return True to skip all further update processing, false otherwise.
-	 */
-	protected boolean onDecide(GameContainer container, StateBasedGame game, int delta) {
-		return false;
-	}
+    /**
+     * Called on a decide operation (left click on highlighted entry or select button).
+     *
+     * @return True to skip all further update processing, false otherwise.
+     */
+    protected boolean onDecide(GameContainer container, StateBasedGame game, int delta) {
+        return false;
+    }
 
-	/**
-	 * Called on a cancel operation (right click or cancel button).
-	 * @return True to skip all further update processing, false otherwise.
-	 */
-	protected boolean onCancel(GameContainer container, StateBasedGame game, int delta) {
-		return false;
-	}
+    /**
+     * Called on a cancel operation (right click or cancel button).
+     *
+     * @return True to skip all further update processing, false otherwise.
+     */
+    protected boolean onCancel(GameContainer container, StateBasedGame game, int delta) {
+        return false;
+    }
 
-	/**
-	 * Called when D button is pushed.
-	 * Currently, this is the only one needed; methods for other buttons can be added if needed.
-	 * @return True to skip all further update processing, false otherwise.
-	 */
-	protected boolean onPushButtonD(GameContainer container, StateBasedGame game, int delta) {
-		return false;
-	}
+    /**
+     * Called when D button is pushed.
+     * Currently, this is the only one needed; methods for other buttons can be added if needed.
+     *
+     * @return True to skip all further update processing, false otherwise.
+     */
+    protected boolean onPushButtonD(GameContainer container, StateBasedGame game, int delta) {
+        return false;
+    }
 }

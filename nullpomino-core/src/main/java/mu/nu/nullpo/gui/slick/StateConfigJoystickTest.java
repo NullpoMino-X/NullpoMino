@@ -40,178 +40,198 @@ import org.newdawn.slick.state.StateBasedGame;
  * Joystick State of the test screen
  */
 public class StateConfigJoystickTest extends BasicGameState {
-	/** This state's ID */
-	public static final int ID = 13;
+    /**
+     * This state's ID
+     */
+    public static final int ID = 13;
 
-	/** Key input Accepted to be enabled. frame count */
-	public static final int KEYACCEPTFRAME = 20;
+    /**
+     * Key input Accepted to be enabled. frame count
+     */
+    public static final int KEYACCEPTFRAME = 20;
 
-	/** Player number */
-	public int player = 0;
+    /**
+     * Player number
+     */
+    public int player = 0;
 
-	/** ScreenshotShooting flag */
-	protected boolean ssflag = false;
+    /**
+     * ScreenshotShooting flag
+     */
+    protected boolean ssflag = false;
 
-	/** UseJoystick Of number */
-	protected int joyNumber;
+    /**
+     * UseJoystick Of number
+     */
+    protected int joyNumber;
 
-	/** I was last pressed button */
-	protected int lastPressButton;
+    /**
+     * I was last pressed button
+     */
+    protected int lastPressButton;
 
-	/** Course frame count */
-	protected int frame;
+    /**
+     * Course frame count
+     */
+    protected int frame;
 
-	/** Buttoncount */
-	protected int buttonCount;
+    /**
+     * Buttoncount
+     */
+    protected int buttonCount;
 
-	/** StateBasedGame */
-	protected StateBasedGame gameObj;
+    /**
+     * StateBasedGame
+     */
+    protected StateBasedGame gameObj;
 
-	/*
-	 * Fetch this state's ID
-	 */
-	@Override
-	public int getID() {
-		return ID;
-	}
+    /*
+     * Fetch this state's ID
+     */
+    @Override
+    public int getID() {
+        return ID;
+    }
 
-	/*
-	 * State initialization
-	 */
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		gameObj = game;
-	}
+    /*
+     * State initialization
+     */
+    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        gameObj = game;
+    }
 
-	/**
-	 * Various reset
-	 */
-	protected void reset() {
-		joyNumber = ControllerManager.controllerID[player];
-		lastPressButton = -1;
-		frame = 0;
-		buttonCount = 0;
+    /**
+     * Various reset
+     */
+    protected void reset() {
+        joyNumber = ControllerManager.controllerID[player];
+        lastPressButton = -1;
+        frame = 0;
+        buttonCount = 0;
 
-		if(joyNumber >= 0) {
-			buttonCount = ControllerManager.controllers.get(joyNumber).getButtonCount();
-		}
-	}
+        if (joyNumber >= 0) {
+            buttonCount = ControllerManager.controllers.get(joyNumber).getButtonCount();
+        }
+    }
 
-	/*
-	 * Draw the screen
-	 */
-	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		if(!container.hasFocus()) {
-			if(!NullpoMinoSlick.alternateFPSTiming) NullpoMinoSlick.alternateFPSSleep();
-			return;
-		}
+    /*
+     * Draw the screen
+     */
+    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+        if (!container.hasFocus()) {
+            if (!NullpoMinoSlick.alternateFPSTiming) NullpoMinoSlick.alternateFPSSleep();
+            return;
+        }
 
-		ResourceHolderSlick.imgMenu.draw(0, 0);
+        ResourceHolderSlick.imgMenu.draw(0, 0);
 
-		NormalFontSlick.printFontGrid(1, 1, "JOYSTICK INPUT TEST (" + (player + 1) + "P)", NormalFontSlick.COLOR_ORANGE);
+        NormalFontSlick.printFontGrid(1, 1, "JOYSTICK INPUT TEST (" + (player + 1) + "P)", NormalFontSlick.COLOR_ORANGE);
 
-		if(joyNumber < 0) {
-			NormalFontSlick.printFontGrid(1, 3, "NO JOYSTICK", NormalFontSlick.COLOR_RED);
-		} else if(frame >= KEYACCEPTFRAME) {
-			NormalFontSlick.printFontGrid(1, 3, "JOYSTICK NUMBER:" + joyNumber, NormalFontSlick.COLOR_RED);
+        if (joyNumber < 0) {
+            NormalFontSlick.printFontGrid(1, 3, "NO JOYSTICK", NormalFontSlick.COLOR_RED);
+        } else if (frame >= KEYACCEPTFRAME) {
+            NormalFontSlick.printFontGrid(1, 3, "JOYSTICK NUMBER:" + joyNumber, NormalFontSlick.COLOR_RED);
 
-			NormalFontSlick.printFontGrid(1, 5, "LAST PRESSED BUTTON:" + ((lastPressButton == -1) ? "NONE" : String.valueOf(lastPressButton)));
+            NormalFontSlick.printFontGrid(1, 5, "LAST PRESSED BUTTON:" + ((lastPressButton == -1) ? "NONE" : String.valueOf(lastPressButton)));
 
-			Controller controller = ControllerManager.controllers.get(joyNumber);
+            Controller controller = ControllerManager.controllers.get(joyNumber);
 
-			NormalFontSlick.printFontGrid(1, 7, "AXIS X:" + controller.getXAxisValue());
-			NormalFontSlick.printFontGrid(1, 8, "AXIS Y:" + controller.getYAxisValue());
+            NormalFontSlick.printFontGrid(1, 7, "AXIS X:" + controller.getXAxisValue());
+            NormalFontSlick.printFontGrid(1, 8, "AXIS Y:" + controller.getYAxisValue());
 
-			NormalFontSlick.printFontGrid(1, 10, "POV X:" + controller.getPovX());
-			NormalFontSlick.printFontGrid(1, 11, "POV Y:" + controller.getPovY());
-		}
+            NormalFontSlick.printFontGrid(1, 10, "POV X:" + controller.getPovX());
+            NormalFontSlick.printFontGrid(1, 11, "POV Y:" + controller.getPovY());
+        }
 
-		if(frame >= KEYACCEPTFRAME) {
-			NormalFontSlick.printFontGrid(1, 23, "ENTER/BACKSPACE: EXIT", NormalFontSlick.COLOR_GREEN);
-		}
+        if (frame >= KEYACCEPTFRAME) {
+            NormalFontSlick.printFontGrid(1, 23, "ENTER/BACKSPACE: EXIT", NormalFontSlick.COLOR_GREEN);
+        }
 
-		// FPS
-		NullpoMinoSlick.drawFPS(container);
-		// Observer
-		NullpoMinoSlick.drawObserverClient();
-		if(!NullpoMinoSlick.alternateFPSTiming) NullpoMinoSlick.alternateFPSSleep();
-	}
+        // FPS
+        NullpoMinoSlick.drawFPS(container);
+        // Observer
+        NullpoMinoSlick.drawObserverClient();
+        if (!NullpoMinoSlick.alternateFPSTiming) NullpoMinoSlick.alternateFPSSleep();
+    }
 
-	/*
-	 * Update game state
-	 */
-	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		if(!container.hasFocus()) {
-			if(NullpoMinoSlick.alternateFPSTiming) NullpoMinoSlick.alternateFPSSleep();
-			return;
-		}
+    /*
+     * Update game state
+     */
+    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+        if (!container.hasFocus()) {
+            if (NullpoMinoSlick.alternateFPSTiming) NullpoMinoSlick.alternateFPSSleep();
+            return;
+        }
 
-		frame++;
+        frame++;
 
-		// Joystick button
-		if(frame >= KEYACCEPTFRAME) {
-			for(int i = 0; i < buttonCount; i++) {
-				try {
-					if(ControllerManager.isControllerButton(player, container.getInput(), i)) {
-						ResourceHolderSlick.soundManager.play("change");
-						lastPressButton = i;
-					}
-				} catch (Throwable e) {}
-			}
-		}
+        // Joystick button
+        if (frame >= KEYACCEPTFRAME) {
+            for (int i = 0; i < buttonCount; i++) {
+                try {
+                    if (ControllerManager.isControllerButton(player, container.getInput(), i)) {
+                        ResourceHolderSlick.soundManager.play("change");
+                        lastPressButton = i;
+                    }
+                } catch (Throwable e) {
+                }
+            }
+        }
 
-		// JInput
-		if(NullpoMinoSlick.useJInputKeyboard) {
-			JInputManager.poll();
+        // JInput
+        if (NullpoMinoSlick.useJInputKeyboard) {
+            JInputManager.poll();
 
-			if(frame >= KEYACCEPTFRAME) {
-				for(int i = 0; i < JInputManager.MAX_SLICK_KEY; i++) {
-					if(JInputManager.isKeyDown(i)) {
-						onKey(i);
-						break;
-					}
-				}
-			}
-		}
+            if (frame >= KEYACCEPTFRAME) {
+                for (int i = 0; i < JInputManager.MAX_SLICK_KEY; i++) {
+                    if (JInputManager.isKeyDown(i)) {
+                        onKey(i);
+                        break;
+                    }
+                }
+            }
+        }
 
-		if(NullpoMinoSlick.alternateFPSTiming) NullpoMinoSlick.alternateFPSSleep();
-	}
+        if (NullpoMinoSlick.alternateFPSTiming) NullpoMinoSlick.alternateFPSSleep();
+    }
 
-	/*
-	 * Called when a key is pressed (Slick native)
-	 */
-	@Override
-	public void keyPressed(int key, char c) {
-		if(!NullpoMinoSlick.useJInputKeyboard) {
-			onKey(key);
-		}
-	}
+    /*
+     * Called when a key is pressed (Slick native)
+     */
+    @Override
+    public void keyPressed(int key, char c) {
+        if (!NullpoMinoSlick.useJInputKeyboard) {
+            onKey(key);
+        }
+    }
 
-	/**
-	 * When a key is pressed
-	 * @param key Keycode
-	 */
-	protected void onKey(int key) {
-		if(frame >= KEYACCEPTFRAME) {
-			// Backspace & Enter/Return
-			if((key == Input.KEY_BACK) || (key == Input.KEY_RETURN)) {
-				gameObj.enterState(StateConfigJoystickMain.ID);
-			}
-		}
-	}
+    /**
+     * When a key is pressed
+     *
+     * @param key Keycode
+     */
+    protected void onKey(int key) {
+        if (frame >= KEYACCEPTFRAME) {
+            // Backspace & Enter/Return
+            if ((key == Input.KEY_BACK) || (key == Input.KEY_RETURN)) {
+                gameObj.enterState(StateConfigJoystickMain.ID);
+            }
+        }
+    }
 
-	/*
-	 * Called when entering this state
-	 */
-	@Override
-	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
-		reset();
-	}
+    /*
+     * Called when entering this state
+     */
+    @Override
+    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+        reset();
+    }
 
-	/*
-	 * Called when leaving this state
-	 */
-	@Override
-	public void leave(GameContainer container, StateBasedGame game) throws SlickException {
-		reset();
-	}
+    /*
+     * Called when leaving this state
+     */
+    @Override
+    public void leave(GameContainer container, StateBasedGame game) throws SlickException {
+        reset();
+    }
 }

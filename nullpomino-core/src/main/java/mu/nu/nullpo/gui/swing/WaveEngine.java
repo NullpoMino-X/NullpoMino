@@ -51,159 +51,177 @@ import org.apache.log4j.Logger;
  * <a href="http://javagame.skr.jp/index.php?%A5%B5%A5%A6%A5%F3%A5%C9%A5%A8%A5%F3%A5%B8%A5%F3">Reprint yuan</a>
  */
 public class WaveEngine implements LineListener {
-	/** Log */
-	static Logger log = Logger.getLogger(WaveEngine.class);
+    /**
+     * Log
+     */
+    static Logger log = Logger.getLogger(WaveEngine.class);
 
-	/** You can registerWAVE file OfMaximumcount */
-	private int maxClips;
+    /**
+     * You can registerWAVE file OfMaximumcount
+     */
+    private int maxClips;
 
-	/** WAVE file  data (Name-> dataBody) */
-	private HashMap<String, Clip> clipMap;
+    /**
+     * WAVE file  data (Name-> dataBody)
+     */
+    private HashMap<String, Clip> clipMap;
 
-	/** Was registeredWAVE file count */
-	private int counter = 0;
+    /**
+     * Was registeredWAVE file count
+     */
+    private int counter = 0;
 
-	/** Volume */
-	private double volume = 1.0;
+    /**
+     * Volume
+     */
+    private double volume = 1.0;
 
-	/**
-	 * Constructor
-	 */
-	public WaveEngine() {
-		this(128);
-	}
+    /**
+     * Constructor
+     */
+    public WaveEngine() {
+        this(128);
+    }
 
-	/**
-	 * Constructor
-	 * @param maxClips You can registerWAVE file OfMaximumcount
-	 */
-	public WaveEngine(int maxClips) {
-		this.maxClips = maxClips;
-		clipMap = new HashMap<String, Clip>(maxClips);
-	}
+    /**
+     * Constructor
+     *
+     * @param maxClips You can registerWAVE file OfMaximumcount
+     */
+    public WaveEngine(int maxClips) {
+        this.maxClips = maxClips;
+        clipMap = new HashMap<String, Clip>(maxClips);
+    }
 
-	/**
-	 * Current Get the volume setting
-	 * @return Current Volume setting (1.0The default )
-	 */
-	public double getVolume() {
-		return volume;
-	}
+    /**
+     * Current Get the volume setting
+     *
+     * @return Current Volume setting (1.0The default )
+     */
+    public double getVolume() {
+        return volume;
+    }
 
-	/**
-	 * Set the volume
-	 * @param vol New configuration volume (1.0The default )
-	 */
-	public void setVolume(double vol) {
-		volume = vol;
+    /**
+     * Set the volume
+     *
+     * @param vol New configuration volume (1.0The default )
+     */
+    public void setVolume(double vol) {
+        volume = vol;
 
-		Set<String> set = clipMap.keySet();
-		for(String name: set) {
-			try {
-				Clip clip = clipMap.get(name);
-				FloatControl ctrl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-				ctrl.setValue((float)Math.log10(volume) * 20);
-			} catch (Exception e) {}
-		}
-	}
+        Set<String> set = clipMap.keySet();
+        for (String name : set) {
+            try {
+                Clip clip = clipMap.get(name);
+                FloatControl ctrl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                ctrl.setValue((float) Math.log10(volume) * 20);
+            } catch (Exception e) {
+            }
+        }
+    }
 
-	/**
-	 * WAVE file Read
-	 * @param name Registered name
-	 * @param filename Filename
-	 */
-	public void load(String name, String filename) {
-		load(name, ResourceHolderSwing.getURL(filename));
-	}
+    /**
+     * WAVE file Read
+     *
+     * @param name     Registered name
+     * @param filename Filename
+     */
+    public void load(String name, String filename) {
+        load(name, ResourceHolderSwing.getURL(filename));
+    }
 
-	/**
-	 * WAVE file Read
-	 * @param name Registered name
-	 * @param url URL
-	 */
-	public void load(String name, URL url) {
-		if(counter >= maxClips) {
-			log.warn(name + " : No more files can be loaded (Max:" + maxClips + ")");
-			return;
-		}
+    /**
+     * WAVE file Read
+     *
+     * @param name Registered name
+     * @param url  URL
+     */
+    public void load(String name, URL url) {
+        if (counter >= maxClips) {
+            log.warn(name + " : No more files can be loaded (Max:" + maxClips + ")");
+            return;
+        }
 
-		try {
-			// Open the audio stream
-			AudioInputStream stream = AudioSystem.getAudioInputStream(url);
+        try {
+            // Open the audio stream
+            AudioInputStream stream = AudioSystem.getAudioInputStream(url);
 
-			// Obtains the audio format
-			AudioFormat format = stream.getFormat();
+            // Obtains the audio format
+            AudioFormat format = stream.getFormat();
 
-			// ULAW/ALAWIf the format isPCMChange the format
-			if((format.getEncoding() == AudioFormat.Encoding.ULAW) || (format.getEncoding() == AudioFormat.Encoding.ALAW)) {
-				AudioFormat newFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
-														format.getSampleRate(), format.getSampleSizeInBits() * 2,
-														format.getChannels(), format.getFrameSize() * 2, format.getFrameRate(),
-														true);
-				stream = AudioSystem.getAudioInputStream(newFormat, stream);
-				format = newFormat;
-			}
+            // ULAW/ALAWIf the format isPCMChange the format
+            if ((format.getEncoding() == AudioFormat.Encoding.ULAW) || (format.getEncoding() == AudioFormat.Encoding.ALAW)) {
+                AudioFormat newFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+                        format.getSampleRate(), format.getSampleSizeInBits() * 2,
+                        format.getChannels(), format.getFrameSize() * 2, format.getFrameRate(),
+                        true);
+                stream = AudioSystem.getAudioInputStream(newFormat, stream);
+                format = newFormat;
+            }
 
-			// LinesGet information
-			DataLine.Info info = new DataLine.Info(Clip.class, format);
-			// Create an empty clip
-			Clip clip = (Clip) AudioSystem.getLine(info);
-			// Clip event Monitoring
-			clip.addLineListener(this);
-			// Opened as a clip the audio stream
-			clip.open(stream);
-			// Submit a clip
-			clipMap.put(name, clip);
+            // LinesGet information
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+            // Create an empty clip
+            Clip clip = (Clip) AudioSystem.getLine(info);
+            // Clip event Monitoring
+            clip.addLineListener(this);
+            // Opened as a clip the audio stream
+            clip.open(stream);
+            // Submit a clip
+            clipMap.put(name, clip);
 
-			// Close the stream
-			stream.close();
-		} catch (LineUnavailableException e) {
-			log.warn(name + " : Failed to open line", e);
-		} catch (UnsupportedAudioFileException e) {
-			log.warn(name + " : This is not a wave file", e);
-		} catch (IOException e) {
-			log.warn(name + " : Load failed", e);
-		}
-	}
+            // Close the stream
+            stream.close();
+        } catch (LineUnavailableException e) {
+            log.warn(name + " : Failed to open line", e);
+        } catch (UnsupportedAudioFileException e) {
+            log.warn(name + " : This is not a wave file", e);
+        } catch (IOException e) {
+            log.warn(name + " : Load failed", e);
+        }
+    }
 
-	/**
-	 * Playback
-	 * @param name Registered name
-	 */
-	public void play(String name) {
-		Clip clip = clipMap.get(name);
+    /**
+     * Playback
+     *
+     * @param name Registered name
+     */
+    public void play(String name) {
+        Clip clip = clipMap.get(name);
 
-		if(clip != null) {
-			// Stop
-			clip.stop();
-			// Playback position back to the beginning
-			clip.setFramePosition(0);
-			// Playback
-			clip.start();
-		}
-	}
+        if (clip != null) {
+            // Stop
+            clip.stop();
+            // Playback position back to the beginning
+            clip.setFramePosition(0);
+            // Playback
+            clip.start();
+        }
+    }
 
-	/**
-	 * Stop
-	 * @param name Registered name
-	 */
-	public void stop(String name) {
-		Clip clip = clipMap.get(name);
+    /**
+     * Stop
+     *
+     * @param name Registered name
+     */
+    public void stop(String name) {
+        Clip clip = clipMap.get(name);
 
-		if(clip != null) {
-			clip.stop();
-		}
-	}
+        if (clip != null) {
+            clip.stop();
+        }
+    }
 
-	/*
-	 * Lines stateChange
-	 */
-	public void update(LineEvent event) {
-		// If you stop playback or to the end
-		if(event.getType() == LineEvent.Type.STOP) {
-			Clip clip = (Clip) event.getSource();
-			clip.stop();
-			clip.setFramePosition(0); // Playback position back to the beginning
-		}
-	}
+    /*
+     * Lines stateChange
+     */
+    public void update(LineEvent event) {
+        // If you stop playback or to the end
+        if (event.getType() == LineEvent.Type.STOP) {
+            Clip clip = (Clip) event.getSource();
+            clip.stop();
+            clip.setFramePosition(0); // Playback position back to the beginning
+        }
+    }
 }

@@ -43,259 +43,290 @@ import org.apache.log4j.Logger;
  * Class to the management of image and sound
  */
 public class ResourceHolderSwing {
-	/** BackgroundOfcount */
-	public static final int BACKGROUND_MAX = 20;
+    /**
+     * BackgroundOfcount
+     */
+    public static final int BACKGROUND_MAX = 20;
 
-	/** Number of images for block spatter animation during line clears */
-	public static final int BLOCK_BREAK_MAX = 8;
+    /**
+     * Number of images for block spatter animation during line clears
+     */
+    public static final int BLOCK_BREAK_MAX = 8;
 
-	/** Number of image splits for block spatter animation during line clears */
-	public static final int BLOCK_BREAK_SEGMENTS = 2;
+    /**
+     * Number of image splits for block spatter animation during line clears
+     */
+    public static final int BLOCK_BREAK_SEGMENTS = 2;
 
-	/** Number of gem block clear effects */
-	public static final int PERASE_MAX = 7;
+    /**
+     * Number of gem block clear effects
+     */
+    public static final int PERASE_MAX = 7;
 
-	/** Log */
-	static Logger log = Logger.getLogger(ResourceHolderSwing.class);
+    /**
+     * Log
+     */
+    static Logger log = Logger.getLogger(ResourceHolderSwing.class);
 
-	/** Block images */
-	public static LinkedList<Image> imgNormalBlockList, imgSmallBlockList, imgBigBlockList;
+    /**
+     * Block images
+     */
+    public static LinkedList<Image> imgNormalBlockList, imgSmallBlockList, imgBigBlockList;
 
-	/** Block sticky flag */
-	public static LinkedList<Boolean> blockStickyFlagList;
+    /**
+     * Block sticky flag
+     */
+    public static LinkedList<Boolean> blockStickyFlagList;
 
-	/** Regular font */
-	public static Image imgFont, imgFontSmall;
+    /**
+     * Regular font
+     */
+    public static Image imgFont, imgFontSmall;
 
-	/** Field frame */
-	public static Image imgFrame;
+    /**
+     * Field frame
+     */
+    public static Image imgFrame;
 
-	/** Field background */
-	public static Image imgFieldbg, imgFieldbg2, imgFieldbg2Small, imgFieldbg2Big;
+    /**
+     * Field background
+     */
+    public static Image imgFieldbg, imgFieldbg2, imgFieldbg2Small, imgFieldbg2Big;
 
-	/** Block spatter animation during line clears */
-	public static Image[][] imgBreak;
+    /**
+     * Block spatter animation during line clears
+     */
+    public static Image[][] imgBreak;
 
-	/** Effects for clearing gem blocks */
-	public static Image[] imgPErase;
+    /**
+     * Effects for clearing gem blocks
+     */
+    public static Image[] imgPErase;
 
-	/** In playBackground */
-	public static Image[] imgPlayBG;
+    /**
+     * In playBackground
+     */
+    public static Image[] imgPlayBG;
 
-	/** Audio file management */
-	public static WaveEngine soundManager;
+    /**
+     * Audio file management
+     */
+    public static WaveEngine soundManager;
 
-	/**
-	 * Loading images and sound files
-	 */
-	public static void load() {
-		String skindir = NullpoMinoSwing.propConfig.getProperty("custom.skin.directory", "res");
+    /**
+     * Loading images and sound files
+     */
+    public static void load() {
+        String skindir = NullpoMinoSwing.propConfig.getProperty("custom.skin.directory", "res");
 
-		// Blocks
-		int numBlocks = 0;
-		File file = null;
-		while(true) {
-			file = new File(skindir + "/graphics/blockskin/normal/n" + numBlocks + ".png");
-			if(file.canRead()) {
-				numBlocks++;
-			} else {
-				break;
-			}
-		}
-		log.debug(numBlocks + " block skins found");
+        // Blocks
+        int numBlocks = 0;
+        File file = null;
+        while (true) {
+            file = new File(skindir + "/graphics/blockskin/normal/n" + numBlocks + ".png");
+            if (file.canRead()) {
+                numBlocks++;
+            } else {
+                break;
+            }
+        }
+        log.debug(numBlocks + " block skins found");
 
-		imgNormalBlockList = new LinkedList<Image>();
-		imgSmallBlockList = new LinkedList<Image>();
-		imgBigBlockList = new LinkedList<Image>();
-		blockStickyFlagList = new LinkedList<Boolean>();
+        imgNormalBlockList = new LinkedList<Image>();
+        imgSmallBlockList = new LinkedList<Image>();
+        imgBigBlockList = new LinkedList<Image>();
+        blockStickyFlagList = new LinkedList<Boolean>();
 
-		for(int i = 0; i < numBlocks; i++) {
-			Image imgNormal = loadImage(getURL(skindir + "/graphics/blockskin/normal/n" + i + ".png"));
-			imgNormalBlockList.add(imgNormal);
-			imgSmallBlockList.add(loadImage(getURL(skindir + "/graphics/blockskin/small/s" + i + ".png")));
-			imgBigBlockList.add(loadImage(getURL(skindir + "/graphics/blockskin/big/b" + i + ".png")));
+        for (int i = 0; i < numBlocks; i++) {
+            Image imgNormal = loadImage(getURL(skindir + "/graphics/blockskin/normal/n" + i + ".png"));
+            imgNormalBlockList.add(imgNormal);
+            imgSmallBlockList.add(loadImage(getURL(skindir + "/graphics/blockskin/small/s" + i + ".png")));
+            imgBigBlockList.add(loadImage(getURL(skindir + "/graphics/blockskin/big/b" + i + ".png")));
 
-			if((imgNormal.getWidth(null) >= 400) && (imgNormal.getHeight(null) >= 304)) {
-				blockStickyFlagList.add(Boolean.TRUE);
-			} else {
-				blockStickyFlagList.add(Boolean.FALSE);
-			}
-		}
+            if ((imgNormal.getWidth(null) >= 400) && (imgNormal.getHeight(null) >= 304)) {
+                blockStickyFlagList.add(Boolean.TRUE);
+            } else {
+                blockStickyFlagList.add(Boolean.FALSE);
+            }
+        }
 
-		// Other images
-		imgFont = loadImage(getURL(skindir + "/graphics/font.png"));
-		imgFontSmall = loadImage(getURL(skindir + "/graphics/font_small.png"));
-		imgFrame = loadImage(getURL(skindir + "/graphics/frame.png"));
-		imgFieldbg = loadImage(getURL(skindir + "/graphics/fieldbg.png"));
-		imgFieldbg2 = loadImage(getURL(skindir + "/graphics/fieldbg2.png"));
-		imgFieldbg2Small = loadImage(getURL(skindir + "/graphics/fieldbg2_small.png"));
-		imgFieldbg2Big = loadImage(getURL(skindir + "/graphics/fieldbg2_big.png"));
+        // Other images
+        imgFont = loadImage(getURL(skindir + "/graphics/font.png"));
+        imgFontSmall = loadImage(getURL(skindir + "/graphics/font_small.png"));
+        imgFrame = loadImage(getURL(skindir + "/graphics/frame.png"));
+        imgFieldbg = loadImage(getURL(skindir + "/graphics/fieldbg.png"));
+        imgFieldbg2 = loadImage(getURL(skindir + "/graphics/fieldbg2.png"));
+        imgFieldbg2Small = loadImage(getURL(skindir + "/graphics/fieldbg2_small.png"));
+        imgFieldbg2Big = loadImage(getURL(skindir + "/graphics/fieldbg2_big.png"));
 
-		if(NullpoMinoSwing.propConfig.getProperty("option.showlineeffect", false) == true) {
-			loadLineClearEffectImages();
-		}
-		if(NullpoMinoSwing.propConfig.getProperty("option.showbg", true) == true) {
-			loadBackgroundImages();
-		}
+        if (NullpoMinoSwing.propConfig.getProperty("option.showlineeffect", false) == true) {
+            loadLineClearEffectImages();
+        }
+        if (NullpoMinoSwing.propConfig.getProperty("option.showbg", true) == true) {
+            loadBackgroundImages();
+        }
 
-		// Sound effects
-		soundManager = new WaveEngine();
-		if(NullpoMinoSwing.propConfig.getProperty("option.se", true) == true) {
-			soundManager.load("cursor", skindir + "/se/cursor.wav");
-			soundManager.load("decide", skindir + "/se/decide.wav");
-			soundManager.load("erase1", skindir + "/se/erase1.wav");
-			soundManager.load("erase2", skindir + "/se/erase2.wav");
-			soundManager.load("erase3", skindir + "/se/erase3.wav");
-			soundManager.load("erase4", skindir + "/se/erase4.wav");
-			soundManager.load("died", skindir + "/se/died.wav");
-			soundManager.load("gameover", skindir + "/se/gameover.wav");
-			soundManager.load("hold", skindir + "/se/hold.wav");
-			soundManager.load("holdfail", skindir + "/se/holdfail.wav");
-			soundManager.load("initialhold", skindir + "/se/initialhold.wav");
-			soundManager.load("initialrotate", skindir + "/se/initialrotate.wav");
-			soundManager.load("levelup", skindir + "/se/levelup.wav");
-			soundManager.load("linefall", skindir + "/se/linefall.wav");
-			soundManager.load("lock", skindir + "/se/lock.wav");
-			soundManager.load("move", skindir + "/se/move.wav");
-			soundManager.load("pause", skindir + "/se/pause.wav");
-			soundManager.load("rotate", skindir + "/se/rotate.wav");
-			soundManager.load("step", skindir + "/se/step.wav");
-			soundManager.load("piece0", skindir + "/se/piece0.wav");
-			soundManager.load("piece1", skindir + "/se/piece1.wav");
-			soundManager.load("piece2", skindir + "/se/piece2.wav");
-			soundManager.load("piece3", skindir + "/se/piece3.wav");
-			soundManager.load("piece4", skindir + "/se/piece4.wav");
-			soundManager.load("piece5", skindir + "/se/piece5.wav");
-			soundManager.load("piece6", skindir + "/se/piece6.wav");
-			soundManager.load("piece7", skindir + "/se/piece7.wav");
-			soundManager.load("piece8", skindir + "/se/piece8.wav");
-			soundManager.load("piece9", skindir + "/se/piece9.wav");
-			soundManager.load("piece10", skindir + "/se/piece10.wav");
-			soundManager.load("harddrop", skindir + "/se/harddrop.wav");
-			soundManager.load("softdrop", skindir + "/se/softdrop.wav");
-			soundManager.load("levelstop", skindir + "/se/levelstop.wav");
-			soundManager.load("endingstart", skindir + "/se/endingstart.wav");
-			soundManager.load("excellent", skindir + "/se/excellent.wav");
-			soundManager.load("b2b_start", skindir + "/se/b2b_start.wav");
-			soundManager.load("b2b_continue", skindir + "/se/b2b_continue.wav");
-			soundManager.load("b2b_end", skindir + "/se/b2b_end.wav");
-			soundManager.load("gradeup", skindir + "/se/gradeup.wav");
-			soundManager.load("countdown", skindir + "/se/countdown.wav");
-			soundManager.load("tspin0", skindir + "/se/tspin0.wav");
-			soundManager.load("tspin1", skindir + "/se/tspin1.wav");
-			soundManager.load("tspin2", skindir + "/se/tspin2.wav");
-			soundManager.load("tspin3", skindir + "/se/tspin3.wav");
-			soundManager.load("ready", skindir + "/se/ready.wav");
-			soundManager.load("go", skindir + "/se/go.wav");
-			soundManager.load("movefail", skindir + "/se/movefail.wav");
-			soundManager.load("rotfail", skindir + "/se/rotfail.wav");
-			soundManager.load("medal", skindir + "/se/medal.wav");
-			soundManager.load("change", skindir + "/se/change.wav");
-			soundManager.load("bravo", skindir + "/se/bravo.wav");
-			soundManager.load("cool", skindir + "/se/cool.wav");
-			soundManager.load("regret", skindir + "/se/regret.wav");
-			soundManager.load("garbage", skindir + "/se/garbage.wav");
-			soundManager.load("stageclear", skindir + "/se/stageclear.wav");
-			soundManager.load("stagefail", skindir + "/se/stagefail.wav");
-			soundManager.load("gem", skindir + "/se/gem.wav");
-			soundManager.load("danger", skindir + "/se/danger.wav");
-			soundManager.load("matchend", skindir + "/se/matchend.wav");
-			soundManager.load("hurryup", skindir + "/se/hurryup.wav");
-			soundManager.load("square_s", skindir + "/se/square_s.wav");
-			soundManager.load("square_g", skindir + "/se/square_g.wav");
+        // Sound effects
+        soundManager = new WaveEngine();
+        if (NullpoMinoSwing.propConfig.getProperty("option.se", true) == true) {
+            soundManager.load("cursor", skindir + "/se/cursor.wav");
+            soundManager.load("decide", skindir + "/se/decide.wav");
+            soundManager.load("erase1", skindir + "/se/erase1.wav");
+            soundManager.load("erase2", skindir + "/se/erase2.wav");
+            soundManager.load("erase3", skindir + "/se/erase3.wav");
+            soundManager.load("erase4", skindir + "/se/erase4.wav");
+            soundManager.load("died", skindir + "/se/died.wav");
+            soundManager.load("gameover", skindir + "/se/gameover.wav");
+            soundManager.load("hold", skindir + "/se/hold.wav");
+            soundManager.load("holdfail", skindir + "/se/holdfail.wav");
+            soundManager.load("initialhold", skindir + "/se/initialhold.wav");
+            soundManager.load("initialrotate", skindir + "/se/initialrotate.wav");
+            soundManager.load("levelup", skindir + "/se/levelup.wav");
+            soundManager.load("linefall", skindir + "/se/linefall.wav");
+            soundManager.load("lock", skindir + "/se/lock.wav");
+            soundManager.load("move", skindir + "/se/move.wav");
+            soundManager.load("pause", skindir + "/se/pause.wav");
+            soundManager.load("rotate", skindir + "/se/rotate.wav");
+            soundManager.load("step", skindir + "/se/step.wav");
+            soundManager.load("piece0", skindir + "/se/piece0.wav");
+            soundManager.load("piece1", skindir + "/se/piece1.wav");
+            soundManager.load("piece2", skindir + "/se/piece2.wav");
+            soundManager.load("piece3", skindir + "/se/piece3.wav");
+            soundManager.load("piece4", skindir + "/se/piece4.wav");
+            soundManager.load("piece5", skindir + "/se/piece5.wav");
+            soundManager.load("piece6", skindir + "/se/piece6.wav");
+            soundManager.load("piece7", skindir + "/se/piece7.wav");
+            soundManager.load("piece8", skindir + "/se/piece8.wav");
+            soundManager.load("piece9", skindir + "/se/piece9.wav");
+            soundManager.load("piece10", skindir + "/se/piece10.wav");
+            soundManager.load("harddrop", skindir + "/se/harddrop.wav");
+            soundManager.load("softdrop", skindir + "/se/softdrop.wav");
+            soundManager.load("levelstop", skindir + "/se/levelstop.wav");
+            soundManager.load("endingstart", skindir + "/se/endingstart.wav");
+            soundManager.load("excellent", skindir + "/se/excellent.wav");
+            soundManager.load("b2b_start", skindir + "/se/b2b_start.wav");
+            soundManager.load("b2b_continue", skindir + "/se/b2b_continue.wav");
+            soundManager.load("b2b_end", skindir + "/se/b2b_end.wav");
+            soundManager.load("gradeup", skindir + "/se/gradeup.wav");
+            soundManager.load("countdown", skindir + "/se/countdown.wav");
+            soundManager.load("tspin0", skindir + "/se/tspin0.wav");
+            soundManager.load("tspin1", skindir + "/se/tspin1.wav");
+            soundManager.load("tspin2", skindir + "/se/tspin2.wav");
+            soundManager.load("tspin3", skindir + "/se/tspin3.wav");
+            soundManager.load("ready", skindir + "/se/ready.wav");
+            soundManager.load("go", skindir + "/se/go.wav");
+            soundManager.load("movefail", skindir + "/se/movefail.wav");
+            soundManager.load("rotfail", skindir + "/se/rotfail.wav");
+            soundManager.load("medal", skindir + "/se/medal.wav");
+            soundManager.load("change", skindir + "/se/change.wav");
+            soundManager.load("bravo", skindir + "/se/bravo.wav");
+            soundManager.load("cool", skindir + "/se/cool.wav");
+            soundManager.load("regret", skindir + "/se/regret.wav");
+            soundManager.load("garbage", skindir + "/se/garbage.wav");
+            soundManager.load("stageclear", skindir + "/se/stageclear.wav");
+            soundManager.load("stagefail", skindir + "/se/stagefail.wav");
+            soundManager.load("gem", skindir + "/se/gem.wav");
+            soundManager.load("danger", skindir + "/se/danger.wav");
+            soundManager.load("matchend", skindir + "/se/matchend.wav");
+            soundManager.load("hurryup", skindir + "/se/hurryup.wav");
+            soundManager.load("square_s", skindir + "/se/square_s.wav");
+            soundManager.load("square_g", skindir + "/se/square_g.wav");
 
-			for(int i = 0; i < 20; i++) {
-				soundManager.load("combo" + (i + 1), skindir + "/se/combo" + (i + 1) + ".wav");
-			}
+            for (int i = 0; i < 20; i++) {
+                soundManager.load("combo" + (i + 1), skindir + "/se/combo" + (i + 1) + ".wav");
+            }
 
-			soundManager.setVolume(NullpoMinoSwing.propConfig.getProperty("option.sevolume", 0.5));
-		}
-	}
+            soundManager.setVolume(NullpoMinoSwing.propConfig.getProperty("option.sevolume", 0.5));
+        }
+    }
 
-	/**
-	 * Load background images.
-	 */
-	public static void loadBackgroundImages() {
-		if(imgPlayBG == null) {
-			imgPlayBG = new Image[BACKGROUND_MAX];
+    /**
+     * Load background images.
+     */
+    public static void loadBackgroundImages() {
+        if (imgPlayBG == null) {
+            imgPlayBG = new Image[BACKGROUND_MAX];
 
-			String skindir = NullpoMinoSwing.propConfig.getProperty("custom.skin.directory", "res");
-			for(int i = 0; i < BACKGROUND_MAX; i++) {
-				imgPlayBG[i] = loadImage(getURL(skindir + "/graphics/back" + i + ".png"));
-			}
-		}
-	}
+            String skindir = NullpoMinoSwing.propConfig.getProperty("custom.skin.directory", "res");
+            for (int i = 0; i < BACKGROUND_MAX; i++) {
+                imgPlayBG[i] = loadImage(getURL(skindir + "/graphics/back" + i + ".png"));
+            }
+        }
+    }
 
-	/**
-	 * Load line clear effect images.
-	 */
-	public static void loadLineClearEffectImages() {
-		String skindir = NullpoMinoSwing.propConfig.getProperty("custom.skin.directory", "res");
+    /**
+     * Load line clear effect images.
+     */
+    public static void loadLineClearEffectImages() {
+        String skindir = NullpoMinoSwing.propConfig.getProperty("custom.skin.directory", "res");
 
-		if(imgBreak == null) {
-			imgBreak = new Image[BLOCK_BREAK_MAX][BLOCK_BREAK_SEGMENTS];
+        if (imgBreak == null) {
+            imgBreak = new Image[BLOCK_BREAK_MAX][BLOCK_BREAK_SEGMENTS];
 
-			for(int i = 0; i < BLOCK_BREAK_MAX; i++) {
-				for(int j = 0; j < BLOCK_BREAK_SEGMENTS; j++) {
-					imgBreak[i][j] = loadImage(getURL(skindir + "/graphics/break" + i + "_" + j + ".png"));
-				}
-			}
-		}
-		if(imgPErase == null) {
-			imgPErase = new Image[PERASE_MAX];
+            for (int i = 0; i < BLOCK_BREAK_MAX; i++) {
+                for (int j = 0; j < BLOCK_BREAK_SEGMENTS; j++) {
+                    imgBreak[i][j] = loadImage(getURL(skindir + "/graphics/break" + i + "_" + j + ".png"));
+                }
+            }
+        }
+        if (imgPErase == null) {
+            imgPErase = new Image[PERASE_MAX];
 
-			for(int i = 0; i < imgPErase.length; i++) {
-				imgPErase[i] = loadImage(getURL(skindir + "/graphics/perase" + i + ".png"));
-			}
-		}
-	}
+            for (int i = 0; i < imgPErase.length; i++) {
+                imgPErase[i] = loadImage(getURL(skindir + "/graphics/perase" + i + ".png"));
+            }
+        }
+    }
 
-	/**
-	 * Load an image
-	 * @param url Image filesURL
-	 * @return Image file (Failurenull)
-	 */
-	public static BufferedImage loadImage(URL url) {
-		BufferedImage img = null;
-		try {
-			img = ImageIO.read(url);
-		} catch (Throwable e) {
-			log.error("Failed to load image " + url, e);
-			try {
-				img = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
-			} catch (Throwable e2) {}
-		}
+    /**
+     * Load an image
+     *
+     * @param url Image filesURL
+     * @return Image file (Failurenull)
+     */
+    public static BufferedImage loadImage(URL url) {
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(url);
+        } catch (Throwable e) {
+            log.error("Failed to load image " + url, e);
+            try {
+                img = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
+            } catch (Throwable e2) {
+            }
+        }
 
-		return img;
-	}
+        return img;
+    }
 
-	/**
-	 * Resource FilesURLReturns
-	 * @param str Filename
-	 * @return Resource FilesURL
-	 */
-	public static URL getURL(String str) {
-		URL url = null;
+    /**
+     * Resource FilesURLReturns
+     *
+     * @param str Filename
+     * @return Resource FilesURL
+     */
+    public static URL getURL(String str) {
+        URL url = null;
 
-		try {
-			char sep = File.separator.charAt(0);
-			String file = str.replace(sep, '/');
+        try {
+            char sep = File.separator.charAt(0);
+            String file = str.replace(sep, '/');
 
-			// 参考(消滅)：http://www.asahi-net.or.jp/~DP8T-ASM/java/tips/HowToMakeURL.html
-			if(file.charAt(0) != '/') {
-				String dir = System.getProperty("user.dir");
-				dir = dir.replace(sep, '/') + '/';
-				if(dir.charAt(0) != '/') {
-					dir = "/" + dir;
-				}
-				file = dir + file;
-			}
-			url = new URL("file", "", file);
-		} catch(MalformedURLException e) {
-			log.warn("Invalid URL:" + str, e);
-			return null;
-		}
+            // 参考(消滅)：http://www.asahi-net.or.jp/~DP8T-ASM/java/tips/HowToMakeURL.html
+            if (file.charAt(0) != '/') {
+                String dir = System.getProperty("user.dir");
+                dir = dir.replace(sep, '/') + '/';
+                if (dir.charAt(0) != '/') {
+                    dir = "/" + dir;
+                }
+                file = dir + file;
+            }
+            url = new URL("file", "", file);
+        } catch (MalformedURLException e) {
+            log.warn("Invalid URL:" + str, e);
+            return null;
+        }
 
-		return url;
-	}
+        return url;
+    }
 }

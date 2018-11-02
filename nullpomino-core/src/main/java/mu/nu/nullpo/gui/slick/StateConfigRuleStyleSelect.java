@@ -11,69 +11,73 @@ import org.newdawn.slick.state.StateBasedGame;
  * Style select menu
  */
 public class StateConfigRuleStyleSelect extends DummyMenuChooseState {
-	/** This state's ID */
-	public static final int ID = 15;
+    /**
+     * This state's ID
+     */
+    public static final int ID = 15;
 
-	/** Player number */
-	protected int player = 0;
+    /**
+     * Player number
+     */
+    protected int player = 0;
 
-	public StateConfigRuleStyleSelect() {
-		super();
-		maxCursor = GameEngine.MAX_GAMESTYLE - 1;
-		minChoiceY = 3;
-	}
+    public StateConfigRuleStyleSelect() {
+        super();
+        maxCursor = GameEngine.MAX_GAMESTYLE - 1;
+        minChoiceY = 3;
+    }
 
-	/*
-	 * Fetch this state's ID
-	 */
-	@Override
-	public int getID() {
-		return ID;
-	}
+    /*
+     * Fetch this state's ID
+     */
+    @Override
+    public int getID() {
+        return ID;
+    }
 
-	/*
-	 * State initialization
-	 */
-	@Override
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-	}
+    /*
+     * State initialization
+     */
+    @Override
+    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    }
 
-	/*
-	 * Draw the screen
-	 */
-	@Override
-	protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		// Background
-		g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
+    /*
+     * Draw the screen
+     */
+    @Override
+    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+        // Background
+        g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
 
-		// Menu
-		NormalFontSlick.printFontGrid(1, 1, "SELECT " + (player+1) + "P STYLE", NormalFontSlick.COLOR_ORANGE);
+        // Menu
+        NormalFontSlick.printFontGrid(1, 1, "SELECT " + (player + 1) + "P STYLE", NormalFontSlick.COLOR_ORANGE);
 
-		NormalFontSlick.printFontGrid(1, 3 + cursor, "b", NormalFontSlick.COLOR_RED);
+        NormalFontSlick.printFontGrid(1, 3 + cursor, "b", NormalFontSlick.COLOR_RED);
 
-		for(int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
-			NormalFontSlick.printFontGrid(2, 3 + i, GameEngine.GAMESTYLE_NAMES[i], (cursor == i));
-		}
-	}
+        for (int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
+            NormalFontSlick.printFontGrid(2, 3 + i, GameEngine.GAMESTYLE_NAMES[i], (cursor == i));
+        }
+    }
 
-	/*
-	 * Decide
-	 */
-	@Override
-	protected boolean onDecide(GameContainer container, StateBasedGame game, int delta) {
-		ResourceHolderSlick.soundManager.play("decide");
-		NullpoMinoSlick.stateConfigRuleSelect.player = player;
-		NullpoMinoSlick.stateConfigRuleSelect.style = cursor;
-		game.enterState(StateConfigRuleSelect.ID);
-		return false;
-	}
+    /*
+     * Decide
+     */
+    @Override
+    protected boolean onDecide(GameContainer container, StateBasedGame game, int delta) {
+        ResourceHolderSlick.soundManager.play("decide");
+        NullpoMinoSlick.stateConfigRuleSelect.player = player;
+        NullpoMinoSlick.stateConfigRuleSelect.style = cursor;
+        game.enterState(StateConfigRuleSelect.ID);
+        return false;
+    }
 
-	/*
-	 * Cancel
-	 */
-	@Override
-	protected boolean onCancel(GameContainer container, StateBasedGame game, int delta) {
-		game.enterState(StateConfigMainMenu.ID);
-		return false;
-	}
+    /*
+     * Cancel
+     */
+    @Override
+    protected boolean onCancel(GameContainer container, StateBasedGame game, int delta) {
+        game.enterState(StateConfigMainMenu.ID);
+        return false;
+    }
 }

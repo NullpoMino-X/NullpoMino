@@ -37,99 +37,106 @@ import org.newdawn.slick.state.StateBasedGame;
  * State of the keyboard setting screen
  */
 public class StateConfigKeyboardNavi extends DummyMenuChooseState {
-	/** This state's ID */
-	public static final int ID = 16;
+    /**
+     * This state's ID
+     */
+    public static final int ID = 16;
 
-	/** Player number */
-	public int player = 0;
+    /**
+     * Player number
+     */
+    public int player = 0;
 
-	/** StateBasedGame */
-	protected StateBasedGame gameObj;
+    /**
+     * StateBasedGame
+     */
+    protected StateBasedGame gameObj;
 
-	public StateConfigKeyboardNavi () {
-		maxCursor = 1;
-		minChoiceY = 1;
-	}
+    public StateConfigKeyboardNavi() {
+        maxCursor = 1;
+        minChoiceY = 1;
+    }
 
-	/*
-	 * Fetch this state's ID
-	 */
-	@Override
-	public int getID() {
-		return ID;
-	}
+    /*
+     * Fetch this state's ID
+     */
+    @Override
+    public int getID() {
+        return ID;
+    }
 
-	/*
-	 * State initialization
-	 */
-	@Override
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		gameObj = game;
-	}
+    /*
+     * State initialization
+     */
+    @Override
+    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        gameObj = game;
+    }
 
-	/**
-	 * Get key name
-	 * @param key Keycode
-	 * @return Key name
-	 */
-	protected String getKeyName(int key) {
-		String str = org.lwjgl.input.Keyboard.getKeyName(key);
-		return (str == null) ? String.valueOf(key) : str.toUpperCase();
-	}
+    /**
+     * Get key name
+     *
+     * @param key Keycode
+     * @return Key name
+     */
+    protected String getKeyName(int key) {
+        String str = org.lwjgl.input.Keyboard.getKeyName(key);
+        return (str == null) ? String.valueOf(key) : str.toUpperCase();
+    }
 
-	/*
-	 * Draw the screen
-	 */
-	@Override
-	protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
+    /*
+     * Draw the screen
+     */
+    @Override
+    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+        g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
 
-		NormalFontSlick.printFontGrid(1, 1, "KEYBOARD NAVIGATION SETTING (" + (player + 1) + "P)", NormalFontSlick.COLOR_ORANGE);
+        NormalFontSlick.printFontGrid(1, 1, "KEYBOARD NAVIGATION SETTING (" + (player + 1) + "P)", NormalFontSlick.COLOR_ORANGE);
 
-		NormalFontSlick.printFontGrid(1, 3 + cursor, "b", NormalFontSlick.COLOR_RED);
+        NormalFontSlick.printFontGrid(1, 3 + cursor, "b", NormalFontSlick.COLOR_RED);
 
-		NormalFontSlick.printFontGrid(2, 3, "COPY FROM GAME KEYS", (cursor == 0));
-		NormalFontSlick.printFontGrid(2, 4, "CUSTOMIZE", (cursor == 1));
-	}
+        NormalFontSlick.printFontGrid(2, 3, "COPY FROM GAME KEYS", (cursor == 0));
+        NormalFontSlick.printFontGrid(2, 4, "CUSTOMIZE", (cursor == 1));
+    }
 
-	@Override
-	protected boolean onDecide(GameContainer container, StateBasedGame game, int delta) {
-		if (cursor == 0) {
-			for(int i = 0; i < GameKeySlick.MAX_BUTTON; i++) {
-				GameKeySlick.gamekey[player].keymapNav[i] = GameKeySlick.gamekey[player].keymap[i];
-			}
-		} else if (cursor == 1) {
-			NullpoMinoSlick.stateConfigKeyboard.player = player;
-			NullpoMinoSlick.stateConfigKeyboard.isNavSetting = true;
-			game.enterState(StateConfigKeyboard.ID);
-			return true;
-		}
+    @Override
+    protected boolean onDecide(GameContainer container, StateBasedGame game, int delta) {
+        if (cursor == 0) {
+            for (int i = 0; i < GameKeySlick.MAX_BUTTON; i++) {
+                GameKeySlick.gamekey[player].keymapNav[i] = GameKeySlick.gamekey[player].keymap[i];
+            }
+        } else if (cursor == 1) {
+            NullpoMinoSlick.stateConfigKeyboard.player = player;
+            NullpoMinoSlick.stateConfigKeyboard.isNavSetting = true;
+            game.enterState(StateConfigKeyboard.ID);
+            return true;
+        }
 
-		GameKeySlick.gamekey[player].saveConfig(NullpoMinoSlick.propConfig);
-		NullpoMinoSlick.saveConfig();
+        GameKeySlick.gamekey[player].saveConfig(NullpoMinoSlick.propConfig);
+        NullpoMinoSlick.saveConfig();
 
-		ResourceHolderSlick.soundManager.play("decide");
-		gameObj.enterState(StateConfigMainMenu.ID);
-		return true;
-	}
+        ResourceHolderSlick.soundManager.play("decide");
+        gameObj.enterState(StateConfigMainMenu.ID);
+        return true;
+    }
 
-	@Override
-	protected boolean onCancel(GameContainer container, StateBasedGame game, int delta) {
-		game.enterState(StateConfigMainMenu.ID);
-		return false;
-	}
+    @Override
+    protected boolean onCancel(GameContainer container, StateBasedGame game, int delta) {
+        game.enterState(StateConfigMainMenu.ID);
+        return false;
+    }
 
-	/**
-	 * Called when entering this state
-	 */
-	@Override
-	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
-	}
+    /**
+     * Called when entering this state
+     */
+    @Override
+    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    }
 
-	/**
-	 * Called when leaving this state
-	 */
-	@Override
-	public void leave(GameContainer container, StateBasedGame game) throws SlickException {
-	}
+    /**
+     * Called when leaving this state
+     */
+    @Override
+    public void leave(GameContainer container, StateBasedGame game) throws SlickException {
+    }
 }

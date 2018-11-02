@@ -48,435 +48,481 @@ import org.newdawn.slick.openal.SoundStore;
  * Class to the management of image and sound
  */
 public class ResourceHolderSlick {
-	/** Log */
-	static Logger log = Logger.getLogger(ResourceHolderSlick.class);
-
-	/** BackgroundOfcount */
-	public static final int BACKGROUND_MAX = 20;
-
-	/** Number of images for block spatter animation during line clears */
-	public static final int BLOCK_BREAK_MAX = 8;
-
-	/** Number of image splits for block spatter animation during line clears */
-	public static final int BLOCK_BREAK_SEGMENTS = 2;
-
-	/** Number of gem block clear effects */
-	public static final int PERASE_MAX = 7;
-
-	/** Block images */
-	public static LinkedList<Image> imgNormalBlockList, imgSmallBlockList, imgBigBlockList;
-
-	/** Block sticky flag */
-	public static LinkedList<Boolean> blockStickyFlagList;
-
-	/** Regular font */
-	public static Image imgFont, imgFontSmall;
-
-	/** Small image */
-	//public static Image imgSprite;
-
-	/** Title */
-	public static Image imgTitle;
-
-	/** Menu Background */
-	public static Image imgMenu;
-
-	/** Field frame */
-	public static Image imgFrame;
-
-	/** Field background */
-	public static Image imgFieldbg2, imgFieldbg2Small, imgFieldbg2Big;
-	//public static Image imgFieldbg;
-
-	/** Block spatter animation during line clears */
-	public static Image[][] imgBreak;
-
-	/** Effects for clearing gem blocks */
-	public static Image[] imgPErase;
-
-	/** In playBackground */
-	public static Image[] imgPlayBG;
-
-	/** TTF font */
-	public static UnicodeFont ttfFont;
-
-	/** Sound effects */
-	public static SoundManager soundManager;
-
-	/** BGM */
-	public static Music[] bgm;
-
-	/** Current BGM number */
-	public static int bgmPlaying;
-
-	/**
-	 * Loading images and sound files
-	 * @throws SlickException Failed to load
-	 */
-	public static void load() throws SlickException {
-		String skindir = NullpoMinoSlick.propConfig.getProperty("custom.skin.directory", "res");
-
-		log.info("Loading Image");
-
-		// Blocks
-		int numBlocks = 0;
-		File file = null;
-		while(true) {
-			file = new File(skindir + "/graphics/blockskin/normal/n" + numBlocks + ".png");
-			if(file.canRead()) {
-				numBlocks++;
-			} else {
-				break;
-			}
-		}
-		log.debug(numBlocks + " block skins found");
-
-		imgNormalBlockList = new LinkedList<Image>();
-		imgSmallBlockList = new LinkedList<Image>();
-		imgBigBlockList = new LinkedList<Image>();
-		blockStickyFlagList = new LinkedList<Boolean>();
-
-		for(int i = 0; i < numBlocks; i++) {
-			Image imgNormal = loadImage(skindir + "/graphics/blockskin/normal/n" + i + ".png");
-			imgNormalBlockList.add(imgNormal);
-			imgSmallBlockList.add(loadImage(skindir + "/graphics/blockskin/small/s" + i + ".png"));
-			imgBigBlockList.add(loadImage(skindir + "/graphics/blockskin/big/b" + i + ".png"));
-
-			if((imgNormal.getWidth() >= 400) && (imgNormal.getHeight() >= 304)) {
-				blockStickyFlagList.add(Boolean.TRUE);
-			} else {
-				blockStickyFlagList.add(Boolean.FALSE);
-			}
-		}
-
-		// Other images
-		imgFont = loadImage(skindir + "/graphics/font.png");
-		imgFontSmall = loadImage(skindir + "/graphics/font_small.png");
-		imgTitle = loadImage(skindir + "/graphics/title.png");
-		imgMenu = loadImage(skindir + "/graphics/menu.png");
-		imgFrame = loadImage(skindir + "/graphics/frame.png");
-		imgFieldbg2 = loadImage(skindir + "/graphics/fieldbg2.png");
-		imgFieldbg2Small = loadImage(skindir + "/graphics/fieldbg2_small.png");
-		imgFieldbg2Big = loadImage(skindir + "/graphics/fieldbg2_big.png");
-
-		if(NullpoMinoSlick.propConfig.getProperty("option.showlineeffect", true) == true) {
-			loadLineClearEffectImages();
-		}
-		if(NullpoMinoSlick.propConfig.getProperty("option.showbg", true) == true) {
-			loadBackgroundImages();
-		}
-
-		// Font
-		try {
-			ttfFont = new UnicodeFont(skindir + "/font/font.ttf", 16, false, false);
-			ttfFont.getEffects().add(new ShadowEffect(Color.black, 1, 1, 1));
-			ttfFont.getEffects().add(new ColorEffect(java.awt.Color.white));
-		} catch (Throwable e) {
-			log.error("TTF Font load failed", e);
-			ttfFont = null;
-		}
-
-		// Sound effects
-		soundManager = new SoundManager();
-		if(NullpoMinoSlick.propConfig.getProperty("option.se", true) == true) {
-			try {
-				SoundStore.get().init();
-			} catch (Throwable e) {
-				log.warn("Sound init failed", e);
-			}
-
-			log.info("Loading Sound Effect");
-			soundManager.load("cursor", skindir + "/se/cursor.wav");
-			soundManager.load("decide", skindir + "/se/decide.wav");
-			soundManager.load("erase1", skindir + "/se/erase1.wav");
-			soundManager.load("erase2", skindir + "/se/erase2.wav");
-			soundManager.load("erase3", skindir + "/se/erase3.wav");
-			soundManager.load("erase4", skindir + "/se/erase4.wav");
-			soundManager.load("died", skindir + "/se/died.wav");
-			soundManager.load("gameover", skindir + "/se/gameover.wav");
-			soundManager.load("hold", skindir + "/se/hold.wav");
-			soundManager.load("holdfail", skindir + "/se/holdfail.wav");
-			soundManager.load("initialhold", skindir + "/se/initialhold.wav");
-			soundManager.load("initialrotate", skindir + "/se/initialrotate.wav");
-			soundManager.load("levelup", skindir + "/se/levelup.wav");
-			soundManager.load("linefall", skindir + "/se/linefall.wav");
-			soundManager.load("lock", skindir + "/se/lock.wav");
-			soundManager.load("move", skindir + "/se/move.wav");
-			soundManager.load("pause", skindir + "/se/pause.wav");
-			soundManager.load("rotate", skindir + "/se/rotate.wav");
-			soundManager.load("step", skindir + "/se/step.wav");
-			soundManager.load("piece0", skindir + "/se/piece0.wav");
-			soundManager.load("piece1", skindir + "/se/piece1.wav");
-			soundManager.load("piece2", skindir + "/se/piece2.wav");
-			soundManager.load("piece3", skindir + "/se/piece3.wav");
-			soundManager.load("piece4", skindir + "/se/piece4.wav");
-			soundManager.load("piece5", skindir + "/se/piece5.wav");
-			soundManager.load("piece6", skindir + "/se/piece6.wav");
-			soundManager.load("piece7", skindir + "/se/piece7.wav");
-			soundManager.load("piece8", skindir + "/se/piece8.wav");
-			soundManager.load("piece9", skindir + "/se/piece9.wav");
-			soundManager.load("piece10", skindir + "/se/piece10.wav");
-			soundManager.load("harddrop", skindir + "/se/harddrop.wav");
-			soundManager.load("softdrop", skindir + "/se/softdrop.wav");
-			soundManager.load("levelstop", skindir + "/se/levelstop.wav");
-			soundManager.load("endingstart", skindir + "/se/endingstart.wav");
-			soundManager.load("excellent", skindir + "/se/excellent.wav");
-			soundManager.load("b2b_start", skindir + "/se/b2b_start.wav");
-			soundManager.load("b2b_continue", skindir + "/se/b2b_continue.wav");
-			soundManager.load("b2b_end", skindir + "/se/b2b_end.wav");
-			soundManager.load("gradeup", skindir + "/se/gradeup.wav");
-			soundManager.load("countdown", skindir + "/se/countdown.wav");
-			soundManager.load("tspin0", skindir + "/se/tspin0.wav");
-			soundManager.load("tspin1", skindir + "/se/tspin1.wav");
-			soundManager.load("tspin2", skindir + "/se/tspin2.wav");
-			soundManager.load("tspin3", skindir + "/se/tspin3.wav");
-			soundManager.load("ready", skindir + "/se/ready.wav");
-			soundManager.load("go", skindir + "/se/go.wav");
-			soundManager.load("movefail", skindir + "/se/movefail.wav");
-			soundManager.load("rotfail", skindir + "/se/rotfail.wav");
-			soundManager.load("medal", skindir + "/se/medal.wav");
-			soundManager.load("change", skindir + "/se/change.wav");
-			soundManager.load("bravo", skindir + "/se/bravo.wav");
-			soundManager.load("cool", skindir + "/se/cool.wav");
-			soundManager.load("regret", skindir + "/se/regret.wav");
-			soundManager.load("garbage", skindir + "/se/garbage.wav");
-			soundManager.load("stageclear", skindir + "/se/stageclear.wav");
-			soundManager.load("stagefail", skindir + "/se/stagefail.wav");
-			soundManager.load("gem", skindir + "/se/gem.wav");
-			soundManager.load("danger", skindir + "/se/danger.wav");
-			soundManager.load("matchend", skindir + "/se/matchend.wav");
-			soundManager.load("hurryup", skindir + "/se/hurryup.wav");
-			soundManager.load("square_s", skindir + "/se/square_s.wav");
-			soundManager.load("square_g", skindir + "/se/square_g.wav");
-
-			for(int i = 0; i < 20; i++) {
-				soundManager.load("combo" + (i + 1), skindir + "/se/combo" + (i + 1) + ".wav");
-			}
-		}
-
-		// Music
-		bgm = new Music[BGMStatus.BGM_COUNT];
-		bgmPlaying = -1;
-
-		if(NullpoMinoSlick.propConfig.getProperty("option.bgmpreload", false) == true) {
-			for(int i = 0; i < BGMStatus.BGM_COUNT; i++) {
-				bgmLoad(i, false);
-			}
-		}
-	}
-
-	/**
-	 * Load background images.
-	 */
-	public static void loadBackgroundImages() {
-		if(imgPlayBG == null) {
-			imgPlayBG = new Image[BACKGROUND_MAX];
-
-			String skindir = NullpoMinoSlick.propConfig.getProperty("custom.skin.directory", "res");
-			for(int i = 0; i < imgPlayBG.length; i++)
-				imgPlayBG[i] = loadImage(skindir + "/graphics/back" + i + ".png");
-		}
-	}
-
-	/**
-	 * Load line clear effect images.
-	 */
-	public static void loadLineClearEffectImages() {
-		String skindir = NullpoMinoSlick.propConfig.getProperty("custom.skin.directory", "res");
-
-		if(imgBreak == null) {
-			imgBreak = new Image[BLOCK_BREAK_MAX][BLOCK_BREAK_SEGMENTS];
-
-			for(int i = 0; i < BLOCK_BREAK_MAX; i++) {
-				for(int j = 0; j < BLOCK_BREAK_SEGMENTS; j++) {
-					imgBreak[i][j] = loadImage(skindir + "/graphics/break" + i + "_" + j + ".png");
-				}
-			}
-		}
-		if(imgPErase == null) {
-			imgPErase = new Image[PERASE_MAX];
-
-			for(int i = 0; i < imgPErase.length; i++) {
-				imgPErase[i] = loadImage(skindir + "/graphics/perase" + i + ".png");
-			}
-		}
-	}
-
-	/**
-	 * Load image
-	 * @param filename Filename
-	 * @return Image data
-	 */
-	public static Image loadImage(String filename) {
-		if(NullpoMinoSlick.useBigImageTextureLoad) {
-			return (Image)loadBigImage(filename);
-		}
-		return loadNormalImage(filename);
-	}
-
-	/**
-	 * Load image (uses normal regular Image)
-	 * @param filename Filename
-	 * @return Image data
-	 */
-	public static Image loadNormalImage(String filename) {
-		log.debug("Loading image from " + filename);
-
-		Image img = null;
-		try {
-			img = new Image(filename);
-		} catch (Throwable e) {
-			log.error("Failed to load image from " + filename, e);
-			try {
-				img = new Image(256, 256);
-			} catch (Throwable e2) {}
-		}
-
-		return img;
-	}
-
-	/**
-	 * Load image (uses normal BigImage)
-	 * @param filename Filename
-	 * @return Image data
-	 */
-	public static BigImage loadBigImage(String filename) {
-		log.debug("Loading big image from " + filename);
-
-		BigImage bigImg = null;
-		try {
-			bigImg = new BigImage(filename);
-		} catch (Throwable e) {
-			log.error("Failed to load big image from " + filename, e);
-		}
-
-		return bigImg;
-	}
-
-	/**
-	 * Specified numberOfBGMRead into memory
-	 * @param no BGM number
-	 * @param showerr displayed on the console when an exception occurs
-	 */
-	public static void bgmLoad(int no, boolean showerr) {
-		if(NullpoMinoSlick.propConfig.getProperty("option.bgm", false) == false) return;
-
-		if(bgm[no] == null) {
-			if(showerr) log.info("Loading BGM" + no);
-
-			try {
-				String filename = NullpoMinoSlick.propMusic.getProperty("music.filename." + no, null);
-				if((filename == null) || (filename.length() < 1)) {
-					if(showerr) log.info("BGM" + no + " not available");
-					return;
-				}
-
-				boolean streaming = NullpoMinoSlick.propConfig.getProperty("option.bgmstreaming", true);
-
-				bgm[no] = new Music(filename, streaming);
-
-				if(!showerr) log.info("Loaded BGM" + no);
-			} catch(Throwable e) {
-				if(showerr)
-					log.error("BGM " + no + " load failed", e);
-				else
-					log.warn("BGM " + no + " load failed");
-			}
-		}
-	}
-
-	/**
-	 * Specified numberOfBGMPlay
-	 * @param no BGM number
-	 */
-	public static void bgmStart(int no) {
-		if(NullpoMinoSlick.propConfig.getProperty("option.bgm", false) == false) return;
-
-		bgmStop();
-
-		int bgmvolume = NullpoMinoSlick.propConfig.getProperty("option.bgmvolume", 128);
-		NullpoMinoSlick.appGameContainer.setMusicVolume(bgmvolume / (float)128);
-
-		if(no >= 0) {
-			if(bgm[no] == null) {
-				bgmLoad(no, true);
-			}
-
-			if(bgm[no] != null) {
-				try {
-					if(NullpoMinoSlick.propMusic.getProperty("music.noloop." + no, false) == true)
-						bgm[no].play();
-					else
-						bgm[no].loop();
-				} catch(Throwable e) {
-					log.error("Failed to play music " + no, e);
-				}
-			}
-
-			bgmPlaying = no;
-		} else {
-			bgmPlaying = -1;
-		}
-	}
-
-	/**
-	 * Current BGMPause
-	 */
-	public static void bgmPause() {
-		if(bgmPlaying >= 0) {
-			if(bgm[bgmPlaying] != null) {
-				bgm[bgmPlaying].pause();
-			}
-		}
-	}
-
-	/**
-	 * PausedBGMResumes
-	 */
-	public static void bgmResume() {
-		if(bgmPlaying >= 0) {
-			if(bgm[bgmPlaying] != null) {
-				bgm[bgmPlaying].resume();
-			}
-		}
-	}
-
-	/**
-	 * BGMWhether during playback
-	 * @return If during playbacktrue
-	 */
-	public static boolean bgmIsPlaying() {
-		if(bgmPlaying >= 0) {
-			if(bgm[bgmPlaying] != null) {
-				return bgm[bgmPlaying].playing();
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * BGMStop
-	 */
-	public static void bgmStop() {
-		for(int i = 0; i < BGMStatus.BGM_COUNT; i++) {
-			if(bgm[i] != null) {
-				bgm[i].pause();
-				bgm[i].stop();
-			}
-		}
-	}
-
-	/**
-	 * AllBGMFreed from memory
-	 */
-	public static void bgmUnloadAll() {
-		for(int i = 0; i < BGMStatus.BGM_COUNT; i++) {
-			if(bgm[i] != null) {
-				bgm[i].stop();
-				if(NullpoMinoSlick.propConfig.getProperty("option.bgmpreload", false) == false)
-					bgm[i] = null;
-			}
-		}
-	}
+    /**
+     * Log
+     */
+    static Logger log = Logger.getLogger(ResourceHolderSlick.class);
+
+    /**
+     * BackgroundOfcount
+     */
+    public static final int BACKGROUND_MAX = 20;
+
+    /**
+     * Number of images for block spatter animation during line clears
+     */
+    public static final int BLOCK_BREAK_MAX = 8;
+
+    /**
+     * Number of image splits for block spatter animation during line clears
+     */
+    public static final int BLOCK_BREAK_SEGMENTS = 2;
+
+    /**
+     * Number of gem block clear effects
+     */
+    public static final int PERASE_MAX = 7;
+
+    /**
+     * Block images
+     */
+    public static LinkedList<Image> imgNormalBlockList, imgSmallBlockList, imgBigBlockList;
+
+    /**
+     * Block sticky flag
+     */
+    public static LinkedList<Boolean> blockStickyFlagList;
+
+    /**
+     * Regular font
+     */
+    public static Image imgFont, imgFontSmall;
+
+    /** Small image */
+    //public static Image imgSprite;
+
+    /**
+     * Title
+     */
+    public static Image imgTitle;
+
+    /**
+     * Menu Background
+     */
+    public static Image imgMenu;
+
+    /**
+     * Field frame
+     */
+    public static Image imgFrame;
+
+    /**
+     * Field background
+     */
+    public static Image imgFieldbg2, imgFieldbg2Small, imgFieldbg2Big;
+    //public static Image imgFieldbg;
+
+    /**
+     * Block spatter animation during line clears
+     */
+    public static Image[][] imgBreak;
+
+    /**
+     * Effects for clearing gem blocks
+     */
+    public static Image[] imgPErase;
+
+    /**
+     * In playBackground
+     */
+    public static Image[] imgPlayBG;
+
+    /**
+     * TTF font
+     */
+    public static UnicodeFont ttfFont;
+
+    /**
+     * Sound effects
+     */
+    public static SoundManager soundManager;
+
+    /**
+     * BGM
+     */
+    public static Music[] bgm;
+
+    /**
+     * Current BGM number
+     */
+    public static int bgmPlaying;
+
+    /**
+     * Loading images and sound files
+     *
+     * @throws SlickException Failed to load
+     */
+    public static void load() throws SlickException {
+        String skindir = NullpoMinoSlick.propConfig.getProperty("custom.skin.directory", "res");
+
+        log.info("Loading Image");
+
+        // Blocks
+        int numBlocks = 0;
+        File file = null;
+        while (true) {
+            file = new File(skindir + "/graphics/blockskin/normal/n" + numBlocks + ".png");
+            if (file.canRead()) {
+                numBlocks++;
+            } else {
+                break;
+            }
+        }
+        log.debug(numBlocks + " block skins found");
+
+        imgNormalBlockList = new LinkedList<Image>();
+        imgSmallBlockList = new LinkedList<Image>();
+        imgBigBlockList = new LinkedList<Image>();
+        blockStickyFlagList = new LinkedList<Boolean>();
+
+        for (int i = 0; i < numBlocks; i++) {
+            Image imgNormal = loadImage(skindir + "/graphics/blockskin/normal/n" + i + ".png");
+            imgNormalBlockList.add(imgNormal);
+            imgSmallBlockList.add(loadImage(skindir + "/graphics/blockskin/small/s" + i + ".png"));
+            imgBigBlockList.add(loadImage(skindir + "/graphics/blockskin/big/b" + i + ".png"));
+
+            if ((imgNormal.getWidth() >= 400) && (imgNormal.getHeight() >= 304)) {
+                blockStickyFlagList.add(Boolean.TRUE);
+            } else {
+                blockStickyFlagList.add(Boolean.FALSE);
+            }
+        }
+
+        // Other images
+        imgFont = loadImage(skindir + "/graphics/font.png");
+        imgFontSmall = loadImage(skindir + "/graphics/font_small.png");
+        imgTitle = loadImage(skindir + "/graphics/title.png");
+        imgMenu = loadImage(skindir + "/graphics/menu.png");
+        imgFrame = loadImage(skindir + "/graphics/frame.png");
+        imgFieldbg2 = loadImage(skindir + "/graphics/fieldbg2.png");
+        imgFieldbg2Small = loadImage(skindir + "/graphics/fieldbg2_small.png");
+        imgFieldbg2Big = loadImage(skindir + "/graphics/fieldbg2_big.png");
+
+        if (NullpoMinoSlick.propConfig.getProperty("option.showlineeffect", true) == true) {
+            loadLineClearEffectImages();
+        }
+        if (NullpoMinoSlick.propConfig.getProperty("option.showbg", true) == true) {
+            loadBackgroundImages();
+        }
+
+        // Font
+        try {
+            ttfFont = new UnicodeFont(skindir + "/font/font.ttf", 16, false, false);
+            ttfFont.getEffects().add(new ShadowEffect(Color.black, 1, 1, 1));
+            ttfFont.getEffects().add(new ColorEffect(java.awt.Color.white));
+        } catch (Throwable e) {
+            log.error("TTF Font load failed", e);
+            ttfFont = null;
+        }
+
+        // Sound effects
+        soundManager = new SoundManager();
+        if (NullpoMinoSlick.propConfig.getProperty("option.se", true) == true) {
+            try {
+                SoundStore.get().init();
+            } catch (Throwable e) {
+                log.warn("Sound init failed", e);
+            }
+
+            log.info("Loading Sound Effect");
+            soundManager.load("cursor", skindir + "/se/cursor.wav");
+            soundManager.load("decide", skindir + "/se/decide.wav");
+            soundManager.load("erase1", skindir + "/se/erase1.wav");
+            soundManager.load("erase2", skindir + "/se/erase2.wav");
+            soundManager.load("erase3", skindir + "/se/erase3.wav");
+            soundManager.load("erase4", skindir + "/se/erase4.wav");
+            soundManager.load("died", skindir + "/se/died.wav");
+            soundManager.load("gameover", skindir + "/se/gameover.wav");
+            soundManager.load("hold", skindir + "/se/hold.wav");
+            soundManager.load("holdfail", skindir + "/se/holdfail.wav");
+            soundManager.load("initialhold", skindir + "/se/initialhold.wav");
+            soundManager.load("initialrotate", skindir + "/se/initialrotate.wav");
+            soundManager.load("levelup", skindir + "/se/levelup.wav");
+            soundManager.load("linefall", skindir + "/se/linefall.wav");
+            soundManager.load("lock", skindir + "/se/lock.wav");
+            soundManager.load("move", skindir + "/se/move.wav");
+            soundManager.load("pause", skindir + "/se/pause.wav");
+            soundManager.load("rotate", skindir + "/se/rotate.wav");
+            soundManager.load("step", skindir + "/se/step.wav");
+            soundManager.load("piece0", skindir + "/se/piece0.wav");
+            soundManager.load("piece1", skindir + "/se/piece1.wav");
+            soundManager.load("piece2", skindir + "/se/piece2.wav");
+            soundManager.load("piece3", skindir + "/se/piece3.wav");
+            soundManager.load("piece4", skindir + "/se/piece4.wav");
+            soundManager.load("piece5", skindir + "/se/piece5.wav");
+            soundManager.load("piece6", skindir + "/se/piece6.wav");
+            soundManager.load("piece7", skindir + "/se/piece7.wav");
+            soundManager.load("piece8", skindir + "/se/piece8.wav");
+            soundManager.load("piece9", skindir + "/se/piece9.wav");
+            soundManager.load("piece10", skindir + "/se/piece10.wav");
+            soundManager.load("harddrop", skindir + "/se/harddrop.wav");
+            soundManager.load("softdrop", skindir + "/se/softdrop.wav");
+            soundManager.load("levelstop", skindir + "/se/levelstop.wav");
+            soundManager.load("endingstart", skindir + "/se/endingstart.wav");
+            soundManager.load("excellent", skindir + "/se/excellent.wav");
+            soundManager.load("b2b_start", skindir + "/se/b2b_start.wav");
+            soundManager.load("b2b_continue", skindir + "/se/b2b_continue.wav");
+            soundManager.load("b2b_end", skindir + "/se/b2b_end.wav");
+            soundManager.load("gradeup", skindir + "/se/gradeup.wav");
+            soundManager.load("countdown", skindir + "/se/countdown.wav");
+            soundManager.load("tspin0", skindir + "/se/tspin0.wav");
+            soundManager.load("tspin1", skindir + "/se/tspin1.wav");
+            soundManager.load("tspin2", skindir + "/se/tspin2.wav");
+            soundManager.load("tspin3", skindir + "/se/tspin3.wav");
+            soundManager.load("ready", skindir + "/se/ready.wav");
+            soundManager.load("go", skindir + "/se/go.wav");
+            soundManager.load("movefail", skindir + "/se/movefail.wav");
+            soundManager.load("rotfail", skindir + "/se/rotfail.wav");
+            soundManager.load("medal", skindir + "/se/medal.wav");
+            soundManager.load("change", skindir + "/se/change.wav");
+            soundManager.load("bravo", skindir + "/se/bravo.wav");
+            soundManager.load("cool", skindir + "/se/cool.wav");
+            soundManager.load("regret", skindir + "/se/regret.wav");
+            soundManager.load("garbage", skindir + "/se/garbage.wav");
+            soundManager.load("stageclear", skindir + "/se/stageclear.wav");
+            soundManager.load("stagefail", skindir + "/se/stagefail.wav");
+            soundManager.load("gem", skindir + "/se/gem.wav");
+            soundManager.load("danger", skindir + "/se/danger.wav");
+            soundManager.load("matchend", skindir + "/se/matchend.wav");
+            soundManager.load("hurryup", skindir + "/se/hurryup.wav");
+            soundManager.load("square_s", skindir + "/se/square_s.wav");
+            soundManager.load("square_g", skindir + "/se/square_g.wav");
+
+            for (int i = 0; i < 20; i++) {
+                soundManager.load("combo" + (i + 1), skindir + "/se/combo" + (i + 1) + ".wav");
+            }
+        }
+
+        // Music
+        bgm = new Music[BGMStatus.BGM_COUNT];
+        bgmPlaying = -1;
+
+        if (NullpoMinoSlick.propConfig.getProperty("option.bgmpreload", false) == true) {
+            for (int i = 0; i < BGMStatus.BGM_COUNT; i++) {
+                bgmLoad(i, false);
+            }
+        }
+    }
+
+    /**
+     * Load background images.
+     */
+    public static void loadBackgroundImages() {
+        if (imgPlayBG == null) {
+            imgPlayBG = new Image[BACKGROUND_MAX];
+
+            String skindir = NullpoMinoSlick.propConfig.getProperty("custom.skin.directory", "res");
+            for (int i = 0; i < imgPlayBG.length; i++)
+                imgPlayBG[i] = loadImage(skindir + "/graphics/back" + i + ".png");
+        }
+    }
+
+    /**
+     * Load line clear effect images.
+     */
+    public static void loadLineClearEffectImages() {
+        String skindir = NullpoMinoSlick.propConfig.getProperty("custom.skin.directory", "res");
+
+        if (imgBreak == null) {
+            imgBreak = new Image[BLOCK_BREAK_MAX][BLOCK_BREAK_SEGMENTS];
+
+            for (int i = 0; i < BLOCK_BREAK_MAX; i++) {
+                for (int j = 0; j < BLOCK_BREAK_SEGMENTS; j++) {
+                    imgBreak[i][j] = loadImage(skindir + "/graphics/break" + i + "_" + j + ".png");
+                }
+            }
+        }
+        if (imgPErase == null) {
+            imgPErase = new Image[PERASE_MAX];
+
+            for (int i = 0; i < imgPErase.length; i++) {
+                imgPErase[i] = loadImage(skindir + "/graphics/perase" + i + ".png");
+            }
+        }
+    }
+
+    /**
+     * Load image
+     *
+     * @param filename Filename
+     * @return Image data
+     */
+    public static Image loadImage(String filename) {
+        if (NullpoMinoSlick.useBigImageTextureLoad) {
+            return (Image) loadBigImage(filename);
+        }
+        return loadNormalImage(filename);
+    }
+
+    /**
+     * Load image (uses normal regular Image)
+     *
+     * @param filename Filename
+     * @return Image data
+     */
+    public static Image loadNormalImage(String filename) {
+        log.debug("Loading image from " + filename);
+
+        Image img = null;
+        try {
+            img = new Image(filename);
+        } catch (Throwable e) {
+            log.error("Failed to load image from " + filename, e);
+            try {
+                img = new Image(256, 256);
+            } catch (Throwable e2) {
+            }
+        }
+
+        return img;
+    }
+
+    /**
+     * Load image (uses normal BigImage)
+     *
+     * @param filename Filename
+     * @return Image data
+     */
+    public static BigImage loadBigImage(String filename) {
+        log.debug("Loading big image from " + filename);
+
+        BigImage bigImg = null;
+        try {
+            bigImg = new BigImage(filename);
+        } catch (Throwable e) {
+            log.error("Failed to load big image from " + filename, e);
+        }
+
+        return bigImg;
+    }
+
+    /**
+     * Specified numberOfBGMRead into memory
+     *
+     * @param no      BGM number
+     * @param showerr displayed on the console when an exception occurs
+     */
+    public static void bgmLoad(int no, boolean showerr) {
+        if (NullpoMinoSlick.propConfig.getProperty("option.bgm", false) == false) return;
+
+        if (bgm[no] == null) {
+            if (showerr) log.info("Loading BGM" + no);
+
+            try {
+                String filename = NullpoMinoSlick.propMusic.getProperty("music.filename." + no, null);
+                if ((filename == null) || (filename.length() < 1)) {
+                    if (showerr) log.info("BGM" + no + " not available");
+                    return;
+                }
+
+                boolean streaming = NullpoMinoSlick.propConfig.getProperty("option.bgmstreaming", true);
+
+                bgm[no] = new Music(filename, streaming);
+
+                if (!showerr) log.info("Loaded BGM" + no);
+            } catch (Throwable e) {
+                if (showerr)
+                    log.error("BGM " + no + " load failed", e);
+                else
+                    log.warn("BGM " + no + " load failed");
+            }
+        }
+    }
+
+    /**
+     * Specified numberOfBGMPlay
+     *
+     * @param no BGM number
+     */
+    public static void bgmStart(int no) {
+        if (NullpoMinoSlick.propConfig.getProperty("option.bgm", false) == false) return;
+
+        bgmStop();
+
+        int bgmvolume = NullpoMinoSlick.propConfig.getProperty("option.bgmvolume", 128);
+        NullpoMinoSlick.appGameContainer.setMusicVolume(bgmvolume / (float) 128);
+
+        if (no >= 0) {
+            if (bgm[no] == null) {
+                bgmLoad(no, true);
+            }
+
+            if (bgm[no] != null) {
+                try {
+                    if (NullpoMinoSlick.propMusic.getProperty("music.noloop." + no, false) == true)
+                        bgm[no].play();
+                    else
+                        bgm[no].loop();
+                } catch (Throwable e) {
+                    log.error("Failed to play music " + no, e);
+                }
+            }
+
+            bgmPlaying = no;
+        } else {
+            bgmPlaying = -1;
+        }
+    }
+
+    /**
+     * Current BGMPause
+     */
+    public static void bgmPause() {
+        if (bgmPlaying >= 0) {
+            if (bgm[bgmPlaying] != null) {
+                bgm[bgmPlaying].pause();
+            }
+        }
+    }
+
+    /**
+     * PausedBGMResumes
+     */
+    public static void bgmResume() {
+        if (bgmPlaying >= 0) {
+            if (bgm[bgmPlaying] != null) {
+                bgm[bgmPlaying].resume();
+            }
+        }
+    }
+
+    /**
+     * BGMWhether during playback
+     *
+     * @return If during playbacktrue
+     */
+    public static boolean bgmIsPlaying() {
+        if (bgmPlaying >= 0) {
+            if (bgm[bgmPlaying] != null) {
+                return bgm[bgmPlaying].playing();
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * BGMStop
+     */
+    public static void bgmStop() {
+        for (int i = 0; i < BGMStatus.BGM_COUNT; i++) {
+            if (bgm[i] != null) {
+                bgm[i].pause();
+                bgm[i].stop();
+            }
+        }
+    }
+
+    /**
+     * AllBGMFreed from memory
+     */
+    public static void bgmUnloadAll() {
+        for (int i = 0; i < BGMStatus.BGM_COUNT; i++) {
+            if (bgm[i] != null) {
+                bgm[i].stop();
+                if (NullpoMinoSlick.propConfig.getProperty("option.bgmpreload", false) == false)
+                    bgm[i] = null;
+            }
+        }
+    }
 }

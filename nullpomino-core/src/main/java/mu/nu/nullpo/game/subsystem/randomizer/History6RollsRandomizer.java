@@ -35,71 +35,73 @@ import mu.nu.nullpo.util.GeneralUtil;
 
 /**
  * History randomizer (4 rolls)
+ *
  * @deprecated No longer used. The current one is net.omegaboshi.nullpomino.game.subsystem.randomizer.History6RollsRandomizer.
  */
 public class History6RollsRandomizer implements Randomizer {
-	/*
-	 * Create NEXT sequence
-	 */
-	public int[] createPieceSequence(boolean[] pieceEnable, Random random, int arrayMax) {
-		int[] pieceArray = new int[arrayMax];
-		int history[] = new int[4];
-		int id = 0;
-		boolean szoOnly = GeneralUtil.isPieceSZOOnly(pieceEnable);
+    /*
+     * Create NEXT sequence
+     */
+    public int[] createPieceSequence(boolean[] pieceEnable, Random random, int arrayMax) {
+        int[] pieceArray = new int[arrayMax];
+        int history[] = new int[4];
+        int id = 0;
+        boolean szoOnly = GeneralUtil.isPieceSZOOnly(pieceEnable);
 
-		// HistoryZ S Z SI am filled with
-		history[0] = Piece.PIECE_Z;
-		history[1] = Piece.PIECE_S;
-		history[2] = Piece.PIECE_Z;
-		history[3] = Piece.PIECE_S;
+        // HistoryZ S Z SI am filled with
+        history[0] = Piece.PIECE_Z;
+        history[1] = Piece.PIECE_S;
+        history[2] = Piece.PIECE_Z;
+        history[3] = Piece.PIECE_S;
 
-		// Pat generation
-		do {
-			id = random.nextInt(Piece.PIECE_COUNT);
-		} while( (!pieceEnable[id]) || ((!szoOnly) && ((id == Piece.PIECE_Z) || (id == Piece.PIECE_O) || (id == Piece.PIECE_S))) );
+        // Pat generation
+        do {
+            id = random.nextInt(Piece.PIECE_COUNT);
+        }
+        while ((!pieceEnable[id]) || ((!szoOnly) && ((id == Piece.PIECE_Z) || (id == Piece.PIECE_O) || (id == Piece.PIECE_S))));
 
-		// Add to NEXT list
-		pieceArray[0] = id;
+        // Add to NEXT list
+        pieceArray[0] = id;
 
-		// Slide the history
-		for(int j = 0; j < 3; j++) {
-			history[3 - j] = history[3 - (j + 1)];
-		}
+        // Slide the history
+        for (int j = 0; j < 3; j++) {
+            history[3 - j] = history[3 - (j + 1)];
+        }
 
-		// A new historyBlockPut
-		history[0] = id;
+        // A new historyBlockPut
+        history[0] = id;
 
-		// Create draws
-		for(int i = 1; i < arrayMax; i++) {
-			// Draw
-			do {
-				id = random.nextInt(Piece.PIECE_COUNT);
-			} while(!pieceEnable[id]);
+        // Create draws
+        for (int i = 1; i < arrayMax; i++) {
+            // Draw
+            do {
+                id = random.nextInt(Piece.PIECE_COUNT);
+            } while (!pieceEnable[id]);
 
-			// Was drawn to the history TsumoMaximum6Redraw times
-			if((id == history[0]) || (id == history[1]) || (id == history[2]) || (id == history[3])) {
-				for(int j = 0; j < 6; j++) {
-					do {
-						id = random.nextInt(Piece.PIECE_COUNT);
-					} while(!pieceEnable[id]);
+            // Was drawn to the history TsumoMaximum6Redraw times
+            if ((id == history[0]) || (id == history[1]) || (id == history[2]) || (id == history[3])) {
+                for (int j = 0; j < 6; j++) {
+                    do {
+                        id = random.nextInt(Piece.PIECE_COUNT);
+                    } while (!pieceEnable[id]);
 
-					// 4If you do not have to leave in place the history of one
-					if((id != history[0]) && (id != history[1]) && (id != history[2]) && (id != history[3])) break;
-				}
-			}
+                    // 4If you do not have to leave in place the history of one
+                    if ((id != history[0]) && (id != history[1]) && (id != history[2]) && (id != history[3])) break;
+                }
+            }
 
-			// Slide the history
-			for(int j = 0; j < 3; j++) {
-				history[3 - j] = history[3 - (j + 1)];
-			}
+            // Slide the history
+            for (int j = 0; j < 3; j++) {
+                history[3 - j] = history[3 - (j + 1)];
+            }
 
-			// A new historyBlockPut
-			history[0] = id;
+            // A new historyBlockPut
+            history[0] = id;
 
-			// Add to NEXT list
-			pieceArray[i] = id;
-		}
+            // Add to NEXT list
+            pieceArray[i] = id;
+        }
 
-		return pieceArray;
-	}
+        return pieceArray;
+    }
 }

@@ -46,253 +46,279 @@ import org.newdawn.slick.state.StateBasedGame;
  * AI config screen state
  */
 public class StateConfigAISelect extends BaseGameState {
-	/** This state's ID */
-	public static final int ID = 8;
+    /**
+     * This state's ID
+     */
+    public static final int ID = 8;
 
-	/** 1Displayed on the screenMaximumAIcount */
-	public static final int MAX_AI_IN_ONE_PAGE = 20;
+    /**
+     * 1Displayed on the screenMaximumAIcount
+     */
+    public static final int MAX_AI_IN_ONE_PAGE = 20;
 
-	/** Log */
-	static Logger log = Logger.getLogger(StateConfigAISelect.class);
+    /**
+     * Log
+     */
+    static Logger log = Logger.getLogger(StateConfigAISelect.class);
 
-	/** Player ID */
-	public int player = 0;
+    /**
+     * Player ID
+     */
+    public int player = 0;
 
-	/** AIList of classes */
-	protected String[] aiPathList;
+    /**
+     * AIList of classes
+     */
+    protected String[] aiPathList;
 
-	/** AIOfNameList */
-	protected String[] aiNameList;
+    /**
+     * AIOfNameList
+     */
+    protected String[] aiNameList;
 
-	/** Current AIClass of */
-	protected String currentAI;
+    /**
+     * Current AIClass of
+     */
+    protected String currentAI;
 
-	/** AIOfID */
-	protected int aiID = 0;
+    /**
+     * AIOfID
+     */
+    protected int aiID = 0;
 
-	/** AIMovement interval of */
-	protected int aiMoveDelay = 0;
+    /**
+     * AIMovement interval of
+     */
+    protected int aiMoveDelay = 0;
 
-	/** AIThinking of waiting time */
-	protected int aiThinkDelay = 0;
+    /**
+     * AIThinking of waiting time
+     */
+    protected int aiThinkDelay = 0;
 
-	/** AIUsing threads in */
-	protected boolean aiUseThread = false;
+    /**
+     * AIUsing threads in
+     */
+    protected boolean aiUseThread = false;
 
-	protected boolean aiShowHint = false;
-	
-	protected boolean aiPrethink = false;
-	
-	protected boolean aiShowState = false;
+    protected boolean aiShowHint = false;
 
-	/** Cursor position */
-	protected int cursor = 0;
+    protected boolean aiPrethink = false;
 
-	/*
-	 * Fetch this state's ID
-	 */
-	@Override
-	public int getID() {
-		return ID;
-	}
+    protected boolean aiShowState = false;
 
-	/*
-	 * State initialization
-	 */
-	@Override
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		try {
-			BufferedReader in = new BufferedReader(new FileReader("config/list/ai.lst"));
-			aiPathList = loadAIList(in);
-			aiNameList = loadAINames(aiPathList);
-			in.close();
-		} catch (IOException e) {
-			log.error("Failed to load AI list", e);
-		}
-	}
+    /**
+     * Cursor position
+     */
+    protected int cursor = 0;
 
-	/*
-	 * Called when entering this state
-	 */
-	@Override
-	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
-		currentAI = NullpoMinoSlick.propGlobal.getProperty(player + ".ai", "");
-		aiMoveDelay = NullpoMinoSlick.propGlobal.getProperty(player + ".aiMoveDelay", 0);
-		aiThinkDelay = NullpoMinoSlick.propGlobal.getProperty(player + ".aiThinkDelay", 0);
-		aiUseThread = NullpoMinoSlick.propGlobal.getProperty(player + ".aiUseThread", true);
-		aiShowHint = NullpoMinoSlick.propGlobal.getProperty(player+ ".aiShowHint", false);
-		aiPrethink = NullpoMinoSlick.propGlobal.getProperty(player+ ".aiPrethink", false);
-		aiShowState = NullpoMinoSlick.propGlobal.getProperty(player+ ".aiShowState", false);
+    /*
+     * Fetch this state's ID
+     */
+    @Override
+    public int getID() {
+        return ID;
+    }
 
-		aiID = -1;
-		for(int i = 0; i < aiPathList.length; i++) {
-			if(currentAI.equals(aiPathList[i])) aiID = i;
-		}
-	}
+    /*
+     * State initialization
+     */
+    @Override
+    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        try {
+            BufferedReader in = new BufferedReader(new FileReader("config/list/ai.lst"));
+            aiPathList = loadAIList(in);
+            aiNameList = loadAINames(aiPathList);
+            in.close();
+        } catch (IOException e) {
+            log.error("Failed to load AI list", e);
+        }
+    }
 
-	/**
-	 * AIReads the list
-	 * @param bf To read from a text file
-	 * @return AIList
-	 */
-	public String[] loadAIList(BufferedReader bf) {
-		ArrayList<String> aiArrayList = new ArrayList<String>();
+    /*
+     * Called when entering this state
+     */
+    @Override
+    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+        currentAI = NullpoMinoSlick.propGlobal.getProperty(player + ".ai", "");
+        aiMoveDelay = NullpoMinoSlick.propGlobal.getProperty(player + ".aiMoveDelay", 0);
+        aiThinkDelay = NullpoMinoSlick.propGlobal.getProperty(player + ".aiThinkDelay", 0);
+        aiUseThread = NullpoMinoSlick.propGlobal.getProperty(player + ".aiUseThread", true);
+        aiShowHint = NullpoMinoSlick.propGlobal.getProperty(player + ".aiShowHint", false);
+        aiPrethink = NullpoMinoSlick.propGlobal.getProperty(player + ".aiPrethink", false);
+        aiShowState = NullpoMinoSlick.propGlobal.getProperty(player + ".aiShowState", false);
 
-		while(true) {
-			String name = null;
-			try {
-				name = bf.readLine();
-			} catch (Exception e) {
-				break;
-			}
-			if(name == null) break;
-			if(name.length() == 0) break;
+        aiID = -1;
+        for (int i = 0; i < aiPathList.length; i++) {
+            if (currentAI.equals(aiPathList[i])) aiID = i;
+        }
+    }
 
-			if(!name.startsWith("#"))
-				aiArrayList.add(name);
-		}
+    /**
+     * AIReads the list
+     *
+     * @param bf To read from a text file
+     * @return AIList
+     */
+    public String[] loadAIList(BufferedReader bf) {
+        ArrayList<String> aiArrayList = new ArrayList<String>();
 
-		String[] aiStringList = new String[aiArrayList.size()];
-		for(int i = 0; i < aiArrayList.size(); i++) aiStringList[i] = aiArrayList.get(i);
+        while (true) {
+            String name = null;
+            try {
+                name = bf.readLine();
+            } catch (Exception e) {
+                break;
+            }
+            if (name == null) break;
+            if (name.length() == 0) break;
 
-		return aiStringList;
-	}
+            if (!name.startsWith("#"))
+                aiArrayList.add(name);
+        }
 
-	/**
-	 * AIOfNameCreate a list
-	 * @param aiPath AIList of classes
-	 * @return AIOfNameList
-	 */
-	public String[] loadAINames(String[] aiPath) {
-		String[] aiName = new String[aiPath.length];
+        String[] aiStringList = new String[aiArrayList.size()];
+        for (int i = 0; i < aiArrayList.size(); i++) aiStringList[i] = aiArrayList.get(i);
 
-		for(int i = 0; i < aiPath.length; i++) {
-			Class<?> aiClass;
-			AIPlayer aiObj;
-			aiName[i] = "(INVALID)";
+        return aiStringList;
+    }
 
-			try {
-				aiClass = Class.forName(aiPath[i]);
-				aiObj = (AIPlayer) aiClass.newInstance();
-				aiName[i] = aiObj.getName();
-			} catch(ClassNotFoundException e) {
-				log.error("AI class " + aiPath[i] + " not found", e);
-			} catch(Throwable e) {
-				log.error("AI class " + aiPath[i] + " load failed", e);
-			}
-		}
+    /**
+     * AIOfNameCreate a list
+     *
+     * @param aiPath AIList of classes
+     * @return AIOfNameList
+     */
+    public String[] loadAINames(String[] aiPath) {
+        String[] aiName = new String[aiPath.length];
 
-		return aiName;
-	}
+        for (int i = 0; i < aiPath.length; i++) {
+            Class<?> aiClass;
+            AIPlayer aiObj;
+            aiName[i] = "(INVALID)";
 
-	/*
-	 * Draw the screen
-	 */
-	@Override
-	protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		// Background
-		g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
+            try {
+                aiClass = Class.forName(aiPath[i]);
+                aiObj = (AIPlayer) aiClass.newInstance();
+                aiName[i] = aiObj.getName();
+            } catch (ClassNotFoundException e) {
+                log.error("AI class " + aiPath[i] + " not found", e);
+            } catch (Throwable e) {
+                log.error("AI class " + aiPath[i] + " load failed", e);
+            }
+        }
 
-		// Menu
-		NormalFontSlick.printFontGrid(1, 1, (player + 1) + "P AI SETTING", NormalFontSlick.COLOR_ORANGE);
+        return aiName;
+    }
 
-		NormalFontSlick.printFontGrid(1, 3 + cursor, "b", NormalFontSlick.COLOR_RED);
+    /*
+     * Draw the screen
+     */
+    @Override
+    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+        // Background
+        g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
 
-		String aiName = "";
-		if(aiID < 0) aiName = "(DISABLE)";
-		else aiName = aiNameList[aiID].toUpperCase();
-		NormalFontSlick.printFontGrid(2, 3, "AI TYPE:" + aiName, (cursor == 0));
-		NormalFontSlick.printFontGrid(2, 4, "AI MOVE DELAY:" + aiMoveDelay, (cursor == 1));
-		NormalFontSlick.printFontGrid(2, 5, "AI THINK DELAY:" + aiThinkDelay, (cursor == 2));
-		NormalFontSlick.printFontGrid(2, 6, "AI USE THREAD:" + GeneralUtil.getONorOFF(aiUseThread), (cursor == 3));
-		NormalFontSlick.printFontGrid(2, 7, "AI SHOW HINT:" + GeneralUtil.getONorOFF(aiShowHint), (cursor == 4));
-		NormalFontSlick.printFontGrid(2, 8, "AI PRE-THINK:" + GeneralUtil.getONorOFF(aiPrethink), (cursor == 5));
-		NormalFontSlick.printFontGrid(2, 9, "AI SHOW INFO:" + GeneralUtil.getONorOFF(aiShowState), (cursor == 6));
+        // Menu
+        NormalFontSlick.printFontGrid(1, 1, (player + 1) + "P AI SETTING", NormalFontSlick.COLOR_ORANGE);
 
-		NormalFontSlick.printFontGrid(1, 28, "A:OK B:CANCEL", NormalFontSlick.COLOR_GREEN);
-	}
+        NormalFontSlick.printFontGrid(1, 3 + cursor, "b", NormalFontSlick.COLOR_RED);
 
-	/*
-	 * Update game state
-	 */
-	@Override
-	protected void updateImpl(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		// Update key input states
-		GameKeySlick.gamekey[0].update(container.getInput());
+        String aiName = "";
+        if (aiID < 0) aiName = "(DISABLE)";
+        else aiName = aiNameList[aiID].toUpperCase();
+        NormalFontSlick.printFontGrid(2, 3, "AI TYPE:" + aiName, (cursor == 0));
+        NormalFontSlick.printFontGrid(2, 4, "AI MOVE DELAY:" + aiMoveDelay, (cursor == 1));
+        NormalFontSlick.printFontGrid(2, 5, "AI THINK DELAY:" + aiThinkDelay, (cursor == 2));
+        NormalFontSlick.printFontGrid(2, 6, "AI USE THREAD:" + GeneralUtil.getONorOFF(aiUseThread), (cursor == 3));
+        NormalFontSlick.printFontGrid(2, 7, "AI SHOW HINT:" + GeneralUtil.getONorOFF(aiShowHint), (cursor == 4));
+        NormalFontSlick.printFontGrid(2, 8, "AI PRE-THINK:" + GeneralUtil.getONorOFF(aiPrethink), (cursor == 5));
+        NormalFontSlick.printFontGrid(2, 9, "AI SHOW INFO:" + GeneralUtil.getONorOFF(aiShowState), (cursor == 6));
 
-		// Cursor movement
-		if(GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_UP)) {
-			cursor--;
-			if(cursor < 0) cursor = 6;
-			ResourceHolderSlick.soundManager.play("cursor");
-		}
-		if(GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_DOWN)) {
-			cursor++;
-			if(cursor > 6) cursor = 0;
-			ResourceHolderSlick.soundManager.play("cursor");
-		}
+        NormalFontSlick.printFontGrid(1, 28, "A:OK B:CANCEL", NormalFontSlick.COLOR_GREEN);
+    }
 
-		// Configuration changes
-		int change = 0;
-		if(GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_LEFT)) change = -1;
-		if(GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_RIGHT)) change = 1;
+    /*
+     * Update game state
+     */
+    @Override
+    protected void updateImpl(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+        // Update key input states
+        GameKeySlick.gamekey[0].update(container.getInput());
 
-		if(change != 0) {
-			ResourceHolderSlick.soundManager.play("change");
+        // Cursor movement
+        if (GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_UP)) {
+            cursor--;
+            if (cursor < 0) cursor = 6;
+            ResourceHolderSlick.soundManager.play("cursor");
+        }
+        if (GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_DOWN)) {
+            cursor++;
+            if (cursor > 6) cursor = 0;
+            ResourceHolderSlick.soundManager.play("cursor");
+        }
 
-			switch(cursor) {
-			case 0:
-				aiID += change;
-				if(aiID < -1) aiID = aiNameList.length - 1;
-				if(aiID > aiNameList.length - 1) aiID = -1;
-				break;
-			case 1:
-				aiMoveDelay += change;
-				if(aiMoveDelay < -1) aiMoveDelay = 99;
-				if(aiMoveDelay > 99) aiMoveDelay = -1;
-				break;
-			case 2:
-				aiThinkDelay += change * 10;
-				if(aiThinkDelay < 0) aiThinkDelay = 1000;
-				if(aiThinkDelay > 1000) aiThinkDelay = 0;
-				break;
-			case 3:
-				aiUseThread = !aiUseThread;
-				break;
-			case 4:
-				aiShowHint = !aiShowHint;
-				break;
-			case 5:
-				aiPrethink = !aiPrethink;
-				break;
-			case 6:
-				aiShowState = !aiShowState;
-				break;
-			}
-		}
+        // Configuration changes
+        int change = 0;
+        if (GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_LEFT)) change = -1;
+        if (GameKeySlick.gamekey[0].isMenuRepeatKey(GameKeySlick.BUTTON_RIGHT)) change = 1;
 
-		// Confirm button
-		if(GameKeySlick.gamekey[0].isPushKey(GameKeySlick.BUTTON_A)) {
-		    ResourceHolderSlick.soundManager.play("decide");
+        if (change != 0) {
+            ResourceHolderSlick.soundManager.play("change");
 
-			if(aiID >= 0) NullpoMinoSlick.propGlobal.setProperty(player + ".ai", aiPathList[aiID]);
-			else NullpoMinoSlick.propGlobal.setProperty(player + ".ai", "");
-			NullpoMinoSlick.propGlobal.setProperty(player + ".aiMoveDelay", aiMoveDelay);
-			NullpoMinoSlick.propGlobal.setProperty(player + ".aiThinkDelay", aiThinkDelay);
-			NullpoMinoSlick.propGlobal.setProperty(player + ".aiUseThread", aiUseThread);
-			NullpoMinoSlick.propGlobal.setProperty(player + ".aiShowHint",aiShowHint);
-			NullpoMinoSlick.propGlobal.setProperty(player + ".aiPrethink",aiPrethink);
-			NullpoMinoSlick.propGlobal.setProperty(player + ".aiShowState",aiShowState);
-			NullpoMinoSlick.saveConfig();
+            switch (cursor) {
+                case 0:
+                    aiID += change;
+                    if (aiID < -1) aiID = aiNameList.length - 1;
+                    if (aiID > aiNameList.length - 1) aiID = -1;
+                    break;
+                case 1:
+                    aiMoveDelay += change;
+                    if (aiMoveDelay < -1) aiMoveDelay = 99;
+                    if (aiMoveDelay > 99) aiMoveDelay = -1;
+                    break;
+                case 2:
+                    aiThinkDelay += change * 10;
+                    if (aiThinkDelay < 0) aiThinkDelay = 1000;
+                    if (aiThinkDelay > 1000) aiThinkDelay = 0;
+                    break;
+                case 3:
+                    aiUseThread = !aiUseThread;
+                    break;
+                case 4:
+                    aiShowHint = !aiShowHint;
+                    break;
+                case 5:
+                    aiPrethink = !aiPrethink;
+                    break;
+                case 6:
+                    aiShowState = !aiShowState;
+                    break;
+            }
+        }
 
-			game.enterState(StateConfigMainMenu.ID);
-			return;
-		}
+        // Confirm button
+        if (GameKeySlick.gamekey[0].isPushKey(GameKeySlick.BUTTON_A)) {
+            ResourceHolderSlick.soundManager.play("decide");
 
-		// Cancel button
-		if(GameKeySlick.gamekey[0].isPushKey(GameKeySlick.BUTTON_B)) {
-		    game.enterState(StateConfigMainMenu.ID);
-			return;
-		}
-	}
+            if (aiID >= 0) NullpoMinoSlick.propGlobal.setProperty(player + ".ai", aiPathList[aiID]);
+            else NullpoMinoSlick.propGlobal.setProperty(player + ".ai", "");
+            NullpoMinoSlick.propGlobal.setProperty(player + ".aiMoveDelay", aiMoveDelay);
+            NullpoMinoSlick.propGlobal.setProperty(player + ".aiThinkDelay", aiThinkDelay);
+            NullpoMinoSlick.propGlobal.setProperty(player + ".aiUseThread", aiUseThread);
+            NullpoMinoSlick.propGlobal.setProperty(player + ".aiShowHint", aiShowHint);
+            NullpoMinoSlick.propGlobal.setProperty(player + ".aiPrethink", aiPrethink);
+            NullpoMinoSlick.propGlobal.setProperty(player + ".aiShowState", aiShowState);
+            NullpoMinoSlick.saveConfig();
+
+            game.enterState(StateConfigMainMenu.ID);
+            return;
+        }
+
+        // Cancel button
+        if (GameKeySlick.gamekey[0].isPushKey(GameKeySlick.BUTTON_B)) {
+            game.enterState(StateConfigMainMenu.ID);
+            return;
+        }
+    }
 }

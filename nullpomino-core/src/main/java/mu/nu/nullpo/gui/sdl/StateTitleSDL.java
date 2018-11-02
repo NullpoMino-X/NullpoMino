@@ -40,101 +40,107 @@ import sdljava.video.SDLVideo;
  * Title screen state (SDL)
  */
 public class StateTitleSDL extends DummyMenuChooseStateSDL {
-	/** Strings for menu choices */
-	private static final String[] CHOICES = {"START", "REPLAY", "NETPLAY", "OPTIONS", "EXIT"};
+    /**
+     * Strings for menu choices
+     */
+    private static final String[] CHOICES = {"START", "REPLAY", "NETPLAY", "OPTIONS", "EXIT"};
 
-	/** UI Text identifier Strings */
-	private static final String[] UI_TEXT = {
-        "Title_Start", "Title_Replay", "Title_NetPlay", "Title_Config", "Title_Exit"
-	};
+    /**
+     * UI Text identifier Strings
+     */
+    private static final String[] UI_TEXT = {
+            "Title_Start", "Title_Replay", "Title_NetPlay", "Title_Config", "Title_Exit"
+    };
 
-	/** true when new version is already checked */
-	protected boolean isNewVersionChecked = false;
+    /**
+     * true when new version is already checked
+     */
+    protected boolean isNewVersionChecked = false;
 
-	public StateTitleSDL () {
-		maxCursor = 4;
-		minChoiceY = 4;
-	}
+    public StateTitleSDL() {
+        maxCursor = 4;
+        minChoiceY = 4;
+    }
 
-	/*
-	 * Called when entering this state
-	 */
-	@Override
-	public void enter() throws SDLException {
-		// Update title bar
-		SDLVideo.wmSetCaption("NullpoMino version" + GameManager.getVersionString(), null);
-		// Observer start
-		NullpoMinoSDL.startObserverClient();
-		// Call GC
-		System.gc();
+    /*
+     * Called when entering this state
+     */
+    @Override
+    public void enter() throws SDLException {
+        // Update title bar
+        SDLVideo.wmSetCaption("NullpoMino version" + GameManager.getVersionString(), null);
+        // Observer start
+        NullpoMinoSDL.startObserverClient();
+        // Call GC
+        System.gc();
 
-		// New Version check
-		if(!isNewVersionChecked && NullpoMinoSDL.propGlobal.getProperty("updatechecker.enable", true)) {
-			isNewVersionChecked = true;
+        // New Version check
+        if (!isNewVersionChecked && NullpoMinoSDL.propGlobal.getProperty("updatechecker.enable", true)) {
+            isNewVersionChecked = true;
 
-			int startupCount = NullpoMinoSDL.propGlobal.getProperty("updatechecker.startupCount", 0);
-			int startupMax = NullpoMinoSDL.propGlobal.getProperty("updatechecker.startupMax", 20);
+            int startupCount = NullpoMinoSDL.propGlobal.getProperty("updatechecker.startupCount", 0);
+            int startupMax = NullpoMinoSDL.propGlobal.getProperty("updatechecker.startupMax", 20);
 
-			if(startupCount >= startupMax) {
-				String strURL = NullpoMinoSDL.propGlobal.getProperty("updatechecker.url", "");
-				UpdateChecker.startCheckForUpdates(strURL);
-				startupCount = 0;
-			} else {
-				startupCount++;
-			}
+            if (startupCount >= startupMax) {
+                String strURL = NullpoMinoSDL.propGlobal.getProperty("updatechecker.url", "");
+                UpdateChecker.startCheckForUpdates(strURL);
+                startupCount = 0;
+            } else {
+                startupCount++;
+            }
 
-			if(startupMax >= 1) {
-				NullpoMinoSDL.propGlobal.setProperty("updatechecker.startupCount", startupCount);
-				NullpoMinoSDL.saveConfig();
-			}
-		}
-	}
+            if (startupMax >= 1) {
+                NullpoMinoSDL.propGlobal.setProperty("updatechecker.startupCount", startupCount);
+                NullpoMinoSDL.saveConfig();
+            }
+        }
+    }
 
-	/*
-	 * Draw the game screen
-	 */
-	@Override
-	public void render(SDLSurface screen) throws SDLException {
-		ResourceHolderSDL.imgTitle.blitSurface(screen);
+    /*
+     * Draw the game screen
+     */
+    @Override
+    public void render(SDLSurface screen) throws SDLException {
+        ResourceHolderSDL.imgTitle.blitSurface(screen);
 
-		NormalFontSDL.printFontGrid(1, 1, "NULLPOMINO", NormalFontSDL.COLOR_ORANGE);
-		NormalFontSDL.printFontGrid(1, 2, "VERSION " + GameManager.getVersionString(), NormalFontSDL.COLOR_ORANGE);
+        NormalFontSDL.printFontGrid(1, 1, "NULLPOMINO", NormalFontSDL.COLOR_ORANGE);
+        NormalFontSDL.printFontGrid(1, 2, "VERSION " + GameManager.getVersionString(), NormalFontSDL.COLOR_ORANGE);
 
-		NormalFontSDL.printFontGrid(1, 4 + cursor, "b", NormalFontSDL.COLOR_RED);
+        NormalFontSDL.printFontGrid(1, 4 + cursor, "b", NormalFontSDL.COLOR_RED);
 
-		renderChoices(2, 4, CHOICES);
+        renderChoices(2, 4, CHOICES);
 
-		NormalFontSDL.printTTFFont(16, 432, NullpoMinoSDL.getUIText(UI_TEXT[cursor]));
+        NormalFontSDL.printTTFFont(16, 432, NullpoMinoSDL.getUIText(UI_TEXT[cursor]));
 
-		if(UpdateChecker.isNewVersionAvailable(GameManager.getVersionMajor(), GameManager.getVersionMinor())) {
-			String strTemp = String.format(NullpoMinoSDL.getUIText("Title_NewVersion"),
-					UpdateChecker.getLatestVersionFullString(), UpdateChecker.getStrReleaseDate());
-			NormalFontSDL.printTTFFont(16, 416, strTemp);
-		}
-	}
+        if (UpdateChecker.isNewVersionAvailable(GameManager.getVersionMajor(), GameManager.getVersionMinor())) {
+            String strTemp = String.format(NullpoMinoSDL.getUIText("Title_NewVersion"),
+                    UpdateChecker.getLatestVersionFullString(), UpdateChecker.getStrReleaseDate());
+            NormalFontSDL.printTTFFont(16, 416, strTemp);
+        }
+    }
 
-	@Override
-	protected boolean onDecide () throws SDLException {
-		ResourceHolderSDL.soundManager.play("decide");
+    @Override
+    protected boolean onDecide() throws SDLException {
+        ResourceHolderSDL.soundManager.play("decide");
 
-		switch(cursor) {
-		case 0:
-			StateSelectModeSDL.isTopLevel = true;
-			NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_SELECTMODE);
-			break;
-		case 1:
-			NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_REPLAYSELECT);
-			break;
-		case 2:
-			NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_NETGAME);
-			break;
-		case 3:
-			NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_CONFIG_MAINMENU);
-			break;
-		case 4:
-			NullpoMinoSDL.enterState(-1);
-			break;
-		}
-		return false;
-	}
+        switch (cursor) {
+            case 0:
+                StateSelectModeSDL.isTopLevel = true;
+                NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_SELECTMODE);
+                break;
+            case 1:
+                NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_REPLAYSELECT);
+                break;
+            case 2:
+                NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_NETGAME);
+                break;
+            case 3:
+                NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_CONFIG_MAINMENU);
+                break;
+            case 4:
+                NullpoMinoSDL.enterState(-1);
+                break;
+        }
+        return false;
+    }
 }

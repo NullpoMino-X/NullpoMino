@@ -43,139 +43,148 @@ import org.newdawn.slick.state.StateBasedGame;
  * State of the loading screen
  */
 public class StateLoading extends BasicGameState {
-	/** This state's ID */
-	public static final int ID = 0;
+    /**
+     * This state's ID
+     */
+    public static final int ID = 0;
 
-	/** Log */
-	static Logger log = Logger.getLogger(StateLoading.class);
+    /**
+     * Log
+     */
+    static Logger log = Logger.getLogger(StateLoading.class);
 
-	/** Progress preload */
-	protected int preloadCount, preloadSet;
+    /**
+     * Progress preload
+     */
+    protected int preloadCount, preloadSet;
 
-	/*
-	 * Fetch this state's ID
-	 */
-	@Override
-	public int getID() {
-		return ID;
-	}
+    /*
+     * Fetch this state's ID
+     */
+    @Override
+    public int getID() {
+        return ID;
+    }
 
-	/*
-	 * State initialization
-	 */
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-	}
+    /*
+     * State initialization
+     */
+    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    }
 
-	/*
-	 * Called when entering this state
-	 */
-	@Override
-	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
-		preloadCount = 0;
-		preloadSet = 0;
+    /*
+     * Called when entering this state
+     */
+    @Override
+    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+        preloadCount = 0;
+        preloadSet = 0;
 
-		//  input The associationInitialization
-		GameKeySlick.initGlobalGameKey();
-		GameKeySlick.gamekey[0].loadConfig(NullpoMinoSlick.propConfig);
-		GameKeySlick.gamekey[1].loadConfig(NullpoMinoSlick.propConfig);
-		MouseInputSlick.initializeMouseInput();
+        //  input The associationInitialization
+        GameKeySlick.initGlobalGameKey();
+        GameKeySlick.gamekey[0].loadConfig(NullpoMinoSlick.propConfig);
+        GameKeySlick.gamekey[1].loadConfig(NullpoMinoSlick.propConfig);
+        MouseInputSlick.initializeMouseInput();
 
-		// Settings to take effect
-		NullpoMinoSlick.setGeneralConfig();
+        // Settings to take effect
+        NullpoMinoSlick.setGeneralConfig();
 
-		// Load images, etc.
-		try {
-			ResourceHolderSlick.load();
-		} catch(Throwable e) {
-			log.error("Resource load failed", e);
-		}
-	}
+        // Load images, etc.
+        try {
+            ResourceHolderSlick.load();
+        } catch (Throwable e) {
+            log.error("Resource load failed", e);
+        }
+    }
 
-	/*
-	 * Draw the screen
-	 */
-	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		// Be cached in memory by drawing on a huge screen image in advance
-		if(preloadSet == 0) {
-			if(preloadCount < ResourceHolderSlick.BLOCK_BREAK_MAX) {
-				try {
-					ResourceHolderSlick.imgBreak[preloadCount][0].draw(0, 0);
-				} catch (Exception e) {}
-				preloadCount++;
-			} else {
-				preloadCount = 0;
-				preloadSet++;
-			}
-		}
-		if(preloadSet == 1) {
-			if(preloadCount < ResourceHolderSlick.BLOCK_BREAK_MAX) {
-				try {
-					ResourceHolderSlick.imgBreak[preloadCount][1].draw(0, 0);
-				} catch (Exception e) {}
-				preloadCount++;
-			} else {
-				preloadCount = 0;
-				preloadSet++;
-			}
-		}
-		if(preloadSet == 2) {
-			if(preloadCount < ResourceHolderSlick.PERASE_MAX) {
-				try {
-					ResourceHolderSlick.imgPErase[preloadCount].draw(0, 0);
-				} catch (Exception e) {}
-				preloadCount++;
-			} else {
-				preloadCount = 0;
-				preloadSet++;
-			}
-		}
-		if(preloadSet == 3) {
-			ResourceHolderSlick.imgFont.draw(0, 0);
-			preloadSet++;
-		}
+    /*
+     * Draw the screen
+     */
+    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+        // Be cached in memory by drawing on a huge screen image in advance
+        if (preloadSet == 0) {
+            if (preloadCount < ResourceHolderSlick.BLOCK_BREAK_MAX) {
+                try {
+                    ResourceHolderSlick.imgBreak[preloadCount][0].draw(0, 0);
+                } catch (Exception e) {
+                }
+                preloadCount++;
+            } else {
+                preloadCount = 0;
+                preloadSet++;
+            }
+        }
+        if (preloadSet == 1) {
+            if (preloadCount < ResourceHolderSlick.BLOCK_BREAK_MAX) {
+                try {
+                    ResourceHolderSlick.imgBreak[preloadCount][1].draw(0, 0);
+                } catch (Exception e) {
+                }
+                preloadCount++;
+            } else {
+                preloadCount = 0;
+                preloadSet++;
+            }
+        }
+        if (preloadSet == 2) {
+            if (preloadCount < ResourceHolderSlick.PERASE_MAX) {
+                try {
+                    ResourceHolderSlick.imgPErase[preloadCount].draw(0, 0);
+                } catch (Exception e) {
+                }
+                preloadCount++;
+            } else {
+                preloadCount = 0;
+                preloadSet++;
+            }
+        }
+        if (preloadSet == 3) {
+            ResourceHolderSlick.imgFont.draw(0, 0);
+            preloadSet++;
+        }
 
-		g.setColor(Color.black);
-		g.fillRect(0, 0, 640, 480);
-	}
+        g.setColor(Color.black);
+        g.fillRect(0, 0, 640, 480);
+    }
 
-	/*
-	 * Update game
-	 */
-	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-		if(preloadSet > 2) {
-			// Change title bar caption
-			if(container instanceof AppGameContainer) {
-				((AppGameContainer) container).setTitle("NullpoMino version" + GameManager.getVersionString());
-				((AppGameContainer) container).setUpdateOnlyWhenVisible(true);
-			}
+    /*
+     * Update game
+     */
+    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+        if (preloadSet > 2) {
+            // Change title bar caption
+            if (container instanceof AppGameContainer) {
+                ((AppGameContainer) container).setTitle("NullpoMino version" + GameManager.getVersionString());
+                ((AppGameContainer) container).setUpdateOnlyWhenVisible(true);
+            }
 
-			// First run
-			if(NullpoMinoSlick.propConfig.getProperty("option.firstSetupMode", true) == true) {
-				// Set various default settings here
-				GameKeySlick.gamekey[0].loadDefaultKeymap();
-				GameKeySlick.gamekey[0].saveConfig(NullpoMinoSlick.propConfig);
-				NullpoMinoSlick.propConfig.setProperty("option.firstSetupMode", false);
+            // First run
+            if (NullpoMinoSlick.propConfig.getProperty("option.firstSetupMode", true) == true) {
+                // Set various default settings here
+                GameKeySlick.gamekey[0].loadDefaultKeymap();
+                GameKeySlick.gamekey[0].saveConfig(NullpoMinoSlick.propConfig);
+                NullpoMinoSlick.propConfig.setProperty("option.firstSetupMode", false);
 
-				// Set default rotation button setting (only for first run)
-				if(NullpoMinoSlick.propGlobal.getProperty("global.firstSetupMode", true) == true) {
-					for(int pl = 0; pl < 2; pl++) {
-						if(NullpoMinoSlick.propGlobal.getProperty(pl + ".tuning.owRotateButtonDefaultRight") == null) {
-							NullpoMinoSlick.propGlobal.setProperty(pl + ".tuning.owRotateButtonDefaultRight", 0);
-						}
-					}
-					NullpoMinoSlick.propGlobal.setProperty("global.firstSetupMode", false);
-				}
+                // Set default rotation button setting (only for first run)
+                if (NullpoMinoSlick.propGlobal.getProperty("global.firstSetupMode", true) == true) {
+                    for (int pl = 0; pl < 2; pl++) {
+                        if (NullpoMinoSlick.propGlobal.getProperty(pl + ".tuning.owRotateButtonDefaultRight") == null) {
+                            NullpoMinoSlick.propGlobal.setProperty(pl + ".tuning.owRotateButtonDefaultRight", 0);
+                        }
+                    }
+                    NullpoMinoSlick.propGlobal.setProperty("global.firstSetupMode", false);
+                }
 
-				// Save settings
-				NullpoMinoSlick.saveConfig();
+                // Save settings
+                NullpoMinoSlick.saveConfig();
 
-				// Go to title screen
-				game.enterState(StateTitle.ID);
-			}
-			// Second+ run
-			else {
-				game.enterState(StateTitle.ID);
-			}
-		}
-	}
+                // Go to title screen
+                game.enterState(StateTitle.ID);
+            }
+            // Second+ run
+            else {
+                game.enterState(StateTitle.ID);
+            }
+        }
+    }
 }
