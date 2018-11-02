@@ -35,37 +35,38 @@ import mu.nu.nullpo.util.GeneralUtil;
 
 /**
  * 7 piece bag randomizer
+ *
  * @deprecated No longer used. The current one is net.omegaboshi.nullpomino.game.subsystem.randomizer.BagRandomizer.
  */
 public class BagRandomizer implements Randomizer {
-	/*
-	 * Create NEXT sequence
-	 */
-	public int[] createPieceSequence(boolean[] pieceEnable, Random random, int arrayMax) {
-		int[] pieceArray = new int[arrayMax];
-		int pieceKind = GeneralUtil.getNumberOfPiecesCanAppear(pieceEnable);
+    /*
+     * Create NEXT sequence
+     */
+    public int[] createPieceSequence(boolean[] pieceEnable, Random random, int arrayMax) {
+        int[] pieceArray = new int[arrayMax];
+        int pieceKind = GeneralUtil.getNumberOfPiecesCanAppear(pieceEnable);
 
-		for(int i = 0; i < arrayMax / pieceKind; i++) {
-			// Flags for pieces which have already appeared
-			boolean[] alreadyAppeared = new boolean[Piece.PIECE_COUNT];
+        for (int i = 0; i < arrayMax / pieceKind; i++) {
+            // Flags for pieces which have already appeared
+            boolean[] alreadyAppeared = new boolean[Piece.PIECE_COUNT];
 
-			// Create draws
-			for(int j = 0; j < pieceKind; j++) {
-				int id = 0;
+            // Create draws
+            for (int j = 0; j < pieceKind; j++) {
+                int id = 0;
 
-				// Draw
-				do {
-					id = random.nextInt(Piece.PIECE_COUNT);
-				} while((pieceEnable[id] == false) || (alreadyAppeared[id] == true));
+                // Draw
+                do {
+                    id = random.nextInt(Piece.PIECE_COUNT);
+                } while ((pieceEnable[id] == false) || (alreadyAppeared[id] == true));
 
-				// Set block drawn flag to ON
-				alreadyAppeared[id] = true;
+                // Set block drawn flag to ON
+                alreadyAppeared[id] = true;
 
-				// Add to NEXT list
-				pieceArray[i * pieceKind + j] = id;
-			}
-		}
+                // Add to NEXT list
+                pieceArray[i * pieceKind + j] = id;
+            }
+        }
 
-		return pieceArray;
-	}
+        return pieceArray;
+    }
 }

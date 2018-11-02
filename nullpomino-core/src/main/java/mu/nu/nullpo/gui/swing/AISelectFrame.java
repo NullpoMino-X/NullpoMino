@@ -56,315 +56,349 @@ import org.apache.log4j.Logger;
  * AISelection screen frame
  */
 public class AISelectFrame extends JFrame implements ActionListener {
-	/** Serial version ID */
-	private static final long serialVersionUID = 1L;
+    /**
+     * Serial version ID
+     */
+    private static final long serialVersionUID = 1L;
 
-	/** Log */
-	static Logger log = Logger.getLogger(AISelectFrame.class);
+    /**
+     * Log
+     */
+    static Logger log = Logger.getLogger(AISelectFrame.class);
 
-	/** Parent window */
-	protected NullpoMinoSwing owner;
+    /**
+     * Parent window
+     */
+    protected NullpoMinoSwing owner;
 
-	/** Player number */
-	protected int playerID;
+    /**
+     * Player number
+     */
+    protected int playerID;
 
-	/** AIList of classes */
-	protected String[] aiPathList;
+    /**
+     * AIList of classes
+     */
+    protected String[] aiPathList;
 
-	/** AIOfNameList */
-	protected String[] aiNameList;
+    /**
+     * AIOfNameList
+     */
+    protected String[] aiNameList;
 
-	/** Current AIClass of */
-	protected String currentAI;
+    /**
+     * Current AIClass of
+     */
+    protected String currentAI;
 
-	/** AIOfID */
-	protected int aiID = 0;
+    /**
+     * AIOfID
+     */
+    protected int aiID = 0;
 
-	/** AIMovement interval of */
-	protected int aiMoveDelay = 0;
+    /**
+     * AIMovement interval of
+     */
+    protected int aiMoveDelay = 0;
 
-	/** AIThinking of waiting time */
-	protected int aiThinkDelay = 0;
+    /**
+     * AIThinking of waiting time
+     */
+    protected int aiThinkDelay = 0;
 
-	/** AIUsing threads in */
-	protected boolean aiUseThread = false;
+    /**
+     * AIUsing threads in
+     */
+    protected boolean aiUseThread = false;
 
-	protected boolean aiShowHint = false;
+    protected boolean aiShowHint = false;
 
-	protected boolean aiPrethink = false;
+    protected boolean aiPrethink = false;
 
-	protected boolean aiShowState = false;
+    protected boolean aiShowState = false;
 
-	/** AIList list box */
-	protected JList listboxAI;
+    /**
+     * AIList list box
+     */
+    protected JList listboxAI;
 
-	/** AIText box of the movement interval */
-	protected JTextField txtfldAIMoveDelay;
+    /**
+     * AIText box of the movement interval
+     */
+    protected JTextField txtfldAIMoveDelay;
 
-	/** AIThinking of waiting timeText box */
-	protected JTextField txtfldAIThinkDelay;
+    /**
+     * AIThinking of waiting timeText box
+     */
+    protected JTextField txtfldAIThinkDelay;
 
-	/** AIThread Usage in check Box */
-	protected JCheckBox chkboxAIUseThread;
+    /**
+     * AIThread Usage in check Box
+     */
+    protected JCheckBox chkboxAIUseThread;
 
-	protected JCheckBox chkBoxAIShowHint;
+    protected JCheckBox chkBoxAIShowHint;
 
-	protected JCheckBox chkBoxAIPrethink;
+    protected JCheckBox chkBoxAIPrethink;
 
-	protected JCheckBox chkBoxAIShowState;
+    protected JCheckBox chkBoxAIShowState;
 
 
-	/**
-	 * Constructor
-	 * @param owner Parent window
-	 * @throws HeadlessException Keyboard, Mouse, Exceptions such as the display if there is no
-	 */
-	public AISelectFrame(NullpoMinoSwing owner) throws HeadlessException {
-		super();
-		this.owner = owner;
+    /**
+     * Constructor
+     *
+     * @param owner Parent window
+     * @throws HeadlessException Keyboard, Mouse, Exceptions such as the display if there is no
+     */
+    public AISelectFrame(NullpoMinoSwing owner) throws HeadlessException {
+        super();
+        this.owner = owner;
 
-		try {
-			BufferedReader in = new BufferedReader(new FileReader("config/list/ai.lst"));
-			aiPathList = loadAIList(in);
-			aiNameList = loadAINames(aiPathList);
-			in.close();
-		} catch (IOException e) {
-			log.warn("Failed to load AI list", e);
-		}
+        try {
+            BufferedReader in = new BufferedReader(new FileReader("config/list/ai.lst"));
+            aiPathList = loadAIList(in);
+            aiNameList = loadAINames(aiPathList);
+            in.close();
+        } catch (IOException e) {
+            log.warn("Failed to load AI list", e);
+        }
 
-		// GUIOfInitialization
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		initUI();
-		pack();
-	}
+        // GUIOfInitialization
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        initUI();
+        pack();
+    }
 
-	/**
-	 * This frame Action to take when you view the
-	 * @param pl Player number
-	 */
-	public void load(int pl) {
-		this.playerID = pl;
+    /**
+     * This frame Action to take when you view the
+     *
+     * @param pl Player number
+     */
+    public void load(int pl) {
+        this.playerID = pl;
 
-		setTitle(NullpoMinoSwing.getUIText("Title_AISelect") + " (" + (playerID+1) + "P)");
+        setTitle(NullpoMinoSwing.getUIText("Title_AISelect") + " (" + (playerID + 1) + "P)");
 
-		currentAI = NullpoMinoSwing.propGlobal.getProperty(playerID + ".ai", "");
-		aiMoveDelay = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiMoveDelay", 0);
-		aiThinkDelay = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiThinkDelay", 0);
-		aiUseThread = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiUseThread", true);
-		aiShowHint = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiShowHint", false);
-		aiPrethink = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiPrethink", false);
-		aiShowState = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiShowState", false);
+        currentAI = NullpoMinoSwing.propGlobal.getProperty(playerID + ".ai", "");
+        aiMoveDelay = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiMoveDelay", 0);
+        aiThinkDelay = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiThinkDelay", 0);
+        aiUseThread = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiUseThread", true);
+        aiShowHint = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiShowHint", false);
+        aiPrethink = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiPrethink", false);
+        aiShowState = NullpoMinoSwing.propGlobal.getProperty(playerID + ".aiShowState", false);
 
-		aiID = -1;
-		listboxAI.clearSelection();
-		for(int i = 0; i < aiPathList.length; i++) {
-			if(currentAI.equals(aiPathList[i])) {
-				aiID = i;
-				listboxAI.setSelectedIndex(i);
-				break;
-			}
-		}
+        aiID = -1;
+        listboxAI.clearSelection();
+        for (int i = 0; i < aiPathList.length; i++) {
+            if (currentAI.equals(aiPathList[i])) {
+                aiID = i;
+                listboxAI.setSelectedIndex(i);
+                break;
+            }
+        }
 
-		txtfldAIMoveDelay.setText(String.valueOf(aiMoveDelay));
-		txtfldAIThinkDelay.setText(String.valueOf(aiThinkDelay));
-		chkboxAIUseThread.setSelected(aiUseThread);
-		chkBoxAIShowHint.setSelected(aiShowHint);
-		chkBoxAIPrethink.setSelected(aiPrethink);
-		chkBoxAIShowState.setSelected(aiShowState);
-	}
+        txtfldAIMoveDelay.setText(String.valueOf(aiMoveDelay));
+        txtfldAIThinkDelay.setText(String.valueOf(aiThinkDelay));
+        chkboxAIUseThread.setSelected(aiUseThread);
+        chkBoxAIShowHint.setSelected(aiShowHint);
+        chkBoxAIPrethink.setSelected(aiPrethink);
+        chkBoxAIShowState.setSelected(aiShowState);
+    }
 
-	/**
-	 * AIReads the list
-	 * @param bf To read from a text file
-	 * @return AIList
-	 */
-	public String[] loadAIList(BufferedReader bf) {
-		ArrayList<String> aiArrayList = new ArrayList<String>();
+    /**
+     * AIReads the list
+     *
+     * @param bf To read from a text file
+     * @return AIList
+     */
+    public String[] loadAIList(BufferedReader bf) {
+        ArrayList<String> aiArrayList = new ArrayList<String>();
 
-		while(true) {
-			String name = null;
-			try {
-				name = bf.readLine();
-			} catch (Exception e) {
-				break;
-			}
-			if(name == null) break;
-			if(name.length() == 0) break;
+        while (true) {
+            String name = null;
+            try {
+                name = bf.readLine();
+            } catch (Exception e) {
+                break;
+            }
+            if (name == null) break;
+            if (name.length() == 0) break;
 
-			if(!name.startsWith("#"))
-				aiArrayList.add(name);
-		}
+            if (!name.startsWith("#"))
+                aiArrayList.add(name);
+        }
 
-		String[] aiStringList = new String[aiArrayList.size()];
-		for(int i = 0; i < aiArrayList.size(); i++) aiStringList[i] = aiArrayList.get(i);
+        String[] aiStringList = new String[aiArrayList.size()];
+        for (int i = 0; i < aiArrayList.size(); i++) aiStringList[i] = aiArrayList.get(i);
 
-		return aiStringList;
-	}
+        return aiStringList;
+    }
 
-	/**
-	 * AIOfNameCreate a list
-	 * @param aiPath AIList of classes
-	 * @return AIOfNameList
-	 */
-	public String[] loadAINames(String[] aiPath) {
-		String[] aiName = new String[aiPath.length];
+    /**
+     * AIOfNameCreate a list
+     *
+     * @param aiPath AIList of classes
+     * @return AIOfNameList
+     */
+    public String[] loadAINames(String[] aiPath) {
+        String[] aiName = new String[aiPath.length];
 
-		for(int i = 0; i < aiPath.length; i++) {
-			Class<?> aiClass;
-			AIPlayer aiObj;
-			aiName[i] = "[Invalid]";
+        for (int i = 0; i < aiPath.length; i++) {
+            Class<?> aiClass;
+            AIPlayer aiObj;
+            aiName[i] = "[Invalid]";
 
-			try {
-				aiClass = Class.forName(aiPath[i]);
-				aiObj = (AIPlayer) aiClass.newInstance();
-				aiName[i] = aiObj.getName();
-			} catch(ClassNotFoundException e) {
-				log.warn("AI class " + aiPath[i] + " not found", e);
-			} catch(Throwable e) {
-				log.warn("AI class " + aiPath[i] + " load failed", e);
-			}
-		}
+            try {
+                aiClass = Class.forName(aiPath[i]);
+                aiObj = (AIPlayer) aiClass.newInstance();
+                aiName[i] = aiObj.getName();
+            } catch (ClassNotFoundException e) {
+                log.warn("AI class " + aiPath[i] + " not found", e);
+            } catch (Throwable e) {
+                log.warn("AI class " + aiPath[i] + " load failed", e);
+            }
+        }
 
-		return aiName;
-	}
+        return aiName;
+    }
 
-	/**
-	 * GUIAInitialization
-	 */
-	protected void initUI() {
-		this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+    /**
+     * GUIAInitialization
+     */
+    protected void initUI() {
+        this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
-		// AIList
-		JPanel panelAIList = new JPanel();
-		panelAIList.setLayout(new BorderLayout());
-		panelAIList.setAlignmentX(LEFT_ALIGNMENT);
-		this.add(panelAIList);
+        // AIList
+        JPanel panelAIList = new JPanel();
+        panelAIList.setLayout(new BorderLayout());
+        panelAIList.setAlignmentX(LEFT_ALIGNMENT);
+        this.add(panelAIList);
 
-		String[] strList = new String[aiPathList.length];
-		for(int i = 0; i < strList.length; i++) {
-			strList[i] = aiNameList[i] + " (" + aiPathList[i] + ")";
-		}
-		listboxAI = new JList(strList);
+        String[] strList = new String[aiPathList.length];
+        for (int i = 0; i < strList.length; i++) {
+            strList[i] = aiNameList[i] + " (" + aiPathList[i] + ")";
+        }
+        listboxAI = new JList(strList);
 
-		JScrollPane scpaneAI = new JScrollPane(listboxAI);
-		scpaneAI.setPreferredSize(new Dimension(400, 250));
-		panelAIList.add(scpaneAI, BorderLayout.CENTER);
+        JScrollPane scpaneAI = new JScrollPane(listboxAI);
+        scpaneAI.setPreferredSize(new Dimension(400, 250));
+        panelAIList.add(scpaneAI, BorderLayout.CENTER);
 
-		JButton btnNoUse = new JButton(NullpoMinoSwing.getUIText("AISelect_NoUse"));
-		btnNoUse.setMnemonic('N');
-		btnNoUse.addActionListener(this);
-		btnNoUse.setActionCommand("AISelect_NoUse");
-		btnNoUse.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
-		panelAIList.add(btnNoUse, BorderLayout.SOUTH);
+        JButton btnNoUse = new JButton(NullpoMinoSwing.getUIText("AISelect_NoUse"));
+        btnNoUse.setMnemonic('N');
+        btnNoUse.addActionListener(this);
+        btnNoUse.setActionCommand("AISelect_NoUse");
+        btnNoUse.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
+        panelAIList.add(btnNoUse, BorderLayout.SOUTH);
 
-		// AIText box of the movement interval
-		JPanel panelTxtfldAIMoveDelay = new JPanel();
-		panelTxtfldAIMoveDelay.setLayout(new BorderLayout());
-		panelTxtfldAIMoveDelay.setAlignmentX(LEFT_ALIGNMENT);
-		this.add(panelTxtfldAIMoveDelay);
+        // AIText box of the movement interval
+        JPanel panelTxtfldAIMoveDelay = new JPanel();
+        panelTxtfldAIMoveDelay.setLayout(new BorderLayout());
+        panelTxtfldAIMoveDelay.setAlignmentX(LEFT_ALIGNMENT);
+        this.add(panelTxtfldAIMoveDelay);
 
-		panelTxtfldAIMoveDelay.add(new JLabel(NullpoMinoSwing.getUIText("AISelect_LabelAIMoveDelay")), BorderLayout.WEST);
+        panelTxtfldAIMoveDelay.add(new JLabel(NullpoMinoSwing.getUIText("AISelect_LabelAIMoveDelay")), BorderLayout.WEST);
 
-		txtfldAIMoveDelay = new JTextField(20);
-		panelTxtfldAIMoveDelay.add(txtfldAIMoveDelay, BorderLayout.EAST);
+        txtfldAIMoveDelay = new JTextField(20);
+        panelTxtfldAIMoveDelay.add(txtfldAIMoveDelay, BorderLayout.EAST);
 
-		// AIText box of the movement interval
-		JPanel panelTxtfldAIThinkDelay = new JPanel();
-		panelTxtfldAIThinkDelay.setLayout(new BorderLayout());
-		panelTxtfldAIThinkDelay.setAlignmentX(LEFT_ALIGNMENT);
-		this.add(panelTxtfldAIThinkDelay);
+        // AIText box of the movement interval
+        JPanel panelTxtfldAIThinkDelay = new JPanel();
+        panelTxtfldAIThinkDelay.setLayout(new BorderLayout());
+        panelTxtfldAIThinkDelay.setAlignmentX(LEFT_ALIGNMENT);
+        this.add(panelTxtfldAIThinkDelay);
 
-		panelTxtfldAIThinkDelay.add(new JLabel(NullpoMinoSwing.getUIText("AISelect_LabelAIThinkDelay")), BorderLayout.WEST);
+        panelTxtfldAIThinkDelay.add(new JLabel(NullpoMinoSwing.getUIText("AISelect_LabelAIThinkDelay")), BorderLayout.WEST);
 
-		txtfldAIThinkDelay = new JTextField(20);
-		panelTxtfldAIThinkDelay.add(txtfldAIThinkDelay, BorderLayout.EAST);
+        txtfldAIThinkDelay = new JTextField(20);
+        panelTxtfldAIThinkDelay.add(txtfldAIThinkDelay, BorderLayout.EAST);
 
-		// AIThread use check Box
-		chkboxAIUseThread = new JCheckBox(NullpoMinoSwing.getUIText("AISelect_CheckboxAIUseThread"));
-		chkboxAIUseThread.setAlignmentX(LEFT_ALIGNMENT);
-		chkboxAIUseThread.setMnemonic('T');
-		this.add(chkboxAIUseThread);
+        // AIThread use check Box
+        chkboxAIUseThread = new JCheckBox(NullpoMinoSwing.getUIText("AISelect_CheckboxAIUseThread"));
+        chkboxAIUseThread.setAlignmentX(LEFT_ALIGNMENT);
+        chkboxAIUseThread.setMnemonic('T');
+        this.add(chkboxAIUseThread);
 
-		chkBoxAIShowHint = new JCheckBox(NullpoMinoSwing.getUIText("AISelect_CheckboxAIShowHint"));
-		chkBoxAIShowHint.setAlignmentX(LEFT_ALIGNMENT);
-		chkBoxAIShowHint.setMnemonic('H');
-		this.add(chkBoxAIShowHint);
+        chkBoxAIShowHint = new JCheckBox(NullpoMinoSwing.getUIText("AISelect_CheckboxAIShowHint"));
+        chkBoxAIShowHint.setAlignmentX(LEFT_ALIGNMENT);
+        chkBoxAIShowHint.setMnemonic('H');
+        this.add(chkBoxAIShowHint);
 
-		chkBoxAIPrethink = new JCheckBox(NullpoMinoSwing.getUIText("AISelect_CheckboxAIPrethink"));
-		chkBoxAIPrethink.setAlignmentX(LEFT_ALIGNMENT);
-		chkBoxAIPrethink.setMnemonic('P');
-		this.add(chkBoxAIPrethink);
+        chkBoxAIPrethink = new JCheckBox(NullpoMinoSwing.getUIText("AISelect_CheckboxAIPrethink"));
+        chkBoxAIPrethink.setAlignmentX(LEFT_ALIGNMENT);
+        chkBoxAIPrethink.setMnemonic('P');
+        this.add(chkBoxAIPrethink);
 
-		chkBoxAIShowState = new JCheckBox(NullpoMinoSwing.getUIText("AISelect_CheckboxAIShowState"));
-		chkBoxAIShowState.setAlignmentX(LEFT_ALIGNMENT);
-		chkBoxAIShowState.setMnemonic('S');
-		this.add(chkBoxAIShowState);
+        chkBoxAIShowState = new JCheckBox(NullpoMinoSwing.getUIText("AISelect_CheckboxAIShowState"));
+        chkBoxAIShowState.setAlignmentX(LEFT_ALIGNMENT);
+        chkBoxAIShowState.setMnemonic('S');
+        this.add(chkBoxAIShowState);
 
-		//  buttonKind
-		JPanel panelButtons = new JPanel();
-		panelButtons.setLayout(new BoxLayout(panelButtons, BoxLayout.X_AXIS));
-		panelButtons.setAlignmentX(LEFT_ALIGNMENT);
-		this.add(panelButtons);
+        //  buttonKind
+        JPanel panelButtons = new JPanel();
+        panelButtons.setLayout(new BoxLayout(panelButtons, BoxLayout.X_AXIS));
+        panelButtons.setAlignmentX(LEFT_ALIGNMENT);
+        this.add(panelButtons);
 
-		JButton btnOK = new JButton(NullpoMinoSwing.getUIText("AISelect_OK"));
-		btnOK.setMnemonic('O');
-		btnOK.addActionListener(this);
-		btnOK.setActionCommand("AISelect_OK");
-		btnOK.setAlignmentX(LEFT_ALIGNMENT);
-		btnOK.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
-		panelButtons.add(btnOK);
-		this.getRootPane().setDefaultButton(btnOK);
+        JButton btnOK = new JButton(NullpoMinoSwing.getUIText("AISelect_OK"));
+        btnOK.setMnemonic('O');
+        btnOK.addActionListener(this);
+        btnOK.setActionCommand("AISelect_OK");
+        btnOK.setAlignmentX(LEFT_ALIGNMENT);
+        btnOK.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
+        panelButtons.add(btnOK);
+        this.getRootPane().setDefaultButton(btnOK);
 
-		JButton btnCancel = new JButton(NullpoMinoSwing.getUIText("AISelect_Cancel"));
-		btnCancel.setMnemonic('C');
-		btnCancel.addActionListener(this);
-		btnCancel.setActionCommand("AISelect_Cancel");
-		btnCancel.setAlignmentX(LEFT_ALIGNMENT);
-		btnCancel.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
-		panelButtons.add(btnCancel);
-	}
+        JButton btnCancel = new JButton(NullpoMinoSwing.getUIText("AISelect_Cancel"));
+        btnCancel.setMnemonic('C');
+        btnCancel.addActionListener(this);
+        btnCancel.setActionCommand("AISelect_Cancel");
+        btnCancel.setAlignmentX(LEFT_ALIGNMENT);
+        btnCancel.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
+        panelButtons.add(btnCancel);
+    }
 
-	/*
-	 *  Called when button clicked
-	 */
-	public void actionPerformed(ActionEvent e) {
-		// AIUnused button
-		if(e.getActionCommand() == "AISelect_NoUse") {
-			listboxAI.clearSelection();
-		}
-		// OK
-		else if(e.getActionCommand() == "AISelect_OK") {
-			aiID = listboxAI.getSelectedIndex();
-			try {
-				aiMoveDelay = Integer.parseInt(txtfldAIMoveDelay.getText());
-			} catch (NumberFormatException e2) {
-				aiMoveDelay = -1;
-			}
-			try {
-				aiThinkDelay = Integer.parseInt(txtfldAIThinkDelay.getText());
-			} catch (NumberFormatException e2) {
-				aiThinkDelay = 0;
-			}
-			aiUseThread = chkboxAIUseThread.isSelected();
-			aiShowHint = chkBoxAIShowHint.isSelected();
-			aiPrethink = chkBoxAIPrethink.isSelected();
-			aiShowState = chkBoxAIShowState.isSelected();
+    /*
+     *  Called when button clicked
+     */
+    public void actionPerformed(ActionEvent e) {
+        // AIUnused button
+        if (e.getActionCommand() == "AISelect_NoUse") {
+            listboxAI.clearSelection();
+        }
+        // OK
+        else if (e.getActionCommand() == "AISelect_OK") {
+            aiID = listboxAI.getSelectedIndex();
+            try {
+                aiMoveDelay = Integer.parseInt(txtfldAIMoveDelay.getText());
+            } catch (NumberFormatException e2) {
+                aiMoveDelay = -1;
+            }
+            try {
+                aiThinkDelay = Integer.parseInt(txtfldAIThinkDelay.getText());
+            } catch (NumberFormatException e2) {
+                aiThinkDelay = 0;
+            }
+            aiUseThread = chkboxAIUseThread.isSelected();
+            aiShowHint = chkBoxAIShowHint.isSelected();
+            aiPrethink = chkBoxAIPrethink.isSelected();
+            aiShowState = chkBoxAIShowState.isSelected();
 
-			if(aiID >= 0) NullpoMinoSwing.propGlobal.setProperty(playerID + ".ai", aiPathList[aiID]);
-			else NullpoMinoSwing.propGlobal.setProperty(playerID + ".ai", "");
-			NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiMoveDelay", aiMoveDelay);
-			NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiThinkDelay", aiThinkDelay);
-			NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiUseThread", aiUseThread);
-			NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiShowHint", aiShowHint);
-			NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiPrethink", aiPrethink);
-			NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiShowState", aiShowState);
-			NullpoMinoSwing.saveConfig();
+            if (aiID >= 0) NullpoMinoSwing.propGlobal.setProperty(playerID + ".ai", aiPathList[aiID]);
+            else NullpoMinoSwing.propGlobal.setProperty(playerID + ".ai", "");
+            NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiMoveDelay", aiMoveDelay);
+            NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiThinkDelay", aiThinkDelay);
+            NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiUseThread", aiUseThread);
+            NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiShowHint", aiShowHint);
+            NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiPrethink", aiPrethink);
+            NullpoMinoSwing.propGlobal.setProperty(playerID + ".aiShowState", aiShowState);
+            NullpoMinoSwing.saveConfig();
 
-			this.setVisible(false);
-		}
-		// Cancel
-		else if(e.getActionCommand() == "AISelect_Cancel") {
-			this.setVisible(false);
-		}
-	}
+            this.setVisible(false);
+        }
+        // Cancel
+        else if (e.getActionCommand() == "AISelect_Cancel") {
+            this.setVisible(false);
+        }
+    }
 }

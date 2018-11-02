@@ -32,15 +32,17 @@ import java.util.Random;
 
 /**
  * Deprecated interface of piece sequence randomizer.
+ *
  * @deprecated No longer used. The current one is net.omegaboshi.nullpomino.game.subsystem.randomizer.Randomizer.
  */
 public interface Randomizer {
-	/**
-	 * Create piece sequence.
-	 * @param pieceEnable Piece enable array (When pieceEnable[id] is true the piece can appear)
-	 * @param random Random number generator
-	 * @param arrayMax Preferred array size
-	 * @return Piece sequence (Piece ID only)
-	 */
-	public int[] createPieceSequence(boolean[] pieceEnable, Random random, int arrayMax);
+    /**
+     * Create piece sequence.
+     *
+     * @param pieceEnable Piece enable array (When pieceEnable[id] is true the piece can appear)
+     * @param random      Random number generator
+     * @param arrayMax    Preferred array size
+     * @return Piece sequence (Piece ID only)
+     */
+    public int[] createPieceSequence(boolean[] pieceEnable, Random random, int arrayMax);
 }

@@ -38,102 +38,115 @@ import org.newdawn.slick.Sound;
  * Sound effectsManager
  */
 public class SoundManager {
-	/** Log */
-	static Logger log = Logger.getLogger(SoundManager.class);
+    /**
+     * Log
+     */
+    static Logger log = Logger.getLogger(SoundManager.class);
 
-	/** You can registerWAVE file OfMaximumcount */
-	protected int maxClips;
+    /**
+     * You can registerWAVE file OfMaximumcount
+     */
+    protected int maxClips;
 
-	/** WAVE file  data (Name-> dataBody) */
-	protected HashMap<String, Sound> clipMap;
+    /**
+     * WAVE file  data (Name-> dataBody)
+     */
+    protected HashMap<String, Sound> clipMap;
 
-	/** Was registeredWAVE file count */
-	protected int counter = 0;
+    /**
+     * Was registeredWAVE file count
+     */
+    protected int counter = 0;
 
-	/**
-	 * Constructor
-	 */
-	public SoundManager() {
-		this(128);
-	}
+    /**
+     * Constructor
+     */
+    public SoundManager() {
+        this(128);
+    }
 
-	/**
-	 * Constructor
-	 * @param maxClips You can registerWAVE file OfMaximumcount
-	 */
-	public SoundManager(int maxClips) {
-		this.maxClips = maxClips;
-		clipMap = new HashMap<String, Sound>(maxClips);
-	}
+    /**
+     * Constructor
+     *
+     * @param maxClips You can registerWAVE file OfMaximumcount
+     */
+    public SoundManager(int maxClips) {
+        this.maxClips = maxClips;
+        clipMap = new HashMap<String, Sound>(maxClips);
+    }
 
-	/**
-	 * Load WAVE file
-	 * @param name Registered name
-	 * @param filename Filename (String)
-	 * @return true if successful, false if failed
-	 */
-	public boolean load(String name, String filename) {
-		if(counter >= maxClips) {
-			log.error("No more wav files can be loaded (" + maxClips + ")");
-			return false;
-		}
+    /**
+     * Load WAVE file
+     *
+     * @param name     Registered name
+     * @param filename Filename (String)
+     * @return true if successful, false if failed
+     */
+    public boolean load(String name, String filename) {
+        if (counter >= maxClips) {
+            log.error("No more wav files can be loaded (" + maxClips + ")");
+            return false;
+        }
 
-		try {
-			Sound clip = new Sound(filename);
-			clipMap.put(name, clip);
-		} catch(Throwable e) {
-			log.error("Failed to load wav file", e);
-			return false;
-		}
+        try {
+            Sound clip = new Sound(filename);
+            clipMap.put(name, clip);
+        } catch (Throwable e) {
+            log.error("Failed to load wav file", e);
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * Load WAVE file
-	 * @param name Registered name
-	 * @param fileurl Filename (URL)
-	 * @return true if successful, false if failed
-	 */
-	public boolean load(String name, URL fileurl) {
-		if(counter >= maxClips) {
-			log.error("No more wav files can be loaded (" + maxClips + ")");
-			return false;
-		}
+    /**
+     * Load WAVE file
+     *
+     * @param name    Registered name
+     * @param fileurl Filename (URL)
+     * @return true if successful, false if failed
+     */
+    public boolean load(String name, URL fileurl) {
+        if (counter >= maxClips) {
+            log.error("No more wav files can be loaded (" + maxClips + ")");
+            return false;
+        }
 
-		try {
-			Sound clip = new Sound(fileurl);
-			clipMap.put(name, clip);
-		} catch(Throwable e) {
-			log.error("Failed to load wav file", e);
-			return false;
-		}
+        try {
+            Sound clip = new Sound(fileurl);
+            clipMap.put(name, clip);
+        } catch (Throwable e) {
+            log.error("Failed to load wav file", e);
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * Playback
-	 * @param name Registered name
-	 */
-	public void play(String name) {
-		// NameGet the clip corresponding to the
-		Sound clip = clipMap.get(name);
+    /**
+     * Playback
+     *
+     * @param name Registered name
+     */
+    public void play(String name) {
+        // NameGet the clip corresponding to the
+        Sound clip = clipMap.get(name);
 
-		if(clip != null) {
-			clip.play();
-		}
-	}
+        if (clip != null) {
+            clip.play();
+        }
+    }
 
-	/**
-	 * Stop
-	 * @param name Registered name
-	 */
-	public void stop(String name) {
-		Sound clip = clipMap.get(name);
+    /**
+     * Stop
+     *
+     * @param name Registered name
+     */
+    public void stop(String name) {
+        Sound clip = clipMap.get(name);
 
-		if(clip != null) {
-			clip.stop();
-		}
-	}
+        if (clip != null) {
+            clip.stop();
+        }
+    }
 }

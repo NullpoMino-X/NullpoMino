@@ -45,243 +45,275 @@ import org.newdawn.slick.state.StateBasedGame;
  * Rule selector state
  */
 public class StateConfigRuleSelect extends DummyMenuScrollState {
-	/** This state's ID */
-	public static final int ID = 7;
+    /**
+     * This state's ID
+     */
+    public static final int ID = 7;
 
-	/** Number of rules shown at a time */
-	public static final int PAGE_HEIGHT = 21;
+    /**
+     * Number of rules shown at a time
+     */
+    public static final int PAGE_HEIGHT = 21;
 
-	/** Player ID */
-	public int player = 0;
+    /**
+     * Player ID
+     */
+    public int player = 0;
 
-	/** Game style ID */
-	public int style = 0;
+    /**
+     * Game style ID
+     */
+    public int style = 0;
 
-	/** Rule file list (for loading) */
-	private String[] strFileList;
+    /**
+     * Rule file list (for loading)
+     */
+    private String[] strFileList;
 
-	/** Rule name list */
-	private String[] strRuleNameList;
+    /**
+     * Rule name list
+     */
+    private String[] strRuleNameList;
 
-	/** Rule file list (for list display) */
-	private String[] strRuleFileList;
+    /**
+     * Rule file list (for list display)
+     */
+    private String[] strRuleFileList;
 
-	/** Current Rule File name */
-	private String strCurrentFileName;
+    /**
+     * Current Rule File name
+     */
+    private String strCurrentFileName;
 
-	/** Current Rule name */
-	private String strCurrentRuleName;
+    /**
+     * Current Rule name
+     */
+    private String strCurrentRuleName;
 
-	/** Rule entries */
-	private LinkedList<RuleEntry> ruleEntries;
+    /**
+     * Rule entries
+     */
+    private LinkedList<RuleEntry> ruleEntries;
 
-	/**
-	 * Constructor
-	 */
-	public StateConfigRuleSelect() {
-		pageHeight = PAGE_HEIGHT;
-		nullError = "RULE DIRECTORY NOT FOUND";
-		emptyError = "NO RULE FILE";
-	}
+    /**
+     * Constructor
+     */
+    public StateConfigRuleSelect() {
+        pageHeight = PAGE_HEIGHT;
+        nullError = "RULE DIRECTORY NOT FOUND";
+        emptyError = "NO RULE FILE";
+    }
 
-	/*
-	 * Fetch this state's ID
-	 */
-	@Override
-	public int getID() {
-		return ID;
-	}
+    /*
+     * Fetch this state's ID
+     */
+    @Override
+    public int getID() {
+        return ID;
+    }
 
-	/**
-	 * Get rule file list
-	 * @return Rule file list. null if directory doesn't exist.
-	 */
-	private String[] getRuleFileList() {
-		File dir = new File("config/rule");
+    /**
+     * Get rule file list
+     *
+     * @return Rule file list. null if directory doesn't exist.
+     */
+    private String[] getRuleFileList() {
+        File dir = new File("config/rule");
 
-		FilenameFilter filter = new FilenameFilter() {
-			public boolean accept(File dir1, String name) {
-				return name.endsWith(".rul");
-			}
-		};
+        FilenameFilter filter = new FilenameFilter() {
+            public boolean accept(File dir1, String name) {
+                return name.endsWith(".rul");
+            }
+        };
 
-		String[] list = dir.list(filter);
+        String[] list = dir.list(filter);
 
-		if(!System.getProperty("os.name").startsWith("Windows")) {
-			// Sort if not windows
-			Arrays.sort(list);
-		}
+        if (!System.getProperty("os.name").startsWith("Windows")) {
+            // Sort if not windows
+            Arrays.sort(list);
+        }
 
-		return list;
-	}
+        return list;
+    }
 
-	/**
-	 * Create rule entries
-	 * @param filelist Rule file list
-	 * @param currentStyle Current style
-	 */
-	private void createRuleEntries(String[] filelist, int currentStyle) {
-		ruleEntries = new LinkedList<RuleEntry>();
+    /**
+     * Create rule entries
+     *
+     * @param filelist     Rule file list
+     * @param currentStyle Current style
+     */
+    private void createRuleEntries(String[] filelist, int currentStyle) {
+        ruleEntries = new LinkedList<RuleEntry>();
 
-		for(int i = 0; i < filelist.length; i++) {
-			RuleEntry entry = new RuleEntry();
+        for (int i = 0; i < filelist.length; i++) {
+            RuleEntry entry = new RuleEntry();
 
-			File file = new File("config/rule/" + filelist[i]);
-			entry.filename = filelist[i];
-			entry.filepath = file.getPath();
+            File file = new File("config/rule/" + filelist[i]);
+            entry.filename = filelist[i];
+            entry.filepath = file.getPath();
 
-			CustomProperties prop = new CustomProperties();
-			try {
-				FileInputStream in = new FileInputStream("config/rule/" + filelist[i]);
-				prop.load(in);
-				in.close();
-				entry.rulename = prop.getProperty("0.ruleopt.strRuleName", "");
-				entry.style = prop.getProperty("0.ruleopt.style", 0);
-			} catch (Exception e) {
-				entry.rulename = "";
-				entry.style = -1;
-			}
+            CustomProperties prop = new CustomProperties();
+            try {
+                FileInputStream in = new FileInputStream("config/rule/" + filelist[i]);
+                prop.load(in);
+                in.close();
+                entry.rulename = prop.getProperty("0.ruleopt.strRuleName", "");
+                entry.style = prop.getProperty("0.ruleopt.style", 0);
+            } catch (Exception e) {
+                entry.rulename = "";
+                entry.style = -1;
+            }
 
-			if(entry.style == currentStyle) {
-				ruleEntries.add(entry);
-			}
-		}
-	}
+            if (entry.style == currentStyle) {
+                ruleEntries.add(entry);
+            }
+        }
+    }
 
-	/**
-	 * Get rule name list as String[]
-	 * @return Rule name list
-	 */
-	private String[] extractRuleNameListFromRuleEntries() {
-		String[] result = new String[ruleEntries.size()];
+    /**
+     * Get rule name list as String[]
+     *
+     * @return Rule name list
+     */
+    private String[] extractRuleNameListFromRuleEntries() {
+        String[] result = new String[ruleEntries.size()];
 
-		for(int i = 0; i < ruleEntries.size(); i++) {
-			result[i] = ruleEntries.get(i).rulename;
-		}
+        for (int i = 0; i < ruleEntries.size(); i++) {
+            result[i] = ruleEntries.get(i).rulename;
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * Get rule file name list as String[]
-	 * @return Rule name list
-	 */
-	private String[] extractFileNameListFromRuleEntries() {
-		String[] result = new String[ruleEntries.size()];
+    /**
+     * Get rule file name list as String[]
+     *
+     * @return Rule name list
+     */
+    private String[] extractFileNameListFromRuleEntries() {
+        String[] result = new String[ruleEntries.size()];
 
-		for(int i = 0; i < ruleEntries.size(); i++) {
-			result[i] = ruleEntries.get(i).filename;
-		}
+        for (int i = 0; i < ruleEntries.size(); i++) {
+            result[i] = ruleEntries.get(i).filename;
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/*
-	 * Called when entering this state
-	 */
-	@Override
-	public void enter(GameContainer container, StateBasedGame game) throws SlickException {
-		strFileList = getRuleFileList();
-		createRuleEntries(strFileList, style);
-		strRuleNameList = extractRuleNameListFromRuleEntries();
-		strRuleFileList = extractFileNameListFromRuleEntries();
-		list = strRuleNameList;
-		maxCursor = list.length-1;
+    /*
+     * Called when entering this state
+     */
+    @Override
+    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+        strFileList = getRuleFileList();
+        createRuleEntries(strFileList, style);
+        strRuleNameList = extractRuleNameListFromRuleEntries();
+        strRuleFileList = extractFileNameListFromRuleEntries();
+        list = strRuleNameList;
+        maxCursor = list.length - 1;
 
-		if(style == 0) {
-			strCurrentFileName = NullpoMinoSlick.propGlobal.getProperty(player + ".rulefile", "");
-			strCurrentRuleName = NullpoMinoSlick.propGlobal.getProperty(player + ".rulename", "");
-		} else {
-			strCurrentFileName = NullpoMinoSlick.propGlobal.getProperty(player + ".rulefile." + style, "");
-			strCurrentRuleName = NullpoMinoSlick.propGlobal.getProperty(player + ".rulename." + style, "");
-		}
+        if (style == 0) {
+            strCurrentFileName = NullpoMinoSlick.propGlobal.getProperty(player + ".rulefile", "");
+            strCurrentRuleName = NullpoMinoSlick.propGlobal.getProperty(player + ".rulename", "");
+        } else {
+            strCurrentFileName = NullpoMinoSlick.propGlobal.getProperty(player + ".rulefile." + style, "");
+            strCurrentRuleName = NullpoMinoSlick.propGlobal.getProperty(player + ".rulename." + style, "");
+        }
 
-		cursor = 0;
-		for(int i = 0; i < ruleEntries.size(); i++) {
-			if(ruleEntries.get(i).filename.equals(strCurrentFileName)) {
-				cursor = i;
-			}
-		}
-	}
+        cursor = 0;
+        for (int i = 0; i < ruleEntries.size(); i++) {
+            if (ruleEntries.get(i).filename.equals(strCurrentFileName)) {
+                cursor = i;
+            }
+        }
+    }
 
-	/*
-	 * State initialization
-	 */
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-	}
+    /*
+     * State initialization
+     */
+    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    }
 
-	/*
-	 * Draw the screen
-	 */
-	@Override
-	protected void onRenderSuccess (GameContainer container, StateBasedGame game, Graphics graphics)  {
-		String title = "SELECT " + (player + 1) + "P RULE (" + (cursor + 1) + "/" + (list.length) + ")";
-		NormalFontSlick.printFontGrid(1, 1, title, NormalFontSlick.COLOR_ORANGE);
+    /*
+     * Draw the screen
+     */
+    @Override
+    protected void onRenderSuccess(GameContainer container, StateBasedGame game, Graphics graphics) {
+        String title = "SELECT " + (player + 1) + "P RULE (" + (cursor + 1) + "/" + (list.length) + ")";
+        NormalFontSlick.printFontGrid(1, 1, title, NormalFontSlick.COLOR_ORANGE);
 
-		NormalFontSlick.printFontGrid(1, 25, "CURRENT:" + strCurrentRuleName.toUpperCase(), NormalFontSlick.COLOR_BLUE);
-		NormalFontSlick.printFontGrid(9, 26, strCurrentFileName.toUpperCase(), NormalFontSlick.COLOR_BLUE);
+        NormalFontSlick.printFontGrid(1, 25, "CURRENT:" + strCurrentRuleName.toUpperCase(), NormalFontSlick.COLOR_BLUE);
+        NormalFontSlick.printFontGrid(9, 26, strCurrentFileName.toUpperCase(), NormalFontSlick.COLOR_BLUE);
 
-		NormalFontSlick.printFontGrid(1, 28, "A:OK B:CANCEL D:TOGGLE-VIEW", NormalFontSlick.COLOR_GREEN);
-	}
+        NormalFontSlick.printFontGrid(1, 28, "A:OK B:CANCEL D:TOGGLE-VIEW", NormalFontSlick.COLOR_GREEN);
+    }
 
-	/*
-	 * Decide
-	 */
-	@Override
-	protected boolean onDecide(GameContainer container, StateBasedGame game, int delta) {
-		ResourceHolderSlick.soundManager.play("decide");
+    /*
+     * Decide
+     */
+    @Override
+    protected boolean onDecide(GameContainer container, StateBasedGame game, int delta) {
+        ResourceHolderSlick.soundManager.play("decide");
 
-		RuleEntry entry = ruleEntries.get(cursor);
-		if(style == 0) {
-			NullpoMinoSlick.propGlobal.setProperty(player + ".rule", entry.filepath);
-			NullpoMinoSlick.propGlobal.setProperty(player + ".rulefile", entry.filename);
-			NullpoMinoSlick.propGlobal.setProperty(player + ".rulename", entry.rulename);
-		} else {
-			NullpoMinoSlick.propGlobal.setProperty(player + ".rule." + style, entry.filepath);
-			NullpoMinoSlick.propGlobal.setProperty(player + ".rulefile." + style, entry.filename);
-			NullpoMinoSlick.propGlobal.setProperty(player + ".rulename." + style, entry.rulename);
-		}
+        RuleEntry entry = ruleEntries.get(cursor);
+        if (style == 0) {
+            NullpoMinoSlick.propGlobal.setProperty(player + ".rule", entry.filepath);
+            NullpoMinoSlick.propGlobal.setProperty(player + ".rulefile", entry.filename);
+            NullpoMinoSlick.propGlobal.setProperty(player + ".rulename", entry.rulename);
+        } else {
+            NullpoMinoSlick.propGlobal.setProperty(player + ".rule." + style, entry.filepath);
+            NullpoMinoSlick.propGlobal.setProperty(player + ".rulefile." + style, entry.filename);
+            NullpoMinoSlick.propGlobal.setProperty(player + ".rulename." + style, entry.rulename);
+        }
 
-		NullpoMinoSlick.saveConfig();
+        NullpoMinoSlick.saveConfig();
 
-		game.enterState(StateConfigRuleStyleSelect.ID);
-		return true;
-	}
+        game.enterState(StateConfigRuleStyleSelect.ID);
+        return true;
+    }
 
-	/*
-	 * Cancel
-	 */
-	@Override
-	protected boolean onCancel(GameContainer container, StateBasedGame game, int delta) {
-		game.enterState(StateConfigRuleStyleSelect.ID);
-		return true;
-	}
+    /*
+     * Cancel
+     */
+    @Override
+    protected boolean onCancel(GameContainer container, StateBasedGame game, int delta) {
+        game.enterState(StateConfigRuleStyleSelect.ID);
+        return true;
+    }
 
-	/*
-	 * D button
-	 */
-	@Override
-	protected boolean onPushButtonD(GameContainer container, StateBasedGame game, int delta) {
-		ResourceHolderSlick.soundManager.play("change");
-		if(list == strRuleNameList) {
-			list = strRuleFileList;
-		} else {
-			list = strRuleNameList;
-		}
-		return false;
-	}
+    /*
+     * D button
+     */
+    @Override
+    protected boolean onPushButtonD(GameContainer container, StateBasedGame game, int delta) {
+        ResourceHolderSlick.soundManager.play("change");
+        if (list == strRuleNameList) {
+            list = strRuleFileList;
+        } else {
+            list = strRuleNameList;
+        }
+        return false;
+    }
 
-	/**
-	 * Rule entry
-	 */
-	private class RuleEntry {
-		/** File name */
-		public String filename;
-		/** File path */
-		public String filepath;
-		/** Rule name */
-		public String rulename;
-		/** Game style */
-		public int style;
-	}
+    /**
+     * Rule entry
+     */
+    private class RuleEntry {
+        /**
+         * File name
+         */
+        public String filename;
+        /**
+         * File path
+         */
+        public String filepath;
+        /**
+         * Rule name
+         */
+        public String rulename;
+        /**
+         * Game style
+         */
+        public int style;
+    }
 }

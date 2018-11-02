@@ -50,7 +50,8 @@ package net.clarenceho.crypto;
  * Please check your local law.  The author is not
  * responsible for any illegal use of this code.
  * <p>
- * @author  Clarence Ho
+ *
+ * @author Clarence Ho
  */
 public class RC4 {
 
@@ -63,7 +64,7 @@ public class RC4 {
      * of a normal key should be between 1 and 2048 bits.  But
      * this method doens't check the length at all.
      *
-     * @param key   the encryption/decryption key
+     * @param key the encryption/decryption key
      */
     public RC4(String key) throws NullPointerException {
         this(key.getBytes());
@@ -74,12 +75,12 @@ public class RC4 {
      * of a normal key should be between 1 and 2048 bits.  But
      * this method doens't check the length at all.
      *
-     * @param key   the encryption/decryption key
+     * @param key the encryption/decryption key
      */
     public RC4(byte[] key) throws NullPointerException {
 
-        for (int i=0; i < 256; i++) {
-            state[i] = (byte)i;
+        for (int i = 0; i < 256; i++) {
+            state[i] = (byte) i;
         }
 
         x = 0;
@@ -94,7 +95,7 @@ public class RC4 {
             throw new NullPointerException();
         }
 
-        for (int i=0; i < 256; i++) {
+        for (int i = 0; i < 256; i++) {
 
             index2 = ((key[index1] & 0xff) + (state[i] & 0xff) + index2) & 0xff;
 
@@ -106,13 +107,12 @@ public class RC4 {
         }
 
 
-
     }
 
     /**
      * RC4 encryption/decryption.
      *
-     * @param data  the data to be encrypted/decrypted
+     * @param data the data to be encrypted/decrypted
      * @return the result of the encryption/decryption
      */
     public byte[] rc4(String data) {
@@ -131,7 +131,7 @@ public class RC4 {
     /**
      * RC4 encryption/decryption.
      *
-     * @param buf  the data to be encrypted/decrypted
+     * @param buf the data to be encrypted/decrypted
      * @return the result of the encryption/decryption
      */
     public byte[] rc4(byte[] buf) {
@@ -148,7 +148,7 @@ public class RC4 {
 
         byte[] result = new byte[buf.length];
 
-        for (int i=0; i < buf.length; i++) {
+        for (int i = 0; i < buf.length; i++) {
 
             x = (x + 1) & 0xff;
             y = ((state[x] & 0xff) + y) & 0xff;
@@ -157,8 +157,8 @@ public class RC4 {
             state[x] = state[y];
             state[y] = tmp;
 
-            xorIndex = ((state[x] &0xff) + (state[y] & 0xff)) & 0xff;
-            result[i] = (byte)(buf[i] ^ state[xorIndex]);
+            xorIndex = ((state[x] & 0xff) + (state[y] & 0xff)) & 0xff;
+            result[i] = (byte) (buf[i] ^ state[xorIndex]);
         }
 
         //this.x = lx;
@@ -168,17 +168,18 @@ public class RC4 {
     }
 
     // ***** BEGIN HACKED CODE *****
+
     /**
      * Initializes the class with a string key. The length
      * of a normal key should be between 1 and 2048 bits.  But
      * this method doens't check the length at all.
      *
-     * @param key   the encryption/decryption key
+     * @param key the encryption/decryption key
      */
     public RC4(char[] key) throws NullPointerException {
 
-        for (int i=0; i < 256; i++) {
-            state[i] = (byte)i;
+        for (int i = 0; i < 256; i++) {
+            state[i] = (byte) i;
         }
 
         x = 0;
@@ -193,7 +194,7 @@ public class RC4 {
             throw new NullPointerException();
         }
 
-        for (int i=0; i < 256; i++) {
+        for (int i = 0; i < 256; i++) {
 
             index2 = ((key[index1] & 0xff) + (state[i] & 0xff) + index2) & 0xff;
 
@@ -205,13 +206,12 @@ public class RC4 {
         }
 
 
-
     }
 
     /**
      * RC4 encryption/decryption.
      *
-     * @param buf  the data to be encrypted/decrypted
+     * @param buf the data to be encrypted/decrypted
      * @return the result of the encryption/decryption
      */
     public byte[] rc4(char[] buf) {
@@ -228,7 +228,7 @@ public class RC4 {
 
         byte[] result = new byte[buf.length];
 
-        for (int i=0; i < buf.length; i++) {
+        for (int i = 0; i < buf.length; i++) {
 
             x = (x + 1) & 0xff;
             y = ((state[x] & 0xff) + y) & 0xff;
@@ -237,8 +237,8 @@ public class RC4 {
             state[x] = state[y];
             state[y] = tmp;
 
-            xorIndex = ((state[x] &0xff) + (state[y] & 0xff)) & 0xff;
-            result[i] = (byte)(buf[i] ^ state[xorIndex]);
+            xorIndex = ((state[x] & 0xff) + (state[y] & 0xff)) & 0xff;
+            result[i] = (byte) (buf[i] ^ state[xorIndex]);
         }
 
         //this.x = lx;

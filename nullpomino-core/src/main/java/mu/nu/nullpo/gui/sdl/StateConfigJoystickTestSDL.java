@@ -37,139 +37,152 @@ import sdljava.video.SDLSurface;
  * Joystick State of the test screen
  */
 public class StateConfigJoystickTestSDL extends BaseStateSDL {
-	/** Key input Accepted to be enabled. frame count */
-	public static final int KEYACCEPTFRAME = 20;
+    /**
+     * Key input Accepted to be enabled. frame count
+     */
+    public static final int KEYACCEPTFRAME = 20;
 
-	/** Player number */
-	public int player;
+    /**
+     * Player number
+     */
+    public int player;
 
-	/** UseJoystick Of number */
-	protected int joyNumber;
+    /**
+     * UseJoystick Of number
+     */
+    protected int joyNumber;
 
-	/** I was last pressed button */
-	protected int lastPressButton;
+    /**
+     * I was last pressed button
+     */
+    protected int lastPressButton;
 
-	/** Course frame count */
-	protected int frame;
+    /**
+     * Course frame count
+     */
+    protected int frame;
 
-	/** Previous frame OfJoystick Of input State */
-	protected boolean previousJoyPressedState[];
+    /**
+     * Previous frame OfJoystick Of input State
+     */
+    protected boolean previousJoyPressedState[];
 
-	/**
-	 * Constructor
-	 */
-	public StateConfigJoystickTestSDL() {
-		player = 0;
-	}
+    /**
+     * Constructor
+     */
+    public StateConfigJoystickTestSDL() {
+        player = 0;
+    }
 
-	/**
-	 * Various reset
-	 */
-	protected void reset() {
-		joyNumber = NullpoMinoSDL.joyUseNumber[player];
-		lastPressButton = -1;
-		frame = 0;
-		if(joyNumber >= 0) previousJoyPressedState = new boolean[NullpoMinoSDL.joyMaxButton[joyNumber]];
-		else previousJoyPressedState = null;
-	}
+    /**
+     * Various reset
+     */
+    protected void reset() {
+        joyNumber = NullpoMinoSDL.joyUseNumber[player];
+        lastPressButton = -1;
+        frame = 0;
+        if (joyNumber >= 0) previousJoyPressedState = new boolean[NullpoMinoSDL.joyMaxButton[joyNumber]];
+        else previousJoyPressedState = null;
+    }
 
-	/**
-	 * Pressed buttonOf numberReturns
-	 * @param prev Previous frame In input State
-	 * @param now This frame In input State
-	 * @return Pressed buttonOf number, If you do not-1
-	 */
-	protected int getPressedKeyNumber(boolean[] prev, boolean[] now) {
-		for(int i = 0; i < now.length; i++) {
-			if(prev[i] != now[i]) {
-				return i;
-			}
-		}
+    /**
+     * Pressed buttonOf numberReturns
+     *
+     * @param prev Previous frame In input State
+     * @param now  This frame In input State
+     * @return Pressed buttonOf number, If you do not-1
+     */
+    protected int getPressedKeyNumber(boolean[] prev, boolean[] now) {
+        for (int i = 0; i < now.length; i++) {
+            if (prev[i] != now[i]) {
+                return i;
+            }
+        }
 
-		return -1;
-	}
+        return -1;
+    }
 
-	/*
-	 * Draw the screen
-	 */
-	@Override
-	public void render(SDLSurface screen) throws SDLException {
-		ResourceHolderSDL.imgMenu.blitSurface(screen);
+    /*
+     * Draw the screen
+     */
+    @Override
+    public void render(SDLSurface screen) throws SDLException {
+        ResourceHolderSDL.imgMenu.blitSurface(screen);
 
-		NormalFontSDL.printFontGrid(1, 1, "JOYSTICK INPUT TEST (" + (player + 1) + "P)", NormalFontSDL.COLOR_ORANGE);
+        NormalFontSDL.printFontGrid(1, 1, "JOYSTICK INPUT TEST (" + (player + 1) + "P)", NormalFontSDL.COLOR_ORANGE);
 
-		if(joyNumber < 0) {
-			NormalFontSDL.printFontGrid(1, 3, "NO JOYSTICK", NormalFontSDL.COLOR_RED);
-		} else if(frame >= KEYACCEPTFRAME) {
-			NormalFontSDL.printFontGrid(1, 3, "JOYSTICK NUMBER:" + joyNumber, NormalFontSDL.COLOR_RED);
+        if (joyNumber < 0) {
+            NormalFontSDL.printFontGrid(1, 3, "NO JOYSTICK", NormalFontSDL.COLOR_RED);
+        } else if (frame >= KEYACCEPTFRAME) {
+            NormalFontSDL.printFontGrid(1, 3, "JOYSTICK NUMBER:" + joyNumber, NormalFontSDL.COLOR_RED);
 
-			NormalFontSDL.printFontGrid(1, 5, "LAST PRESSED BUTTON:" + ((lastPressButton == -1) ? "NONE" : String.valueOf(lastPressButton)));
+            NormalFontSDL.printFontGrid(1, 5, "LAST PRESSED BUTTON:" + ((lastPressButton == -1) ? "NONE" : String.valueOf(lastPressButton)));
 
-			NormalFontSDL.printFontGrid(1, 7, "AXIS X:" + NullpoMinoSDL.joyAxisX[joyNumber]);
-			NormalFontSDL.printFontGrid(1, 8, "AXIS Y:" + NullpoMinoSDL.joyAxisY[joyNumber]);
+            NormalFontSDL.printFontGrid(1, 7, "AXIS X:" + NullpoMinoSDL.joyAxisX[joyNumber]);
+            NormalFontSDL.printFontGrid(1, 8, "AXIS Y:" + NullpoMinoSDL.joyAxisY[joyNumber]);
 
-			String strHat = "";
-			HatState hat = NullpoMinoSDL.joyHatState[joyNumber];
-			if(hat != null) {
-				if(hat.hatCentered()) strHat += "CENTER ";
-				if(hat.hatUp()) strHat += "UP ";
-				if(hat.hatDown()) strHat += "DOWN ";
-				if(hat.hatLeft()) strHat += "LEFT ";
-				if(hat.hatRight()) strHat += "RIGHT ";
-			}
-			NormalFontSDL.printFontGrid(1, 10, "POV:" + strHat);
-		}
+            String strHat = "";
+            HatState hat = NullpoMinoSDL.joyHatState[joyNumber];
+            if (hat != null) {
+                if (hat.hatCentered()) strHat += "CENTER ";
+                if (hat.hatUp()) strHat += "UP ";
+                if (hat.hatDown()) strHat += "DOWN ";
+                if (hat.hatLeft()) strHat += "LEFT ";
+                if (hat.hatRight()) strHat += "RIGHT ";
+            }
+            NormalFontSDL.printFontGrid(1, 10, "POV:" + strHat);
+        }
 
-		if(frame >= KEYACCEPTFRAME) {
-			NormalFontSDL.printFontGrid(1, 23, "ENTER/BACKSPACE: EXIT", NormalFontSDL.COLOR_GREEN);
-		}
-	}
+        if (frame >= KEYACCEPTFRAME) {
+            NormalFontSDL.printFontGrid(1, 23, "ENTER/BACKSPACE: EXIT", NormalFontSDL.COLOR_GREEN);
+        }
+    }
 
-	/*
-	 * Update game state
-	 */
-	@Override
-	public void update() throws SDLException {
-		if(frame >= KEYACCEPTFRAME) {
-			// Backspace & Enter/Return
-			if(NullpoMinoSDL.keyPressedState[SDLKey.SDLK_BACKSPACE] || NullpoMinoSDL.keyPressedState[SDLKey.SDLK_RETURN]) {
-				NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_CONFIG_JOYSTICK_MAIN);
-				return;
-			}
-			// Joystick input
-			else if(previousJoyPressedState != null) {
-				int key = getPressedKeyNumber(previousJoyPressedState, NullpoMinoSDL.joyPressedState[joyNumber]);
+    /*
+     * Update game state
+     */
+    @Override
+    public void update() throws SDLException {
+        if (frame >= KEYACCEPTFRAME) {
+            // Backspace & Enter/Return
+            if (NullpoMinoSDL.keyPressedState[SDLKey.SDLK_BACKSPACE] || NullpoMinoSDL.keyPressedState[SDLKey.SDLK_RETURN]) {
+                NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_CONFIG_JOYSTICK_MAIN);
+                return;
+            }
+            // Joystick input
+            else if (previousJoyPressedState != null) {
+                int key = getPressedKeyNumber(previousJoyPressedState, NullpoMinoSDL.joyPressedState[joyNumber]);
 
-				if(key != -1) {
-					ResourceHolderSDL.soundManager.play("change");
-					lastPressButton = key;
-				}
-			}
-		}
+                if (key != -1) {
+                    ResourceHolderSDL.soundManager.play("change");
+                    lastPressButton = key;
+                }
+            }
+        }
 
-		if(previousJoyPressedState != null) {
-			for(int i = 0; i < NullpoMinoSDL.joyPressedState.length; i++) {
-				previousJoyPressedState[i] = NullpoMinoSDL.joyPressedState[joyNumber][i];
-			}
-		}
-		frame++;
-	}
+        if (previousJoyPressedState != null) {
+            for (int i = 0; i < NullpoMinoSDL.joyPressedState.length; i++) {
+                previousJoyPressedState[i] = NullpoMinoSDL.joyPressedState[joyNumber][i];
+            }
+        }
+        frame++;
+    }
 
-	/*
-	 * Called when entering this state
-	 */
-	@Override
-	public void enter() throws SDLException {
-		reset();
-		NullpoMinoSDL.enableSpecialKeys = false;
-	}
+    /*
+     * Called when entering this state
+     */
+    @Override
+    public void enter() throws SDLException {
+        reset();
+        NullpoMinoSDL.enableSpecialKeys = false;
+    }
 
-	/*
-	 * Called when leaving this state
-	 */
-	@Override
-	public void leave() throws SDLException {
-		reset();
-		NullpoMinoSDL.enableSpecialKeys = true;
-	}
+    /*
+     * Called when leaving this state
+     */
+    @Override
+    public void leave() throws SDLException {
+        reset();
+        NullpoMinoSDL.enableSpecialKeys = true;
+    }
 }

@@ -35,43 +35,44 @@ import mu.nu.nullpo.util.GeneralUtil;
 
 /**
  * 7 piece bag randomizer (No SZO at start)
+ *
  * @deprecated No longer used. The current one is net.omegaboshi.nullpomino.game.subsystem.randomizer.BagNoSZORandomizer.
  */
 public class BagRandomizerNoSZO implements Randomizer {
-	/*
-	 * Create NEXT sequence
-	 */
-	public int[] createPieceSequence(boolean[] pieceEnable, Random random, int arrayMax) {
-		int[] pieceArray = new int[arrayMax];
-		int pieceKind = GeneralUtil.getNumberOfPiecesCanAppear(pieceEnable);
-		boolean first = true;
+    /*
+     * Create NEXT sequence
+     */
+    public int[] createPieceSequence(boolean[] pieceEnable, Random random, int arrayMax) {
+        int[] pieceArray = new int[arrayMax];
+        int pieceKind = GeneralUtil.getNumberOfPiecesCanAppear(pieceEnable);
+        boolean first = true;
 
-		if(GeneralUtil.isPieceSZOOnly(pieceEnable)) first = false;
+        if (GeneralUtil.isPieceSZOOnly(pieceEnable)) first = false;
 
-		for(int i = 0; i < arrayMax / pieceKind; i++) {
-			// Flags for pieces which have already appeared
-			boolean[] alreadyAppeared = new boolean[Piece.PIECE_COUNT];
+        for (int i = 0; i < arrayMax / pieceKind; i++) {
+            // Flags for pieces which have already appeared
+            boolean[] alreadyAppeared = new boolean[Piece.PIECE_COUNT];
 
-			// Create draws
-			for(int j = 0; j < pieceKind; j++) {
-				int id = 0;
+            // Create draws
+            for (int j = 0; j < pieceKind; j++) {
+                int id = 0;
 
-				// Draw
-				do {
-					id = random.nextInt(Piece.PIECE_COUNT);
-				} while( (pieceEnable[id] == false) || (alreadyAppeared[id] == true) ||
-				         ((first) && ((id == Piece.PIECE_Z) || (id == Piece.PIECE_O) || (id == Piece.PIECE_S))) );
+                // Draw
+                do {
+                    id = random.nextInt(Piece.PIECE_COUNT);
+                } while ((pieceEnable[id] == false) || (alreadyAppeared[id] == true) ||
+                        ((first) && ((id == Piece.PIECE_Z) || (id == Piece.PIECE_O) || (id == Piece.PIECE_S))));
 
-				// Set block drawn flag to ON
-				alreadyAppeared[id] = true;
+                // Set block drawn flag to ON
+                alreadyAppeared[id] = true;
 
-				// Add to NEXT list
-				pieceArray[i * pieceKind + j] = id;
+                // Add to NEXT list
+                pieceArray[i * pieceKind + j] = id;
 
-				first = false;
-			}
-		}
+                first = false;
+            }
+        }
 
-		return pieceArray;
-	}
+        return pieceArray;
+    }
 }

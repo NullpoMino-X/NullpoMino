@@ -34,80 +34,94 @@ import java.io.Serializable;
  * BackgroundImage state
  */
 public class BackgroundStatus implements Serializable {
-	/** Serial version ID */
-	private static final long serialVersionUID = 2159669210087818385L;
+    /**
+     * Serial version ID
+     */
+    private static final long serialVersionUID = 2159669210087818385L;
 
-	/** Background number */
-	public int bg;
+    /**
+     * Background number
+     */
+    public int bg;
 
-	/** Background fade flag */
-	public boolean fadesw;
+    /**
+     * Background fade flag
+     */
+    public boolean fadesw;
 
-	/** Background fade state (false for fadeout, true for fade-in) */
-	public boolean fadestat;
+    /**
+     * Background fade state (false for fadeout, true for fade-in)
+     */
+    public boolean fadestat;
 
-	/** Background fade usage counter */
-	public int fadecount;
+    /**
+     * Background fade usage counter
+     */
+    public int fadecount;
 
-	/** Background after fade */
-	public int fadebg;
+    /**
+     * Background after fade
+     */
+    public int fadebg;
 
-	/**
-	 * Default constructor
-	 */
-	public BackgroundStatus() {
-		reset();
-	}
+    /**
+     * Default constructor
+     */
+    public BackgroundStatus() {
+        reset();
+    }
 
-	/**
-	 * Copy constructor
-	 * @param b Copy source
-	 */
-	public BackgroundStatus(BackgroundStatus b) {
-		copy(b);
-	}
+    /**
+     * Copy constructor
+     *
+     * @param b Copy source
+     */
+    public BackgroundStatus(BackgroundStatus b) {
+        copy(b);
+    }
 
-	/**
-	 * Reset to defaults
-	 */
-	public void reset() {
-		bg = 0;
-		fadesw = false;
-		fadestat = false;
-		fadecount = 0;
-		fadebg = 0;
-	}
+    /**
+     * Reset to defaults
+     */
+    public void reset() {
+        bg = 0;
+        fadesw = false;
+        fadestat = false;
+        fadecount = 0;
+        fadebg = 0;
+    }
 
-	/**
-	 * Copy from a different BackgroundStatus
-	 * @param b Copy source
-	 */
-	public void copy(BackgroundStatus b) {
-		bg = b.bg;
-		fadesw = b.fadesw;
-		fadestat = b.fadestat;
-		fadecount = b.fadecount;
-		fadebg = b.fadebg;
-	}
+    /**
+     * Copy from a different BackgroundStatus
+     *
+     * @param b Copy source
+     */
+    public void copy(BackgroundStatus b) {
+        bg = b.bg;
+        fadesw = b.fadesw;
+        fadestat = b.fadestat;
+        fadecount = b.fadecount;
+        fadebg = b.fadebg;
+    }
 
-	/**
-	 * Update background fade state
-	 */
-	public void fadeUpdate() {
-		if(fadesw == true) {
-			if(fadecount < 100) {
-				fadecount += 10;
-			} else {
-				if(fadestat == false) {
-					bg = fadebg;
-					fadestat = true;
-					fadecount = 0;
-				} else {
-					fadesw = false;
-					fadestat = false;
-					fadecount = 0;
-				}
-			}
-		}
-	}
+    /**
+     * Update background fade state
+     */
+    public void fadeUpdate() {
+        if (fadesw == true) {
+            if (fadecount < 100) {
+                fadecount += 10;
+            } else {
+                if (fadestat == false) {
+                    bg = fadebg;
+                    fadestat = true;
+                    fadecount = 0;
+                } else {
+                    fadesw = false;
+                    fadestat = false;
+                    fadecount = 0;
+                }
+            }
+        }
+    }
 }

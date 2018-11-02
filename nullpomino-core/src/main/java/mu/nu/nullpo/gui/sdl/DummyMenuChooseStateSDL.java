@@ -35,141 +35,149 @@ import sdljava.video.SDLSurface;
  * Dummy class for menus where the player picks from a list of options
  */
 public abstract class DummyMenuChooseStateSDL extends BaseStateSDL {
-	/** Cursor position */
-	protected int cursor = 0;
+    /**
+     * Cursor position
+     */
+    protected int cursor = 0;
 
-	/** ScreenshotShooting flag */
-	protected boolean ssflag = false;
+    /**
+     * ScreenshotShooting flag
+     */
+    protected boolean ssflag = false;
 
-	/** Max cursor value */
-	protected int maxCursor;
+    /**
+     * Max cursor value
+     */
+    protected int maxCursor;
 
-	/** Top choice's y-coordinate */
-	protected int minChoiceY;
+    /**
+     * Top choice's y-coordinate
+     */
+    protected int minChoiceY;
 
-	/** Set to false to ignore mouse input */
-	protected boolean mouseEnabled;
+    /**
+     * Set to false to ignore mouse input
+     */
+    protected boolean mouseEnabled;
 
-	public DummyMenuChooseStateSDL () {
-		maxCursor = -1;
-		minChoiceY = 3;
-		mouseEnabled = true;
-	}
+    public DummyMenuChooseStateSDL() {
+        maxCursor = -1;
+        minChoiceY = 3;
+        mouseEnabled = true;
+    }
 
-	@Override
-	public void render(SDLSurface screen) throws SDLException {
-	}
+    @Override
+    public void render(SDLSurface screen) throws SDLException {
+    }
 
-	@Override
-	public void update() throws SDLException
-	{
-		// Mouse
-		boolean mouseConfirm = false;
-		if (mouseEnabled)
-			mouseConfirm = updateMouseInput();
+    @Override
+    public void update() throws SDLException {
+        // Mouse
+        boolean mouseConfirm = false;
+        if (mouseEnabled)
+            mouseConfirm = updateMouseInput();
 
-		if (maxCursor >= 0) {
+        if (maxCursor >= 0) {
 
-			// Cursor movement
-			if(GameKeySDL.gamekey[0].isMenuRepeatKey(GameKeySDL.BUTTON_UP)) {
-				cursor--;
-				if(cursor < 0) cursor = maxCursor;
-				ResourceHolderSDL.soundManager.play("cursor");
-			}
-			if(GameKeySDL.gamekey[0].isMenuRepeatKey(GameKeySDL.BUTTON_DOWN)) {
-				cursor++;
-				if(cursor > maxCursor) cursor = 0;
-				ResourceHolderSDL.soundManager.play("cursor");
-			}
+            // Cursor movement
+            if (GameKeySDL.gamekey[0].isMenuRepeatKey(GameKeySDL.BUTTON_UP)) {
+                cursor--;
+                if (cursor < 0) cursor = maxCursor;
+                ResourceHolderSDL.soundManager.play("cursor");
+            }
+            if (GameKeySDL.gamekey[0].isMenuRepeatKey(GameKeySDL.BUTTON_DOWN)) {
+                cursor++;
+                if (cursor > maxCursor) cursor = 0;
+                ResourceHolderSDL.soundManager.play("cursor");
+            }
 
-			int change = 0;
-			if(GameKeySDL.gamekey[0].isMenuRepeatKey(GameKeySDL.BUTTON_LEFT)) change = -1;
-			if(GameKeySDL.gamekey[0].isMenuRepeatKey(GameKeySDL.BUTTON_RIGHT)) change = 1;
+            int change = 0;
+            if (GameKeySDL.gamekey[0].isMenuRepeatKey(GameKeySDL.BUTTON_LEFT)) change = -1;
+            if (GameKeySDL.gamekey[0].isMenuRepeatKey(GameKeySDL.BUTTON_RIGHT)) change = 1;
 
-			if(change != 0)
-				onChange(change);
+            if (change != 0)
+                onChange(change);
 
-			// Decision button
-			if(GameKeySDL.gamekey[0].isPushKey(GameKeySDL.BUTTON_A) || mouseConfirm) {
-				if (onDecide())
-					return;
-			}
+            // Decision button
+            if (GameKeySDL.gamekey[0].isPushKey(GameKeySDL.BUTTON_A) || mouseConfirm) {
+                if (onDecide())
+                    return;
+            }
 
-		}
-		if(GameKeySDL.gamekey[0].isPushKey(GameKeySDL.BUTTON_D)) {
-			if (onPushButtonD());
-				return;
-		}
+        }
+        if (GameKeySDL.gamekey[0].isPushKey(GameKeySDL.BUTTON_D)) {
+            if (onPushButtonD()) ;
+            return;
+        }
 
-		// Cancel button
-		if(GameKeySDL.gamekey[0].isPushKey(GameKeySDL.BUTTON_B) || MouseInputSDL.mouseInput.isMouseRightClicked()) {
-			if (onCancel());
-				return;
-		}
-	}
+        // Cancel button
+        if (GameKeySDL.gamekey[0].isPushKey(GameKeySDL.BUTTON_B) || MouseInputSDL.mouseInput.isMouseRightClicked()) {
+            if (onCancel()) ;
+            return;
+        }
+    }
 
-	protected boolean updateMouseInput() throws SDLException
-	{
-		MouseInputSDL.mouseInput.update();
-		if (MouseInputSDL.mouseInput.isMouseClicked())
-		{
-			int y = MouseInputSDL.mouseInput.getMouseY() >> 4;
-			int newCursor = y - minChoiceY;
-			if (newCursor >= 0 && newCursor <= maxCursor)
-			{
-				if (newCursor == cursor)
-					return true;
-				ResourceHolderSDL.soundManager.play("cursor");
-				cursor = newCursor;
-			}
-		}
-		return false;
-	}
+    protected boolean updateMouseInput() throws SDLException {
+        MouseInputSDL.mouseInput.update();
+        if (MouseInputSDL.mouseInput.isMouseClicked()) {
+            int y = MouseInputSDL.mouseInput.getMouseY() >> 4;
+            int newCursor = y - minChoiceY;
+            if (newCursor >= 0 && newCursor <= maxCursor) {
+                if (newCursor == cursor)
+                    return true;
+                ResourceHolderSDL.soundManager.play("cursor");
+                cursor = newCursor;
+            }
+        }
+        return false;
+    }
 
-	protected void renderChoices(int x, String[] choices) throws SDLException
-	{
-		renderChoices(x, minChoiceY, choices);
-	}
+    protected void renderChoices(int x, String[] choices) throws SDLException {
+        renderChoices(x, minChoiceY, choices);
+    }
 
-	protected void renderChoices(int x, int y, String[] choices) throws SDLException
-	{
-		NormalFontSDL.printFontGrid(x-1, y+cursor, "b", NormalFontSDL.COLOR_RED);
-		for (int i = 0; i < choices.length; i++)
-			NormalFontSDL.printFontGrid(x, y+i, choices[i], (cursor == i));
-	}
+    protected void renderChoices(int x, int y, String[] choices) throws SDLException {
+        NormalFontSDL.printFontGrid(x - 1, y + cursor, "b", NormalFontSDL.COLOR_RED);
+        for (int i = 0; i < choices.length; i++)
+            NormalFontSDL.printFontGrid(x, y + i, choices[i], (cursor == i));
+    }
 
-	/**
-	 * Called when left or right is pressed.
-	 * @throws SDLException When something bad happens.
-	 */
-	protected void onChange(int change) throws SDLException {
-	}
+    /**
+     * Called when left or right is pressed.
+     *
+     * @throws SDLException When something bad happens.
+     */
+    protected void onChange(int change) throws SDLException {
+    }
 
-	/**
-	 * Called on a decide operation (left click on highlighted entry or select button).
-	 * @return True to skip all further update processing, false otherwise.
-	 * @throws SDLException When something bad happens.
-	 */
-	protected boolean onDecide() throws SDLException {
-		return false;
-	}
+    /**
+     * Called on a decide operation (left click on highlighted entry or select button).
+     *
+     * @return True to skip all further update processing, false otherwise.
+     * @throws SDLException When something bad happens.
+     */
+    protected boolean onDecide() throws SDLException {
+        return false;
+    }
 
-	/**
-	 * Called on a cancel operation (right click or cancel button).
-	 * @return True to skip all further update processing, false otherwise.
-	 * @throws SDLException When something bad happens.
-	 */
-	protected boolean onCancel() throws SDLException {
-		return false;
-	}
+    /**
+     * Called on a cancel operation (right click or cancel button).
+     *
+     * @return True to skip all further update processing, false otherwise.
+     * @throws SDLException When something bad happens.
+     */
+    protected boolean onCancel() throws SDLException {
+        return false;
+    }
 
-	/**
-	 * Called when D button is pushed.
-	 * Currently, this is the only one needed; methods for other buttons can be added if needed.
-	 * @return True to skip all further update processing, false otherwise.
-	 * @throws SDLException When something bad happens.
-	 */
-	protected boolean onPushButtonD() throws SDLException {
-		return false;
-	}
+    /**
+     * Called when D button is pushed.
+     * Currently, this is the only one needed; methods for other buttons can be added if needed.
+     *
+     * @return True to skip all further update processing, false otherwise.
+     * @throws SDLException When something bad happens.
+     */
+    protected boolean onPushButtonD() throws SDLException {
+        return false;
+    }
 }

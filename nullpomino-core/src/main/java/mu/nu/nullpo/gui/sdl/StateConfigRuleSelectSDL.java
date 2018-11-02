@@ -44,220 +44,250 @@ import sdljava.video.SDLSurface;
  * Rule selector state
  */
 public class StateConfigRuleSelectSDL extends DummyMenuScrollStateSDL {
-	/** Number of rules shown at a time */
-	public static final int PAGE_HEIGHT = 21;
+    /**
+     * Number of rules shown at a time
+     */
+    public static final int PAGE_HEIGHT = 21;
 
-	/** Player ID */
-	public int player = 0;
+    /**
+     * Player ID
+     */
+    public int player = 0;
 
-	/** Game style */
-	public int style = 0;
+    /**
+     * Game style
+     */
+    public int style = 0;
 
-	/** Rule file list (for loading) */
-	private String[] strFileList;
+    /**
+     * Rule file list (for loading)
+     */
+    private String[] strFileList;
 
-	/** Rule name list */
-	private String[] strRuleNameList;
+    /**
+     * Rule name list
+     */
+    private String[] strRuleNameList;
 
-	/** Rule file list (for list display) */
-	private String[] strRuleFileList;
+    /**
+     * Rule file list (for list display)
+     */
+    private String[] strRuleFileList;
 
-	/** Current Rule File name */
-	private String strCurrentFileName;
+    /**
+     * Current Rule File name
+     */
+    private String strCurrentFileName;
 
-	/** Current Rule name */
-	private String strCurrentRuleName;
+    /**
+     * Current Rule name
+     */
+    private String strCurrentRuleName;
 
-	/** Rule entries */
-	private LinkedList<RuleEntry> ruleEntries;
+    /**
+     * Rule entries
+     */
+    private LinkedList<RuleEntry> ruleEntries;
 
-	public StateConfigRuleSelectSDL() {
-		pageHeight = PAGE_HEIGHT;
-		nullError = "RULE DIRECTORY NOT FOUND";
-		emptyError = "NO RULE FILE";
-	}
+    public StateConfigRuleSelectSDL() {
+        pageHeight = PAGE_HEIGHT;
+        nullError = "RULE DIRECTORY NOT FOUND";
+        emptyError = "NO RULE FILE";
+    }
 
-	/**
-	 * Get rule file list
-	 * @return Rule file list. null if directory doesn't exist.
-	 */
-	private String[] getRuleFileList() {
-		File dir = new File("config/rule");
+    /**
+     * Get rule file list
+     *
+     * @return Rule file list. null if directory doesn't exist.
+     */
+    private String[] getRuleFileList() {
+        File dir = new File("config/rule");
 
-		FilenameFilter filter = new FilenameFilter() {
-			public boolean accept(File dir1, String name) {
-				return name.endsWith(".rul");
-			}
-		};
+        FilenameFilter filter = new FilenameFilter() {
+            public boolean accept(File dir1, String name) {
+                return name.endsWith(".rul");
+            }
+        };
 
-		String[] list = dir.list(filter);
+        String[] list = dir.list(filter);
 
-		if(!System.getProperty("os.name").startsWith("Windows")) {
-			// Sort if not windows
-			Arrays.sort(list);
-		}
+        if (!System.getProperty("os.name").startsWith("Windows")) {
+            // Sort if not windows
+            Arrays.sort(list);
+        }
 
-		return list;
-	}
+        return list;
+    }
 
-	/**
-	 * Create rule entries
-	 * @param filelist Rule file list
-	 * @param currentStyle Current style
-	 */
-	private void createRuleEntries(String[] filelist, int currentStyle) {
-		ruleEntries = new LinkedList<RuleEntry>();
+    /**
+     * Create rule entries
+     *
+     * @param filelist     Rule file list
+     * @param currentStyle Current style
+     */
+    private void createRuleEntries(String[] filelist, int currentStyle) {
+        ruleEntries = new LinkedList<RuleEntry>();
 
-		for(int i = 0; i < filelist.length; i++) {
-			RuleEntry entry = new RuleEntry();
+        for (int i = 0; i < filelist.length; i++) {
+            RuleEntry entry = new RuleEntry();
 
-			File file = new File("config/rule/" + filelist[i]);
-			entry.filename = filelist[i];
-			entry.filepath = file.getPath();
+            File file = new File("config/rule/" + filelist[i]);
+            entry.filename = filelist[i];
+            entry.filepath = file.getPath();
 
-			CustomProperties prop = new CustomProperties();
-			try {
-				FileInputStream in = new FileInputStream("config/rule/" + filelist[i]);
-				prop.load(in);
-				in.close();
-				entry.rulename = prop.getProperty("0.ruleopt.strRuleName", "");
-				entry.style = prop.getProperty("0.ruleopt.style", 0);
-			} catch (Exception e) {
-				entry.rulename = "";
-				entry.style = -1;
-			}
+            CustomProperties prop = new CustomProperties();
+            try {
+                FileInputStream in = new FileInputStream("config/rule/" + filelist[i]);
+                prop.load(in);
+                in.close();
+                entry.rulename = prop.getProperty("0.ruleopt.strRuleName", "");
+                entry.style = prop.getProperty("0.ruleopt.style", 0);
+            } catch (Exception e) {
+                entry.rulename = "";
+                entry.style = -1;
+            }
 
-			if(entry.style == currentStyle) {
-				ruleEntries.add(entry);
-			}
-		}
-	}
+            if (entry.style == currentStyle) {
+                ruleEntries.add(entry);
+            }
+        }
+    }
 
-	/**
-	 * Get rule name list as String[]
-	 * @return Rule name list
-	 */
-	private String[] extractRuleNameListFromRuleEntries() {
-		String[] result = new String[ruleEntries.size()];
+    /**
+     * Get rule name list as String[]
+     *
+     * @return Rule name list
+     */
+    private String[] extractRuleNameListFromRuleEntries() {
+        String[] result = new String[ruleEntries.size()];
 
-		for(int i = 0; i < ruleEntries.size(); i++) {
-			result[i] = ruleEntries.get(i).rulename;
-		}
+        for (int i = 0; i < ruleEntries.size(); i++) {
+            result[i] = ruleEntries.get(i).rulename;
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * Get rule file name list as String[]
-	 * @return Rule name list
-	 */
-	private String[] extractFileNameListFromRuleEntries() {
-		String[] result = new String[ruleEntries.size()];
+    /**
+     * Get rule file name list as String[]
+     *
+     * @return Rule name list
+     */
+    private String[] extractFileNameListFromRuleEntries() {
+        String[] result = new String[ruleEntries.size()];
 
-		for(int i = 0; i < ruleEntries.size(); i++) {
-			result[i] = ruleEntries.get(i).filename;
-		}
+        for (int i = 0; i < ruleEntries.size(); i++) {
+            result[i] = ruleEntries.get(i).filename;
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/*
-	 * Called when entering this state
-	 */
-	@Override
-	public void enter() throws SDLException {
-		strFileList = getRuleFileList();
-		createRuleEntries(strFileList, style);
-		strRuleNameList = extractRuleNameListFromRuleEntries();
-		strRuleFileList = extractFileNameListFromRuleEntries();
-		list = strRuleNameList;
-		maxCursor = list.length-1;
+    /*
+     * Called when entering this state
+     */
+    @Override
+    public void enter() throws SDLException {
+        strFileList = getRuleFileList();
+        createRuleEntries(strFileList, style);
+        strRuleNameList = extractRuleNameListFromRuleEntries();
+        strRuleFileList = extractFileNameListFromRuleEntries();
+        list = strRuleNameList;
+        maxCursor = list.length - 1;
 
-		if(style == 0) {
-			strCurrentFileName = NullpoMinoSDL.propGlobal.getProperty(player + ".rulefile", "");
-			strCurrentRuleName = NullpoMinoSDL.propGlobal.getProperty(player + ".rulename", "");
-		} else {
-			strCurrentFileName = NullpoMinoSDL.propGlobal.getProperty(player + ".rulefile." + style, "");
-			strCurrentRuleName = NullpoMinoSDL.propGlobal.getProperty(player + ".rulename." + style, "");
-		}
+        if (style == 0) {
+            strCurrentFileName = NullpoMinoSDL.propGlobal.getProperty(player + ".rulefile", "");
+            strCurrentRuleName = NullpoMinoSDL.propGlobal.getProperty(player + ".rulename", "");
+        } else {
+            strCurrentFileName = NullpoMinoSDL.propGlobal.getProperty(player + ".rulefile." + style, "");
+            strCurrentRuleName = NullpoMinoSDL.propGlobal.getProperty(player + ".rulename." + style, "");
+        }
 
-		cursor = 0;
-		for(int i = 0; i < ruleEntries.size(); i++) {
-			if(ruleEntries.get(i).filename.equals(strCurrentFileName)) {
-				cursor = i;
-			}
-		}
-	}
+        cursor = 0;
+        for (int i = 0; i < ruleEntries.size(); i++) {
+            if (ruleEntries.get(i).filename.equals(strCurrentFileName)) {
+                cursor = i;
+            }
+        }
+    }
 
-	/*
-	 * Draw the screen
-	 */
-	@Override
-	protected void onRenderSuccess(SDLSurface screen) throws SDLException {
-		String title = "SELECT " + (player + 1) + "P RULE (" + (cursor + 1) + "/" + (list.length) + ")";
-		NormalFontSDL.printFontGrid(1, 1, title, NormalFontSDL.COLOR_ORANGE);
+    /*
+     * Draw the screen
+     */
+    @Override
+    protected void onRenderSuccess(SDLSurface screen) throws SDLException {
+        String title = "SELECT " + (player + 1) + "P RULE (" + (cursor + 1) + "/" + (list.length) + ")";
+        NormalFontSDL.printFontGrid(1, 1, title, NormalFontSDL.COLOR_ORANGE);
 
-		NormalFontSDL.printFontGrid(1, 25, "CURRENT:" + strCurrentRuleName.toUpperCase(), NormalFontSDL.COLOR_BLUE);
-		NormalFontSDL.printFontGrid(9, 26, strCurrentFileName.toUpperCase(), NormalFontSDL.COLOR_BLUE);
+        NormalFontSDL.printFontGrid(1, 25, "CURRENT:" + strCurrentRuleName.toUpperCase(), NormalFontSDL.COLOR_BLUE);
+        NormalFontSDL.printFontGrid(9, 26, strCurrentFileName.toUpperCase(), NormalFontSDL.COLOR_BLUE);
 
-		NormalFontSDL.printFontGrid(1, 28, "A:OK B:CANCEL D:TOGGLE-VIEW", NormalFontSDL.COLOR_GREEN);
-	}
+        NormalFontSDL.printFontGrid(1, 28, "A:OK B:CANCEL D:TOGGLE-VIEW", NormalFontSDL.COLOR_GREEN);
+    }
 
-	/*
-	 * Decide
-	 */
-	@Override
-	protected boolean onDecide() throws SDLException {
-		ResourceHolderSDL.soundManager.play("decide");
-		RuleEntry entry = ruleEntries.get(cursor);
-		if(style == 0) {
-			NullpoMinoSDL.propGlobal.setProperty(player + ".rule", entry.filepath);
-			NullpoMinoSDL.propGlobal.setProperty(player + ".rulefile", entry.filename);
-			NullpoMinoSDL.propGlobal.setProperty(player + ".rulename", entry.rulename);
-		} else {
-			NullpoMinoSDL.propGlobal.setProperty(player + ".rule." + style, entry.filepath);
-			NullpoMinoSDL.propGlobal.setProperty(player + ".rulefile." + style, entry.filename);
-			NullpoMinoSDL.propGlobal.setProperty(player + ".rulename." + style, entry.rulename);
-		}
-		NullpoMinoSDL.saveConfig();
-		NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_CONFIG_RULESTYLESELECT);
-		return true;
-	}
+    /*
+     * Decide
+     */
+    @Override
+    protected boolean onDecide() throws SDLException {
+        ResourceHolderSDL.soundManager.play("decide");
+        RuleEntry entry = ruleEntries.get(cursor);
+        if (style == 0) {
+            NullpoMinoSDL.propGlobal.setProperty(player + ".rule", entry.filepath);
+            NullpoMinoSDL.propGlobal.setProperty(player + ".rulefile", entry.filename);
+            NullpoMinoSDL.propGlobal.setProperty(player + ".rulename", entry.rulename);
+        } else {
+            NullpoMinoSDL.propGlobal.setProperty(player + ".rule." + style, entry.filepath);
+            NullpoMinoSDL.propGlobal.setProperty(player + ".rulefile." + style, entry.filename);
+            NullpoMinoSDL.propGlobal.setProperty(player + ".rulename." + style, entry.rulename);
+        }
+        NullpoMinoSDL.saveConfig();
+        NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_CONFIG_RULESTYLESELECT);
+        return true;
+    }
 
-	/*
-	 * Cancel
-	 */
-	@Override
-	protected boolean onCancel() throws SDLException {
-		NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_CONFIG_RULESTYLESELECT);
-		return true;
-	}
+    /*
+     * Cancel
+     */
+    @Override
+    protected boolean onCancel() throws SDLException {
+        NullpoMinoSDL.enterState(NullpoMinoSDL.STATE_CONFIG_RULESTYLESELECT);
+        return true;
+    }
 
-	/*
-	 * D button
-	 */
-	@Override
-	protected boolean onPushButtonD() throws SDLException {
-		ResourceHolderSDL.soundManager.play("change");
-		if(list == strRuleNameList) {
-			list = strRuleFileList;
-		} else {
-			list = strRuleNameList;
-		}
-		return false;
-	}
+    /*
+     * D button
+     */
+    @Override
+    protected boolean onPushButtonD() throws SDLException {
+        ResourceHolderSDL.soundManager.play("change");
+        if (list == strRuleNameList) {
+            list = strRuleFileList;
+        } else {
+            list = strRuleNameList;
+        }
+        return false;
+    }
 
-	/**
-	 * Rule entry
-	 */
-	private class RuleEntry {
-		/** File name */
-		public String filename;
-		/** File path */
-		public String filepath;
-		/** Rule name */
-		public String rulename;
-		/** Game style */
-		public int style;
-	}
+    /**
+     * Rule entry
+     */
+    private class RuleEntry {
+        /**
+         * File name
+         */
+        public String filename;
+        /**
+         * File path
+         */
+        public String filepath;
+        /**
+         * Rule name
+         */
+        public String rulename;
+        /**
+         * Game style
+         */
+        public int style;
+    }
 }

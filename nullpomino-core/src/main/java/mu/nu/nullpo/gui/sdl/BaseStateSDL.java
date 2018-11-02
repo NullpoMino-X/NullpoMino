@@ -35,28 +35,36 @@ import sdljava.video.SDLSurface;
  * State
  */
 public class BaseStateSDL {
-	/**
-	 * Called when entering this state
-	 * @throws SDLException SDLErrors
-	 */
-	public void enter() throws SDLException {}
+    /**
+     * Called when entering this state
+     *
+     * @throws SDLException SDLErrors
+     */
+    public void enter() throws SDLException {
+    }
 
-	/**
-	 * What happens when you leave this state
-	 * @throws SDLException SDLErrors
-	 */
-	public void leave() throws SDLException {}
+    /**
+     * What happens when you leave this state
+     *
+     * @throws SDLException SDLErrors
+     */
+    public void leave() throws SDLException {
+    }
 
-	/**
-	 * Draw the game screen
-	 * @param screen Surface of the game screen
-	 * @throws SDLException SDLErrors
-	 */
-	public void render(SDLSurface screen) throws SDLException {}
+    /**
+     * Draw the game screen
+     *
+     * @param screen Surface of the game screen
+     * @throws SDLException SDLErrors
+     */
+    public void render(SDLSurface screen) throws SDLException {
+    }
 
-	/**
-	 * Update game state
-	 * @throws SDLException SDLErrors
-	 */
-	public void update() throws SDLException {}
+    /**
+     * Update game state
+     *
+     * @throws SDLException SDLErrors
+     */
+    public void update() throws SDLException {
+    }
 }

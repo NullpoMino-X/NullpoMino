@@ -37,142 +37,149 @@ import org.newdawn.slick.Input;
  * Key input state manager (Only use with Slick. Don't use inside game modes!)
  */
 public class GameKeySlick extends GameKeyDummy {
-	/** Key input state (Used by all game states) */
-	public static GameKeySlick[] gamekey;
+    /**
+     * Key input state (Used by all game states)
+     */
+    public static GameKeySlick[] gamekey;
 
-	/** Default key mappings */
-	public static int[][][] DEFAULTKEYS =
-	{
-		// Ingame
-		{
-			// Blockbox type
-			{
-				Input.KEY_UP,Input.KEY_DOWN,Input.KEY_LEFT,Input.KEY_RIGHT,
-				Input.KEY_Z,Input.KEY_X,Input.KEY_A,Input.KEY_SPACE,Input.KEY_D,Input.KEY_S,
-				Input.KEY_F12,Input.KEY_ESCAPE,Input.KEY_F11,Input.KEY_F10,Input.KEY_N,Input.KEY_F5
-			},
-			// Guideline games type
-			{
-				Input.KEY_SPACE,Input.KEY_DOWN,Input.KEY_LEFT,Input.KEY_RIGHT,
-				Input.KEY_Z,Input.KEY_UP,Input.KEY_C,Input.KEY_LSHIFT,Input.KEY_X,Input.KEY_V,Input.KEY_F12,
-				Input.KEY_ESCAPE,Input.KEY_F11,Input.KEY_F10,Input.KEY_N,Input.KEY_F5
-			},
-			// NullpoMino classic type
-			{
-				Input.KEY_UP,Input.KEY_DOWN,Input.KEY_LEFT,Input.KEY_RIGHT,
-				Input.KEY_A,Input.KEY_S,Input.KEY_D,Input.KEY_Z,Input.KEY_X,Input.KEY_C,
-				Input.KEY_ESCAPE,Input.KEY_F1,Input.KEY_F12,Input.KEY_F11,Input.KEY_N,Input.KEY_F10
-			},
-		},
-		// Menu
-		{
-			// Blockbox type
-			{
-				Input.KEY_UP,Input.KEY_DOWN,Input.KEY_LEFT,Input.KEY_RIGHT,
-				Input.KEY_ENTER,Input.KEY_ESCAPE,Input.KEY_A,Input.KEY_SPACE,Input.KEY_D,Input.KEY_S,
-				Input.KEY_F12,Input.KEY_F1,Input.KEY_F11,Input.KEY_F10,Input.KEY_N,Input.KEY_F5
-			},
-			// Guideline games type
-			{
-				Input.KEY_UP,Input.KEY_DOWN,Input.KEY_LEFT,Input.KEY_RIGHT,
-				Input.KEY_ENTER,Input.KEY_ESCAPE,Input.KEY_C,Input.KEY_LSHIFT,Input.KEY_X,Input.KEY_V,
-				Input.KEY_F12,Input.KEY_F1,Input.KEY_F11,Input.KEY_F10,Input.KEY_N,Input.KEY_F5
-			},
-			// NullpoMino classic type
-			{
-				Input.KEY_UP,Input.KEY_DOWN,Input.KEY_LEFT,Input.KEY_RIGHT,
-				Input.KEY_A,Input.KEY_S,Input.KEY_D,Input.KEY_Z,Input.KEY_X,Input.KEY_C,
-				Input.KEY_ESCAPE,Input.KEY_F1,Input.KEY_F12,Input.KEY_F11,Input.KEY_N,Input.KEY_F10
-			},
-		},
-	};
+    /**
+     * Default key mappings
+     */
+    public static int[][][] DEFAULTKEYS =
+            {
+                    // Ingame
+                    {
+                            // Blockbox type
+                            {
+                                    Input.KEY_UP, Input.KEY_DOWN, Input.KEY_LEFT, Input.KEY_RIGHT,
+                                    Input.KEY_Z, Input.KEY_X, Input.KEY_A, Input.KEY_SPACE, Input.KEY_D, Input.KEY_S,
+                                    Input.KEY_F12, Input.KEY_ESCAPE, Input.KEY_F11, Input.KEY_F10, Input.KEY_N, Input.KEY_F5
+                            },
+                            // Guideline games type
+                            {
+                                    Input.KEY_SPACE, Input.KEY_DOWN, Input.KEY_LEFT, Input.KEY_RIGHT,
+                                    Input.KEY_Z, Input.KEY_UP, Input.KEY_C, Input.KEY_LSHIFT, Input.KEY_X, Input.KEY_V, Input.KEY_F12,
+                                    Input.KEY_ESCAPE, Input.KEY_F11, Input.KEY_F10, Input.KEY_N, Input.KEY_F5
+                            },
+                            // NullpoMino classic type
+                            {
+                                    Input.KEY_UP, Input.KEY_DOWN, Input.KEY_LEFT, Input.KEY_RIGHT,
+                                    Input.KEY_A, Input.KEY_S, Input.KEY_D, Input.KEY_Z, Input.KEY_X, Input.KEY_C,
+                                    Input.KEY_ESCAPE, Input.KEY_F1, Input.KEY_F12, Input.KEY_F11, Input.KEY_N, Input.KEY_F10
+                            },
+                    },
+                    // Menu
+                    {
+                            // Blockbox type
+                            {
+                                    Input.KEY_UP, Input.KEY_DOWN, Input.KEY_LEFT, Input.KEY_RIGHT,
+                                    Input.KEY_ENTER, Input.KEY_ESCAPE, Input.KEY_A, Input.KEY_SPACE, Input.KEY_D, Input.KEY_S,
+                                    Input.KEY_F12, Input.KEY_F1, Input.KEY_F11, Input.KEY_F10, Input.KEY_N, Input.KEY_F5
+                            },
+                            // Guideline games type
+                            {
+                                    Input.KEY_UP, Input.KEY_DOWN, Input.KEY_LEFT, Input.KEY_RIGHT,
+                                    Input.KEY_ENTER, Input.KEY_ESCAPE, Input.KEY_C, Input.KEY_LSHIFT, Input.KEY_X, Input.KEY_V,
+                                    Input.KEY_F12, Input.KEY_F1, Input.KEY_F11, Input.KEY_F10, Input.KEY_N, Input.KEY_F5
+                            },
+                            // NullpoMino classic type
+                            {
+                                    Input.KEY_UP, Input.KEY_DOWN, Input.KEY_LEFT, Input.KEY_RIGHT,
+                                    Input.KEY_A, Input.KEY_S, Input.KEY_D, Input.KEY_Z, Input.KEY_X, Input.KEY_C,
+                                    Input.KEY_ESCAPE, Input.KEY_F1, Input.KEY_F12, Input.KEY_F11, Input.KEY_N, Input.KEY_F10
+                            },
+                    },
+            };
 
-	/**
-	 * Init everything
-	 */
-	public static void initGlobalGameKey() {
-		ControllerManager.initControllers();
-		JInputManager.initKeymap();
-		JInputManager.initKeyboard();
-		gamekey = new GameKeySlick[2];
-		gamekey[0] = new GameKeySlick(0);
-		gamekey[1] = new GameKeySlick(1);
-	}
+    /**
+     * Init everything
+     */
+    public static void initGlobalGameKey() {
+        ControllerManager.initControllers();
+        JInputManager.initKeymap();
+        JInputManager.initKeyboard();
+        gamekey = new GameKeySlick[2];
+        gamekey[0] = new GameKeySlick(0);
+        gamekey[1] = new GameKeySlick(1);
+    }
 
-	/**
-	 * Default constructor
-	 */
-	public GameKeySlick() {
-		super();
-	}
+    /**
+     * Default constructor
+     */
+    public GameKeySlick() {
+        super();
+    }
 
-	/**
-	 * Constructor with player number param
-	 * @param pl Player number
-	 */
-	public GameKeySlick(int pl) {
-		super(pl);
-	}
+    /**
+     * Constructor with player number param
+     *
+     * @param pl Player number
+     */
+    public GameKeySlick(int pl) {
+        super(pl);
+    }
 
-	/**
-	 * Update button input status
-	 * @param input Slick's Input class (You can get it with container.getInput())
-	 */
-	public void update(Input input) {
-		update(input, false);
-	}
+    /**
+     * Update button input status
+     *
+     * @param input Slick's Input class (You can get it with container.getInput())
+     */
+    public void update(Input input) {
+        update(input, false);
+    }
 
-	/**
-	 * Update button input status
-	 * @param input Slick's Input class (You can get it with container.getInput())
-	 * @param ingame true if ingame
-	 */
-	public void update(Input input, boolean ingame) {
-		if((player == 0) && (NullpoMinoSlick.useJInputKeyboard)) {
-			JInputManager.poll();
-		}
+    /**
+     * Update button input status
+     *
+     * @param input  Slick's Input class (You can get it with container.getInput())
+     * @param ingame true if ingame
+     */
+    public void update(Input input, boolean ingame) {
+        if ((player == 0) && (NullpoMinoSlick.useJInputKeyboard)) {
+            JInputManager.poll();
+        }
 
-		for(int i = 0; i < MAX_BUTTON; i++) {
-			int[] kmap = ingame ? keymap : keymapNav;
+        for (int i = 0; i < MAX_BUTTON; i++) {
+            int[] kmap = ingame ? keymap : keymapNav;
 
-			boolean flag = false;
-			if(kmap[i] != 0) {
-				flag = NullpoMinoSlick.useJInputKeyboard ?
-						JInputManager.isKeyDown(kmap[i]) : input.isKeyDown(kmap[i]);
-			}
+            boolean flag = false;
+            if (kmap[i] != 0) {
+                flag = NullpoMinoSlick.useJInputKeyboard ?
+                        JInputManager.isKeyDown(kmap[i]) : input.isKeyDown(kmap[i]);
+            }
 
-			switch(i) {
-			case BUTTON_UP:
-				flag |= ControllerManager.isControllerUp(player, input);
-				break;
-			case BUTTON_DOWN:
-				flag |= ControllerManager.isControllerDown(player, input);
-				break;
-			case BUTTON_LEFT:
-				flag |= ControllerManager.isControllerLeft(player, input);
-				break;
-			case BUTTON_RIGHT:
-				flag |= ControllerManager.isControllerRight(player, input);
-				break;
-			default:
-				flag |= ControllerManager.isControllerButton(player, input, buttonmap[i]);
-				break;
-			}
+            switch (i) {
+                case BUTTON_UP:
+                    flag |= ControllerManager.isControllerUp(player, input);
+                    break;
+                case BUTTON_DOWN:
+                    flag |= ControllerManager.isControllerDown(player, input);
+                    break;
+                case BUTTON_LEFT:
+                    flag |= ControllerManager.isControllerLeft(player, input);
+                    break;
+                case BUTTON_RIGHT:
+                    flag |= ControllerManager.isControllerRight(player, input);
+                    break;
+                default:
+                    flag |= ControllerManager.isControllerButton(player, input, buttonmap[i]);
+                    break;
+            }
 
-			if(flag){
-				inputstate[i]++;
-			}
-			else inputstate[i] = 0;
-		}
-	}
+            if (flag) {
+                inputstate[i]++;
+            } else inputstate[i] = 0;
+        }
+    }
 
-	/**
-	 * Load navigation key settings
-	 * @param prop Property file to read from
-	 */
-	@Override
-	public void loadConfig(CustomProperties prop) {
-		super.loadConfig(prop);
+    /**
+     * Load navigation key settings
+     *
+     * @param prop Property file to read from
+     */
+    @Override
+    public void loadConfig(CustomProperties prop) {
+        super.loadConfig(prop);
 
 		/*
 		keymap[BUTTON_NAV_UP] = prop.getProperty("key.p" + player + ".navigationup", Input.KEY_UP);
@@ -182,41 +189,44 @@ public class GameKeySlick extends GameKeyDummy {
 		keymap[BUTTON_NAV_SELECT] = prop.getProperty("key.p" + player + ".navigationselect", Input.KEY_ENTER);
 		keymap[BUTTON_NAV_CANCEL] = prop.getProperty("key.p" + player + ".navigationcancel", Input.KEY_ESCAPE);
 		*/
-	}
+    }
 
-	/**
-	 * Reset keyboard settings to default (Uses Blockbox type settings)
-	 */
-	public void loadDefaultKeymap() {
-		loadDefaultKeymap(0);
-	}
+    /**
+     * Reset keyboard settings to default (Uses Blockbox type settings)
+     */
+    public void loadDefaultKeymap() {
+        loadDefaultKeymap(0);
+    }
 
-	/**
-	 * Reset keyboard settings to default
-	 * @param type Settings type (0=Blockbox 1=Guideline 2=NullpoMino-Classic)
-	 */
-	public void loadDefaultKeymap(int type) {
-		loadDefaultGameKeymap(type);
-		loadDefaultMenuKeymap(type);
-	}
+    /**
+     * Reset keyboard settings to default
+     *
+     * @param type Settings type (0=Blockbox 1=Guideline 2=NullpoMino-Classic)
+     */
+    public void loadDefaultKeymap(int type) {
+        loadDefaultGameKeymap(type);
+        loadDefaultMenuKeymap(type);
+    }
 
-	/**
-	 * Reset in-game keyboard settings to default. Menu keys are unchanged.
-	 * @param type Settings type (0=Blockbox 1=Guideline 2=NullpoMino-Classic)
-	 */
-	public void loadDefaultGameKeymap(int type) {
-		for(int i = 0; i < keymap.length; i++) {
-			keymap[i] = DEFAULTKEYS[0][type][i];
-		}
-	}
+    /**
+     * Reset in-game keyboard settings to default. Menu keys are unchanged.
+     *
+     * @param type Settings type (0=Blockbox 1=Guideline 2=NullpoMino-Classic)
+     */
+    public void loadDefaultGameKeymap(int type) {
+        for (int i = 0; i < keymap.length; i++) {
+            keymap[i] = DEFAULTKEYS[0][type][i];
+        }
+    }
 
-	/**
-	 * Reset menu keyboard settings to default. In-game keys are unchanged.
-	 * @param type Settings type (0=Blockbox 1=Guideline 2=NullpoMino-Classic)
-	 */
-	public void loadDefaultMenuKeymap(int type) {
-		for(int i = 0; i < keymapNav.length; i++) {
-			keymapNav[i] = DEFAULTKEYS[1][type][i];
-		}
-	}
+    /**
+     * Reset menu keyboard settings to default. In-game keys are unchanged.
+     *
+     * @param type Settings type (0=Blockbox 1=Guideline 2=NullpoMino-Classic)
+     */
+    public void loadDefaultMenuKeymap(int type) {
+        for (int i = 0; i < keymapNav.length; i++) {
+            keymapNav[i] = DEFAULTKEYS[1][type][i];
+        }
+    }
 }
