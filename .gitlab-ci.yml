@@ -71,11 +71,13 @@ deploy:jdk8:
   stage: test
   script:
     - 'mvn install'
+    - cd ..
+    - cd nullpomino-core
   only:
     - master
   # Archive up the built documentation site.
   artifacts:
     paths:
-    - target/staging
+    - target/install
   image: maven:3.3.9-jdk-8
 
