@@ -68,7 +68,7 @@ verify:jdk8:
 # See https://maven.apache.org/settings.html
 deploy:jdk8:
   # Use stage test here, so the pages job may later pickup the created site.
-  stage: test
+  stage: deploy
   script:
     - mvn install
   # Archive up the built documentation site.
