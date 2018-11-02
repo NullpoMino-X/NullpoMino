@@ -72,10 +72,7 @@ deploy:jdk8:
   script:
     - 'mvn install'
     - cd ..
-    - cd nullpomino-core
-    - ls
-  only:
-    - master
+    - cd nullpomino-run
   # Archive up the built documentation site.
   artifacts:
     paths:
