@@ -71,8 +71,6 @@ deploy:jdk8:
   stage: test
   script:
     - 'mvn install'
-    - cd ..
-    - cd nullpomino-run
   # Archive up the built documentation site.
   artifacts:
     paths:
