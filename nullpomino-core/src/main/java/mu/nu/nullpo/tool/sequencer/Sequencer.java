@@ -342,7 +342,7 @@ public class Sequencer extends JFrame implements ActionListener {
     }
 
     public Vector<String> getTextFileVector(String filename) {
-        Vector<String> vec = new Vector<String>();
+        Vector<String> vec = new Vector<>();
 
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
@@ -359,10 +359,10 @@ public class Sequencer extends JFrame implements ActionListener {
     }
 
     public Vector<String> createShortStringVector(Vector<String> vecSrc) {
-        Vector<String> vec = new Vector<String>();
+        Vector<String> vec = new Vector<>();
 
-        for (int i = 0; i < vecSrc.size(); i++) {
-            vec.add(createShortString(vecSrc.get(i)));
+        for (String aVecSrc : vecSrc) {
+            vec.add(createShortString(aVecSrc));
         }
 
         return vec;
@@ -566,13 +566,11 @@ public class Sequencer extends JFrame implements ActionListener {
         }
         if (Piece.PIECE_COUNT % 2 == 0) setPieceEnableFrame.getContentPane().add(new JLabel(""));
         final JButton btnConfirm = new JButton(getUIText("Button_Confirm"));
-        btnConfirm.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i < Piece.PIECE_COUNT; i++) {
-                    nextPieceEnable[i] = chkboxEnable[i].isSelected();
-                }
-                setPieceEnableFrame.dispose();
+        btnConfirm.addActionListener(e -> {
+            for (int i = 0; i < Piece.PIECE_COUNT; i++) {
+                nextPieceEnable[i] = chkboxEnable[i].isSelected();
             }
+            setPieceEnableFrame.dispose();
         });
         setPieceEnableFrame.getContentPane().add(btnConfirm);
         setPieceEnableFrame.pack();

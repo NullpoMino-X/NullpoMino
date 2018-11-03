@@ -80,7 +80,7 @@ public class ToolVSMapEditMode extends AbstractMode {
         owner = manager;
         receiver = owner.receiver;
         propMap = null;
-        listFields = new LinkedList<Field>();
+        listFields = new LinkedList<>();
         nowMapSetID = 0;
         nowMapID = 0;
     }

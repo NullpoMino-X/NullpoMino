@@ -103,11 +103,7 @@ public class StateConfigRuleSelectSDL extends DummyMenuScrollStateSDL {
     private String[] getRuleFileList() {
         File dir = new File("config/rule");
 
-        FilenameFilter filter = new FilenameFilter() {
-            public boolean accept(File dir1, String name) {
-                return name.endsWith(".rul");
-            }
-        };
+        FilenameFilter filter = (dir1, name) -> name.endsWith(".rul");
 
         String[] list = dir.list(filter);
 
@@ -126,18 +122,18 @@ public class StateConfigRuleSelectSDL extends DummyMenuScrollStateSDL {
      * @param currentStyle Current style
      */
     private void createRuleEntries(String[] filelist, int currentStyle) {
-        ruleEntries = new LinkedList<RuleEntry>();
+        ruleEntries = new LinkedList<>();
 
-        for (int i = 0; i < filelist.length; i++) {
+        for (String aFilelist : filelist) {
             RuleEntry entry = new RuleEntry();
 
-            File file = new File("config/rule/" + filelist[i]);
-            entry.filename = filelist[i];
+            File file = new File("config/rule/" + aFilelist);
+            entry.filename = aFilelist;
             entry.filepath = file.getPath();
 
             CustomProperties prop = new CustomProperties();
             try {
-                FileInputStream in = new FileInputStream("config/rule/" + filelist[i]);
+                FileInputStream in = new FileInputStream("config/rule/" + aFilelist);
                 prop.load(in);
                 in.close();
                 entry.rulename = prop.getProperty("0.ruleopt.strRuleName", "");

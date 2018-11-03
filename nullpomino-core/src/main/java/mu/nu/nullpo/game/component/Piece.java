@@ -339,7 +339,7 @@ public class Piece implements Serializable {
      * @param b SetBlock
      */
     public void setBlock(Block b) {
-        for (int i = 0; i < block.length; i++) block[i].copy(b);
+        for (Block aBlock : block) aBlock.copy(b);
     }
 
     /**
@@ -348,8 +348,8 @@ public class Piece implements Serializable {
      * @param color Color
      */
     public void setColor(int color) {
-        for (int i = 0; i < block.length; i++) {
-            block[i].color = color;
+        for (Block aBlock : block) {
+            aBlock.color = color;
         }
     }
 
@@ -372,8 +372,8 @@ public class Piece implements Serializable {
      * @param item ID number of the item
      */
     public void setItem(int item) {
-        for (int i = 0; i < block.length; i++) {
-            block[i].item = item;
+        for (Block aBlock : block) {
+            aBlock.item = item;
         }
     }
 
@@ -396,8 +396,8 @@ public class Piece implements Serializable {
      * @param hard Hard count
      */
     public void setHard(int hard) {
-        for (int i = 0; i < block.length; i++) {
-            block[i].hard = hard;
+        for (Block aBlock : block) {
+            aBlock.hard = hard;
         }
     }
 
@@ -432,8 +432,8 @@ public class Piece implements Serializable {
      * @param skin Pattern
      */
     public void setSkin(int skin) {
-        for (int i = 0; i < block.length; i++) {
-            block[i].skin = skin;
+        for (Block aBlock : block) {
+            aBlock.skin = skin;
         }
     }
 
@@ -443,8 +443,8 @@ public class Piece implements Serializable {
      * @param elapsedFrames I have elapsed since a fixed frame count
      */
     public void setElapsedFrames(int elapsedFrames) {
-        for (int i = 0; i < block.length; i++) {
-            block[i].elapsedFrames = elapsedFrames;
+        for (Block aBlock : block) {
+            aBlock.elapsedFrames = elapsedFrames;
         }
     }
 
@@ -454,8 +454,8 @@ public class Piece implements Serializable {
      * @param darkness It is the darkness or lightness (0.03If it&#39;s the case3%Darkly, -0.05If it&#39;s the case5%Bright)
      */
     public void setDarkness(float darkness) {
-        for (int i = 0; i < block.length; i++) {
-            block[i].darkness = darkness;
+        for (Block aBlock : block) {
+            aBlock.darkness = darkness;
         }
     }
 
@@ -465,8 +465,8 @@ public class Piece implements Serializable {
      * @param alpha Transparency (1.0fOpacity in, 0.0fCompletely transparent in)
      */
     public void setAlpha(float alpha) {
-        for (int i = 0; i < block.length; i++) {
-            block[i].alpha = alpha;
+        for (Block aBlock : block) {
+            aBlock.alpha = alpha;
         }
     }
 
@@ -477,7 +477,7 @@ public class Piece implements Serializable {
      * @param status After the change state
      */
     public void setAttribute(int attr, boolean status) {
-        for (int i = 0; i < block.length; i++) block[i].setAttribute(attr, status);
+        for (Block aBlock : block) aBlock.setAttribute(attr, status);
     }
 
     /**

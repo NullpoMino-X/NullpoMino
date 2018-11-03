@@ -700,11 +700,9 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
             client = null;
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                setLoginUIEnabled(true);
-                changeCurrentScreenCard(SCREENCARD_LOGIN);
-            }
+        SwingUtilities.invokeLater(() -> {
+            setLoginUIEnabled(true);
+            changeCurrentScreenCard(SCREENCARD_LOGIN);
         });
     }
 
@@ -1055,21 +1053,15 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
 
         final JButton btnConfirm = new JButton(getUIText("Ban_Confirm"));
         btnConfirm.setMnemonic('O');
-        btnConfirm.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                requestBanFromGUI(txtfldBanIP.getText(), comboboxBanLength.getSelectedIndex() - 1, false);
-                dialogBan.dispose();
-            }
+        btnConfirm.addActionListener(e -> {
+            requestBanFromGUI(txtfldBanIP.getText(), comboboxBanLength.getSelectedIndex() - 1, false);
+            dialogBan.dispose();
         });
         pButtons.add(btnConfirm);
 
         final JButton btnCancel = new JButton(getUIText("Ban_Cancel"));
         btnCancel.setMnemonic('C');
-        btnCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dialogBan.dispose();
-            }
-        });
+        btnCancel.addActionListener(e -> dialogBan.dispose());
         pButtons.add(btnCancel);
 
         // Set frame vitals
@@ -1243,11 +1235,7 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
 
             addConsoleLog(String.format(getUIText("Console_LoginOK"), strServerHost, serverPort));
 
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    changeCurrentScreenCard(SCREENCARD_LOBBY);
-                }
-            });
+            SwingUtilities.invokeLater(() -> changeCurrentScreenCard(SCREENCARD_LOBBY));
         }
         // Multiplayer Leaderboard
         if (message[0].equals("mpranking")) {
@@ -1260,8 +1248,8 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
             String strPData = NetUtil.decompressString(message[3]);
             String[] strPDataA = strPData.split("\t");
 
-            for (int i = 0; i < strPDataA.length; i++) {
-                String[] strRankData = strPDataA[i].split(";");
+            for (String aStrPDataA : strPDataA) {
+                String[] strRankData = aStrPDataA.split(";");
 
                 if (strRankData.length >= MPRANKING_COLUMNNAMES.length) {
                     String[] strRowData = new String[MPRANKING_COLUMNNAMES.length];

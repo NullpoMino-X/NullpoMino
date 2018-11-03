@@ -230,10 +230,7 @@ public class RanksAI extends DummyAI implements Runnable {
 
                 } catch (FileNotFoundException e) {
                     ranks = new Ranks(4, 9);
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
@@ -426,8 +423,8 @@ public class RanksAI extends DummyAI implements Runnable {
                     }
                 } else {
                     ranks.addToHeights(heights, pieces[0], bestRt, bestX);
-                    for (int i = 0; i < heights.length; i++) {
-                        if (heights[i] > 20) {
+                    for (int height : heights) {
+                        if (height > 20) {
                             gameOver = true;
                             break;
                         }

@@ -435,9 +435,7 @@ public class NullpoMinoSlick extends StateBasedGame {
         useJInputKeyboard = false;
         useBigImageTextureLoad = false;
 
-        for (int i = 0; i < args.length; i++) {
-            String str = args[i];
-
+        for (String str : args) {
             if (str.equals("-j") || str.equals("/j")) {
                 useJInputKeyboard = true;
                 log.info("-j option is used. Use JInput to read keyboard input.");

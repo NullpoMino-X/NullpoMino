@@ -294,37 +294,37 @@ public class NetRoomInfo implements Serializable {
     /**
      * Map list
      */
-    public LinkedList<String> mapList = new LinkedList<String>();
+    public LinkedList<String> mapList = new LinkedList<>();
 
     /**
      * List of people in the room
      */
-    public LinkedList<NetPlayerInfo> playerList = new LinkedList<NetPlayerInfo>();
+    public LinkedList<NetPlayerInfo> playerList = new LinkedList<>();
 
     /**
      * Game seat
      */
-    public LinkedList<NetPlayerInfo> playerSeat = new LinkedList<NetPlayerInfo>();
+    public LinkedList<NetPlayerInfo> playerSeat = new LinkedList<>();
 
     /**
      * Game seat(Start gameI updated and new people will not change, even if someone or go out or come in only when)
      */
-    public LinkedList<NetPlayerInfo> playerSeatNowPlaying = new LinkedList<NetPlayerInfo>();
+    public LinkedList<NetPlayerInfo> playerSeatNowPlaying = new LinkedList<>();
 
     /**
      * Queue
      */
-    public LinkedList<NetPlayerInfo> playerQueue = new LinkedList<NetPlayerInfo>();
+    public LinkedList<NetPlayerInfo> playerQueue = new LinkedList<>();
 
     /**
      * Dead player list (Pushed from front, winner will be the first entry)
      */
-    public LinkedList<NetPlayerInfo> playerSeatDead = new LinkedList<NetPlayerInfo>();
+    public LinkedList<NetPlayerInfo> playerSeatDead = new LinkedList<>();
 
     /**
      * Chat messages
      */
-    public LinkedList<NetChatMessage> chatList = new LinkedList<NetChatMessage>();
+    public LinkedList<NetChatMessage> chatList = new LinkedList<>();
 
     /**
      * Constructor
@@ -588,8 +588,8 @@ public class NetRoomInfo implements Serializable {
      */
     public int getNumberOfPlayerSeated() {
         int count = 0;
-        for (int i = 0; i < playerSeat.size(); i++) {
-            if (playerSeat.get(i) != null)
+        for (NetPlayerInfo aPlayerSeat : playerSeat) {
+            if (aPlayerSeat != null)
                 count++;
         }
         return count;
@@ -789,7 +789,7 @@ public class NetRoomInfo implements Serializable {
      * @return true if it's a team game
      */
     public boolean isTeamGame() {
-        LinkedList<String> teamList = new LinkedList<String>();
+        LinkedList<String> teamList = new LinkedList<>();
 
         if (startPlayers >= 2) {
             for (NetPlayerInfo pInfo : playerSeatNowPlaying) {
@@ -810,7 +810,7 @@ public class NetRoomInfo implements Serializable {
      * @return true if 2 or more people have same IP
      */
     public boolean hasSameIPPlayers() {
-        LinkedList<String> ipList = new LinkedList<String>();
+        LinkedList<String> ipList = new LinkedList<>();
 
         if (startPlayers >= 2) {
             for (NetPlayerInfo pInfo : playerSeatNowPlaying) {

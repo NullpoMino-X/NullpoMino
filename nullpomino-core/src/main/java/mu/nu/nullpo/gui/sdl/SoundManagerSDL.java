@@ -82,8 +82,8 @@ public class SoundManagerSDL {
      */
     public SoundManagerSDL(int maxClips) {
         this.maxClips = maxClips;
-        clipMap = new HashMap<String, MixChunk>(maxClips);
-        channelMap = new HashMap<String, Integer>(maxClips);
+        clipMap = new HashMap<>(maxClips);
+        channelMap = new HashMap<>(maxClips);
     }
 
     /**
@@ -181,10 +181,8 @@ public class SoundManagerSDL {
      */
     public void changeVolume(int volume) {
         Collection<MixChunk> sounds = clipMap.values();
-        Iterator<MixChunk> it = sounds.iterator();
 
-        while (it.hasNext()) {
-            MixChunk clip = it.next();
+        for (MixChunk clip : sounds) {
             try {
                 SDLMixer.volumeChunk(clip, volume);
             } catch (SDLException e) {

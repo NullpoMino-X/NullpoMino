@@ -52,7 +52,7 @@ public class StateSelectRuleFromListSDL extends DummyMenuScrollStateSDL {
      * Load list file
      */
     protected void loadRecommendedRuleList() {
-        mapRuleEntries = new HashMap<String, RuleEntry>();
+        mapRuleEntries = new HashMap<>();
 
         try {
             BufferedReader in = new BufferedReader(new FileReader("config/list/recommended_rules.lst"));
@@ -193,7 +193,7 @@ public class StateSelectRuleFromListSDL extends DummyMenuScrollStateSDL {
      * RuleEntry
      */
     protected class RuleEntry {
-        public LinkedList<String> listPath = new LinkedList<String>();
-        public LinkedList<String> listName = new LinkedList<String>();
+        public LinkedList<String> listPath = new LinkedList<>();
+        public LinkedList<String> listName = new LinkedList<>();
     }
 }

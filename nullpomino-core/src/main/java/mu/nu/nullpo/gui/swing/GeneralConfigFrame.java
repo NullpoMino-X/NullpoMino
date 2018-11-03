@@ -293,8 +293,8 @@ public class GeneralConfigFrame extends JFrame implements ActionListener {
         pScreenSize.add(lScreenSize);
 
         modelScreenSize = new DefaultComboBoxModel();
-        for (int i = 0; i < SCREENSIZE_TABLE.length; i++) {
-            String strTemp = SCREENSIZE_TABLE[i][0] + "x" + SCREENSIZE_TABLE[i][1];
+        for (int[] aSCREENSIZE_TABLE : SCREENSIZE_TABLE) {
+            String strTemp = aSCREENSIZE_TABLE[0] + "x" + aSCREENSIZE_TABLE[1];
             modelScreenSize.addElement(strTemp);
         }
         comboboxScreenSize = new JComboBox(modelScreenSize);

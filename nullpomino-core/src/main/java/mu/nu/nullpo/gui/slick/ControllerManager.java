@@ -92,7 +92,7 @@ public class ControllerManager {
      * Initialization
      */
     public static void initControllers() {
-        controllers = new ArrayList<Controller>();
+        controllers = new ArrayList<>();
         controllerID = new int[2];
         controllerID[0] = -1;
         controllerID[1] = -1;

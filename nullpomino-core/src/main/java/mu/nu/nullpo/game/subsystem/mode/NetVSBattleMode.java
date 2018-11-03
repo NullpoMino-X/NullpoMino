@@ -316,7 +316,7 @@ public class NetVSBattleMode extends NetDummyVSMode {
             targetTimer = 0;
 
             if (garbageEntries == null) {
-                garbageEntries = new LinkedList<GarbageEntry>();
+                garbageEntries = new LinkedList<>();
             } else {
                 garbageEntries.clear();
             }

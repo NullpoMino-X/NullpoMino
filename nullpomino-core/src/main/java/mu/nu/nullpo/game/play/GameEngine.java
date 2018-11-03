@@ -2331,8 +2331,8 @@ public class GameEngine {
             if (nextPieceArrayID == null) {
                 // Peace is possible emergence1If no one is to be able to all appearance
                 boolean allDisable = true;
-                for (int i = 0; i < nextPieceEnable.length; i++) {
-                    if (nextPieceEnable[i] == true) {
+                for (boolean aNextPieceEnable : nextPieceEnable) {
+                    if (aNextPieceEnable == true) {
                         allDisable = false;
                         break;
                     }
@@ -2372,13 +2372,13 @@ public class GameEngine {
                 if (randomBlockColor) {
                     if (blockColors.length < numColors || numColors < 1)
                         numColors = blockColors.length;
-                    for (int i = 0; i < nextPieceArrayObject.length; i++) {
-                        int size = nextPieceArrayObject[i].getMaxBlock();
+                    for (Piece aNextPieceArrayObject : nextPieceArrayObject) {
+                        int size = aNextPieceArrayObject.getMaxBlock();
                         int[] colors = new int[size];
                         for (int j = 0; j < size; j++)
                             colors[j] = blockColors[random.nextInt(numColors)];
-                        nextPieceArrayObject[i].setColor(colors);
-                        nextPieceArrayObject[i].updateConnectData();
+                        aNextPieceArrayObject.setColor(colors);
+                        aNextPieceArrayObject.updateConnectData();
                     }
                 }
             }

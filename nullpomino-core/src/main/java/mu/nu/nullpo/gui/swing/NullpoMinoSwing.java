@@ -393,11 +393,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
         }
 
         // Create and display main window
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                mainFrame = new NullpoMinoSwing();
-            }
-        });
+        SwingUtilities.invokeLater(() -> mainFrame = new NullpoMinoSwing());
     }
 
     /**
@@ -606,12 +602,10 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
         // * Mode select listbox
         listboxMode = new JList(modeList);
         listboxMode.addMouseListener(new ListboxModeMouseAdapter());
-        listboxMode.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                String strMode = (String) listboxMode.getSelectedValue();
-                lModeSelect.setText(getModeDesc(strMode));
-                prepareRuleList(strMode);
-            }
+        listboxMode.addListSelectionListener(e -> {
+            String strMode = (String) listboxMode.getSelectedValue();
+            lModeSelect.setText(getModeDesc(strMode));
+            prepareRuleList(strMode);
         });
         JScrollPane scpaneListboxMode = new JScrollPane(listboxMode);
         scpaneListboxMode.setPreferredSize(new Dimension(280, 375));
@@ -757,7 +751,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
      * Load list file
      */
     protected void loadRecommendedRuleList() {
-        mapRuleEntries = new HashMap<String, RuleEntry>();
+        mapRuleEntries = new HashMap<>();
 
         try {
             BufferedReader in = new BufferedReader(new FileReader("config/list/recommended_rules.lst"));
@@ -1383,13 +1377,11 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
 
     public void onUpdateCheckerEnd(int status) {
         if (UpdateChecker.isNewVersionAvailable(GameManager.getVersionMajor(), GameManager.getVersionMinor())) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    if (lModeSelect != null) {
-                        String strTemp = String.format(getUIText("Top_NewVersion"),
-                                UpdateChecker.getLatestVersionFullString(), UpdateChecker.getStrReleaseDate());
-                        lModeSelect.setText(strTemp);
-                    }
+            SwingUtilities.invokeLater(() -> {
+                if (lModeSelect != null) {
+                    String strTemp = String.format(getUIText("Top_NewVersion"),
+                            UpdateChecker.getLatestVersionFullString(), UpdateChecker.getStrReleaseDate());
+                    lModeSelect.setText(strTemp);
                 }
             });
         }
@@ -1435,7 +1427,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
      * RuleEntry
      */
     protected class RuleEntry {
-        public LinkedList<String> listPath = new LinkedList<String>();
-        public LinkedList<String> listName = new LinkedList<String>();
+        public LinkedList<String> listPath = new LinkedList<>();
+        public LinkedList<String> listName = new LinkedList<>();
     }
 }

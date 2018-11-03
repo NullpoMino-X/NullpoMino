@@ -48,7 +48,7 @@ public class JInputManager {
      * Init keysym mappings
      */
     public static void initKeymap() {
-        keyMap = new HashMap<Integer, Component.Identifier.Key>();
+        keyMap = new HashMap<>();
         keyMap.put(0, Component.Identifier.Key.VOID);    // Most likely zero
         keyMap.put(Input.KEY_ESCAPE, Component.Identifier.Key.ESCAPE);
         keyMap.put(Input.KEY_1, Component.Identifier.Key._1);
@@ -192,9 +192,7 @@ public class JInputManager {
         controllerEnvironment = ControllerEnvironment.getDefaultEnvironment();
         controllers = controllerEnvironment.getControllers();
 
-        for (int i = 0; i < controllers.length; i++) {
-            Controller c = controllers[i];
-
+        for (Controller c : controllers) {
             if ((c.getType() == Controller.Type.KEYBOARD) && (c instanceof Keyboard)) {
                 if (NullpoMinoSlick.useJInputKeyboard) {
                     log.debug("initKeyboard: Keyboard found");

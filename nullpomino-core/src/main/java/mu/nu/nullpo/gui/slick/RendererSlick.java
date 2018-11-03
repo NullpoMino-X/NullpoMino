@@ -156,7 +156,7 @@ public class RendererSlick extends EventReceiver {
      */
     public RendererSlick() {
         graphics = null;
-        effectlist = new ArrayList<EffectObject>(10 * 4);
+        effectlist = new ArrayList<>(10 * 4);
 
         showbg = NullpoMinoSlick.propConfig.getProperty("option.showbg", true);
         showlineeffect = NullpoMinoSlick.propConfig.getProperty("option.showlineeffect", true);
@@ -1616,9 +1616,7 @@ public class RendererSlick extends EventReceiver {
     protected void effectUpdate() {
         boolean emptyflag = true;
 
-        for (int i = 0; i < effectlist.size(); i++) {
-            EffectObject obj = effectlist.get(i);
-
+        for (EffectObject obj : effectlist) {
             if (obj.effect != 0) emptyflag = false;
 
             // Normal Block
@@ -1640,9 +1638,7 @@ public class RendererSlick extends EventReceiver {
      * Render effects
      */
     protected void effectRender() {
-        for (int i = 0; i < effectlist.size(); i++) {
-            EffectObject obj = effectlist.get(i);
-
+        for (EffectObject obj : effectlist) {
             // Normal Block
             if (obj.effect == 1) {
                 int x = obj.x - 40;

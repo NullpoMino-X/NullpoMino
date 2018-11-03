@@ -212,7 +212,7 @@ public class RendererSwing extends EventReceiver {
      */
     public RendererSwing() {
         graphics = null;
-        effectlist = new ArrayList<EffectObject>(10 * 4);
+        effectlist = new ArrayList<>(10 * 4);
 
         showbg = NullpoMinoSwing.propConfig.getProperty("option.showbg", true);
         showlineeffect = NullpoMinoSwing.propConfig.getProperty("option.showlineeffect", false);
@@ -1616,9 +1616,7 @@ public class RendererSwing extends EventReceiver {
     protected void effectUpdate() {
         boolean emptyflag = true;
 
-        for (int i = 0; i < effectlist.size(); i++) {
-            EffectObject obj = effectlist.get(i);
-
+        for (EffectObject obj : effectlist) {
             if (obj.effect != 0) emptyflag = false;
 
             // Normal Block
@@ -1640,9 +1638,7 @@ public class RendererSwing extends EventReceiver {
      * Render effects
      */
     protected void effectRender() {
-        for (int i = 0; i < effectlist.size(); i++) {
-            EffectObject obj = effectlist.get(i);
-
+        for (EffectObject obj : effectlist) {
             // Normal Block
             if (obj.effect == 1) {
                 int x = obj.x - 40;

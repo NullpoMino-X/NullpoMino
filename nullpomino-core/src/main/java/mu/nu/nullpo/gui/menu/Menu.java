@@ -19,7 +19,7 @@ public class Menu {
     }
 
     public Menu(String title, String subTitle) {
-        this(title, subTitle, new Vector<MenuItem>());
+        this(title, subTitle, new Vector<>());
     }
 
     public Menu(String title, Vector<MenuItem> menuItems) {

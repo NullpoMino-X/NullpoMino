@@ -95,7 +95,7 @@ public abstract class AbstractMode implements GameMode {
         menuTime = 0;
         menuColor = EventReceiver.COLOR_WHITE;
         menuY = 0;
-        menu = new ArrayList<AbstractMenuItem>();
+        menu = new ArrayList<>();
         propName = "dummy";
     }
 
@@ -441,8 +441,8 @@ public abstract class AbstractMode implements GameMode {
     }
 
     protected void drawResultStatsScale(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, float scale, Statistic... stats) {
-        for (int i = 0; i < stats.length; i++) {
-            switch (stats[i]) {
+        for (Statistic stat : stats) {
+            switch (stat) {
                 case SCORE:
                     receiver.drawMenuFont(engine, playerID, 0, y, "SCORE", color, scale);
                     receiver.drawMenuFont(engine, playerID, 0, y + 1, String.format("%10d", engine.statistics.score), scale);

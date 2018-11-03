@@ -585,7 +585,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
      * @return Surviving teamcount
      */
     private int getNumberOfTeamsAlive() {
-        LinkedList<String> listTeamName = new LinkedList<String>();
+        LinkedList<String> listTeamName = new LinkedList<>();
         int noTeamCount = 0;
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
@@ -891,7 +891,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
      */
     private void updatePlayerNames() {
         LinkedList<NetPlayerInfo> pList = netLobby.getSameRoomPlayerInfoList();
-        LinkedList<String> teamList = new LinkedList<String>();
+        LinkedList<String> teamList = new LinkedList<>();
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
             playerNames[i] = "";
@@ -1098,7 +1098,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
             prevPieceDir = 0;
 
             if (garbageEntries == null) {
-                garbageEntries = new LinkedList<GarbageEntry>();
+                garbageEntries = new LinkedList<>();
             } else {
                 garbageEntries.clear();
             }

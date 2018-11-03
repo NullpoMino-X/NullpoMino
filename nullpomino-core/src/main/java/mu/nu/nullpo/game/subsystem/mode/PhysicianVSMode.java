@@ -864,7 +864,7 @@ public class PhysicianVSMode extends AbstractMode {
         int[] colors = new int[4];
         if (size >= 4)
             for (int x = 0; x < 4; x++)
-                colors[x] = garbageColors[playerID].get(x).intValue();
+                colors[x] = garbageColors[playerID].get(x);
         else if (size == 3) {
             int skipSlot = engine.random.nextInt(4);
             colors[skipSlot] = -1;
@@ -873,15 +873,15 @@ public class PhysicianVSMode extends AbstractMode {
                 i = x;
                 if (x >= skipSlot)
                     i++;
-                colors[i] = garbageColors[playerID].get(x).intValue();
+                colors[i] = garbageColors[playerID].get(x);
             }
         } else {
             int firstSlot = engine.random.nextInt(4);
-            colors[firstSlot] = garbageColors[playerID].get(0).intValue();
+            colors[firstSlot] = garbageColors[playerID].get(0);
             int secondSlot = firstSlot + 2;
             if (secondSlot > 3)
                 secondSlot -= 4;
-            colors[secondSlot] = garbageColors[playerID].get(1).intValue();
+            colors[secondSlot] = garbageColors[playerID].get(1);
         }
         int shift = engine.random.nextInt(2);
         int y = (-1 * engine.field.getHiddenHeight());

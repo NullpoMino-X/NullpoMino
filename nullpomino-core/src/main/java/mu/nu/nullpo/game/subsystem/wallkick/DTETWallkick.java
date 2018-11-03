@@ -48,13 +48,13 @@ public class DTETWallkick implements Wallkick {
     public WallkickResult executeWallkick(int x, int y, int rtDir, int rtOld, int rtNew, boolean allowUpward, Piece piece, Field field, Controller ctrl) {
         int x2, y2;
 
-        for (int i = 0; i < WALLKICK.length; i++) {
+        for (int[] aWALLKICK : WALLKICK) {
             if (rtDir < 0 || rtDir == 2) {
-                x2 = WALLKICK[i][0];
+                x2 = aWALLKICK[0];
             } else {
-                x2 = -WALLKICK[i][0];
+                x2 = -aWALLKICK[0];
             }
-            y2 = WALLKICK[i][1];
+            y2 = aWALLKICK[1];
 
             if (piece.big) {
                 x2 *= 2;

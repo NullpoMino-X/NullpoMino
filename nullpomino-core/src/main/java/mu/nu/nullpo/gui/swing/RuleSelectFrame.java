@@ -161,11 +161,7 @@ public class RuleSelectFrame extends JFrame implements ActionListener {
             }
         }
 
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                listboxRule[0].requestFocusInWindow();
-            }
-        });
+        EventQueue.invokeLater(() -> listboxRule[0].requestFocusInWindow());
     }
 
     /**
@@ -231,11 +227,7 @@ public class RuleSelectFrame extends JFrame implements ActionListener {
     private String[] getRuleFileList() {
         File dir = new File("config/rule");
 
-        FilenameFilter filter = new FilenameFilter() {
-            public boolean accept(File dir1, String name) {
-                return name.endsWith(".rul");
-            }
-        };
+        FilenameFilter filter = (dir1, name) -> name.endsWith(".rul");
 
         String[] list = dir.list(filter);
 
@@ -253,18 +245,18 @@ public class RuleSelectFrame extends JFrame implements ActionListener {
      * @param filelist Rule file list
      */
     private void createRuleEntries(String[] filelist) {
-        ruleEntries = new LinkedList<RuleEntry>();
+        ruleEntries = new LinkedList<>();
 
-        for (int i = 0; i < filelist.length; i++) {
+        for (String aFilelist : filelist) {
             RuleEntry entry = new RuleEntry();
 
-            File file = new File("config/rule/" + filelist[i]);
-            entry.filename = filelist[i];
+            File file = new File("config/rule/" + aFilelist);
+            entry.filename = aFilelist;
             entry.filepath = file.getPath();
 
             CustomProperties prop = new CustomProperties();
             try {
-                FileInputStream in = new FileInputStream("config/rule/" + filelist[i]);
+                FileInputStream in = new FileInputStream("config/rule/" + aFilelist);
                 prop.load(in);
                 in.close();
                 entry.rulename = prop.getProperty("0.ruleopt.strRuleName", "");
@@ -285,10 +277,10 @@ public class RuleSelectFrame extends JFrame implements ActionListener {
      * @return Subset of rule entries
      */
     private LinkedList<RuleEntry> getSubsetEntries(int currentStyle) {
-        LinkedList<RuleEntry> subEntries = new LinkedList<RuleEntry>();
-        for (int i = 0; i < ruleEntries.size(); i++) {
-            if (ruleEntries.get(i).style == currentStyle) {
-                subEntries.add(ruleEntries.get(i));
+        LinkedList<RuleEntry> subEntries = new LinkedList<>();
+        for (RuleEntry ruleEntry : ruleEntries) {
+            if (ruleEntry.style == currentStyle) {
+                subEntries.add(ruleEntry);
             }
         }
         return subEntries;

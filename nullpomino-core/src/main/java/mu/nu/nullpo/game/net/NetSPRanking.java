@@ -95,7 +95,7 @@ public class NetSPRanking implements Serializable {
         style = 0;
         rankingType = 0;
         maxRecords = 100;
-        listRecord = new LinkedList<NetSPRecord>();
+        listRecord = new LinkedList<>();
     }
 
     /**
@@ -110,7 +110,7 @@ public class NetSPRanking implements Serializable {
         style = s.style;
         rankingType = s.rankingType;
         maxRecords = s.maxRecords;
-        listRecord = new LinkedList<NetSPRecord>();
+        listRecord = new LinkedList<>();
         for (int i = 0; i < s.listRecord.size(); i++) {
             listRecord.add(new NetSPRecord(s.listRecord.get(i)));
         }
@@ -172,7 +172,7 @@ public class NetSPRanking implements Serializable {
     public int removeRecord(String strPlayerName) {
         int count = 0;
 
-        LinkedList<NetSPRecord> list = new LinkedList<NetSPRecord>(listRecord);
+        LinkedList<NetSPRecord> list = new LinkedList<>(listRecord);
         for (int i = 0; i < list.size(); i++) {
             NetSPRecord r = list.get(i);
 
@@ -220,7 +220,7 @@ public class NetSPRanking implements Serializable {
         removeRecord(r1.strPlayerName);
 
         // Insert new record
-        LinkedList<NetSPRecord> list = new LinkedList<NetSPRecord>(listRecord);
+        LinkedList<NetSPRecord> list = new LinkedList<>(listRecord);
         int rank = -1;
 
         for (int i = 0; i < list.size(); i++) {
