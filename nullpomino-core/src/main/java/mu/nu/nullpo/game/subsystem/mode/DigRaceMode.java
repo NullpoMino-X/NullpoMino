@@ -615,7 +615,7 @@ public class DigRaceMode extends NetDummyMode {
      * @param ruleName Rule name
      */
     @Override
-    protected void loadRanking(CustomProperties prop, String ruleName) {
+    void loadRanking(CustomProperties prop, String ruleName) {
         for (int i = 0; i < GOALTYPE_MAX; i++) {
             for (int j = 0; j < RANKING_MAX; j++) {
                 rankingTime[i][j] = prop.getProperty("digrace.ranking." + ruleName + "." + i + ".time." + j, -1);
@@ -745,7 +745,7 @@ public class DigRaceMode extends NetDummyMode {
      * @param engine GameEngine
      */
     @Override
-    protected void netSendOptions(GameEngine engine) {
+    void netSendOptions(GameEngine engine) {
         String msg = "game\toption\t";
         msg += engine.speed.gravity + "\t" + engine.speed.denominator + "\t" + engine.speed.are + "\t";
         msg += engine.speed.areLine + "\t" + engine.speed.lineDelay + "\t" + engine.speed.lockDelay + "\t";
@@ -783,7 +783,7 @@ public class DigRaceMode extends NetDummyMode {
      * NET: It returns true when the current settings doesn't prevent leaderboard screen from showing.
      */
     @Override
-    protected boolean netIsNetRankingViewOK(GameEngine engine) {
+    boolean netIsNetRankingViewOK(GameEngine engine) {
         return (engine.ai == null);
     }
 

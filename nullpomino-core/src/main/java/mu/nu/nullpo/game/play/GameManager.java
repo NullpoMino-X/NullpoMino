@@ -43,7 +43,7 @@ public class GameManager {
     /**
      * Log (Apache log4j)
      */
-    static Logger log = Logger.getLogger(GameManager.class);
+    private static Logger log = Logger.getLogger(GameManager.class);
 
     /**
      * Major version
@@ -53,12 +53,12 @@ public class GameManager {
     /**
      * Minor version
      */
-    public static final int VERSION_MINOR = 0;
+    private static final int VERSION_MINOR = 0;
 
     /**
      * Development-build flag (false:Release-build true:Dev-build)
      */
-    public static final boolean DEV_BUILD = true;
+    private static final boolean DEV_BUILD = true;
 
     /**
      * Game Mode
@@ -187,7 +187,7 @@ public class GameManager {
     /**
      * Default constructor
      */
-    public GameManager() {
+    private GameManager() {
         log.debug("GameManager constructor called");
     }
 

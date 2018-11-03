@@ -51,52 +51,52 @@ public class StateInGameSDL extends BaseStateSDL {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(StateInGameSDL.class);
+    private static Logger log = Logger.getLogger(StateInGameSDL.class);
 
     /**
      * Game main class
      */
-    protected GameManager gameManager;
+    private GameManager gameManager;
 
     /**
      * Game paused flag
      */
-    protected boolean pause = false;
+    private boolean pause = false;
 
     /**
      * Hide pause menu
      */
-    protected boolean pauseMessageHide = false;
+    private boolean pauseMessageHide = false;
 
     /**
      * Frame step enabled flag
      */
-    protected boolean enableframestep = false;
+    private boolean enableframestep = false;
 
     /**
      * Fast forward
      */
-    protected int fastforward = 0;
+    private int fastforward = 0;
 
     /**
      * Pause menu cursor position
      */
-    protected int cursor = 0;
+    private int cursor = 0;
 
     /**
      * Number of frames remaining until pause key can be used
      */
-    protected int pauseFrame = 0;
+    private int pauseFrame = 0;
 
     /**
      * Previous ingame flag (Used by title-bar text change)
      */
-    protected boolean prevInGameFlag = false;
+    private boolean prevInGameFlag = false;
 
     /**
      * Current game mode name
      */
-    protected String modeName;
+    private String modeName;
 
     /*
      * Called when entering this state
@@ -280,7 +280,7 @@ public class StateInGameSDL extends BaseStateSDL {
     /**
      * Update title bar text
      */
-    public void updateTitleBarCaption() {
+    private void updateTitleBarCaption() {
         String strTitle = "NullpoMino - " + modeName;
 
         if ((gameManager != null) && (gameManager.engine != null) && (gameManager.engine.length > 0) && (gameManager.engine[0] != null)) {

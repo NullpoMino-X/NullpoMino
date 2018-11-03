@@ -197,7 +197,7 @@ public class PhysicianMode extends AbstractMode {
      *
      * @param engine GameEngine
      */
-    public void setSpeed(GameEngine engine) {
+    private void setSpeed(GameEngine engine) {
         engine.speed.gravity = BASE_SPEEDS[speed] * (10 + (engine.statistics.totalPieceLocked / 10));
         engine.speed.denominator = 3600;
     }
@@ -448,7 +448,7 @@ public class PhysicianMode extends AbstractMode {
      *
      * @param prop Property file
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         hoverBlocks = prop.getProperty("physician.hoverBlocks", 40);
         speed = prop.getProperty("physician.speed", 1);
         version = prop.getProperty("physician.version", 0);
@@ -459,7 +459,7 @@ public class PhysicianMode extends AbstractMode {
      *
      * @param prop Property file
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("physician.hoverBlocks", hoverBlocks);
         prop.setProperty("physician.speed", speed);
         prop.setProperty("physician.version", version);

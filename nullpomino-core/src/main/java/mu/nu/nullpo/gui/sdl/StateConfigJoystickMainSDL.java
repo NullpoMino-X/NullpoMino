@@ -46,27 +46,27 @@ public class StateConfigJoystickMainSDL extends BaseStateSDL {
     /**
      * Cursor position
      */
-    protected int cursor;
+    private int cursor;
 
     /**
      * UseJoystick Of number
      */
-    protected int joyUseNumber;
+    private int joyUseNumber;
 
     /**
      * Joystick direction key Threshold for the reaction
      */
-    protected int joyBorder;
+    private int joyBorder;
 
     /**
      * Ignore analog stick
      */
-    protected boolean joyIgnoreAxis;
+    private boolean joyIgnoreAxis;
 
     /**
      * Ignore hat switch
      */
-    protected boolean joyIgnorePOV;
+    private boolean joyIgnorePOV;
 
     /**
      * Constructor
@@ -81,7 +81,7 @@ public class StateConfigJoystickMainSDL extends BaseStateSDL {
      *
      * @param prop Property file to read from
      */
-    protected void loadConfig(CustomProperties prop) {
+    private void loadConfig(CustomProperties prop) {
         joyUseNumber = prop.getProperty("joyUseNumber.p" + player, -1);
         joyBorder = prop.getProperty("joyBorder.p" + player, 0);
         joyIgnoreAxis = prop.getProperty("joyIgnoreAxis.p" + player, false);
@@ -93,7 +93,7 @@ public class StateConfigJoystickMainSDL extends BaseStateSDL {
      *
      * @param prop Property file to save to
      */
-    protected void saveConfig(CustomProperties prop) {
+    private void saveConfig(CustomProperties prop) {
         prop.setProperty("joyUseNumber.p" + player, joyUseNumber);
         prop.setProperty("joyBorder.p" + player, joyBorder);
         prop.setProperty("joyIgnoreAxis.p" + player, joyIgnoreAxis);

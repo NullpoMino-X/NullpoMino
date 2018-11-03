@@ -259,7 +259,7 @@ public class MarathonMode extends NetDummyMode {
      *
      * @param engine GameEngine
      */
-    public void setSpeed(GameEngine engine) {
+    private void setSpeed(GameEngine engine) {
         int lv = engine.statistics.level;
 
         if (lv < 0) lv = 0;
@@ -806,7 +806,7 @@ public class MarathonMode extends NetDummyMode {
      *
      * @param prop Property file
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         startlevel = prop.getProperty("marathon.startlevel", 0);
         tspinEnableType = prop.getProperty("marathon.tspinEnableType", 1);
         enableTSpin = prop.getProperty("marathon.enableTSpin", true);
@@ -825,7 +825,7 @@ public class MarathonMode extends NetDummyMode {
      *
      * @param prop Property file
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("marathon.startlevel", startlevel);
         prop.setProperty("marathon.tspinEnableType", tspinEnableType);
         prop.setProperty("marathon.enableTSpin", enableTSpin);
@@ -846,7 +846,7 @@ public class MarathonMode extends NetDummyMode {
      * @param ruleName Rule name
      */
     @Override
-    protected void loadRanking(CustomProperties prop, String ruleName) {
+    void loadRanking(CustomProperties prop, String ruleName) {
         for (int i = 0; i < RANKING_MAX; i++) {
             for (int j = 0; j < GAMETYPE_MAX; j++) {
                 rankingScore[j][i] = prop.getProperty("marathon.ranking." + ruleName + "." + j + ".score." + i, 0);
@@ -993,7 +993,7 @@ public class MarathonMode extends NetDummyMode {
      * @param engine GameEngine
      */
     @Override
-    protected void netSendOptions(GameEngine engine) {
+    void netSendOptions(GameEngine engine) {
         String msg = "game\toption\t";
         msg += startlevel + "\t" + tspinEnableType + "\t" + enableTSpinKick + "\t" + spinCheckType + "\t" + tspinEnableEZ + "\t";
         msg += enableB2B + "\t" + enableCombo + "\t" + goaltype + "\t" + big + "\n";

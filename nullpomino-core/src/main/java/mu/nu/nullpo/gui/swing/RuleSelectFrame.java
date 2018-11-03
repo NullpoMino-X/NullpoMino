@@ -55,7 +55,7 @@ import org.apache.log4j.Logger;
 /**
  * Rules of selection screen frame
  */
-public class RuleSelectFrame extends JFrame implements ActionListener {
+class RuleSelectFrame extends JFrame implements ActionListener {
     /**
      * Serial version ID
      */
@@ -64,17 +64,17 @@ public class RuleSelectFrame extends JFrame implements ActionListener {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(RuleSelectFrame.class);
+    private static Logger log = Logger.getLogger(RuleSelectFrame.class);
 
     /**
      * Owner window
      */
-    protected NullpoMinoSwing owner;
+    private NullpoMinoSwing owner;
 
     /**
      * Player number
      */
-    protected int playerID;
+    private int playerID;
 
     /**
      * Filename
@@ -167,7 +167,7 @@ public class RuleSelectFrame extends JFrame implements ActionListener {
     /**
      * GUIAInitialization
      */
-    protected void initUI() {
+    private void initUI() {
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         // Tab
@@ -355,18 +355,18 @@ public class RuleSelectFrame extends JFrame implements ActionListener {
         /**
          * File name
          */
-        public String filename;
+        String filename;
         /**
          * File path
          */
-        public String filepath;
+        String filepath;
         /**
          * Rule name
          */
-        public String rulename;
+        String rulename;
         /**
          * Game style
          */
-        public int style;
+        int style;
     }
 }

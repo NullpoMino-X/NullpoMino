@@ -4,7 +4,7 @@ import mu.nu.nullpo.game.component.Piece;
 
 public class BagNoSZORandomizer extends BagRandomizer {
 
-    boolean firstBag;
+    private boolean firstBag;
 
     public BagNoSZORandomizer() {
         super();

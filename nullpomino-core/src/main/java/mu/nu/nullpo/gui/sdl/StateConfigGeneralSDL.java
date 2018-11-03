@@ -41,7 +41,7 @@ public class StateConfigGeneralSDL extends BaseStateSDL {
     /**
      * UI Text identifier Strings
      */
-    protected static final String[] UI_TEXT = {
+    private static final String[] UI_TEXT = {
             "ConfigGeneral_SE",
             "ConfigGeneral_BGM",
             "ConfigGeneral_BGMPreload",
@@ -72,122 +72,122 @@ public class StateConfigGeneralSDL extends BaseStateSDL {
     /**
      * Piece preview type options
      */
-    protected static final String[] NEXTTYPE_OPTIONS = {"TOP", "SIDE(SMALL)", "SIDE(BIG)"};
+    private static final String[] NEXTTYPE_OPTIONS = {"TOP", "SIDE(SMALL)", "SIDE(BIG)"};
 
     /**
      * Cursor position
      */
-    protected int cursor;
+    private int cursor;
 
     /**
      * Full screen flag
      */
-    protected boolean fullscreen;
+    private boolean fullscreen;
 
     /**
      * Sound effectsON/OFF
      */
-    protected boolean se;
+    private boolean se;
 
     /**
      * BGMOfON/OFF
      */
-    protected boolean bgm;
+    private boolean bgm;
 
     /**
      * BGMPreloading of
      */
-    protected boolean bgmpreload;
+    private boolean bgmpreload;
 
     /**
      * BackgroundDisplay
      */
-    protected boolean showbg;
+    private boolean showbg;
 
     /**
      * FPSDisplay
      */
-    protected boolean showfps;
+    private boolean showfps;
 
     /**
      * frame Step is enabled
      */
-    protected boolean enableframestep;
+    private boolean enableframestep;
 
     /**
      * MaximumFPS
      */
-    protected int maxfps;
+    private int maxfps;
 
     /**
      * Line clearDisplay Effects
      */
-    protected boolean showlineeffect;
+    private boolean showlineeffect;
 
     /**
      * Line clear effect speed
      */
-    protected int lineeffectspeed;
+    private int lineeffectspeed;
 
     /**
      * Sound buffer size
      */
-    protected int soundbuffer;
+    private int soundbuffer;
 
     /**
      * Heavy production use
      */
-    protected boolean heavyeffect;
+    private boolean heavyeffect;
 
     /**
      * fieldBackgroundThe brightness of the
      */
-    protected int fieldbgbright;
+    private int fieldbgbright;
 
     /**
      * Show field BG grid
      */
-    protected boolean showfieldbggrid;
+    private boolean showfieldbggrid;
 
     /**
      * NEXTDarken the field
      */
-    protected boolean darknextarea;
+    private boolean darknextarea;
 
     /**
      * Sound effects volume
      */
-    protected int sevolume;
+    private int sevolume;
 
     /**
      * BGM volume
      */
-    protected int bgmvolume;
+    private int bgmvolume;
 
     /**
      * You can play simultaneouslySound effectsOfcount
      */
-    protected int soundChannels;
+    private int soundChannels;
 
     /**
      * fieldTo the rightMeterShow
      */
-    protected boolean showmeter;
+    private boolean showmeter;
 
     /**
      * ghost On top of the pieceNEXTDisplay
      */
-    protected boolean nextshadow;
+    private boolean nextshadow;
 
     /**
      * Linear frameghost Peace
      */
-    protected boolean outlineghost;
+    private boolean outlineghost;
 
     /**
      * Piece preview type (0=Top 1=Side small 2=Side big)
      */
-    protected int nexttype;
+    private int nexttype;
 
     /**
      * Side piece preview
@@ -202,17 +202,17 @@ public class StateConfigGeneralSDL extends BaseStateSDL {
     /**
      * True to use perfect FPS
      */
-    protected boolean perfectFPSMode;
+    private boolean perfectFPSMode;
 
     /**
      * Execute Thread.yield() during Perfect FPS mode
      */
-    protected boolean perfectYield;
+    private boolean perfectYield;
 
     /**
      * Show player input
      */
-    protected boolean showInput;
+    private boolean showInput;
 
     /**
      * Constructor
@@ -227,7 +227,7 @@ public class StateConfigGeneralSDL extends BaseStateSDL {
      *
      * @param prop Property file to read from
      */
-    protected void loadConfig(CustomProperties prop) {
+    private void loadConfig(CustomProperties prop) {
         fullscreen = prop.getProperty("option.fullscreen", false);
         se = prop.getProperty("option.se", true);
         bgm = prop.getProperty("option.bgm", false);
@@ -265,7 +265,7 @@ public class StateConfigGeneralSDL extends BaseStateSDL {
      *
      * @param prop Property file to save to
      */
-    protected void saveConfig(CustomProperties prop) {
+    private void saveConfig(CustomProperties prop) {
         prop.setProperty("option.fullscreen", fullscreen);
         prop.setProperty("option.se", se);
         prop.setProperty("option.bgm", bgm);

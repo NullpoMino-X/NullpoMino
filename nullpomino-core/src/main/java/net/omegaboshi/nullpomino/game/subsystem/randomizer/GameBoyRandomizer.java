@@ -2,8 +2,8 @@ package net.omegaboshi.nullpomino.game.subsystem.randomizer;
 
 public class GameBoyRandomizer extends Randomizer {
 
-    int id;
-    int roll;
+    private int id;
+    private int roll;
 
     public GameBoyRandomizer() {
         super();

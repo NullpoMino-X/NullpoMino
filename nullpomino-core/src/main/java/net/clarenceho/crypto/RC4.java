@@ -77,7 +77,7 @@ public class RC4 {
      *
      * @param key the encryption/decryption key
      */
-    public RC4(byte[] key) throws NullPointerException {
+    private RC4(byte[] key) throws NullPointerException {
 
         for (int i = 0; i < 256; i++) {
             state[i] = (byte) i;

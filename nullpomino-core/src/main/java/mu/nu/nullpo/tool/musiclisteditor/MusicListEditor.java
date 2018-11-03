@@ -64,7 +64,7 @@ import org.apache.log4j.PropertyConfigurator;
 /**
  * MusicListEditor (Music editing tools list)
  */
-public class MusicListEditor extends JFrame implements ActionListener {
+class MusicListEditor extends JFrame implements ActionListener {
     /**
      * Serial version ID
      */
@@ -73,7 +73,7 @@ public class MusicListEditor extends JFrame implements ActionListener {
     /**
      * Log
      */
-    static final Logger log = Logger.getLogger(MusicListEditor.class);
+    private static final Logger log = Logger.getLogger(MusicListEditor.class);
 
     /**
      * SwingVersion ofSave settingsUseProperty file
@@ -118,7 +118,7 @@ public class MusicListEditor extends JFrame implements ActionListener {
     /**
      * Constructor
      */
-    public MusicListEditor() {
+    private MusicListEditor() {
         super();
         init();
         setVisible(true);
@@ -405,7 +405,7 @@ public class MusicListEditor extends JFrame implements ActionListener {
         private Action deleteAction;
         private Action selectAllAction;
 
-        public TextFieldPopupMenu(final JTextField field) {
+        TextFieldPopupMenu(final JTextField field) {
             super();
 
             add(cutAction = new AbstractAction(getUIText("Popup_Cut")) {

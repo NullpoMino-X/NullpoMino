@@ -10,51 +10,55 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * Dummy class for menus with a scroll bar
  */
-public abstract class DummyMenuScrollState extends DummyMenuChooseState {
+abstract class DummyMenuScrollState extends DummyMenuChooseState {
     /**
      * Scroll bar attributes
      */
-    protected static final int SB_TEXT_X = 38,
-            SB_TEXT_COLOR = NormalFontSlick.COLOR_BLUE,
-            SB_MIN_X = SB_TEXT_X << 4,
-            SB_MIN_Y = 65,
-            LINE_WIDTH = 2,
-            SB_WIDTH = 14;
+    private static final int SB_TEXT_X = 38;
+    private static final int SB_TEXT_COLOR = NormalFontSlick.COLOR_BLUE;
+    private static final int SB_MIN_X = SB_TEXT_X << 4;
+    private static final int SB_MIN_Y = 65;
+    private static final int LINE_WIDTH = 2;
+    private static final int SB_WIDTH = 14;
 
     /**
      * Scroll bar colors
      */
-    protected static final Color SB_SHADOW_COLOR = new Color(12, 78, 156),
-            SB_BORDER_COLOR = new Color(52, 150, 252),
-            SB_FILL_COLOR = Color.white,
-            SB_BACK_COLOR = Color.black;
+    private static final Color SB_SHADOW_COLOR = new Color(12, 78, 156);
+    private static final Color SB_BORDER_COLOR = new Color(52, 150, 252);
+    private static final Color SB_FILL_COLOR = Color.white;
+    private static final Color SB_BACK_COLOR = Color.black;
 
     /**
      * ID number of file at top of currently displayed section
      */
-    protected int minentry;
+    private int minentry;
 
     /**
      * Maximum number of entries to display at a time
      */
-    protected int pageHeight;
+    int pageHeight;
 
     /**
      * List of entries
      */
-    protected String[] list;
+    String[] list;
 
     /**
      * Error messages for null or empty list
      */
-    protected String nullError, emptyError;
+    String nullError;
+    String emptyError;
 
     /**
      * Y-coordinates of dark sections of scroll bar
      */
-    protected int pUpMinY, pUpMaxY, pDownMinY, pDownMaxY;
+    private int pUpMinY;
+    private int pUpMaxY;
+    private int pDownMinY;
+    private int pDownMaxY;
 
-    public DummyMenuScrollState() {
+    DummyMenuScrollState() {
         minentry = 0;
         nullError = "";
         emptyError = "";
@@ -92,7 +96,7 @@ public abstract class DummyMenuScrollState extends DummyMenuChooseState {
         }
     }
 
-    protected void onRenderSuccess(GameContainer container, StateBasedGame game, Graphics graphics) {
+    void onRenderSuccess(GameContainer container, StateBasedGame game, Graphics graphics) {
     }
 
     @Override
@@ -138,7 +142,7 @@ public abstract class DummyMenuScrollState extends DummyMenuChooseState {
         return false;
     }
 
-    public void drawMenuList(Graphics graphics) {
+    private void drawMenuList(Graphics graphics) {
         int maxentry = minentry + pageHeight - 1;
         if (maxentry >= list.length)
             maxentry = list.length - 1;
@@ -189,7 +193,7 @@ public abstract class DummyMenuScrollState extends DummyMenuChooseState {
         else if (change == -1) pageUp();
     }
 
-    protected void pageDown() {
+    private void pageDown() {
         ResourceHolderSlick.soundManager.play("cursor");
         int max = maxCursor - pageHeight + 1;
         if (minentry >= max)
@@ -204,7 +208,7 @@ public abstract class DummyMenuScrollState extends DummyMenuChooseState {
         }
     }
 
-    protected void pageUp() {
+    private void pageUp() {
         ResourceHolderSlick.soundManager.play("cursor");
         if (minentry == 0)
             cursor = 0;

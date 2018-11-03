@@ -105,7 +105,8 @@ public class NetRoomInfo implements Serializable {
     /**
      * Spin detection type
      */
-    public static final int SPINTYPE_4POINT = 0, SPINTYPE_IMMOBILE = 1;
+    private static final int SPINTYPE_4POINT = 0;
+    public static final int SPINTYPE_IMMOBILE = 1;
 
     public int spinCheckType = SPINTYPE_4POINT;
 
@@ -172,7 +173,7 @@ public class NetRoomInfo implements Serializable {
     /**
      * Count of all the people in the room(During the war+While watching)
      */
-    public int playerListCount = 0;
+    private int playerListCount = 0;
 
     /**
      * Game flag
@@ -284,7 +285,7 @@ public class NetRoomInfo implements Serializable {
     /**
      * Custom rated-game flag
      */
-    public boolean customRated = false;
+    private boolean customRated = false;
 
     /**
      * Game style
@@ -309,7 +310,7 @@ public class NetRoomInfo implements Serializable {
     /**
      * Game seat(Start gameI updated and new people will not change, even if someone or go out or come in only when)
      */
-    public LinkedList<NetPlayerInfo> playerSeatNowPlaying = new LinkedList<>();
+    private LinkedList<NetPlayerInfo> playerSeatNowPlaying = new LinkedList<>();
 
     /**
      * Queue
@@ -364,7 +365,7 @@ public class NetRoomInfo implements Serializable {
      *
      * @param n Copy source
      */
-    public void copy(NetRoomInfo n) {
+    private void copy(NetRoomInfo n) {
         roomID = n.roomID;
         strName = n.strName;
         maxPlayers = n.maxPlayers;
@@ -443,7 +444,7 @@ public class NetRoomInfo implements Serializable {
      *
      * @param rdata StringAn array of(String[43])
      */
-    public void importStringArray(String[] rdata) {
+    private void importStringArray(String[] rdata) {
         roomID = Integer.parseInt(rdata[0]);
         strName = NetUtil.urlDecode(rdata[1]);
         maxPlayers = Integer.parseInt(rdata[2]);
@@ -495,7 +496,7 @@ public class NetRoomInfo implements Serializable {
      *
      * @param str String
      */
-    public void importString(String str) {
+    private void importString(String str) {
         importStringArray(str.split(";"));
     }
 
@@ -504,7 +505,7 @@ public class NetRoomInfo implements Serializable {
      *
      * @return StringAn array of(String[43])
      */
-    public String[] exportStringArray() {
+    private String[] exportStringArray() {
         String[] rdata = new String[43];
         rdata[0] = Integer.toString(roomID);
         rdata[1] = NetUtil.urlEncode(strName);

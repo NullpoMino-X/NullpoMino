@@ -4,13 +4,14 @@ public class ToggleMenuItem extends MenuItem {
 
     private int drawStyle;
 
-    public static final int DRAWSTYLE_OX = 0, DRAWSTYLE_ONOFF = 1;
+    private static final int DRAWSTYLE_OX = 0;
+    public static final int DRAWSTYLE_ONOFF = 1;
 
     public ToggleMenuItem(String name, int color) {
         this(name, color, 0, DRAWSTYLE_OX);
     }
 
-    public ToggleMenuItem(String name, int color, int state, int drawStyle) {
+    private ToggleMenuItem(String name, int color, int state, int drawStyle) {
         super(name);
         this.name = name;
         this.color = color;

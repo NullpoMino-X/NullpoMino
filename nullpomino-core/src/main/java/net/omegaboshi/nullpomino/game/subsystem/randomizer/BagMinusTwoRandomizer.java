@@ -2,7 +2,7 @@ package net.omegaboshi.nullpomino.game.subsystem.randomizer;
 
 public class BagMinusTwoRandomizer extends BagRandomizer {
 
-    int baglen;
+    private int baglen;
 
     public BagMinusTwoRandomizer() {
         super();

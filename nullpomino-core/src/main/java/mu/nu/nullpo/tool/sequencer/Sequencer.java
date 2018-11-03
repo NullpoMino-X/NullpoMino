@@ -74,7 +74,7 @@ import net.omegaboshi.nullpomino.game.subsystem.randomizer.Randomizer;
 /**
  * NullpoMino Sequence Viewer (Original from NullpoUE build 010210 by Zircean)
  */
-public class Sequencer extends JFrame implements ActionListener {
+class Sequencer extends JFrame implements ActionListener {
     /**
      * Serial Version UID
      */
@@ -83,22 +83,22 @@ public class Sequencer extends JFrame implements ActionListener {
     /**
      * Log
      */
-    static final Logger log = Logger.getLogger(Sequencer.class);
+    private static final Logger log = Logger.getLogger(Sequencer.class);
 
     /**
      * Config File
      */
-    public CustomProperties propConfig;
+    private CustomProperties propConfig;
 
     /**
      * Default language file
      */
-    public CustomProperties propLangDefault;
+    private CustomProperties propLangDefault;
 
     /**
      * UI Language File
      */
-    public CustomProperties propLang;
+    private CustomProperties propLang;
 
     //----------------------------------------------------------------------
     /**
@@ -150,7 +150,7 @@ public class Sequencer extends JFrame implements ActionListener {
     /**
      * Constructor
      */
-    public Sequencer() {
+    private Sequencer() {
         init();
 
         setVisible(true);
@@ -341,7 +341,7 @@ public class Sequencer extends JFrame implements ActionListener {
 
     }
 
-    public Vector<String> getTextFileVector(String filename) {
+    private Vector<String> getTextFileVector(String filename) {
         Vector<String> vec = new Vector<>();
 
         try {
@@ -358,7 +358,7 @@ public class Sequencer extends JFrame implements ActionListener {
         return vec;
     }
 
-    public Vector<String> createShortStringVector(Vector<String> vecSrc) {
+    private Vector<String> createShortStringVector(Vector<String> vecSrc) {
         Vector<String> vec = new Vector<>();
 
         for (String aVecSrc : vecSrc) {
@@ -368,7 +368,7 @@ public class Sequencer extends JFrame implements ActionListener {
         return vec;
     }
 
-    public String createShortString(String str) {
+    private String createShortString(String str) {
         int last = str.lastIndexOf('.');
 
         String newStr = "";
@@ -380,14 +380,14 @@ public class Sequencer extends JFrame implements ActionListener {
         return newStr;
     }
 
-    public void readReplayToUI(CustomProperties prop, int playerID) {
+    private void readReplayToUI(CustomProperties prop, int playerID) {
         txtfldSeed.setText(String.valueOf(Long.parseLong(prop.getProperty(
                 playerID + ".replay.randSeed", "0"), 16)));
         comboboxRandomizer.setSelectedItem(createShortString(prop.getProperty(
                 playerID + ".ruleopt.strRandomizer", null)));
     }
 
-    public CustomProperties load(String filename) throws IOException {
+    private CustomProperties load(String filename) throws IOException {
         log.info("Loading replay file from " + filename);
         CustomProperties prop = new CustomProperties();
 
@@ -398,7 +398,7 @@ public class Sequencer extends JFrame implements ActionListener {
         return prop;
     }
 
-    public void save(String filename) throws IOException {
+    private void save(String filename) throws IOException {
         log.info("Saving piece sequence file to " + filename);
         BufferedWriter out = new BufferedWriter(new FileWriter(filename));
         out.write("# NullpoMino Piece Sequence");
@@ -413,7 +413,7 @@ public class Sequencer extends JFrame implements ActionListener {
      * @param str Text
      * @return Translated text (If translated text is NOT available, it will return str itself)
      */
-    public String getUIText(String str) {
+    private String getUIText(String str) {
         String result = propLang.getProperty(str);
         if (result == null) {
             result = propLangDefault.getProperty(str, str);
@@ -427,7 +427,7 @@ public class Sequencer extends JFrame implements ActionListener {
      * @param txtfld JTextField
      * @return An int value from JTextField (If fails, it will return zero)
      */
-    public int getIntTextField(JTextField txtfld) {
+    private int getIntTextField(JTextField txtfld) {
         int v = 0;
 
         try {
@@ -444,7 +444,7 @@ public class Sequencer extends JFrame implements ActionListener {
      * @param txtfld JTextField
      * @return A long value from JTextField (If fails, it will return zero)
      */
-    public long getLongTextField(JTextField txtfld) {
+    private long getLongTextField(JTextField txtfld) {
         long v = 0L;
 
         try {
@@ -455,7 +455,7 @@ public class Sequencer extends JFrame implements ActionListener {
         return v;
     }
 
-    public void generate() {
+    private void generate() {
         Class<?> randomizerClass;
         Randomizer randomizerObject;
 
@@ -477,7 +477,7 @@ public class Sequencer extends JFrame implements ActionListener {
         }
     }
 
-    public void display() {
+    private void display() {
         if (!txtareaSequence.getText().equals("")) txtareaSequence.setText("");
         for (int i = 1; i <= sequence.length; i++) {
             txtareaSequence.append(getUIText("PieceName" + sequence[i - 1]));
@@ -486,7 +486,7 @@ public class Sequencer extends JFrame implements ActionListener {
         }
     }
 
-    public void reset() {
+    private void reset() {
         txtfldSeed.setText("0");
         txtfldSeqLength.setText("100");
         txtfldSeqOffset.setText("0");
@@ -555,7 +555,7 @@ public class Sequencer extends JFrame implements ActionListener {
         }
     }
 
-    public void setPieceEnable() {
+    private void setPieceEnable() {
         final JFrame setPieceEnableFrame = new JFrame(getUIText("Title_SetPieceEnable"));
         setPieceEnableFrame.getContentPane().setLayout(new GridLayout(0, 2, 10, 10));
         final JCheckBox[] chkboxEnable = new JCheckBox[Piece.PIECE_COUNT];
@@ -583,7 +583,7 @@ public class Sequencer extends JFrame implements ActionListener {
         new Sequencer();
     }
 
-    protected class FileFilterREP extends FileFilter {
+    class FileFilterREP extends FileFilter {
         @Override
         public boolean accept(File f) {
             if (f.isDirectory()) return true;
@@ -597,7 +597,7 @@ public class Sequencer extends JFrame implements ActionListener {
         }
     }
 
-    protected class FileFilterTXT extends FileFilter {
+    class FileFilterTXT extends FileFilter {
         @Override
         public boolean accept(File f) {
             if (f.isDirectory()) return true;

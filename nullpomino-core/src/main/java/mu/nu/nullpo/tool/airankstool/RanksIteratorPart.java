@@ -2,7 +2,7 @@ package mu.nu.nullpo.tool.airankstool;
 
 import mu.nu.nullpo.tool.airankstool.RanksIterator.OneIteration;
 
-public class RanksIteratorPart extends Thread {
+class RanksIteratorPart extends Thread {
 
     private OneIteration oneIteration;
     private Ranks ranks;

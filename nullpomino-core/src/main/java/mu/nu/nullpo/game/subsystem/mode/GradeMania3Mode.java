@@ -46,7 +46,7 @@ public class GradeMania3Mode extends AbstractMode {
     /**
      * Log
      */
-    static final Logger log = Logger.getLogger(GradeMania3Mode.class);
+    private static final Logger log = Logger.getLogger(GradeMania3Mode.class);
 
     /**
      * Current version
@@ -705,7 +705,7 @@ public class GradeMania3Mode extends AbstractMode {
      *
      * @param prop Property file
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         startlevel = prop.getProperty("grademania3.startlevel", 0);
         internalStartLevel = prop.getProperty("grademania3.internalLevel", startlevel * 100);
         alwaysghost = prop.getProperty("grademania3.alwaysghost", false);
@@ -724,7 +724,7 @@ public class GradeMania3Mode extends AbstractMode {
      *
      * @param prop Property file
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("grademania3.startlevel", startlevel);
         prop.setProperty("grademania3.internalLevel", internalStartLevel);
         prop.setProperty("grademania3.alwaysghost", alwaysghost);

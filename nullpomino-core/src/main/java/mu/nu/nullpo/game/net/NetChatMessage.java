@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 /**
  * Chat message
  */
-public class NetChatMessage implements Serializable {
+class NetChatMessage implements Serializable {
     /**
      * Serial version
      */
@@ -19,7 +19,7 @@ public class NetChatMessage implements Serializable {
     /**
      * Log
      */
-    static final Logger log = Logger.getLogger(NetChatMessage.class);
+    private static final Logger log = Logger.getLogger(NetChatMessage.class);
 
     /**
      * User ID
@@ -34,17 +34,17 @@ public class NetChatMessage implements Serializable {
     /**
      * Hostname
      */
-    public String strHost;
+    private String strHost;
 
     /**
      * Room ID (-1:Lobby)
      */
-    public int roomID;
+    private int roomID;
 
     /**
      * Room Name
      */
-    public String strRoomName;
+    private String strRoomName;
 
     /**
      * Timestamp Calendar
@@ -68,7 +68,7 @@ public class NetChatMessage implements Serializable {
      *
      * @param msg Message
      */
-    public NetChatMessage(String msg) {
+    private NetChatMessage(String msg) {
         reset();
         strMessage = msg;
     }
@@ -107,7 +107,7 @@ public class NetChatMessage implements Serializable {
     /**
      * Reset to default values
      */
-    public void reset() {
+    private void reset() {
         uid = -1;
         strUserName = "";
         strHost = "";
@@ -133,7 +133,7 @@ public class NetChatMessage implements Serializable {
      *
      * @param s String array (String[7])
      */
-    public void importStringArray(String[] s) {
+    private void importStringArray(String[] s) {
         uid = Integer.parseInt(s[0]);
         strUserName = NetUtil.urlDecode(s[1]);
         strHost = NetUtil.urlDecode(s[2]);
@@ -157,7 +157,7 @@ public class NetChatMessage implements Serializable {
      *
      * @return String array (String[7])
      */
-    public String[] exportStringArray() {
+    private String[] exportStringArray() {
         String[] s = new String[7];
         s[0] = Integer.toString(uid);
         s[1] = NetUtil.urlEncode(strUserName);

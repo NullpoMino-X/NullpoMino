@@ -47,7 +47,7 @@ public class PracticeMode extends AbstractMode {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(PracticeMode.class);
+    private static Logger log = Logger.getLogger(PracticeMode.class);
 
     /**
      * Current version

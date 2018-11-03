@@ -6,13 +6,13 @@ import mu.nu.nullpo.game.component.Piece;
 
 public abstract class Randomizer {
 
-    protected Random r;
-    public int[] pieces;
+    Random r;
+    int[] pieces;
 
-    public Randomizer() {
+    Randomizer() {
     }
 
-    public Randomizer(boolean[] pieceEnable, long seed) {
+    Randomizer(boolean[] pieceEnable, long seed) {
         setState(pieceEnable, seed);
     }
 
@@ -42,11 +42,11 @@ public abstract class Randomizer {
         }
     }
 
-    public void reseed(long seed) {
+    private void reseed(long seed) {
         r = new Random(seed);
     }
 
-    protected boolean isPieceSZOOnly() {
+    boolean isPieceSZOOnly() {
         for (int piece : pieces) {
             if (piece != Piece.PIECE_O && piece != Piece.PIECE_Z && piece != Piece.PIECE_S)
                 return false;

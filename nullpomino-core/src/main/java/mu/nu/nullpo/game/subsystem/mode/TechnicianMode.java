@@ -1074,7 +1074,7 @@ public class TechnicianMode extends NetDummyMode {
      *
      * @param prop Property file
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         goaltype = prop.getProperty("technician.gametype", 0);
         startlevel = prop.getProperty("technician.startlevel", 0);
         tspinEnableType = prop.getProperty("technician.tspinEnableType", 1);
@@ -1093,7 +1093,7 @@ public class TechnicianMode extends NetDummyMode {
      *
      * @param prop Property file
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("technician.gametype", goaltype);
         prop.setProperty("technician.startlevel", startlevel);
         prop.setProperty("technician.tspinEnableType", tspinEnableType);
@@ -1114,7 +1114,7 @@ public class TechnicianMode extends NetDummyMode {
      * @param ruleName Rule name
      */
     @Override
-    protected void loadRanking(CustomProperties prop, String ruleName) {
+    void loadRanking(CustomProperties prop, String ruleName) {
         for (int i = 0; i < RANKING_MAX; i++) {
             for (int gametypeIndex = 0; gametypeIndex < RANKING_TYPE; gametypeIndex++) {
                 rankingScore[gametypeIndex][i] = prop.getProperty("technician.ranking." + ruleName + "." + gametypeIndex + ".score." + i, 0);
@@ -1265,7 +1265,7 @@ public class TechnicianMode extends NetDummyMode {
      * @param engine GameEngine
      */
     @Override
-    protected void netSendOptions(GameEngine engine) {
+    void netSendOptions(GameEngine engine) {
         String msg = "game\toption\t";
         msg += goaltype + "\t" + startlevel + "\t" + tspinEnableType + "\t";
         msg += enableTSpinKick + "\t" + enableB2B + "\t" + enableCombo + "\t" + big + "\t";
@@ -1301,7 +1301,7 @@ public class TechnicianMode extends NetDummyMode {
      * NET: It returns true when the current settings doesn't prevent leaderboard screen from showing.
      */
     @Override
-    protected boolean netIsNetRankingViewOK(GameEngine engine) {
+    boolean netIsNetRankingViewOK(GameEngine engine) {
         return (!big) && (engine.ai == null) && (startlevel == 0);
     }
 }

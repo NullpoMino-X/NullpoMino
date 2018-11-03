@@ -50,7 +50,7 @@ import javax.swing.JTextField;
 /**
  * Key config frame
  */
-public class KeyConfigFrame extends JFrame implements ActionListener {
+class KeyConfigFrame extends JFrame implements ActionListener {
     /**
      * Serial version ID
      */
@@ -59,42 +59,42 @@ public class KeyConfigFrame extends JFrame implements ActionListener {
     /**
      * Owner window
      */
-    protected NullpoMinoSwing owner;
+    private NullpoMinoSwing owner;
 
     /**
      * Player number
      */
-    protected int playerID;
+    private int playerID;
 
     /**
      * Key event receiver
      */
-    protected KeyConfigKeyEventListener keyEventListener;
+    private KeyConfigKeyEventListener keyEventListener;
 
     /**
      * Mouse event receiver
      */
-    protected KeyConfigMouseEventListener mouseEventListener;
+    private KeyConfigMouseEventListener mouseEventListener;
 
     /**
      * Key config textbox
      */
-    protected JTextField[] txtfldGameKeys;
+    private JTextField[] txtfldGameKeys;
 
     /**
      * Menu key config textbox
      */
-    protected JTextField[] txtfldGameKeysNav;
+    private JTextField[] txtfldGameKeysNav;
 
     /**
      * Key codes
      */
-    protected int[] keyCodes;
+    private int[] keyCodes;
 
     /**
      * Menu key codes
      */
-    protected int[] keyCodesNav;
+    private int[] keyCodesNav;
 
     /**
      * Constructor
@@ -147,7 +147,7 @@ public class KeyConfigFrame extends JFrame implements ActionListener {
     /**
      * Save
      */
-    protected void save() {
+    private void save() {
         for (int i = 0; i < GameKeySwing.MAX_BUTTON; i++) {
             GameKeySwing.gamekey[playerID].keymap[i] = keyCodes[i];
             GameKeySwing.gamekey[playerID].keymapNav[i] = keyCodesNav[i];
@@ -159,7 +159,7 @@ public class KeyConfigFrame extends JFrame implements ActionListener {
     /**
      * GUI init
      */
-    protected void initUI() {
+    private void initUI() {
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         // Hint labels
@@ -273,7 +273,7 @@ public class KeyConfigFrame extends JFrame implements ActionListener {
     /**
      * KeyAdapter for key config textboxes
      */
-    protected class KeyConfigKeyEventListener extends KeyAdapter {
+    class KeyConfigKeyEventListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
             Component c = e.getComponent();
@@ -305,7 +305,7 @@ public class KeyConfigFrame extends JFrame implements ActionListener {
     /**
      * MouseAdapter for key config textboxes
      */
-    protected class KeyConfigMouseEventListener extends MouseAdapter {
+    class KeyConfigMouseEventListener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent e) {
             popupButton(e);
@@ -316,7 +316,7 @@ public class KeyConfigFrame extends JFrame implements ActionListener {
             popupButton(e);
         }
 
-        protected void popupButton(MouseEvent e) {
+        void popupButton(MouseEvent e) {
             if (e.isPopupTrigger()) {
                 Component c = e.getComponent();
                 for (int i = 0; i < GameKeySwing.MAX_BUTTON; i++) {

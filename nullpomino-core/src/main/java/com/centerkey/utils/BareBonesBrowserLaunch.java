@@ -20,9 +20,9 @@ import javax.swing.JOptionPane;
  */
 public class BareBonesBrowserLaunch {
 
-    static final String[] browsers = {"google-chrome", "firefox", "opera",
+    private static final String[] browsers = {"google-chrome", "firefox", "opera",
             "epiphany", "konqueror", "conkeror", "midori", "kazehakase", "mozilla"};
-    static final String errMsg = "Error attempting to launch web browser";
+    private static final String errMsg = "Error attempting to launch web browser";
 
     /**
      * Opens the specified web page in the user's default browser

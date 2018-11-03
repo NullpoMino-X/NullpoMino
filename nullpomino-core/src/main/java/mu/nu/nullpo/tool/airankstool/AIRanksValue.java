@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-public class AIRanksValue {
+class AIRanksValue {
 
     /**
      * @param args

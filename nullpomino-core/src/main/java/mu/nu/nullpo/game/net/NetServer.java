@@ -73,21 +73,21 @@ import biz.source_code.base64Coder.Base64Coder;
  * NullpoMino NetServer<br>
  * The code is based on <a href="http://rox-xmlrpc.sourceforge.net/niotut/">James Greenfield's The Rox Java NIO Tutorial</a>
  */
-public class NetServer {
+class NetServer {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(NetServer.class);
+    private static Logger log = Logger.getLogger(NetServer.class);
 
     /**
      * Default port number
      */
-    public static final int DEFAULT_PORT = 9200;
+    private static final int DEFAULT_PORT = 9200;
 
     /**
      * Read buffer size
      */
-    public static final int BUF_SIZE = 8192;
+    private static final int BUF_SIZE = 8192;
 
     /**
      * Rule data send buffer size
@@ -97,42 +97,42 @@ public class NetServer {
     /**
      * Default value of ratingNormalMaxDiff
      */
-    public static final double NORMAL_MAX_DIFF = 16;
+    private static final double NORMAL_MAX_DIFF = 16;
 
     /**
      * Default value of ratingProvisionalGames
      */
-    public static final int PROVISIONAL_GAMES = 50;
+    private static final int PROVISIONAL_GAMES = 50;
 
     /**
      * Default value of maxMPRanking
      */
-    public static final int DEFAULT_MAX_MPRANKING = 100;
+    private static final int DEFAULT_MAX_MPRANKING = 100;
 
     /**
      * Default value of maxSPRanking
      */
-    public static final int DEFAULT_MAX_SPRANKING = 100;
+    private static final int DEFAULT_MAX_SPRANKING = 100;
 
     /**
      * Default minimum gamerate
      */
-    public static final float DEFAULT_MIN_GAMERATE = 80f;
+    private static final float DEFAULT_MIN_GAMERATE = 80f;
 
     /**
      * Default time of timeout
      */
-    public static final long DEFAULT_TIMEOUT_TIME = 1000 * 60 * 1;
+    private static final long DEFAULT_TIMEOUT_TIME = 1000 * 60 * 1;
 
     /**
      * Default number of lobby chat histories
      */
-    public static final int DEFAULT_MAX_LOBBYCHAT_HISTORY = 10;
+    private static final int DEFAULT_MAX_LOBBYCHAT_HISTORY = 10;
 
     /**
      * Default number of room chat histories
      */
-    public static final int DEFAULT_MAX_ROOMCHAT_HISTORY = 10;
+    private static final int DEFAULT_MAX_ROOMCHAT_HISTORY = 10;
 
     /**
      * Server config file
@@ -1102,7 +1102,7 @@ public class NetServer {
     /**
      * Constructor
      */
-    public NetServer() {
+    private NetServer() {
         init(DEFAULT_PORT);
     }
 
@@ -1111,7 +1111,7 @@ public class NetServer {
      *
      * @param port The port to listen on
      */
-    public NetServer(int port) {
+    private NetServer(int port) {
         init(port);
     }
 
@@ -1236,7 +1236,7 @@ public class NetServer {
     /**
      * Server mainloop
      */
-    public void run() {
+    private void run() {
         // Startup
         try {
             this.selector = initSelector();
@@ -1634,7 +1634,7 @@ public class NetServer {
      * @param client SocketChannel
      * @param bytes  Message to send (byte[])
      */
-    public void send(SocketChannel client, byte[] bytes) {
+    private void send(SocketChannel client, byte[] bytes) {
         synchronized (this.pendingChanges) {
             // Indicate we want the interest ops set changed
             this.pendingChanges.add(new ChangeRequest(client, ChangeRequest.CHANGEOPS, SelectionKey.OP_WRITE));
@@ -1660,7 +1660,7 @@ public class NetServer {
      * @param client SocketChannel
      * @param msg    Message to send (String)
      */
-    public void send(SocketChannel client, String msg) {
+    private void send(SocketChannel client, String msg) {
         send(client, NetUtil.stringToBytes(msg));
     }
 
@@ -1693,7 +1693,7 @@ public class NetServer {
      *
      * @param msg Message to send (String)
      */
-    public void broadcast(String msg) {
+    private void broadcast(String msg) {
         synchronized (channelList) {
             for (SocketChannel ch : channelList) {
                 NetPlayerInfo p = playerInfoMap.get(ch);
@@ -1711,7 +1711,7 @@ public class NetServer {
      * @param msg    Message to send (String)
      * @param roomID Room ID (-1:Lobby)
      */
-    public void broadcast(String msg, int roomID) {
+    private void broadcast(String msg, int roomID) {
         synchronized (channelList) {
             for (SocketChannel ch : channelList) {
                 NetPlayerInfo p = playerInfoMap.get(ch);
@@ -1730,7 +1730,7 @@ public class NetServer {
      * @param roomID Room ID (-1:Lobby)
      * @param pInfo  The player to avoid sending message
      */
-    public void broadcast(String msg, int roomID, NetPlayerInfo pInfo) {
+    private void broadcast(String msg, int roomID, NetPlayerInfo pInfo) {
         synchronized (channelList) {
             for (SocketChannel ch : channelList) {
                 NetPlayerInfo p = playerInfoMap.get(ch);
@@ -1747,7 +1747,7 @@ public class NetServer {
      *
      * @param msg Message to send (String)
      */
-    public void broadcastObserver(String msg) {
+    private void broadcastObserver(String msg) {
         for (SocketChannel ch : observerList) {
             send(ch, msg);
         }
@@ -1756,7 +1756,7 @@ public class NetServer {
     /**
      * Broadcast client count (observers and players) to everyone
      */
-    public void broadcastUserCountToAll() {
+    private void broadcastUserCountToAll() {
         String msg = "observerupdate\t" + playerInfoMap.size() + "\t" + observerList.size() + "\n";
         broadcast(msg);
         broadcastObserver(msg);
@@ -1768,7 +1768,7 @@ public class NetServer {
      *
      * @param msg Message to send (String)
      */
-    public void broadcastAdmin(String msg) {
+    private void broadcastAdmin(String msg) {
         for (SocketChannel ch : adminList) {
             send(ch, msg);
         }
@@ -1780,7 +1780,7 @@ public class NetServer {
      * @param pInfo Player
      * @return SocketChannel (null if not found)
      */
-    public SocketChannel getSocketChannelByPlayer(NetPlayerInfo pInfo) {
+    private SocketChannel getSocketChannelByPlayer(NetPlayerInfo pInfo) {
         synchronized (channelList) {
             for (SocketChannel ch : channelList) {
                 NetPlayerInfo p = playerInfoMap.get(ch);
@@ -1802,7 +1802,7 @@ public class NetServer {
      *
      * @param msg Message to send (String)
      */
-    public SocketChannel findPlayerByMsg(String msg) {
+    private SocketChannel findPlayerByMsg(String msg) {
         // Added to support temporary private messaging code, but might be useful even so?
         synchronized (channelList) {
             int maxLen = 0, len = 0;
@@ -3896,17 +3896,17 @@ public class NetServer {
         /**
          * Delayed disconnect action
          */
-        public static final int DISCONNECT = 1;
+        static final int DISCONNECT = 1;
         /**
          * interestOps change action
          */
-        public static final int CHANGEOPS = 2;
+        static final int CHANGEOPS = 2;
 
-        public SocketChannel socket;
-        public int type;
-        public int ops;
+        SocketChannel socket;
+        int type;
+        int ops;
 
-        public ChangeRequest(SocketChannel socket, int type, int ops) {
+        ChangeRequest(SocketChannel socket, int type, int ops) {
             this.socket = socket;
             this.type = type;
             this.ops = ops;

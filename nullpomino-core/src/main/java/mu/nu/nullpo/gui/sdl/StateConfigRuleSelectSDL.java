@@ -47,7 +47,7 @@ public class StateConfigRuleSelectSDL extends DummyMenuScrollStateSDL {
     /**
      * Number of rules shown at a time
      */
-    public static final int PAGE_HEIGHT = 21;
+    private static final int PAGE_HEIGHT = 21;
 
     /**
      * Player ID
@@ -272,18 +272,18 @@ public class StateConfigRuleSelectSDL extends DummyMenuScrollStateSDL {
         /**
          * File name
          */
-        public String filename;
+        String filename;
         /**
          * File path
          */
-        public String filepath;
+        String filepath;
         /**
          * Rule name
          */
-        public String rulename;
+        String rulename;
         /**
          * Game style
          */
-        public int style;
+        int style;
     }
 }

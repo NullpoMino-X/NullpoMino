@@ -46,7 +46,7 @@ public class UpdateChecker implements Runnable {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(UpdateChecker.class);
+    private static Logger log = Logger.getLogger(UpdateChecker.class);
 
     /**
      * default のXMLのURL
@@ -56,15 +56,15 @@ public class UpdateChecker implements Runnable {
      * on github pages.  For now, just use the v7.5.0 file as a classpath
      * resource.
      */
-    public static final String DEFAULT_XML_URL = UpdateChecker.class.getResource("NullpoUpdate.xml").toString();
+    private static final String DEFAULT_XML_URL = UpdateChecker.class.getResource("NullpoUpdate.xml").toString();
 
     /**
      * Constant statecount
      */
-    public static final int STATUS_INACTIVE = 0,
-            STATUS_LOADING = 1,
-            STATUS_ERROR = 2,
-            STATUS_COMPLETE = 3;
+    public static final int STATUS_INACTIVE = 0;
+    private static final int STATUS_LOADING = 1;
+    public static final int STATUS_ERROR = 2;
+    public static final int STATUS_COMPLETE = 3;
 
     /**
      * Current State
@@ -173,7 +173,7 @@ public class UpdateChecker implements Runnable {
      *
      * @return Major latestVersion(floatType)
      */
-    public static float getLatestMajorVersionAsFloat() {
+    private static float getLatestMajorVersionAsFloat() {
         float resultVersion = 0f;
         if ((strLatestVersion != null) && (strLatestVersion.length() > 0)) {
             String strDot = strLatestVersion.contains("_") ? "_" : ".";
@@ -195,7 +195,7 @@ public class UpdateChecker implements Runnable {
      *
      * @return Minor version of the latestVersion(intType)
      */
-    public static int getLatestMinorVersionAsInt() {
+    private static int getLatestMinorVersionAsInt() {
         int resultVersion = 0;
         if ((strLatestVersion != null) && (strLatestVersion.length() > 0)) {
             String strDot = strLatestVersion.contains("_") ? "_" : ".";

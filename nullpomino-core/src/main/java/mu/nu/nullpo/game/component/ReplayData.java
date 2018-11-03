@@ -45,12 +45,12 @@ public class ReplayData implements Serializable {
     /**
      * Button input dataOf default The length of the
      */
-    public static final int DEFAULT_ARRAYLIST_SIZE = 60 * 60 * 10;
+    private static final int DEFAULT_ARRAYLIST_SIZE = 60 * 60 * 10;
 
     /**
      * Button input data
      */
-    public ArrayList<Integer> inputDataArray;
+    private ArrayList<Integer> inputDataArray;
 
     /**
      * Default constructor
@@ -71,7 +71,7 @@ public class ReplayData implements Serializable {
     /**
      * Reset to defaults
      */
-    public void reset() {
+    private void reset() {
         if (inputDataArray == null)
             inputDataArray = new ArrayList<>(DEFAULT_ARRAYLIST_SIZE);
         else
@@ -83,7 +83,7 @@ public class ReplayData implements Serializable {
      *
      * @param r Copy source
      */
-    public void copy(ReplayData r) {
+    private void copy(ReplayData r) {
         reset();
 
         for (int i = 0; i < r.inputDataArray.size(); i++) {

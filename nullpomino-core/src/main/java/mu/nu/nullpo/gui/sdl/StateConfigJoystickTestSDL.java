@@ -40,7 +40,7 @@ public class StateConfigJoystickTestSDL extends BaseStateSDL {
     /**
      * Key input Accepted to be enabled. frame count
      */
-    public static final int KEYACCEPTFRAME = 20;
+    private static final int KEYACCEPTFRAME = 20;
 
     /**
      * Player number
@@ -50,22 +50,22 @@ public class StateConfigJoystickTestSDL extends BaseStateSDL {
     /**
      * UseJoystick Of number
      */
-    protected int joyNumber;
+    private int joyNumber;
 
     /**
      * I was last pressed button
      */
-    protected int lastPressButton;
+    private int lastPressButton;
 
     /**
      * Course frame count
      */
-    protected int frame;
+    private int frame;
 
     /**
      * Previous frame OfJoystick Of input State
      */
-    protected boolean previousJoyPressedState[];
+    private boolean[] previousJoyPressedState;
 
     /**
      * Constructor
@@ -77,7 +77,7 @@ public class StateConfigJoystickTestSDL extends BaseStateSDL {
     /**
      * Various reset
      */
-    protected void reset() {
+    private void reset() {
         joyNumber = NullpoMinoSDL.joyUseNumber[player];
         lastPressButton = -1;
         frame = 0;
@@ -92,7 +92,7 @@ public class StateConfigJoystickTestSDL extends BaseStateSDL {
      * @param now  This frame In input State
      * @return Pressed buttonOf number, If you do not-1
      */
-    protected int getPressedKeyNumber(boolean[] prev, boolean[] now) {
+    private int getPressedKeyNumber(boolean[] prev, boolean[] now) {
         for (int i = 0; i < now.length; i++) {
             if (prev[i] != now[i]) {
                 return i;

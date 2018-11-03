@@ -510,7 +510,7 @@ public class AvalancheFeverMode extends Avalanche1PDummyMode {
      * @param engine   GameEngine
      * @param playerID Player ID
      */
-    protected void drawXorTimer(GameEngine engine, int playerID) {
+    private void drawXorTimer(GameEngine engine, int playerID) {
         String strFeverTimer = String.format("%02d", (timeLimit + 59) / 60);
 
         for (int i = 0; i < 2; i++) {
@@ -704,7 +704,7 @@ public class AvalancheFeverMode extends Avalanche1PDummyMode {
      *
      * @param prop Property file
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         mapSet = prop.getProperty("avalanchefever.gametype", 0);
         outlinetype = prop.getProperty("avalanchefever.outlinetype", 0);
         numColors = prop.getProperty("avalanchefever.numcolors", 4);
@@ -718,7 +718,7 @@ public class AvalancheFeverMode extends Avalanche1PDummyMode {
      *
      * @param prop Property file
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("avalanchefever.gametype", mapSet);
         prop.setProperty("avalanchefever.outlinetype", outlinetype);
         prop.setProperty("avalanchefever.numcolors", numColors);

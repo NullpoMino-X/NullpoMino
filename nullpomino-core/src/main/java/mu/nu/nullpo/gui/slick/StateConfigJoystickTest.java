@@ -48,7 +48,7 @@ public class StateConfigJoystickTest extends BasicGameState {
     /**
      * Key input Accepted to be enabled. frame count
      */
-    public static final int KEYACCEPTFRAME = 20;
+    private static final int KEYACCEPTFRAME = 20;
 
     /**
      * Player number
@@ -63,27 +63,27 @@ public class StateConfigJoystickTest extends BasicGameState {
     /**
      * UseJoystick Of number
      */
-    protected int joyNumber;
+    private int joyNumber;
 
     /**
      * I was last pressed button
      */
-    protected int lastPressButton;
+    private int lastPressButton;
 
     /**
      * Course frame count
      */
-    protected int frame;
+    private int frame;
 
     /**
      * Buttoncount
      */
-    protected int buttonCount;
+    private int buttonCount;
 
     /**
      * StateBasedGame
      */
-    protected StateBasedGame gameObj;
+    private StateBasedGame gameObj;
 
     /*
      * Fetch this state's ID
@@ -103,7 +103,7 @@ public class StateConfigJoystickTest extends BasicGameState {
     /**
      * Various reset
      */
-    protected void reset() {
+    private void reset() {
         joyNumber = ControllerManager.controllerID[player];
         lastPressButton = -1;
         frame = 0;
@@ -210,7 +210,7 @@ public class StateConfigJoystickTest extends BasicGameState {
      *
      * @param key Keycode
      */
-    protected void onKey(int key) {
+    private void onKey(int key) {
         if (frame >= KEYACCEPTFRAME) {
             // Backspace & Enter/Return
             if ((key == Input.KEY_BACK) || (key == Input.KEY_RETURN)) {

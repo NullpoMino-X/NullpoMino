@@ -268,7 +268,7 @@ public class Statistics implements Serializable {
     /**
      * Reset to defaults
      */
-    public void reset() {
+    private void reset() {
         score = 0;
         scoreFromLineClear = 0;
         scoreFromSoftDrop = 0;
@@ -314,7 +314,7 @@ public class Statistics implements Serializable {
      *
      * @param s Copy source
      */
-    public void copy(Statistics s) {
+    private void copy(Statistics s) {
         score = s.score;
         scoreFromLineClear = s.scoreFromLineClear;
         scoreFromSoftDrop = s.scoreFromSoftDrop;
@@ -478,7 +478,7 @@ public class Statistics implements Serializable {
      *
      * @param s String Array (String[38])
      */
-    public void importStringArray(String[] s) {
+    private void importStringArray(String[] s) {
         score = Integer.parseInt(s[0]);
         scoreFromLineClear = Integer.parseInt(s[1]);
         scoreFromSoftDrop = Integer.parseInt(s[2]);
@@ -524,7 +524,7 @@ public class Statistics implements Serializable {
      *
      * @param s String (Split by ;)
      */
-    public void importString(String s) {
+    private void importString(String s) {
         importStringArray(s.split(";"));
     }
 
@@ -533,7 +533,7 @@ public class Statistics implements Serializable {
      *
      * @return String Array (String[38])
      */
-    public String[] exportStringArray() {
+    private String[] exportStringArray() {
         String[] s = new String[38];
         s[0] = Integer.toString(score);
         s[1] = Integer.toString(scoreFromLineClear);

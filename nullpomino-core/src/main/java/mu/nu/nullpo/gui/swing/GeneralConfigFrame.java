@@ -47,7 +47,7 @@ import javax.swing.JTextField;
 /**
  * Setting screen frame
  */
-public class GeneralConfigFrame extends JFrame implements ActionListener {
+class GeneralConfigFrame extends JFrame implements ActionListener {
     /**
      * Serial version ID
      */
@@ -56,7 +56,7 @@ public class GeneralConfigFrame extends JFrame implements ActionListener {
     /**
      * Screen size table
      */
-    protected static final int[][] SCREENSIZE_TABLE =
+    private static final int[][] SCREENSIZE_TABLE =
             {
                     {320, 240}, {400, 300}, {480, 360}, {512, 384}, {640, 480}, {800, 600}, {1024, 768}, {1152, 864}, {1280, 960}
             };
@@ -64,127 +64,127 @@ public class GeneralConfigFrame extends JFrame implements ActionListener {
     /**
      * Parent window
      */
-    protected NullpoMinoSwing owner;
+    private NullpoMinoSwing owner;
 
     /**
      * Model of screen size combobox
      */
-    protected DefaultComboBoxModel modelScreenSize;
+    private DefaultComboBoxModel modelScreenSize;
 
     /**
      * Screen size combobox
      */
-    protected JComboBox comboboxScreenSize;
+    private JComboBox comboboxScreenSize;
 
     /**
      * MaximumFPS
      */
-    protected JTextField txtfldMaxFPS;
+    private JTextField txtfldMaxFPS;
 
     /**
      * Sound effectsVolume of
      */
-    protected JTextField txtfldSEVolume;
+    private JTextField txtfldSEVolume;
 
     /**
      * Line clear effect speed
      */
-    protected JTextField txtfldLineClearEffectSpeed;
+    private JTextField txtfldLineClearEffectSpeed;
 
     /**
      * FPSDisplay
      */
-    protected JCheckBox chkboxShowFPS;
+    private JCheckBox chkboxShowFPS;
 
     /**
      * BackgroundDisplay
      */
-    protected JCheckBox chkboxShowBackground;
+    private JCheckBox chkboxShowBackground;
 
     /**
      * MeterDisplay
      */
-    protected JCheckBox chkboxShowMeter;
+    private JCheckBox chkboxShowMeter;
 
     /**
      * fieldOfBlockDisplay a picture of a ( check Only if there is no border)
      */
-    protected JCheckBox chkboxShowFieldBlockGraphics;
+    private JCheckBox chkboxShowFieldBlockGraphics;
 
     /**
      * Simple picture ofBlockI use
      */
-    protected JCheckBox chkboxSimpleBlock;
+    private JCheckBox chkboxSimpleBlock;
 
     /**
      * Sound effects
      */
-    protected JCheckBox chkboxSE;
+    private JCheckBox chkboxSE;
 
     /**
      * NativeLook and FeelI use
      */
-    protected JCheckBox chkboxUseNativeLookAndFeel;
+    private JCheckBox chkboxUseNativeLookAndFeel;
 
     /**
      * frame Step
      */
-    protected JCheckBox chkboxEnableFrameStep;
+    private JCheckBox chkboxEnableFrameStep;
 
     /**
      * ghost On top of the pieceNEXTDisplay
      */
-    protected JCheckBox chkboxNextShadow;
+    private JCheckBox chkboxNextShadow;
 
     /**
      * Linear frameghost Peace
      */
-    protected JCheckBox chkboxOutlineGhost;
+    private JCheckBox chkboxOutlineGhost;
 
     /**
      * Side piece preview
      */
-    protected JCheckBox chkboxSideNext;
+    private JCheckBox chkboxSideNext;
 
     /**
      * Use bigger side piece preview
      */
-    protected JCheckBox chkboxBigSideNext;
+    private JCheckBox chkboxBigSideNext;
 
     /**
      * Perfect FPS
      */
-    protected JCheckBox chkboxPerfectFPSMode;
+    private JCheckBox chkboxPerfectFPSMode;
 
     /**
      * Execute Thread.yield() during Perfect FPS mode
      */
-    protected JCheckBox chkboxPerfectYield;
+    private JCheckBox chkboxPerfectYield;
 
     /**
      * Sync Display
      */
-    protected JCheckBox chkboxSyncDisplay;
+    private JCheckBox chkboxSyncDisplay;
 
     /**
      * Show line clear effect
      */
-    protected JCheckBox chkboxShowLineClearEffect;
+    private JCheckBox chkboxShowLineClearEffect;
 
     /**
      * Dark piece preview area
      */
-    protected JCheckBox chkboxDarkNextArea;
+    private JCheckBox chkboxDarkNextArea;
 
     /**
      * Show field BG grid
      */
-    protected JCheckBox chkboxShowFieldBGGrid;
+    private JCheckBox chkboxShowFieldBGGrid;
 
     /**
      * Show field BG grid
      */
-    protected JCheckBox chkboxShowInput;
+    private JCheckBox chkboxShowInput;
 
     /**
      * Constructor
@@ -207,7 +207,7 @@ public class GeneralConfigFrame extends JFrame implements ActionListener {
     /**
      * GUIOfInitialization
      */
-    protected void initUI() {
+    private void initUI() {
         this.getContentPane().setLayout(new BorderLayout());
 
         // * Tab pane

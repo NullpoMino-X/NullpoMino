@@ -38,25 +38,26 @@ import org.newdawn.slick.Input;
 /**
  * Joystick Related processing
  */
-public class ControllerManager {
+class ControllerManager {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(ControllerManager.class);
+    private static Logger log = Logger.getLogger(ControllerManager.class);
 
     /**
      * Minimum/Maximum buttoncount
      */
-    public static final int MIN_BUTTONS = 3, MAX_BUTTONS = 100;
+    private static final int MIN_BUTTONS = 3;
+    public static final int MAX_BUTTONS = 100;
 
     /**
      * Joystick Constant state detection methodcount
      */
-    public static final int CONTROLLER_METHOD_NONE = 0,
-            CONTROLLER_METHOD_SLICK_DEFAULT = 1,
-            CONTROLLER_METHOD_SLICK_ALTERNATE = 2,
-            CONTROLLER_METHOD_LWJGL = 3,
-            CONTROLLER_METHOD_MAX = 4;
+    public static final int CONTROLLER_METHOD_NONE = 0;
+    public static final int CONTROLLER_METHOD_SLICK_DEFAULT = 1;
+    private static final int CONTROLLER_METHOD_SLICK_ALTERNATE = 2;
+    private static final int CONTROLLER_METHOD_LWJGL = 3;
+    public static final int CONTROLLER_METHOD_MAX = 4;
 
     /**
      * Joystick State detection method

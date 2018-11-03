@@ -25,7 +25,7 @@ import javax.swing.JProgressBar;
 
 import org.jdesktop.swingworker.SwingWorker;
 
-public class RanksIterator extends JDialog implements PropertyChangeListener, ActionListener {
+class RanksIterator extends JDialog implements PropertyChangeListener, ActionListener {
     /**
      *
      */
@@ -49,7 +49,7 @@ public class RanksIterator extends JDialog implements PropertyChangeListener, Ac
         private boolean cancelled;
         private Ranks ranks;
 
-        public OneIteration(int totalParts, Ranks ranks) {
+        OneIteration(int totalParts, Ranks ranks) {
             this.ranks = ranks;
             this.totalParts = totalParts;
             cancelled = false;
@@ -93,7 +93,7 @@ public class RanksIterator extends JDialog implements PropertyChangeListener, Ac
             return null;
         }
 
-        public void cancelTask() {
+        void cancelTask() {
             cancelled = true;
             for (int i = 0; i < totalParts; i++) {
                 ranksIteratorPart[i].interrupt();
@@ -110,7 +110,7 @@ public class RanksIterator extends JDialog implements PropertyChangeListener, Ac
         private String inputFile;
         boolean cancelled;
 
-        public AllIterations(int totalParts, RanksIterator ranksIterator, String inputFile) {
+        AllIterations(int totalParts, RanksIterator ranksIterator, String inputFile) {
 
             this.totalParts = totalParts;
             this.ranksIterator = ranksIterator;
@@ -204,7 +204,7 @@ public class RanksIterator extends JDialog implements PropertyChangeListener, Ac
             return null;
         }
 
-        public void cancelTask() {
+        void cancelTask() {
             cancelled = true;
 
         }

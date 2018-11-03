@@ -96,7 +96,7 @@ public class BackgroundStatus implements Serializable {
      *
      * @param b Copy source
      */
-    public void copy(BackgroundStatus b) {
+    private void copy(BackgroundStatus b) {
         bg = b.bg;
         fadesw = b.fadesw;
         fadestat = b.fadestat;

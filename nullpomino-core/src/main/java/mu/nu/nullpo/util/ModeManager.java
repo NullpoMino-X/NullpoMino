@@ -43,12 +43,12 @@ public class ModeManager {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(ModeManager.class);
+    private static Logger log = Logger.getLogger(ModeManager.class);
 
     /**
      * Mode Dynamic array of
      */
-    public ArrayList<GameMode> modelist = new ArrayList<>();
+    private ArrayList<GameMode> modelist = new ArrayList<>();
 
     /**
      * Constructor
@@ -61,7 +61,7 @@ public class ModeManager {
      *
      * @param m Copy source
      */
-    public ModeManager(ModeManager m) {
+    private ModeManager(ModeManager m) {
         modelist.addAll(m.modelist);
     }
 
@@ -70,7 +70,7 @@ public class ModeManager {
      *
      * @return ModeOfcount(Usually + All net play)
      */
-    public int getSize() {
+    private int getSize() {
         return modelist.size();
     }
 
@@ -80,7 +80,7 @@ public class ModeManager {
      * @param netplay falseIf normalMode Only, When true,For net playMode OnlycountObtained
      * @return ModeOfcount
      */
-    public int getNumberOfModes(boolean netplay) {
+    private int getNumberOfModes(boolean netplay) {
         int count = 0;
 
         for (GameMode mode : modelist) {
@@ -133,7 +133,7 @@ public class ModeManager {
      * @param id ModeID
      * @return Mode name (idIf the incorrect &quot;*INVALID MODE*&quot;)
      */
-    public String getName(int id) {
+    private String getName(int id) {
         try {
             return modelist.get(id).getName();
         } catch (Exception e) {
@@ -147,7 +147,7 @@ public class ModeManager {
      * @param name Mode name
      * @return ModeID (If it is not found-1)
      */
-    public int getIDbyName(String name) {
+    private int getIDbyName(String name) {
         if (name == null) return -1;
 
         for (int i = 0; i < modelist.size(); i++) {

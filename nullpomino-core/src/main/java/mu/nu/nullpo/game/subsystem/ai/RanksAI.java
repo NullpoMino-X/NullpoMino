@@ -47,7 +47,7 @@ import org.apache.log4j.Logger;
 
 public class RanksAI extends DummyAI implements Runnable {
 
-    static Logger log = Logger.getLogger(RanksAI.class);
+    private static Logger log = Logger.getLogger(RanksAI.class);
 
 
     //public boolean bestHold;
@@ -59,36 +59,36 @@ public class RanksAI extends DummyAI implements Runnable {
 
     //public int bestRt;
 
-    public int bestXSub;
+    private int bestXSub;
 
-    public int bestYSub;
+    private int bestYSub;
 
-    public int bestRtSub;
+    private int bestRtSub;
 
-    public int bestPts;
+    private int bestPts;
 
 
     //public boolean forceHold;
 
-    public int delay;
+    private int delay;
 
-    public GameEngine gEngine;
+    private GameEngine gEngine;
 
-    public GameManager gManager;
+    private GameManager gManager;
 
-    public boolean thinkRequest;
+    private boolean thinkRequest;
 
-    public boolean thinking;
+    private boolean thinking;
 
-    public int thinkDelay;
+    private int thinkDelay;
 
     //public int thinkCurrentPieceNo;
 
     //public int thinkLastPieceNo;
 
-    public volatile boolean threadRunning;
+    private volatile boolean threadRunning;
 
-    public Thread thread;
+    private Thread thread;
 
     private Ranks ranks;
     private boolean skipNextFrame;
@@ -107,13 +107,13 @@ public class RanksAI extends DummyAI implements Runnable {
     private boolean allowHold;
     private int speedLimit;
 
-    public class Score {
+    class Score {
 
-        public float rankStacking;
-        public int distanceToSet;
-        public boolean iPieceUsedInTheStack;
+        float rankStacking;
+        int distanceToSet;
+        boolean iPieceUsedInTheStack;
 
-        public Score() {
+        Score() {
 
             rankStacking = 0;
             distanceToSet = ranks.getStackWidth() * 20;
@@ -124,7 +124,7 @@ public class RanksAI extends DummyAI implements Runnable {
 
         }
 
-        public void computeScore(int heights[]) {
+        void computeScore(int heights[]) {
             this.distanceToSet = 0;
             int[] surface = new int[ranks.getStackWidth() - 1];
             int maxJump = ranks.getMaxJump();
@@ -168,7 +168,7 @@ public class RanksAI extends DummyAI implements Runnable {
 
         }
 
-        public int compareTo(Object o) {
+        int compareTo(Object o) {
             Score otherScore = (Score) o;
 
 
@@ -453,7 +453,7 @@ public class RanksAI extends DummyAI implements Runnable {
      * @param engine   GameEngine
      * @param playerID Player ID
      */
-    public void thinkBestPosition(GameEngine engine, int playerID) {
+    private void thinkBestPosition(GameEngine engine, int playerID) {
 
         // Current line of the current piece
         int nowY = engine.nowPieceY;
@@ -514,7 +514,7 @@ public class RanksAI extends DummyAI implements Runnable {
      * @param pieces  Array containing the current piece and the next pieces.
      */
 
-    public void thinkBestPosition(int heights[], int[] pieces, int[] holdPiece, boolean holdOK) {
+    private void thinkBestPosition(int heights[], int[] pieces, int[] holdPiece, boolean holdOK) {
 
         // The best* variables contain the chosen best position for the current piece.
         // The best*Sub variables are used in case you want to do a twist or a spin or a slide. they give the final position for the best move
@@ -666,7 +666,7 @@ public class RanksAI extends DummyAI implements Runnable {
      * @param numPreviews Number of previews to consider in the thinking process
      * @return The score for this move (placing the piece in this column, with this rotation)
      */
-    public Score thinkMain(int x, int rt, int[] heights, int pieces[], int holdPiece[], boolean holdOK, int numPreviews) {
+    private Score thinkMain(int x, int rt, int[] heights, int pieces[], int holdPiece[], boolean holdOK, int numPreviews) {
 
         // Initialize the score with zero
         Score score = new Score();

@@ -57,49 +57,49 @@ public class RendererSwing extends EventReceiver {
     /**
      * Surface to draw
      */
-    protected Graphics2D graphics;
+    private Graphics2D graphics;
 
     /**
      * Effect objects
      */
-    protected ArrayList<EffectObject> effectlist;
+    private ArrayList<EffectObject> effectlist;
 
     /**
      * Line clear effect enabled flag
      */
-    protected boolean showlineeffect;
+    private boolean showlineeffect;
 
     /**
      * fieldOfBlockShow (falseBorder appears only if)
      */
-    protected boolean showfieldblockgraphics;
+    private boolean showfieldblockgraphics;
 
     /**
      * OperationBlockTo simplify the design of
      */
-    protected boolean simpleblock;
+    private boolean simpleblock;
 
     /**
      * Show field BG grid
      */
-    protected boolean showfieldbggrid;
+    private boolean showfieldbggrid;
 
     /**
      * Dark piece preview area
      */
-    protected boolean darknextarea;
+    private boolean darknextarea;
 
     /**
      * ghost On top of the pieceNEXTDisplay
      */
-    protected boolean nextshadow;
+    private boolean nextshadow;
 
     /**
      * Line clear effect speed
      */
-    protected int lineeffectspeed;
+    private int lineeffectspeed;
 
-    public static Color getMeterColorAsColor(int meterColor) {
+    private static Color getMeterColorAsColor(int meterColor) {
         switch (meterColor) {
             case GameEngine.METER_COLOR_PINK:
                 return new Color(255, 0, 255);
@@ -132,7 +132,7 @@ public class RendererSwing extends EventReceiver {
      * @param fontColor font Color
      * @return font ColorColor
      */
-    public static Color getFontColorAsColor(int fontColor) {
+    private static Color getFontColorAsColor(int fontColor) {
         switch (fontColor) {
             case COLOR_BLUE:
                 return new Color(0, 0, 255);
@@ -163,7 +163,7 @@ public class RendererSwing extends EventReceiver {
      * @param colorID Block colorID
      * @return AWTUseColorObject
      */
-    public static Color getColorByID(int colorID) {
+    private static Color getColorByID(int colorID) {
         switch (colorID) {
             case Block.BLOCK_COLOR_GRAY:
                 return new Color(64, 64, 64);
@@ -185,7 +185,7 @@ public class RendererSwing extends EventReceiver {
         return new Color(0, 0, 0);
     }
 
-    public static Color getColorByIDBright(int colorID) {
+    private static Color getColorByIDBright(int colorID) {
         switch (colorID) {
             case Block.BLOCK_COLOR_GRAY:
                 return new Color(128, 128, 128);
@@ -419,7 +419,7 @@ public class RendererSwing extends EventReceiver {
      * @param scale    Size (0.5f, 1.0f, 2.0f)
      * @param attr     Attribute
      */
-    protected void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha, float scale, int attr) {
+    private void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha, float scale, int attr) {
         if (graphics == null) return;
 
         if ((color <= Block.BLOCK_COLOR_INVALID)) return;
@@ -556,7 +556,7 @@ public class RendererSwing extends EventReceiver {
      * @param alpha    Transparency
      * @param scale    Enlargement factor
      */
-    protected void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha, float scale) {
+    private void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha, float scale) {
         drawBlock(x, y, color, skin, bone, darkness, alpha, scale, 0);
     }
 
@@ -579,7 +579,7 @@ public class RendererSwing extends EventReceiver {
      * @param blk   BlockInstance of a class
      * @param scale Enlargement factor
      */
-    protected void drawBlock(int x, int y, Block blk, float scale) {
+    private void drawBlock(int x, int y, Block blk, float scale) {
         drawBlock(x, y, blk.getDrawColor(), blk.skin, blk.getAttribute(Block.BLOCK_ATTRIBUTE_BONE), blk.darkness, blk.alpha, scale, blk.attribute);
     }
 
@@ -596,7 +596,7 @@ public class RendererSwing extends EventReceiver {
         drawBlock(x, y, blk.getDrawColor(), blk.skin, blk.getAttribute(Block.BLOCK_ATTRIBUTE_BONE), darkness, blk.alpha, scale, blk.attribute);
     }
 
-    protected void drawBlockForceVisible(int x, int y, Block blk, float scale) {
+    private void drawBlockForceVisible(int x, int y, Block blk, float scale) {
         drawBlock(x, y, blk.getDrawColor(), blk.skin, blk.getAttribute(Block.BLOCK_ATTRIBUTE_BONE), blk.darkness,
                 (0.5f * blk.alpha) + 0.5f, scale, blk.attribute);
     }
@@ -608,7 +608,7 @@ public class RendererSwing extends EventReceiver {
      * @param y     Y-coordinate
      * @param piece Peace to draw
      */
-    protected void drawPiece(int x, int y, Piece piece) {
+    private void drawPiece(int x, int y, Piece piece) {
         drawPiece(x, y, piece, 1.0f);
     }
 
@@ -620,7 +620,7 @@ public class RendererSwing extends EventReceiver {
      * @param piece Peace to draw
      * @param scale Enlargement factor
      */
-    protected void drawPiece(int x, int y, Piece piece, float scale) {
+    private void drawPiece(int x, int y, Piece piece, float scale) {
         drawPiece(x, y, piece, scale, 0f);
     }
 
@@ -633,7 +633,7 @@ public class RendererSwing extends EventReceiver {
      * @param scale    Enlargement factor
      * @param darkness Lightness or darkness
      */
-    protected void drawPiece(int x, int y, Piece piece, float scale, float darkness) {
+    private void drawPiece(int x, int y, Piece piece, float scale, float darkness) {
         for (int i = 0; i < piece.getMaxBlock(); i++) {
             int x2 = x + (int) (piece.dataX[piece.direction][i] * 16 * scale);
             int y2 = y + (int) (piece.dataY[piece.direction][i] * 16 * scale);
@@ -652,7 +652,7 @@ public class RendererSwing extends EventReceiver {
      * @param y      Y-coordinate
      * @param engine GameEngineInstance of
      */
-    protected void drawCurrentPiece(int x, int y, GameEngine engine, float scale) {
+    private void drawCurrentPiece(int x, int y, GameEngine engine, float scale) {
         Piece piece = engine.nowPieceObject;
         int blksize = (int) (16 * scale);
 
@@ -692,7 +692,7 @@ public class RendererSwing extends EventReceiver {
      * @param y      Y-coordinate
      * @param engine GameEngineInstance of
      */
-    protected void drawGhostPiece(int x, int y, GameEngine engine, float scale) {
+    private void drawGhostPiece(int x, int y, GameEngine engine, float scale) {
         Piece piece = engine.nowPieceObject;
         int blksize = (int) (16 * scale);
 
@@ -811,7 +811,7 @@ public class RendererSwing extends EventReceiver {
         }
     }
 
-    protected void drawHintPiece(int x, int y, GameEngine engine, float scale) {
+    private void drawHintPiece(int x, int y, GameEngine engine, float scale) {
         Piece piece = engine.aiHintPiece;
         if (piece != null) {
             piece.direction = engine.ai.bestRt;
@@ -910,7 +910,7 @@ public class RendererSwing extends EventReceiver {
      * @param y      Y-coordinate
      * @param engine GameEngineInstance of
      */
-    protected void drawField(int x, int y, GameEngine engine, int size) {
+    private void drawField(int x, int y, GameEngine engine, int size) {
         if (graphics == null) return;
 
         int blksize = 16;
@@ -1016,7 +1016,7 @@ public class RendererSwing extends EventReceiver {
      * @param y      Y-coordinate
      * @param engine GameEngineInstance of
      */
-    protected void drawFrame(int x, int y, GameEngine engine, int displaysize) {
+    private void drawFrame(int x, int y, GameEngine engine, int displaysize) {
         if (graphics == null) return;
 
         int size = 4;
@@ -1167,7 +1167,7 @@ public class RendererSwing extends EventReceiver {
      * @param y      Y-coordinate
      * @param engine GameEngineInstance of
      */
-    protected void drawNext(int x, int y, GameEngine engine) {
+    private void drawNext(int x, int y, GameEngine engine) {
         if (graphics == null) return;
 
         int fldWidth = 10;
@@ -1338,7 +1338,7 @@ public class RendererSwing extends EventReceiver {
      * @param scale  Display size of piece
      * @author Wojtek
      */
-    protected void drawShadowNexts(int x, int y, GameEngine engine, float scale) {
+    private void drawShadowNexts(int x, int y, GameEngine engine, float scale) {
         Piece piece = engine.nowPieceObject;
         int blksize = (int) (16 * scale);
 
@@ -1613,7 +1613,7 @@ public class RendererSwing extends EventReceiver {
     /**
      * Update effects
      */
-    protected void effectUpdate() {
+    private void effectUpdate() {
         boolean emptyflag = true;
 
         for (EffectObject obj : effectlist) {
@@ -1637,7 +1637,7 @@ public class RendererSwing extends EventReceiver {
     /**
      * Render effects
      */
-    protected void effectRender() {
+    private void effectRender() {
         for (EffectObject obj : effectlist) {
             // Normal Block
             if (obj.effect == 1) {

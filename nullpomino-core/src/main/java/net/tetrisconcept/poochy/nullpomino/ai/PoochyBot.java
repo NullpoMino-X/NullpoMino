@@ -28,92 +28,95 @@ public class PoochyBot extends DummyAI implements Runnable {
     /**
      * After that I was groundedX-coordinate
      */
-    public int bestXSub;
+    private int bestXSub;
 
     /**
      * After that I was groundedY-coordinate
      */
-    public int bestYSub;
+    private int bestYSub;
 
     /**
      * After that I was groundedDirection(-1: None)
      */
-    public int bestRtSub;
+    private int bestRtSub;
 
     /**
      * The best moveEvaluation score
      */
-    public int bestPts;
+    private int bestPts;
 
     /**
      * Delay the move for changecount
      */
-    public int delay;
+    private int delay;
 
     /**
      * The GameEngine that owns this AI
      */
-    public GameEngine gEngine;
+    private GameEngine gEngine;
 
     /**
      * The GameManager that owns this AI
      */
-    public GameManager gManager;
+    private GameManager gManager;
 
     /**
      * When true,To threadThink routineInstructing the execution of the
      */
-    public ThinkRequestMutex thinkRequest;
+    private ThinkRequestMutex thinkRequest;
 
     /**
      * true when thread is executing the think routine.
      */
-    public boolean thinking;
+    private boolean thinking;
 
     /**
      * To stop a thread time
      */
-    public int thinkDelay;
+    private int thinkDelay;
 
     /**
      * When true,Running thread
      */
-    public volatile boolean threadRunning;
+    private volatile boolean threadRunning;
 
     /**
      * Thread for executing the think routine
      */
-    public Thread thread;
+    private Thread thread;
 
     /**
      * Number of frames for which piece has been stuck
      */
-    protected int stuckDelay;
+    private int stuckDelay;
 
     /**
      * Status of last frame
      */
-    protected int lastInput, lastX, lastY, lastRt;
+    private int lastInput;
+    private int lastX;
+    private int lastY;
+    private int lastRt;
     /**
      * Number of consecutive frames with same piece status
      */
-    protected int sameStatusTime;
+    private int sameStatusTime;
     /**
      * DAS charge status. -1 = left, 0 = none, 1 = right
      */
-    protected int setDAS;
+    private int setDAS;
     /**
      * Last input if done in ARE
      */
-    protected int inputARE;
+    private int inputARE;
     /**
      * MaximumCompromise level
      */
-    protected static final int MAX_THINK_DEPTH = 2;
+    private static final int MAX_THINK_DEPTH = 2;
     /**
      * Set to true to print debug information
      */
-    protected static final boolean DEBUG_ALL = false;
+    static final boolean DEBUG_ALL = false;
     /** Wait extra frames at low speeds? */
     //protected static final boolean DELAY_DROP_ON = false;
     /** # of extra frames to wait */
@@ -123,11 +126,11 @@ public class PoochyBot extends DummyAI implements Runnable {
     /**
      * Did the thinking thread find a possible position?
      */
-    protected boolean thinkSuccess;
+    private boolean thinkSuccess;
     /**
      * Was the game in ARE as of the last frame?
      */
-    protected boolean inARE;
+    private boolean inARE;
 
     /*
      * AI's name
@@ -701,7 +704,7 @@ public class PoochyBot extends DummyAI implements Runnable {
         }
     }
 
-    protected void printPieceAndDirection(int pieceType, int rt) {
+    private void printPieceAndDirection(int pieceType, int rt) {
         String result = "Piece " + Piece.PIECE_NAMES[pieceType] + ", direction ";
 
         switch (rt) {
@@ -721,7 +724,7 @@ public class PoochyBot extends DummyAI implements Runnable {
         if (DEBUG_ALL) log.debug(result);
     }
 
-    public int calcIRS(Piece piece, GameEngine engine) {
+    private int calcIRS(Piece piece, GameEngine engine) {
         piece = checkOffset(piece, engine);
         int nextType = piece.id;
         Field fld = engine.field;
@@ -772,7 +775,7 @@ public class PoochyBot extends DummyAI implements Runnable {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public void thinkBestPosition(GameEngine engine, int playerID) {
+    private void thinkBestPosition(GameEngine engine, int playerID) {
         if (DEBUG_ALL) log.debug("thinkBestPosition called, inARE = " + inARE + ", piece: ");
         bestHold = false;
         bestX = 0;
@@ -1291,7 +1294,7 @@ public class PoochyBot extends DummyAI implements Runnable {
      * @param depth Compromise level (ranges from 0 through getMaxThinkDepth-1)
      * @return Evaluation score
      */
-    public int thinkMain(int x, int y, int rt, int rtOld, Field fld, Piece piece, int depth) {
+    int thinkMain(int x, int y, int rt, int rtOld, Field fld, Piece piece, int depth) {
         int pts = 0;
 
         boolean big = piece.big;
@@ -1659,7 +1662,7 @@ public class PoochyBot extends DummyAI implements Runnable {
     }
 
     //private static final int[][] HI_PENALTY = {{6, 2}, {7, 6}, {6, 2}, {1, 0}};
-    public static Piece checkOffset(Piece p, GameEngine engine) {
+    private static Piece checkOffset(Piece p, GameEngine engine) {
         Piece result = new Piece(p);
         result.big = engine.big;
         if (!p.offsetApplied)
@@ -1667,7 +1670,7 @@ public class PoochyBot extends DummyAI implements Runnable {
         return result;
     }
 
-    public static int[] calcValleys(int[] depths, int move) {
+    private static int[] calcValleys(int[] depths, int move) {
         int[] result = {0, 0, 0};
         if (depths[0] > depths[move])
             result[0] = (depths[0] - depths[move]) / 3 / move;
@@ -1731,7 +1734,7 @@ public class PoochyBot extends DummyAI implements Runnable {
         return result;
     }
 
-    public static int[] getColumnDepths(Field fld) {
+    static int[] getColumnDepths(Field fld) {
         int width = fld.getWidth();
         int[] result = new int[width];
         for (int x = 0; x < width; x++)
@@ -1751,7 +1754,7 @@ public class PoochyBot extends DummyAI implements Runnable {
      * @param rt     Desired final rotation direction.
      * @return The farthest x position in the direction that the piece can be moved to.
      */
-    public int mostMovableX(int x, int y, int dir, GameEngine engine, Field fld, Piece piece, int rt) {
+    private int mostMovableX(int x, int y, int dir, GameEngine engine, Field fld, Piece piece, int rt) {
         if (dir == 0)
             return x;
         int shift = 1;
@@ -1831,7 +1834,7 @@ public class PoochyBot extends DummyAI implements Runnable {
         }
     }
 
-    protected void logBest(int caseNum) {
+    private void logBest(int caseNum) {
         log.debug("New best position found (Case " + caseNum +
                 "): bestHold = " + bestHold +
                 ", bestX = " + bestX +
@@ -1923,13 +1926,13 @@ public class PoochyBot extends DummyAI implements Runnable {
 
     //Wrapper for think requests
     private static class ThinkRequestMutex {
-        public boolean active;
+        boolean active;
 
-        public ThinkRequestMutex() {
+        ThinkRequestMutex() {
             active = false;
         }
 
-        public synchronized void newRequest() {
+        synchronized void newRequest() {
             active = true;
             notifyAll();
         }

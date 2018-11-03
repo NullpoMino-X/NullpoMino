@@ -19,7 +19,7 @@ public class StateSelectModeFolder extends DummyMenuScrollState {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(StateSelectModeFolder.class);
+    private static Logger log = Logger.getLogger(StateSelectModeFolder.class);
 
     /**
      * This state's ID
@@ -29,7 +29,7 @@ public class StateSelectModeFolder extends DummyMenuScrollState {
     /**
      * Number of folders in one page
      */
-    public static final int PAGE_HEIGHT = 24;
+    private static final int PAGE_HEIGHT = 24;
 
     /**
      * Top-level mode list
@@ -39,7 +39,7 @@ public class StateSelectModeFolder extends DummyMenuScrollState {
     /**
      * Folder names list
      */
-    public static LinkedList<String> listFolder;
+    private static LinkedList<String> listFolder;
 
     /**
      * HashMap of mode folder (FolderName->ModeNames)
@@ -78,7 +78,7 @@ public class StateSelectModeFolder extends DummyMenuScrollState {
     /**
      * Load folder list file
      */
-    public static void loadFolderListFile() {
+    private static void loadFolderListFile() {
         if (listTopLevelModes == null) listTopLevelModes = new LinkedList<>();
         else listTopLevelModes.clear();
 
@@ -133,7 +133,7 @@ public class StateSelectModeFolder extends DummyMenuScrollState {
     /**
      * Prepare folder list
      */
-    protected void prepareFolderList() {
+    private void prepareFolderList() {
         list = new String[listFolder.size() + 1];
         maxCursor = list.length - 1;
         for (int i = 0; i < listFolder.size(); i++) {
@@ -152,7 +152,7 @@ public class StateSelectModeFolder extends DummyMenuScrollState {
      * @param str Folder name
      * @return Description
      */
-    protected String getFolderDesc(String str) {
+    private String getFolderDesc(String str) {
         String str2 = str.replace(' ', '_');
         str2 = str2.replace('(', 'l');
         str2 = str2.replace(')', 'r');

@@ -42,21 +42,22 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * State of the loading screen
  */
-public class StateLoading extends BasicGameState {
+class StateLoading extends BasicGameState {
     /**
      * This state's ID
      */
-    public static final int ID = 0;
+    private static final int ID = 0;
 
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(StateLoading.class);
+    private static Logger log = Logger.getLogger(StateLoading.class);
 
     /**
      * Progress preload
      */
-    protected int preloadCount, preloadSet;
+    private int preloadCount;
+    private int preloadSet;
 
     /*
      * Fetch this state's ID

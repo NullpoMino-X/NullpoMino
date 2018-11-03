@@ -502,7 +502,7 @@ public class RuleOptions implements Serializable {
     /**
      * Initialization
      */
-    public void reset() {
+    private void reset() {
         strRuleName = "";
         strWallkick = "";
         strRandomizer = "";

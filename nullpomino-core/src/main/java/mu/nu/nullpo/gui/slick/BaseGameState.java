@@ -9,11 +9,11 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * Base state
  */
-public abstract class BaseGameState extends BasicGameState {
+abstract class BaseGameState extends BasicGameState {
     /**
      * Screen Shot flag (Declared in BaseGameState; Don't override it!)
      */
-    protected boolean screenShotFlag = false;
+    private boolean screenShotFlag = false;
 
     /*
      * Fetch this state's ID
@@ -89,7 +89,7 @@ public abstract class BaseGameState extends BasicGameState {
      * @param g         Graphics
      * @throws SlickException Something failed
      */
-    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
     }
 
     /**
@@ -100,6 +100,6 @@ public abstract class BaseGameState extends BasicGameState {
      * @param delta     Time passed since the last execution
      * @throws SlickException Something failed
      */
-    protected void updateImpl(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    void updateImpl(GameContainer container, StateBasedGame game, int delta) throws SlickException {
     }
 }

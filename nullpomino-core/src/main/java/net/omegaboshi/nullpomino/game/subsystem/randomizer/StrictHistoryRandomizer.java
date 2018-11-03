@@ -4,14 +4,14 @@ import mu.nu.nullpo.game.component.Piece;
 
 public class StrictHistoryRandomizer extends Randomizer {
 
-    int[] history;
-    int id;
+    private int[] history;
+    private int id;
 
-    boolean[] curHist;
-    int numDistinctCurHist;
-    int[] notHist;
-    int notHistPos;
-    int histLen;
+    private boolean[] curHist;
+    private int numDistinctCurHist;
+    private int[] notHist;
+    private int notHistPos;
+    private int histLen;
 
     public StrictHistoryRandomizer() {
         super();

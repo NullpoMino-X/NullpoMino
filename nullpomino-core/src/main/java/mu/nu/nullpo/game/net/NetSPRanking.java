@@ -61,7 +61,7 @@ public class NetSPRanking implements Serializable {
      *
      * @param s Source
      */
-    public NetSPRanking(NetSPRanking s) {
+    private NetSPRanking(NetSPRanking s) {
         copy(s);
     }
 
@@ -88,7 +88,7 @@ public class NetSPRanking implements Serializable {
     /**
      * Initialization
      */
-    public void reset() {
+    private void reset() {
         strModeName = "";
         strRuleName = "";
         gameType = 0;
@@ -103,7 +103,7 @@ public class NetSPRanking implements Serializable {
      *
      * @param s Source
      */
-    public void copy(NetSPRanking s) {
+    private void copy(NetSPRanking s) {
         strModeName = s.strModeName;
         strRuleName = s.strRuleName;
         gameType = s.gameType;
@@ -143,7 +143,7 @@ public class NetSPRanking implements Serializable {
      * @param strPlayerName Player Name
      * @return Index (-1 if not found)
      */
-    public int indexOf(String strPlayerName) {
+    private int indexOf(String strPlayerName) {
         for (int i = 0; i < listRecord.size(); i++) {
             NetSPRecord r = listRecord.get(i);
             if (r.strPlayerName.equals(strPlayerName)) {
@@ -169,7 +169,7 @@ public class NetSPRanking implements Serializable {
      * @param strPlayerName Player Name
      * @return Number of records removed (0 if not found)
      */
-    public int removeRecord(String strPlayerName) {
+    private int removeRecord(String strPlayerName) {
         int count = 0;
 
         LinkedList<NetSPRecord> list = new LinkedList<>(listRecord);
@@ -201,7 +201,7 @@ public class NetSPRanking implements Serializable {
      * @param r1 Newer Record
      * @return Returns <code>true</code> if there are no previous record of this player, or if the newer record (r1) is better than old one.
      */
-    public boolean isNewRecord(NetSPRecord r1) {
+    private boolean isNewRecord(NetSPRecord r1) {
         NetSPRecord r2 = getRecord(r1.strPlayerName);
         if (r2 == null) return true;
         return r1.compare(rankingType, r2);

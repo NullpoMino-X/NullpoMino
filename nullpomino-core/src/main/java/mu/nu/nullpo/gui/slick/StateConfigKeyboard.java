@@ -49,12 +49,12 @@ public class StateConfigKeyboard extends BasicGameState {
     /**
      * Number of frames you have to wait
      */
-    public static final int KEYACCEPTFRAME = 15;
+    private static final int KEYACCEPTFRAME = 15;
 
     /**
      * Number of keys to set
      */
-    public static final int NUM_KEYS = 16;
+    private static final int NUM_KEYS = 16;
 
     /**
      * Player number
@@ -69,32 +69,32 @@ public class StateConfigKeyboard extends BasicGameState {
     /**
      * StateBasedGame
      */
-    protected StateBasedGame gameObj;
+    private StateBasedGame gameObj;
 
     /**
      * true if no key is pressed now (for JInput mode)
      */
-    protected boolean noPressedKey;
+    private boolean noPressedKey;
 
     /**
      * Number of button currently being configured
      */
-    protected int keynum;
+    private int keynum;
 
     /**
      * Frame counter
      */
-    protected int frame;
+    private int frame;
 
     /**
      * Nunber of frames left in key-set mode
      */
-    protected int keyConfigRestFrame;
+    private int keyConfigRestFrame;
 
     /**
      * Button settings
      */
-    protected int[] keymap;
+    private int[] keymap;
 
     /*
      * Fetch this state's ID
@@ -107,7 +107,7 @@ public class StateConfigKeyboard extends BasicGameState {
     /**
      * Button settings initialization
      */
-    protected void reset() {
+    private void reset() {
         noPressedKey = true;
 
         keynum = 0;
@@ -137,7 +137,7 @@ public class StateConfigKeyboard extends BasicGameState {
      * @param key Keycode
      * @return Key name
      */
-    protected String getKeyName(int key) {
+    private String getKeyName(int key) {
         String str = org.lwjgl.input.Keyboard.getKeyName(key);
         return (str == null) ? String.valueOf(key) : str.toUpperCase();
     }
@@ -259,7 +259,7 @@ public class StateConfigKeyboard extends BasicGameState {
      *
      * @param key Keycode
      */
-    protected void onKey(int key) {
+    private void onKey(int key) {
         if (frame >= KEYACCEPTFRAME) {
             if (keyConfigRestFrame > 0) {
                 // Key-set mode

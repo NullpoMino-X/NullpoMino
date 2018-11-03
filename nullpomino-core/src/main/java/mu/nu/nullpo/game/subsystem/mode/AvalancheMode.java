@@ -124,12 +124,12 @@ public class AvalancheMode extends Avalanche1PDummyMode {
     /**
      * If true, both columns 3 and 4 are danger columns
      */
-    protected boolean dangerColumnDouble;
+    private boolean dangerColumnDouble;
 
     /**
      * If true, red X's appear at tops of danger columns
      */
-    protected boolean dangerColumnShowX;
+    private boolean dangerColumnShowX;
 
     /**
      * True for classic scoring, false for 15th scoring algorithm
@@ -434,7 +434,7 @@ public class AvalancheMode extends Avalanche1PDummyMode {
      * @param engine   GameEngine
      * @param playerID Player ID
      */
-    protected void drawXorTimer(GameEngine engine, int playerID) {
+    private void drawXorTimer(GameEngine engine, int playerID) {
         for (int i = 0; i < (dangerColumnDouble ? 2 : 1); i++) {
             if ((engine.field == null) || (engine.field.getBlockEmpty(2 + i, 0))) {
                 if (engine.displaysize == 1) {
@@ -581,7 +581,7 @@ public class AvalancheMode extends Avalanche1PDummyMode {
      *
      * @param prop Property file
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         gametype = prop.getProperty("avalanche.gametype", 0);
         sprintTarget = prop.getProperty("avalanche.sprintTarget", 0);
         scoreType = prop.getProperty("avalanche.scoreType", 0);
@@ -600,7 +600,7 @@ public class AvalancheMode extends Avalanche1PDummyMode {
      *
      * @param prop Property file
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("avalanche.gametype", gametype);
         prop.setProperty("avalanche.sprintTarget", sprintTarget);
         prop.setProperty("avalanche.scoreType", scoreType);

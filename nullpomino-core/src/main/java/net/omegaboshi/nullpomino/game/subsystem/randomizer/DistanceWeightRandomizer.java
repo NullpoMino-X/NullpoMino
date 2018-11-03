@@ -4,19 +4,19 @@ import mu.nu.nullpo.game.component.Piece;
 
 public abstract class DistanceWeightRandomizer extends Randomizer {
 
-    int[] initWeights = {3, 3, 0, 0, 3, 3, 0, 2, 2, 2, 2};
+    private int[] initWeights = {3, 3, 0, 0, 3, 3, 0, 2, 2, 2, 2};
     int[] weights;
-    int[] cumulative;
-    int sum;
-    int id;
+    private int[] cumulative;
+    private int sum;
+    private int id;
 
-    boolean firstPiece = true;
+    private boolean firstPiece = true;
 
-    public DistanceWeightRandomizer() {
+    DistanceWeightRandomizer() {
         super();
     }
 
-    public DistanceWeightRandomizer(boolean[] pieceEnable, long seed) {
+    DistanceWeightRandomizer(boolean[] pieceEnable, long seed) {
         super(pieceEnable, seed);
     }
 

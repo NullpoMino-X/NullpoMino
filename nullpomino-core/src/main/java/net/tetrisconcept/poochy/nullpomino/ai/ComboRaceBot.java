@@ -22,7 +22,7 @@ public class ComboRaceBot extends DummyAI implements Runnable {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(ComboRaceBot.class);
+    private static Logger log = Logger.getLogger(ComboRaceBot.class);
 
     /**
      * List of field state codes which are possible to sustain a stable combo
@@ -39,98 +39,99 @@ public class ComboRaceBot extends DummyAI implements Runnable {
             0x111, 0x888
     };
 
-    protected int[] stateScores = {6, 7, 7, 6, 8, 3, 2, 9, 3, 4, 3, 1, 8, 4, 1, 3, 1, 1, 4, 3, 9, 2, 3, 8, 4, 8, 3, 3};
+    private int[] stateScores = {6, 7, 7, 6, 8, 3, 2, 9, 3, 4, 3, 1, 8, 4, 1, 3, 1, 1, 4, 3, 9, 2, 3, 8, 4, 8, 3, 3};
 
-    protected int[] pieceScores = {28, 18, 10, 9, 18, 18, 9};
+    private int[] pieceScores = {28, 18, 10, 9, 18, 18, 9};
 
-    protected Transition[][] moves;
+    private Transition[][] moves;
 
-    protected int[] nextQueueIDs;
+    private int[] nextQueueIDs;
 
     /**
      * After that I was groundedDirection(0: None)
      */
-    public int bestRtSub;
+    private int bestRtSub;
 
     /**
      * Position before twist for hint display
      */
-    public int bestXSub, bestYSub;
+    private int bestXSub;
+    private int bestYSub;
 
     /**
      * The best moveEvaluation score
      */
-    public int bestPts;
+    private int bestPts;
 
     /**
      * Movement state. 0 = initial, 1 = twist, 2 = post-twist
      */
-    public int movestate;
+    private int movestate;
 
     /**
      * Delay the move for changecount
      */
-    public int delay;
+    private int delay;
 
     /**
      * The GameEngine that owns this AI
      */
-    public GameEngine gEngine;
+    private GameEngine gEngine;
 
     /**
      * The GameManager that owns this AI
      */
-    public GameManager gManager;
+    private GameManager gManager;
 
     /**
      * When true,To threadThink routineInstructing the execution of the
      */
-    public ThinkRequestMutex thinkRequest;
+    private ThinkRequestMutex thinkRequest;
 
     /**
      * true when thread is executing the think routine.
      */
-    public boolean thinking;
+    private boolean thinking;
 
     /**
      * To stop a thread time
      */
-    public int thinkDelay;
+    private int thinkDelay;
 
     /**
      * When true,Running thread
      */
-    public volatile boolean threadRunning;
+    private volatile boolean threadRunning;
 
     /**
      * Thread for executing the think routine
      */
-    public Thread thread;
+    private Thread thread;
 
     /**
      * Last input if done in ARE
      */
-    protected int inputARE;
+    private int inputARE;
     /**
      * Number of pieces to think ahead
      */
-    protected static final int MAX_THINK_DEPTH = 6;
+    private static final int MAX_THINK_DEPTH = 6;
     /**
      * Set to true to print debug information
      */
-    protected static final boolean DEBUG_ALL = false;
+    private static final boolean DEBUG_ALL = false;
     /**
      * Did the thinking thread finish successfully?
      */
-    protected boolean thinkComplete;
+    private boolean thinkComplete;
     /**
      * Did the thinking thread find a possible position?
      */
-    protected boolean thinkSuccess;
+    private boolean thinkSuccess;
     /**
      * Was the game in ARE as of the last frame?
      */
-    protected boolean inARE;
+    private boolean inARE;
 
     /*
      * AI's name
@@ -411,7 +412,7 @@ public class ComboRaceBot extends DummyAI implements Runnable {
         }
     }
 
-    protected void printPieceAndDirection(int pieceType, int rt) {
+    private void printPieceAndDirection(int pieceType, int rt) {
         String result = "Piece ";
         switch (pieceType) {
             case Piece.PIECE_I:
@@ -527,7 +528,7 @@ public class ComboRaceBot extends DummyAI implements Runnable {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public void thinkBestPosition(GameEngine engine, int playerID) {
+    private void thinkBestPosition(GameEngine engine, int playerID) {
         if (DEBUG_ALL) log.debug("thinkBestPosition called, inARE = " + inARE + ", piece: ");
         bestHold = false;
         bestX = 0;
@@ -645,7 +646,7 @@ public class ComboRaceBot extends DummyAI implements Runnable {
      * @param depth  Search depth
      * @return Evaluation score
      */
-    public int thinkMain(GameEngine engine, int state, int holdID, int depth) {
+    private int thinkMain(GameEngine engine, int state, int holdID, int depth) {
         if (state == -1)
             return 0;
         if (depth == nextQueueIDs.length) {
@@ -682,7 +683,7 @@ public class ComboRaceBot extends DummyAI implements Runnable {
         return bestPts;
     }
 
-    public static Piece checkOffset(Piece p, GameEngine engine) {
+    private static Piece checkOffset(Piece p, GameEngine engine) {
         Piece result = new Piece(p);
         result.big = engine.big;
         if (!p.offsetApplied)
@@ -736,7 +737,7 @@ public class ComboRaceBot extends DummyAI implements Runnable {
     /**
      * Constructs the moves table if necessary.
      */
-    public void createTables(GameEngine engine) {
+    private void createTables(GameEngine engine) {
         if (moves != null)
             return;
 
@@ -870,7 +871,7 @@ public class ComboRaceBot extends DummyAI implements Runnable {
      * @param valleyX Leftmost x-coordinate of 4-block-wide valley to combo in
      * @return Field state int code.
      */
-    public static short fieldToCode(Field field, int valleyX) {
+    private static short fieldToCode(Field field, int valleyX) {
         int height = field.getHeight();
         short result = 0;
         for (int y = height - 3; y < height; y++)
@@ -882,7 +883,7 @@ public class ComboRaceBot extends DummyAI implements Runnable {
         return result;
     }
 
-    public static short fieldToCode(Field field) {
+    private static short fieldToCode(Field field) {
         return fieldToCode(field, 3);
     }
 
@@ -892,7 +893,7 @@ public class ComboRaceBot extends DummyAI implements Runnable {
      * @param field Field state int code
      * @return State index if found; -1 if not found.
      */
-    public static int fieldToIndex(short field) {
+    private static int fieldToIndex(short field) {
         int min = 0;
         int max = FIELDS.length - 1;
         int mid;
@@ -915,11 +916,11 @@ public class ComboRaceBot extends DummyAI implements Runnable {
      * @param valleyX Leftmost x-coordinate of 4-block-wide valley to combo in
      * @return State index if found; -1 if not found.
      */
-    public static int fieldToIndex(Field field, int valleyX) {
+    private static int fieldToIndex(Field field, int valleyX) {
         return fieldToIndex(fieldToCode(field, valleyX));
     }
 
-    public static int fieldToIndex(Field field) {
+    private static int fieldToIndex(Field field) {
         return fieldToIndex(fieldToCode(field));
     }
 
@@ -1135,9 +1136,12 @@ public class ComboRaceBot extends DummyAI implements Runnable {
         }
     }
 
-    protected static class Transition {
-        public int x, rt, rtSub, newField;
-        public Transition next;
+    static class Transition {
+        int x;
+        int rt;
+        int rtSub;
+        int newField;
+        Transition next;
 
         public Transition(int bestX, int bestRt, int bestRtSub, int newFld) {
             x = bestX;
@@ -1153,7 +1157,7 @@ public class ComboRaceBot extends DummyAI implements Runnable {
             newField = newFld;
         }
 
-        public Transition(int bestX, int bestRt, int bestRtSub, int newFld, Transition nxt) {
+        Transition(int bestX, int bestRt, int bestRtSub, int newFld, Transition nxt) {
             x = bestX;
             rt = bestRt;
             rtSub = bestRtSub;
@@ -1161,7 +1165,7 @@ public class ComboRaceBot extends DummyAI implements Runnable {
             next = nxt;
         }
 
-        public Transition(int bestX, int bestRt, int newFld, Transition nxt) {
+        Transition(int bestX, int bestRt, int newFld, Transition nxt) {
             x = bestX;
             rt = bestRt;
             rtSub = 0;
@@ -1172,20 +1176,20 @@ public class ComboRaceBot extends DummyAI implements Runnable {
 
     //Wrapper for think requests
     private static class ThinkRequestMutex {
-        public boolean active;
-        public boolean createTablesRequest;
+        boolean active;
+        boolean createTablesRequest;
 
-        public ThinkRequestMutex() {
+        ThinkRequestMutex() {
             active = false;
             createTablesRequest = false;
         }
 
-        public synchronized void newRequest() {
+        synchronized void newRequest() {
             active = true;
             notifyAll();
         }
 
-        public synchronized void newCreateTablesRequest() {
+        synchronized void newCreateTablesRequest() {
             createTablesRequest = true;
             notifyAll();
         }

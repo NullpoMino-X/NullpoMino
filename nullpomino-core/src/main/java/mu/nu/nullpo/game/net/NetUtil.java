@@ -106,7 +106,7 @@ public class NetUtil {
      * @param s UTF-8 String
      * @return Shift_JIS encoded byte array (byte[])
      */
-    public static byte[] stringToShiftJIS(String s) {
+    private static byte[] stringToShiftJIS(String s) {
         byte[] b = null;
         try {
             b = s.getBytes("Shift_JIS");
@@ -196,7 +196,7 @@ public class NetUtil {
      * @param level Compression level (0-9)
      * @return Compressed byte array (byte[])
      */
-    public static byte[] compressByteArray(byte[] input, int level) {
+    private static byte[] compressByteArray(byte[] input, int level) {
         // Create the compressor with highest level of compression
         Deflater compressor = new Deflater(level);
 
@@ -267,7 +267,7 @@ public class NetUtil {
      * @param level Compression level (0-9)
      * @return Compressed + Base64 encoded String
      */
-    public static String compressString(String input, int level) {
+    private static String compressString(String input, int level) {
         byte[] bCompressed = compressByteArray(stringToBytes(input), level);
         char[] cCompressed = Base64Coder.encode(bCompressed);
         return new String(cCompressed);

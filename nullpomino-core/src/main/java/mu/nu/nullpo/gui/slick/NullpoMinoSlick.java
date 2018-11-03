@@ -64,16 +64,16 @@ import org.newdawn.slick.util.Log;
 /**
  * NullpoMino SlickVersion
  */
-public class NullpoMinoSlick extends StateBasedGame {
+class NullpoMinoSlick extends StateBasedGame {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(NullpoMinoSlick.class);
+    private static Logger log = Logger.getLogger(NullpoMinoSlick.class);
 
     /**
      * Command that was passed to the programLinesArgumentcount
      */
-    public static String[] programArgs;
+    private static String[] programArgs;
 
     /**
      * Save settingsUseProperty file
@@ -93,17 +93,17 @@ public class NullpoMinoSlick extends StateBasedGame {
     /**
      * ObserverFor the functionProperty file
      */
-    public static CustomProperties propObserver;
+    private static CustomProperties propObserver;
 
     /**
      * Default language file
      */
-    public static CustomProperties propLangDefault;
+    private static CustomProperties propLangDefault;
 
     /**
      * Language file
      */
-    public static CustomProperties propLang;
+    private static CustomProperties propLang;
 
     /**
      * Default game mode description file
@@ -118,7 +118,7 @@ public class NullpoMinoSlick extends StateBasedGame {
     /**
      * ScreenshotUse
      */
-    public static BufferedImage ssImage;
+    private static BufferedImage ssImage;
 
     /**
      * Mode Management
@@ -133,12 +133,12 @@ public class NullpoMinoSlick extends StateBasedGame {
     /**
      * State of the loading screen
      */
-    public static StateLoading stateLoading;
+    private static StateLoading stateLoading;
 
     /**
      * State of the title screen
      */
-    public static StateTitle stateTitle;
+    private static StateTitle stateTitle;
 
     /**
      * State of the game screen
@@ -148,22 +148,22 @@ public class NullpoMinoSlick extends StateBasedGame {
     /**
      * Mode State selection screen
      */
-    public static StateSelectMode stateSelectMode;
+    private static StateSelectMode stateSelectMode;
 
     /**
      * State selection screen replay
      */
-    public static StateReplaySelect stateReplaySelect;
+    private static StateReplaySelect stateReplaySelect;
 
     /**
      * State of the configuration screen
      */
-    public static StateConfigMainMenu stateConfigMainMenu;
+    private static StateConfigMainMenu stateConfigMainMenu;
 
     /**
      * State of the general settings screen
      */
-    public static StateConfigGeneral stateConfigGeneral;
+    private static StateConfigGeneral stateConfigGeneral;
 
     /**
      * State rules on the selection screen
@@ -188,7 +188,7 @@ public class NullpoMinoSlick extends StateBasedGame {
     /**
      * State of Play screen net
      */
-    public static StateNetGame stateNetGame;
+    private static StateNetGame stateNetGame;
 
     /**
      * Joystick Settings MainMenu State
@@ -223,12 +223,12 @@ public class NullpoMinoSlick extends StateBasedGame {
     /**
      * Rule select (after mode selection)
      */
-    public static StateSelectRuleFromList stateSelectRuleFromList;
+    private static StateSelectRuleFromList stateSelectRuleFromList;
 
     /**
      * Mode folder select
      */
-    public static StateSelectModeFolder stateSelectModeFolder;
+    private static StateSelectModeFolder stateSelectModeFolder;
 
     /**
      * Timing of alternate FPS sleep (false=render true=update)
@@ -238,17 +238,17 @@ public class NullpoMinoSlick extends StateBasedGame {
     /**
      * Allow dynamic adjust of target FPS (as seen in Swing version)
      */
-    public static boolean alternateFPSDynamicAdjust;
+    private static boolean alternateFPSDynamicAdjust;
 
     /**
      * Perfect FPS mode (more accurate, eats more CPU)
      */
-    public static boolean alternateFPSPerfectMode;
+    private static boolean alternateFPSPerfectMode;
 
     /**
      * Execute Thread.yield() during Perfect FPS mode
      */
-    public static boolean alternateFPSPerfectYield;
+    private static boolean alternateFPSPerfectYield;
 
     /**
      * Target FPS
@@ -258,62 +258,62 @@ public class NullpoMinoSlick extends StateBasedGame {
     /**
      * Current max FPS
      */
-    public static int altMaxFPSCurrent;
+    private static int altMaxFPSCurrent;
 
     /**
      * Used for FPS calculation
      */
-    protected static long periodCurrent;
+    private static long periodCurrent;
 
     /**
      * FPSFor maintaining
      */
-    protected static long beforeTime;
+    private static long beforeTime;
 
     /**
      * FPSFor maintaining
      */
-    protected static long overSleepTime;
+    private static long overSleepTime;
 
     /**
      * FPSFor maintaining
      */
-    protected static int noDelays;
+    private static int noDelays;
 
     /**
      * FPSFor calculation
      */
-    protected static long calcInterval = 0;
+    private static long calcInterval = 0;
 
     /**
      * FPSFor calculation
      */
-    protected static long prevCalcTime = 0;
+    private static long prevCalcTime = 0;
 
     /**
      * frame count
      */
-    protected static long frameCount = 0;
+    private static long frameCount = 0;
 
     /**
      * ActualFPS
      */
-    public static double actualFPS = 0.0;
+    private static double actualFPS = 0.0;
 
     /**
      * FPSDisplayDecimalFormat
      */
-    public static DecimalFormat df = new DecimalFormat("0.0");
+    private static DecimalFormat df = new DecimalFormat("0.0");
 
     /**
      * Used by perfect fps mode
      */
-    public static long perfectFPSDelay = 0;
+    private static long perfectFPSDelay = 0;
 
     /**
      * ObserverClient
      */
-    public static NetObserverClient netObserverClient;
+    private static NetObserverClient netObserverClient;
 
     /**
      * true if read keyboard input from JInput
@@ -767,7 +767,7 @@ public class NullpoMinoSlick extends StateBasedGame {
      *
      * @param period FPSInterval to calculate the
      */
-    protected static void calcFPS(boolean ingame, long period) {
+    private static void calcFPS(boolean ingame, long period) {
         frameCount++;
         calcInterval += period;
 
@@ -812,7 +812,7 @@ public class NullpoMinoSlick extends StateBasedGame {
     /**
      * Constructor
      */
-    public NullpoMinoSlick() {
+    private NullpoMinoSlick() {
         super("NullpoMino (Now Loading...)");
     }
 

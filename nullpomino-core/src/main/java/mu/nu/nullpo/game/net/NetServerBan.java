@@ -14,20 +14,20 @@ import org.apache.log4j.Logger;
 import biz.source_code.base64Coder.Base64Coder;
 
 public class NetServerBan {
-    static Logger log = Logger.getLogger(NetServerBan.class);
+    private static Logger log = Logger.getLogger(NetServerBan.class);
 
     public String addr;
 
     public Calendar startDate;
     public int banLength;
 
-    public static final int BANLENGTH_1HOUR = 0,
-            BANLENGTH_6HOURS = 1,
-            BANLENGTH_24HOURS = 2,
-            BANLENGTH_1WEEK = 3,
-            BANLENGTH_1MONTH = 4,
-            BANLENGTH_1YEAR = 5,
-            BANLENGTH_PERMANENT = 6;
+    private static final int BANLENGTH_1HOUR = 0;
+    private static final int BANLENGTH_6HOURS = 1;
+    private static final int BANLENGTH_24HOURS = 2;
+    private static final int BANLENGTH_1WEEK = 3;
+    private static final int BANLENGTH_1MONTH = 4;
+    private static final int BANLENGTH_1YEAR = 5;
+    private static final int BANLENGTH_PERMANENT = 6;
 
     public static final int BANLENGTH_TOTAL = 7;
 
@@ -42,7 +42,7 @@ public class NetServerBan {
      *
      * @param addr the remote address this NetServerBan affects.
      */
-    public NetServerBan(String addr) {
+    private NetServerBan(String addr) {
         this(addr, BANLENGTH_PERMANENT);
     }
 
@@ -129,7 +129,7 @@ public class NetServerBan {
      * @param strInput String
      * @return true if success
      */
-    public boolean importStartDate(String strInput) {
+    private boolean importStartDate(String strInput) {
         try {
             if (strInput.startsWith("GMT")) {
                 // GMT String

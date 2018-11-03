@@ -67,11 +67,11 @@ import sdljava.video.SDLVideo;
 /**
  * NullpoMino SDLVersion
  */
-public class NullpoMinoSDL {
+class NullpoMinoSDL {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(NullpoMinoSDL.class);
+    private static Logger log = Logger.getLogger(NullpoMinoSDL.class);
 
     /**
      * SDL key names
@@ -132,7 +132,7 @@ public class NullpoMinoSDL {
     /**
      * State of the gamecount
      */
-    public static final int STATE_MAX = 19;
+    private static final int STATE_MAX = 19;
 
     /**
      * To recognize the keyMaximumValue
@@ -142,7 +142,7 @@ public class NullpoMinoSDL {
     /**
      * Command that was passed to the programLinesArgumentcount
      */
-    public static String[] programArgs;
+    private static String[] programArgs;
 
     /**
      * Save settingsUseProperty file
@@ -162,17 +162,17 @@ public class NullpoMinoSDL {
     /**
      * ObserverFor the functionProperty file
      */
-    public static CustomProperties propObserver;
+    private static CustomProperties propObserver;
 
     /**
      * Default language file
      */
-    public static CustomProperties propLangDefault;
+    private static CustomProperties propLangDefault;
 
     /**
      * Language file
      */
-    public static CustomProperties propLang;
+    private static CustomProperties propLang;
 
     /**
      * Default game mode description file
@@ -192,7 +192,7 @@ public class NullpoMinoSDL {
     /**
      * End flag
      */
-    public static boolean quit = false;
+    private static boolean quit = false;
 
     /**
      * FPSDisplay
@@ -202,32 +202,32 @@ public class NullpoMinoSDL {
     /**
      * FPSFor calculation
      */
-    protected static long calcInterval = 0;
+    private static long calcInterval = 0;
 
     /**
      * FPSFor calculation
      */
-    protected static long prevCalcTime = 0;
+    private static long prevCalcTime = 0;
 
     /**
      * frame count
      */
-    protected static long frameCount = 0;
+    private static long frameCount = 0;
 
     /**
      * ActualFPS
      */
-    public static double actualFPS = 0.0;
+    private static double actualFPS = 0.0;
 
     /**
      * FPSDisplayDecimalFormat
      */
-    public static DecimalFormat df = new DecimalFormat("0.0");
+    private static DecimalFormat df = new DecimalFormat("0.0");
 
     /**
      * Used by perfect fps mode
      */
-    public static long perfectFPSDelay = 0;
+    private static long perfectFPSDelay = 0;
 
     /**
      * True to use perfect FPS
@@ -267,7 +267,7 @@ public class NullpoMinoSDL {
     /**
      * Joystick
      */
-    public static SDLJoystick[] joystick;
+    private static SDLJoystick[] joystick;
 
     /**
      * Joystick direction key State
@@ -277,7 +277,7 @@ public class NullpoMinoSDL {
     /**
      * Joystick Hat switchcount
      */
-    public static int[] joyMaxHat;
+    private static int[] joyMaxHat;
 
     /**
      * Joystick Hat switch state
@@ -302,7 +302,7 @@ public class NullpoMinoSDL {
     /**
      * Current State
      */
-    public static int currentState;
+    private static int currentState;
 
     /**
      * In-game flag (if false, Perfect FPS will not used)
@@ -332,7 +332,7 @@ public class NullpoMinoSDL {
     /**
      * ObserverClient
      */
-    public static NetObserverClient netObserverClient;
+    private static NetObserverClient netObserverClient;
 
     /**
      * Main functioncount
@@ -522,7 +522,7 @@ public class NullpoMinoSDL {
      *
      * @throws SDLException SDLIf an error has occurred
      */
-    public static void init() throws SDLException {
+    private static void init() throws SDLException {
         log.info("Now initializing SDL...");
 
         SDLMain.init(SDLMain.SDL_INIT_VIDEO | SDLMain.SDL_INIT_AUDIO | SDLMain.SDL_INIT_JOYSTICK);
@@ -588,7 +588,7 @@ public class NullpoMinoSDL {
      *
      * @throws SDLException SDLIf an error has occurred
      */
-    public static void run() throws SDLException {
+    private static void run() throws SDLException {
         maxFPS = propConfig.getProperty("option.maxfps", 60);
 
         boolean sleepFlag;
@@ -762,7 +762,7 @@ public class NullpoMinoSDL {
     /**
      * SDLEnd processing of
      */
-    public static void shutdown() {
+    private static void shutdown() {
         log.info("NullpoMinoSDL shutdown()");
 
         try {
@@ -836,7 +836,7 @@ public class NullpoMinoSDL {
      *
      * @throws SDLException If I fail to save
      */
-    public static void saveScreenShot() throws SDLException {
+    private static void saveScreenShot() throws SDLException {
         // FilenameI decided to
         String dir = NullpoMinoSDL.propGlobal.getProperty("custom.screenshot.directory", "ss");
         Calendar c = Calendar.getInstance();
@@ -903,7 +903,7 @@ public class NullpoMinoSDL {
      *
      * @throws SDLException SDLIf an error has occurred
      */
-    protected static void processEvent() throws SDLException {
+    private static void processEvent() throws SDLException {
         while (true) {
             SDLEvent event = SDLEvent.pollEvent();
             if (event == null) break;
@@ -929,7 +929,7 @@ public class NullpoMinoSDL {
     /**
      * Joystick  stateUpdates
      */
-    protected static void joyUpdate() {
+    private static void joyUpdate() {
         try {
             SDLJoystick.joystickUpdate();
 
@@ -962,7 +962,7 @@ public class NullpoMinoSDL {
      *
      * @param period FPSInterval to calculate the
      */
-    protected static void calcFPS(long period) {
+    private static void calcFPS(long period) {
         frameCount++;
         calcInterval += period;
 

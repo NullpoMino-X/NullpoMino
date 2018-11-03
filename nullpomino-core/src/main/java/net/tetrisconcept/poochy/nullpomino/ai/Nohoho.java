@@ -19,89 +19,92 @@ public class Nohoho extends DummyAI implements Runnable {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(Nohoho.class);
+    private static Logger log = Logger.getLogger(Nohoho.class);
 
     /**
      * After that I was groundedX-coordinate
      */
-    public int bestXSub;
+    private int bestXSub;
 
     /**
      * After that I was groundedY-coordinate
      */
-    public int bestYSub;
+    private int bestYSub;
 
     /**
      * After that I was groundedDirection(-1: None)
      */
-    public int bestRtSub;
+    private int bestRtSub;
 
     /**
      * The best moveEvaluation score
      */
-    public int bestPts;
+    private int bestPts;
 
     /**
      * Delay the move for changecount
      */
-    public int delay;
+    private int delay;
 
     /**
      * The GameEngine that owns this AI
      */
-    public GameEngine gEngine;
+    private GameEngine gEngine;
 
     /**
      * The GameManager that owns this AI
      */
-    public GameManager gManager;
+    private GameManager gManager;
 
     /**
      * When true,To threadThink routineInstructing the execution of the
      */
-    public ThinkRequestMutex thinkRequest;
+    private ThinkRequestMutex thinkRequest;
 
     /**
      * true when thread is executing the think routine.
      */
-    public boolean thinking;
+    private boolean thinking;
 
     /**
      * To stop a thread time
      */
-    public int thinkDelay;
+    private int thinkDelay;
 
     /**
      * When true,Running thread
      */
-    public volatile boolean threadRunning;
+    private volatile boolean threadRunning;
 
     /**
      * Thread for executing the think routine
      */
-    public Thread thread;
+    private Thread thread;
 
     /**
      * Number of frames for which piece has been stuck
      */
-    protected int stuckDelay;
+    private int stuckDelay;
 
     /**
      * Status of last frame
      */
-    protected int lastInput, lastX, lastY, lastRt;
+    private int lastInput;
+    private int lastX;
+    private int lastY;
+    private int lastRt;
     /**
      * Number of consecutive frames with same piece status
      */
-    protected int sameStatusTime;
+    private int sameStatusTime;
     /**
      * DAS charge status. -1 = left, 0 = none, 1 = right
      */
-    protected int setDAS;
+    private int setDAS;
     /**
      * Last input if done in ARE
      */
-    protected int inputARE;
+    private int inputARE;
     /**
      * MaximumCompromise level
      */
@@ -109,19 +112,19 @@ public class Nohoho extends DummyAI implements Runnable {
     /**
      * Set to true to print debug information
      */
-    protected static final boolean DEBUG_ALL = true;
+    private static final boolean DEBUG_ALL = true;
     /**
      * Did the thinking thread finish successfully?
      */
-    protected boolean thinkComplete;
+    private boolean thinkComplete;
     /**
      * Did the thinking thread find a possible position?
      */
-    protected boolean thinkSuccess;
+    private boolean thinkSuccess;
     /**
      * Was the game in ARE as of the last frame?
      */
-    protected boolean inARE;
+    private boolean inARE;
 
     /*
      * AI's name
@@ -391,7 +394,7 @@ public class Nohoho extends DummyAI implements Runnable {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public void thinkBestPosition(GameEngine engine, int playerID) {
+    private void thinkBestPosition(GameEngine engine, int playerID) {
         if (DEBUG_ALL) log.debug("thinkBestPosition called, inARE = " + inARE + ", piece: ");
         bestHold = false;
         bestX = 0;
@@ -569,7 +572,7 @@ public class Nohoho extends DummyAI implements Runnable {
      * @param defcon Defense level (the lower, the more defensive)
      * @return Evaluation score
      */
-    public int thinkMain(int x, int y, int rt, int rtOld, Field fld, Piece piece, int defcon) {
+    private int thinkMain(int x, int y, int rt, int rtOld, Field fld, Piece piece, int defcon) {
         int pts = 0;
 
         if (defcon <= 3)
@@ -649,7 +652,7 @@ public class Nohoho extends DummyAI implements Runnable {
     }
 
     //private static final int[][] HI_PENALTY = {{6, 2}, {7, 6}, {6, 2}, {1, 0}};
-    public static Piece checkOffset(Piece p, GameEngine engine) {
+    private static Piece checkOffset(Piece p, GameEngine engine) {
         Piece result = new Piece(p);
         result.big = engine.big;
         if (!p.offsetApplied)
@@ -657,7 +660,7 @@ public class Nohoho extends DummyAI implements Runnable {
         return result;
     }
 
-    public static int[] getColumnDepths(Field fld) {
+    private static int[] getColumnDepths(Field fld) {
         int width = fld.getWidth();
         int[] result = new int[width];
         for (int x = 0; x < width; x++)
@@ -665,7 +668,7 @@ public class Nohoho extends DummyAI implements Runnable {
         return result;
     }
 
-    protected void logBest(int caseNum) {
+    private void logBest(int caseNum) {
         log.debug("New best position found (Case " + caseNum +
                 "): bestHold = " + bestHold +
                 ", bestX = " + bestX +
@@ -721,13 +724,13 @@ public class Nohoho extends DummyAI implements Runnable {
 
     //Wrapper for think requests
     private static class ThinkRequestMutex {
-        public boolean active;
+        boolean active;
 
-        public ThinkRequestMutex() {
+        ThinkRequestMutex() {
             active = false;
         }
 
-        public synchronized void newRequest() {
+        synchronized void newRequest() {
             active = true;
             notifyAll();
         }

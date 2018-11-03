@@ -952,7 +952,7 @@ public class AvalancheVSMode extends AvalancheVSDummyMode {
      * @param engine   GameEngine
      * @param playerID Player ID
      */
-    protected void drawXorTimer(GameEngine engine, int playerID) {
+    private void drawXorTimer(GameEngine engine, int playerID) {
         if (inFever[playerID]) {
             String strFeverTimer = String.format("%02d", (feverTime[playerID] + 59) / 60);
 

@@ -57,67 +57,67 @@ public class StateInGame extends BasicGameState {
     /**
      * Game main class
      */
-    public GameManager gameManager = null;
+    private GameManager gameManager = null;
 
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(StateInGame.class);
+    private static Logger log = Logger.getLogger(StateInGame.class);
 
     /**
      * Game paused flag
      */
-    protected boolean pause = false;
+    private boolean pause = false;
 
     /**
      * Hide pause menu
      */
-    protected boolean pauseMessageHide = false;
+    private boolean pauseMessageHide = false;
 
     /**
      * Frame step enabled flag
      */
-    protected boolean enableframestep = false;
+    private boolean enableframestep = false;
 
     /**
      * Show background flag
      */
-    protected boolean showbg = true;
+    private boolean showbg = true;
 
     /**
      * Fast forward
      */
-    protected int fastforward = 0;
+    private int fastforward = 0;
 
     /**
      * Pause menu cursor position
      */
-    protected int cursor = 0;
+    private int cursor = 0;
 
     /**
      * Number of frames remaining until pause key can be used
      */
-    protected int pauseFrame = 0;
+    private int pauseFrame = 0;
 
     /**
      * Screenshot flag
      */
-    protected boolean ssflag = false;
+    private boolean ssflag = false;
 
     /**
      * AppGameContainer (Used by title-bar text change)
      */
-    protected AppGameContainer appContainer = null;
+    private AppGameContainer appContainer = null;
 
     /**
      * Previous ingame flag (Used by title-bar text change)
      */
-    protected boolean prevInGameFlag = false;
+    private boolean prevInGameFlag = false;
 
     /**
      * Current game mode name
      */
-    protected String modeName;
+    private String modeName;
 
     /*
      * Fetch this state's ID
@@ -308,7 +308,7 @@ public class StateInGame extends BasicGameState {
     /**
      * Update title bar text
      */
-    public void updateTitleBarCaption() {
+    private void updateTitleBarCaption() {
         String strTitle = "NullpoMino - " + modeName;
 
         if ((gameManager != null) && (gameManager.engine != null) && (gameManager.engine.length > 0) && (gameManager.engine[0] != null)) {
@@ -330,7 +330,7 @@ public class StateInGame extends BasicGameState {
     /**
      * Shutdown routine
      */
-    public void shutdown() {
+    private void shutdown() {
         gameManager.shutdown();
         gameManager = null;
         ResourceHolderSlick.bgmUnloadAll();

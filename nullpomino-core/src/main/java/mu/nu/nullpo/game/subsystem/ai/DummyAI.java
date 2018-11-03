@@ -58,7 +58,7 @@ public class DummyAI implements AIPlayer {
     /**
      * Hold Force
      */
-    public boolean forceHold;
+    boolean forceHold;
 
     /**
      * Current piece number

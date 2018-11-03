@@ -56,27 +56,27 @@ public class StateReplaySelect extends DummyMenuScrollState {
     /**
      * 1Displayed on the screenMaximumFilecount
      */
-    public static final int PAGE_HEIGHT = 20;
+    private static final int PAGE_HEIGHT = 20;
 
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(StateReplaySelect.class);
+    private static Logger log = Logger.getLogger(StateReplaySelect.class);
 
     /**
      * Mode  name
      */
-    protected String[] modenameList;
+    private String[] modenameList;
 
     /**
      * Rule name
      */
-    protected String[] rulenameList;
+    private String[] rulenameList;
 
     /**
      * ScoreInformation such as the
      */
-    protected Statistics[] statsList;
+    private Statistics[] statsList;
 
     public StateReplaySelect() {
         pageHeight = PAGE_HEIGHT;
@@ -116,7 +116,7 @@ public class StateReplaySelect extends DummyMenuScrollState {
      *
      * @return Replay fileFilenameArray of. If there is no directorynull
      */
-    protected String[] getReplayFileList() {
+    private String[] getReplayFileList() {
         // Get file list
         File dir = new File(NullpoMinoSlick.propGlobal.getProperty("custom.replay.directory", "replay"));
 
@@ -135,7 +135,7 @@ public class StateReplaySelect extends DummyMenuScrollState {
     /**
      * Set the details of replay
      */
-    protected void setReplayRuleAndModeList() {
+    private void setReplayRuleAndModeList() {
         if (list == null) return;
 
         modenameList = new String[list.length];

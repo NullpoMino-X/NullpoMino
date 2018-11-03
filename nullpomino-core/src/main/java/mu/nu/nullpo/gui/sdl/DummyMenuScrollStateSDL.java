@@ -11,47 +11,51 @@ public abstract class DummyMenuScrollStateSDL extends DummyMenuChooseStateSDL {
     /**
      * Scroll bar attributes
      */
-    protected static final int SB_TEXT_X = 38,
-            SB_TEXT_COLOR = NormalFontSDL.COLOR_BLUE,
-            SB_MIN_X = SB_TEXT_X << 4,
-            SB_MIN_Y = 65,
-            LINE_WIDTH = 2,
-            SB_WIDTH = 14;
+    private static final int SB_TEXT_X = 38;
+    private static final int SB_TEXT_COLOR = NormalFontSDL.COLOR_BLUE;
+    private static final int SB_MIN_X = SB_TEXT_X << 4;
+    private static final int SB_MIN_Y = 65;
+    private static final int LINE_WIDTH = 2;
+    private static final int SB_WIDTH = 14;
 
     /**
      * Scroll bar colors
      */
-    protected static final int SB_SHADOW_COLOR = 0x0C4E9C,
-            SB_BORDER_COLOR = 0x3496FC,
-            SB_FILL_COLOR = 0xFFFFFF,
-            SB_BACK_COLOR = 0;
+    private static final int SB_SHADOW_COLOR = 0x0C4E9C;
+    private static final int SB_BORDER_COLOR = 0x3496FC;
+    private static final int SB_FILL_COLOR = 0xFFFFFF;
+    private static final int SB_BACK_COLOR = 0;
 
     /**
      * ID number of file at top of currently displayed section
      */
-    protected int minentry;
+    private int minentry;
 
     /**
      * Maximum number of entries to display at a time
      */
-    protected int pageHeight;
+    int pageHeight;
 
     /**
      * List of entries
      */
-    protected String[] list;
+    String[] list;
 
     /**
      * Error messages for null or empty list
      */
-    protected String nullError, emptyError;
+    String nullError;
+    String emptyError;
 
     /**
      * Y-coordinates of dark sections of scroll bar
      */
-    protected int pUpMinY, pUpMaxY, pDownMinY, pDownMaxY;
+    private int pUpMinY;
+    private int pUpMaxY;
+    private int pDownMinY;
+    private int pDownMaxY;
 
-    public DummyMenuScrollStateSDL() {
+    DummyMenuScrollStateSDL() {
         minentry = 0;
         nullError = "";
         emptyError = "";
@@ -97,7 +101,7 @@ public abstract class DummyMenuScrollStateSDL extends DummyMenuChooseStateSDL {
      * @param screen SDLSurface
      * @throws SDLException When something bad happens
      */
-    protected void onRenderSuccess(SDLSurface screen) throws SDLException {
+    void onRenderSuccess(SDLSurface screen) throws SDLException {
     }
 
     @Override
@@ -141,7 +145,7 @@ public abstract class DummyMenuScrollStateSDL extends DummyMenuChooseStateSDL {
         return false;
     }
 
-    public void drawMenuList(SDLSurface screen) throws SDLException {
+    private void drawMenuList(SDLSurface screen) throws SDLException {
         int maxentry = minentry + pageHeight - 1;
         if (maxentry >= list.length)
             maxentry = list.length - 1;
@@ -191,7 +195,7 @@ public abstract class DummyMenuScrollStateSDL extends DummyMenuChooseStateSDL {
         else if (change == -1) pageUp();
     }
 
-    protected void pageDown() {
+    private void pageDown() {
         ResourceHolderSDL.soundManager.play("cursor");
         int max = maxCursor - pageHeight + 1;
         if (minentry >= max)
@@ -206,7 +210,7 @@ public abstract class DummyMenuScrollStateSDL extends DummyMenuChooseStateSDL {
         }
     }
 
-    protected void pageUp() {
+    private void pageUp() {
         ResourceHolderSDL.soundManager.play("cursor");
         if (minentry == 0)
             cursor = 0;

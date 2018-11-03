@@ -389,7 +389,7 @@ public class GarbageManiaMode extends AbstractMode {
      *
      * @param prop Property file
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         startlevel = prop.getProperty("garbagemania.startlevel", 0);
         alwaysghost = prop.getProperty("garbagemania.alwaysghost", false);
         always20g = prop.getProperty("garbagemania.always20g", false);
@@ -403,7 +403,7 @@ public class GarbageManiaMode extends AbstractMode {
      *
      * @param prop Property file
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("garbagemania.startlevel", startlevel);
         prop.setProperty("garbagemania.alwaysghost", alwaysghost);
         prop.setProperty("garbagemania.always20g", always20g);

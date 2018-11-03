@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JComponent;
 
-public class SurfaceComponent extends JComponent {
+class SurfaceComponent extends JComponent {
 
     private static final long serialVersionUID = 1L;
 

@@ -34,12 +34,20 @@ import org.newdawn.slick.SlickException;
 /**
  * Normal display class string
  */
-public class NormalFontSlick {
+class NormalFontSlick {
     /**
      * Character constant colorcount
      */
-    public static final int COLOR_WHITE = 0, COLOR_BLUE = 1, COLOR_RED = 2, COLOR_PINK = 3, COLOR_GREEN = 4, COLOR_YELLOW = 5, COLOR_CYAN = 6,
-            COLOR_ORANGE = 7, COLOR_PURPLE = 8, COLOR_DARKBLUE = 9;
+    private static final int COLOR_WHITE = 0;
+    public static final int COLOR_BLUE = 1;
+    public static final int COLOR_RED = 2;
+    public static final int COLOR_PINK = 3;
+    public static final int COLOR_GREEN = 4;
+    public static final int COLOR_YELLOW = 5;
+    public static final int COLOR_CYAN = 6;
+    public static final int COLOR_ORANGE = 7;
+    private static final int COLOR_PURPLE = 8;
+    private static final int COLOR_DARKBLUE = 9;
 
     /**
      * Specified font ColorSlickUseColorObtained as
@@ -47,7 +55,7 @@ public class NormalFontSlick {
      * @param fontColor font Color
      * @return font ColorColor
      */
-    public static Color getFontColorAsColor(int fontColor) {
+    private static Color getFontColorAsColor(int fontColor) {
         switch (fontColor) {
             case COLOR_BLUE:
                 return new Color(0, 0, 255);
@@ -175,7 +183,7 @@ public class NormalFontSlick {
      * @param fontColorFalse flagThefalseText color in the case of
      * @param fontColorTrue  flagThetrueText color in the case of
      */
-    public static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue) {
+    private static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue) {
         if (!flag)
             printFont(fontX, fontY, fontStr, fontColorFalse);
         else
@@ -206,7 +214,7 @@ public class NormalFontSlick {
      * @param scale          Enlargement factor
      * @throws SlickException If I failed to draw
      */
-    public static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue, float scale) throws SlickException {
+    private static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue, float scale) throws SlickException {
         if (!flag)
             printFont(fontX, fontY, fontStr, fontColorFalse, scale);
         else

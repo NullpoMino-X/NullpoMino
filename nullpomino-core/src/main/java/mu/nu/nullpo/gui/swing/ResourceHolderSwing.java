@@ -42,7 +42,7 @@ import org.apache.log4j.Logger;
 /**
  * Class to the management of image and sound
  */
-public class ResourceHolderSwing {
+class ResourceHolderSwing {
     /**
      * BackgroundOfcount
      */
@@ -51,22 +51,22 @@ public class ResourceHolderSwing {
     /**
      * Number of images for block spatter animation during line clears
      */
-    public static final int BLOCK_BREAK_MAX = 8;
+    private static final int BLOCK_BREAK_MAX = 8;
 
     /**
      * Number of image splits for block spatter animation during line clears
      */
-    public static final int BLOCK_BREAK_SEGMENTS = 2;
+    private static final int BLOCK_BREAK_SEGMENTS = 2;
 
     /**
      * Number of gem block clear effects
      */
-    public static final int PERASE_MAX = 7;
+    private static final int PERASE_MAX = 7;
 
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(ResourceHolderSwing.class);
+    private static Logger log = Logger.getLogger(ResourceHolderSwing.class);
 
     /**
      * Block images
@@ -284,7 +284,7 @@ public class ResourceHolderSwing {
      * @param url Image filesURL
      * @return Image file (Failurenull)
      */
-    public static BufferedImage loadImage(URL url) {
+    private static BufferedImage loadImage(URL url) {
         BufferedImage img = null;
         try {
             img = ImageIO.read(url);

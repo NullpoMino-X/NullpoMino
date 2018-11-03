@@ -1,19 +1,19 @@
 package mu.nu.nullpo.gui.menu;
 
-public abstract class MenuItem {
+abstract class MenuItem {
 
-    public String name;
-    public String description;
-    public int color;
-    public int state;
+    String name;
+    private String description;
+    int color;
+    int state;
 
-    public MenuItem(String name, String description) {
+    MenuItem(String name, String description) {
         this.name = name;
         this.description = description;
 
     }
 
-    public MenuItem(String name) {
+    MenuItem(String name) {
         this(name, "");
     }
 

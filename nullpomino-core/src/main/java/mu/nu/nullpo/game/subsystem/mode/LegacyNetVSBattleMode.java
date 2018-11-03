@@ -61,7 +61,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
     /**
      * Log
      */
-    static final Logger log = Logger.getLogger(LegacyNetVSBattleMode.class);
+    private static final Logger log = Logger.getLogger(LegacyNetVSBattleMode.class);
 
     /**
      * Maximum number of players
@@ -2846,17 +2846,17 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
         /**
          * garbage blockcount
          */
-        public int lines = 0;
+        int lines = 0;
 
         /**
          * Source(For gamesPlayer number)
          */
-        public int playerID = 0;
+        int playerID = 0;
 
         /**
          * Source(For non-gamePlayer number)
          */
-        public int uid = 0;
+        int uid = 0;
 
         /**
          * Constructor
@@ -2881,7 +2881,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
          * @param g garbage blockcount
          * @param p Source(For gamesPlayer number)
          */
-        public GarbageEntry(int g, int p) {
+        GarbageEntry(int g, int p) {
             lines = g;
             playerID = p;
         }
@@ -2893,7 +2893,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
          * @param p Source(For gamesPlayer number)
          * @param s Source(For non-gamePlayer number)
          */
-        public GarbageEntry(int g, int p, int s) {
+        GarbageEntry(int g, int p, int s) {
             lines = g;
             playerID = p;
             uid = s;

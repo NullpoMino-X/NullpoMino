@@ -53,52 +53,52 @@ public class RendererSDL extends EventReceiver {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(RendererSDL.class);
+    private static Logger log = Logger.getLogger(RendererSDL.class);
 
     /**
      * Surface to draw
      */
-    protected SDLSurface graphics;
+    private SDLSurface graphics;
 
     /**
      * Production Object
      */
-    protected ArrayList<EffectObject> effectlist;
+    private ArrayList<EffectObject> effectlist;
 
     /**
      * Line clearDisplay Effects
      */
-    protected boolean showlineeffect;
+    private boolean showlineeffect;
 
     /**
      * Heavy production use
      */
-    protected boolean heavyeffect;
+    private boolean heavyeffect;
 
     /**
      * fieldBackgroundThe brightness of the
      */
-    protected int fieldbgbright;
+    private int fieldbgbright;
 
     /**
      * Show field BG grid
      */
-    protected boolean showfieldbggrid;
+    private boolean showfieldbggrid;
 
     /**
      * NEXTDarken the field
      */
-    protected boolean darknextarea;
+    private boolean darknextarea;
 
     /**
      * ghost On top of the pieceNEXTDisplay
      */
-    protected boolean nextshadow;
+    private boolean nextshadow;
 
     /**
      * Line clear effect speed
      */
-    protected int lineeffectspeed;
+    private int lineeffectspeed;
 
     /**
      * Constructor
@@ -129,7 +129,7 @@ public class RendererSDL extends EventReceiver {
      * @param b Blue
      * @return SDLColor values ​​for
      */
-    public long getColorValue(int r, int g, int b) {
+    private long getColorValue(int r, int g, int b) {
         try {
             return SDLVideo.mapRGB(graphics.getFormat(), r, g, b);
         } catch (SDLException e) {
@@ -144,7 +144,7 @@ public class RendererSDL extends EventReceiver {
      * @param colorID Block colorID
      * @return SDLColor values ​​for
      */
-    public long getColorByID(int colorID) {
+    private long getColorByID(int colorID) {
         switch (colorID) {
             case Block.BLOCK_COLOR_GRAY:
                 return getColorValue(64, 64, 64);
@@ -166,7 +166,7 @@ public class RendererSDL extends EventReceiver {
         return getColorValue(0, 0, 0);
     }
 
-    public long getColorByIDBright(int colorID) {
+    private long getColorByIDBright(int colorID) {
         switch (colorID) {
             case Block.BLOCK_COLOR_GRAY:
                 return getColorValue(128, 128, 128);
@@ -415,7 +415,7 @@ public class RendererSDL extends EventReceiver {
      * @param attr     Attribute
      * @throws SDLException When something bad happens
      */
-    protected void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha, float scale, int attr) throws SDLException {
+    private void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha, float scale, int attr) throws SDLException {
         if (graphics == null) return;
 
         if (color <= Block.BLOCK_COLOR_INVALID) return;
@@ -534,7 +534,7 @@ public class RendererSDL extends EventReceiver {
      * @param scale    Enlargement factor
      * @throws SDLException If I failed to draw
      */
-    protected void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha, float scale) throws SDLException {
+    private void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha, float scale) throws SDLException {
         drawBlock(x, y, color, skin, bone, darkness, alpha, scale, 0);
     }
 
@@ -559,7 +559,7 @@ public class RendererSDL extends EventReceiver {
      * @param scale Enlargement factor
      * @throws SDLException If I failed to draw
      */
-    protected void drawBlock(int x, int y, Block blk, float scale) throws SDLException {
+    private void drawBlock(int x, int y, Block blk, float scale) throws SDLException {
         drawBlock(x, y, blk.getDrawColor(), blk.skin, blk.getAttribute(Block.BLOCK_ATTRIBUTE_BONE), blk.darkness, blk.alpha, scale, blk.attribute);
     }
 
@@ -577,7 +577,7 @@ public class RendererSDL extends EventReceiver {
         drawBlock(x, y, blk.getDrawColor(), blk.skin, blk.getAttribute(Block.BLOCK_ATTRIBUTE_BONE), darkness, blk.alpha, scale, blk.attribute);
     }
 
-    protected void drawBlockForceVisible(int x, int y, Block blk, float scale) throws SDLException {
+    private void drawBlockForceVisible(int x, int y, Block blk, float scale) throws SDLException {
         drawBlock(x, y, blk.getDrawColor(), blk.skin, blk.getAttribute(Block.BLOCK_ATTRIBUTE_BONE), blk.darkness,
                 (0.5f * blk.alpha) + 0.5f, scale, blk.attribute);
     }
@@ -590,7 +590,7 @@ public class RendererSDL extends EventReceiver {
      * @param piece Peace to draw
      * @throws SDLException If I failed to draw
      */
-    protected void drawPiece(int x, int y, Piece piece) throws SDLException {
+    private void drawPiece(int x, int y, Piece piece) throws SDLException {
         drawPiece(x, y, piece, 1.0f);
     }
 
@@ -603,7 +603,7 @@ public class RendererSDL extends EventReceiver {
      * @param scale Enlargement factor
      * @throws SDLException If I failed to draw
      */
-    protected void drawPiece(int x, int y, Piece piece, float scale) throws SDLException {
+    private void drawPiece(int x, int y, Piece piece, float scale) throws SDLException {
         drawPiece(x, y, piece, scale, 0f);
     }
 
@@ -617,7 +617,7 @@ public class RendererSDL extends EventReceiver {
      * @param darkness Lightness or darkness
      * @throws SDLException If I failed to draw
      */
-    protected void drawPiece(int x, int y, Piece piece, float scale, float darkness) throws SDLException {
+    private void drawPiece(int x, int y, Piece piece, float scale, float darkness) throws SDLException {
         for (int i = 0; i < piece.getMaxBlock(); i++) {
             int x2 = x + (int) (piece.dataX[piece.direction][i] * 16 * scale);
             int y2 = y + (int) (piece.dataY[piece.direction][i] * 16 * scale);
@@ -638,7 +638,7 @@ public class RendererSDL extends EventReceiver {
      * @param scale  Display magnification
      * @throws SDLException If I failed to draw
      */
-    protected void drawCurrentPiece(int x, int y, GameEngine engine, float scale) throws SDLException {
+    private void drawCurrentPiece(int x, int y, GameEngine engine, float scale) throws SDLException {
         Piece piece = engine.nowPieceObject;
         int blksize = (int) (16 * scale);
 
@@ -680,7 +680,7 @@ public class RendererSDL extends EventReceiver {
      * @param scale  Display magnification
      * @throws SDLException If I failed to draw
      */
-    protected void drawGhostPiece(int x, int y, GameEngine engine, float scale) throws SDLException {
+    private void drawGhostPiece(int x, int y, GameEngine engine, float scale) throws SDLException {
         Piece piece = engine.nowPieceObject;
         int blksize = (int) (16 * scale);
 
@@ -797,7 +797,7 @@ public class RendererSDL extends EventReceiver {
         }
     }
 
-    protected void drawHintPiece(int x, int y, GameEngine engine, float scale) throws SDLException {
+    private void drawHintPiece(int x, int y, GameEngine engine, float scale) throws SDLException {
         Piece piece = engine.aiHintPiece;
         if (piece != null) {
             piece.direction = engine.ai.bestRt;
@@ -898,7 +898,7 @@ public class RendererSDL extends EventReceiver {
      * @param small  Half size
      * @throws SDLException If I failed to draw
      */
-    protected void drawField(int x, int y, GameEngine engine, int size) throws SDLException {
+    private void drawField(int x, int y, GameEngine engine, int size) throws SDLException {
         if (graphics == null) return;
 
         int blksize = 16;
@@ -1023,7 +1023,7 @@ public class RendererSDL extends EventReceiver {
      * @param small  Half size
      * @throws SDLException If I failed to draw
      */
-    protected void drawFrame(int x, int y, GameEngine engine, int displaysize) throws SDLException {
+    private void drawFrame(int x, int y, GameEngine engine, int displaysize) throws SDLException {
         if (graphics == null) return;
 
         int size = 4;
@@ -1178,7 +1178,7 @@ public class RendererSDL extends EventReceiver {
      * @param engine GameEngineInstance of
      * @throws SDLException If I failed to draw
      */
-    protected void drawNext(int x, int y, GameEngine engine) throws SDLException {
+    private void drawNext(int x, int y, GameEngine engine) throws SDLException {
         if (graphics == null) return;
 
         int fldWidth = 10;
@@ -1412,7 +1412,7 @@ public class RendererSDL extends EventReceiver {
      * @throws SDLException
      * @author Wojtek
      */
-    protected void drawShadowNexts(int x, int y, GameEngine engine, float scale) throws SDLException {
+    private void drawShadowNexts(int x, int y, GameEngine engine, float scale) throws SDLException {
         Piece piece = engine.nowPieceObject;
         int blksize = (int) (16 * scale);
 
@@ -1720,7 +1720,7 @@ public class RendererSDL extends EventReceiver {
     /**
      * Update effects
      */
-    protected void effectUpdate() {
+    private void effectUpdate() {
         boolean emptyflag = true;
 
         for (EffectObject obj : effectlist) {
@@ -1744,7 +1744,7 @@ public class RendererSDL extends EventReceiver {
     /**
      * Render effects
      */
-    protected void effectRender() {
+    private void effectRender() {
         for (EffectObject obj : effectlist) {
             // Normal Block
             if (obj.effect == 1) {

@@ -82,7 +82,7 @@ public class Base64Coder {
      * @param lineSeparator The line separator to be used to separate the output lines.
      * @return A String containing the Base64 encoded data, broken into lines.
      */
-    public static String encodeLines(byte[] in, int iOff, int iLen, int lineLen, String lineSeparator) {
+    private static String encodeLines(byte[] in, int iOff, int iLen, int lineLen, String lineSeparator) {
         int blockLen = (lineLen * 3) / 4;
         if (blockLen <= 0) throw new IllegalArgumentException();
         int lines = (iLen + blockLen - 1) / blockLen;
@@ -130,7 +130,7 @@ public class Base64Coder {
      * @param iLen Number of bytes to process in <code>in</code>, starting at <code>iOff</code>.
      * @return A character array containing the Base64 encoded data.
      */
-    public static char[] encode(byte[] in, int iOff, int iLen) {
+    private static char[] encode(byte[] in, int iOff, int iLen) {
         int oDataLen = (iLen * 4 + 2) / 3;       // output length without padding
         int oLen = ((iLen + 2) / 3) * 4;         // output length including padding
         char[] out = new char[oLen];
@@ -207,7 +207,7 @@ public class Base64Coder {
      * @return An array containing the decoded data bytes.
      * @throws IllegalArgumentException If the input is not valid Base64 encoded data.
      */
-    public static byte[] decode(char[] in) {
+    private static byte[] decode(char[] in) {
         return decode(in, 0, in.length);
     }
 
@@ -221,7 +221,7 @@ public class Base64Coder {
      * @return An array containing the decoded data bytes.
      * @throws IllegalArgumentException If the input is not valid Base64 encoded data.
      */
-    public static byte[] decode(char[] in, int iOff, int iLen) {
+    private static byte[] decode(char[] in, int iOff, int iLen) {
         if (iLen % 4 != 0)
             throw new IllegalArgumentException("Length of Base64 encoded input string is not a multiple of 4.");
         while (iLen > 0 && in[iOff + iLen - 1] == '=') iLen--;

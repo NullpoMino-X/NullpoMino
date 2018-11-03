@@ -86,7 +86,7 @@ public class WallkickResult implements Serializable {
     /**
      * Reset to defaults
      */
-    public void reset() {
+    private void reset() {
         offsetX = 0;
         offsetY = 0;
         direction = 0;
@@ -97,7 +97,7 @@ public class WallkickResult implements Serializable {
      *
      * @param w Copy source
      */
-    public void copy(WallkickResult w) {
+    private void copy(WallkickResult w) {
         this.offsetX = w.offsetX;
         this.offsetY = w.offsetY;
         this.direction = w.direction;

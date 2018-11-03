@@ -53,12 +53,12 @@ public class StateConfigJoystickMain extends BaseGameState {
     /**
      * Joystick method names
      */
-    protected static final String[] JOYSTICK_METHOD_STRINGS = {"NONE", "SLICK DEFAULT", "SLICK ALTERNATE", "LWJGL"};
+    private static final String[] JOYSTICK_METHOD_STRINGS = {"NONE", "SLICK DEFAULT", "SLICK ALTERNATE", "LWJGL"};
 
     /**
      * UI Text identifier Strings
      */
-    protected static final String[] UI_TEXT = {
+    private static final String[] UI_TEXT = {
             "ConfigJoystickMain_ButtonSetting",
             "ConfigJoystickMain_InputTest",
             "ConfigJoystickMain_JoyUseNumber",
@@ -76,32 +76,32 @@ public class StateConfigJoystickMain extends BaseGameState {
     /**
      * Cursor position
      */
-    protected int cursor = 0;
+    private int cursor = 0;
 
     /**
      * UseJoystick Of number
      */
-    protected int joyUseNumber;
+    private int joyUseNumber;
 
     /**
      * Joystick direction key Threshold for the reaction
      */
-    protected int joyBorder;
+    private int joyBorder;
 
     /**
      * Ignore analog stick
      */
-    protected boolean joyIgnoreAxis;
+    private boolean joyIgnoreAxis;
 
     /**
      * Ignore hat switch
      */
-    protected boolean joyIgnorePOV;
+    private boolean joyIgnorePOV;
 
     /**
      * Joystick input method
      */
-    protected int joyMethod;
+    private int joyMethod;
 
     /*
      * Fetch this state's ID
@@ -116,7 +116,7 @@ public class StateConfigJoystickMain extends BaseGameState {
      *
      * @param prop Property file to read from
      */
-    protected void loadConfig(CustomProperties prop) {
+    private void loadConfig(CustomProperties prop) {
         joyUseNumber = prop.getProperty("joyUseNumber.p" + player, -1);
         joyBorder = prop.getProperty("joyBorder.p" + player, 0);
         joyIgnoreAxis = prop.getProperty("joyIgnoreAxis.p" + player, false);
@@ -129,7 +129,7 @@ public class StateConfigJoystickMain extends BaseGameState {
      *
      * @param prop Property file to save to
      */
-    protected void saveConfig(CustomProperties prop) {
+    private void saveConfig(CustomProperties prop) {
         prop.setProperty("joyUseNumber.p" + player, joyUseNumber);
         prop.setProperty("joyBorder.p" + player, joyBorder);
         prop.setProperty("joyIgnoreAxis.p" + player, joyIgnoreAxis);

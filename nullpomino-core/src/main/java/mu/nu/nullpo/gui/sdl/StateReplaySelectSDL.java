@@ -52,27 +52,27 @@ public class StateReplaySelectSDL extends DummyMenuScrollStateSDL {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(StateReplaySelectSDL.class);
+    private static Logger log = Logger.getLogger(StateReplaySelectSDL.class);
 
     /**
      * 1Displayed on the screenMaximumFilecount
      */
-    public static final int PAGE_HEIGHT = 20;
+    private static final int PAGE_HEIGHT = 20;
 
     /**
      * Mode  name
      */
-    protected String[] modenameList;
+    private String[] modenameList;
 
     /**
      * Rule name
      */
-    protected String[] rulenameList;
+    private String[] rulenameList;
 
     /**
      * ScoreInformation such as the
      */
-    protected Statistics[] statsList;
+    private Statistics[] statsList;
 
     public StateReplaySelectSDL() {
         pageHeight = PAGE_HEIGHT;
@@ -97,7 +97,7 @@ public class StateReplaySelectSDL extends DummyMenuScrollStateSDL {
      *
      * @return Replay fileFilenameArray of. If there is no directorynull
      */
-    protected String[] getReplayFileList() {
+    private String[] getReplayFileList() {
         File dir = new File(NullpoMinoSDL.propGlobal.getProperty("custom.replay.directory", "replay"));
 
         FilenameFilter filter = (dir1, name) -> name.endsWith(".rep");
@@ -115,7 +115,7 @@ public class StateReplaySelectSDL extends DummyMenuScrollStateSDL {
     /**
      * Set the details of replay
      */
-    protected void setReplayRuleAndModeList() {
+    private void setReplayRuleAndModeList() {
         if (list == null) return;
 
         modenameList = new String[list.length];

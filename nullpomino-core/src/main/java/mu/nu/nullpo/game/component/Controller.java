@@ -97,16 +97,16 @@ public class Controller implements Serializable {
     /**
      * Constant-bit operationcount
      */
-    public static final int BUTTON_BIT_UP = 1,
-            BUTTON_BIT_DOWN = 2,
-            BUTTON_BIT_LEFT = 4,
-            BUTTON_BIT_RIGHT = 8,
-            BUTTON_BIT_A = 16,
-            BUTTON_BIT_B = 32,
-            BUTTON_BIT_C = 64,
-            BUTTON_BIT_D = 128,
-            BUTTON_BIT_E = 256,
-            BUTTON_BIT_F = 512;
+    public static final int BUTTON_BIT_UP = 1;
+    public static final int BUTTON_BIT_DOWN = 2;
+    public static final int BUTTON_BIT_LEFT = 4;
+    public static final int BUTTON_BIT_RIGHT = 8;
+    public static final int BUTTON_BIT_A = 16;
+    public static final int BUTTON_BIT_B = 32;
+    private static final int BUTTON_BIT_C = 64;
+    public static final int BUTTON_BIT_D = 128;
+    public static final int BUTTON_BIT_E = 256;
+    private static final int BUTTON_BIT_F = 512;
 
     /**
      * ButtonIf you hold down thetrue
@@ -147,7 +147,7 @@ public class Controller implements Serializable {
      *
      * @param c Copy source
      */
-    public void copy(Controller c) {
+    private void copy(Controller c) {
         buttonPress = new boolean[BUTTON_COUNT];
         buttonTime = new int[BUTTON_COUNT];
 
@@ -160,7 +160,7 @@ public class Controller implements Serializable {
     /**
      * buttonThe state is not pressed all the
      */
-    public void clearButtonState() {
+    private void clearButtonState() {
         for (int i = 0; i < BUTTON_COUNT; i++) buttonPress[i] = false;
     }
 

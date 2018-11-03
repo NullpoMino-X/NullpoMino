@@ -54,7 +54,7 @@ public class WaveEngine implements LineListener {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(WaveEngine.class);
+    private static Logger log = Logger.getLogger(WaveEngine.class);
 
     /**
      * You can registerWAVE file OfMaximumcount
@@ -88,7 +88,7 @@ public class WaveEngine implements LineListener {
      *
      * @param maxClips You can registerWAVE file OfMaximumcount
      */
-    public WaveEngine(int maxClips) {
+    private WaveEngine(int maxClips) {
         this.maxClips = maxClips;
         clipMap = new HashMap<>(maxClips);
     }
@@ -137,7 +137,7 @@ public class WaveEngine implements LineListener {
      * @param name Registered name
      * @param url  URL
      */
-    public void load(String name, URL url) {
+    private void load(String name, URL url) {
         if (counter >= maxClips) {
             log.warn(name + " : No more files can be loaded (Max:" + maxClips + ")");
             return;

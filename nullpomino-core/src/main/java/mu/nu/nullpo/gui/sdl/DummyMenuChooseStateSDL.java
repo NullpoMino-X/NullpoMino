@@ -38,7 +38,7 @@ public abstract class DummyMenuChooseStateSDL extends BaseStateSDL {
     /**
      * Cursor position
      */
-    protected int cursor = 0;
+    int cursor = 0;
 
     /**
      * ScreenshotShooting flag
@@ -48,19 +48,19 @@ public abstract class DummyMenuChooseStateSDL extends BaseStateSDL {
     /**
      * Max cursor value
      */
-    protected int maxCursor;
+    int maxCursor;
 
     /**
      * Top choice's y-coordinate
      */
-    protected int minChoiceY;
+    int minChoiceY;
 
     /**
      * Set to false to ignore mouse input
      */
-    protected boolean mouseEnabled;
+    private boolean mouseEnabled;
 
-    public DummyMenuChooseStateSDL() {
+    DummyMenuChooseStateSDL() {
         maxCursor = -1;
         minChoiceY = 3;
         mouseEnabled = true;
@@ -117,7 +117,7 @@ public abstract class DummyMenuChooseStateSDL extends BaseStateSDL {
         }
     }
 
-    protected boolean updateMouseInput() throws SDLException {
+    boolean updateMouseInput() throws SDLException {
         MouseInputSDL.mouseInput.update();
         if (MouseInputSDL.mouseInput.isMouseClicked()) {
             int y = MouseInputSDL.mouseInput.getMouseY() >> 4;
@@ -136,7 +136,7 @@ public abstract class DummyMenuChooseStateSDL extends BaseStateSDL {
         renderChoices(x, minChoiceY, choices);
     }
 
-    protected void renderChoices(int x, int y, String[] choices) throws SDLException {
+    void renderChoices(int x, int y, String[] choices) throws SDLException {
         NormalFontSDL.printFontGrid(x - 1, y + cursor, "b", NormalFontSDL.COLOR_RED);
         for (int i = 0; i < choices.length; i++)
             NormalFontSDL.printFontGrid(x, y + i, choices[i], (cursor == i));
@@ -147,7 +147,7 @@ public abstract class DummyMenuChooseStateSDL extends BaseStateSDL {
      *
      * @throws SDLException When something bad happens.
      */
-    protected void onChange(int change) throws SDLException {
+    void onChange(int change) throws SDLException {
     }
 
     /**
@@ -156,7 +156,7 @@ public abstract class DummyMenuChooseStateSDL extends BaseStateSDL {
      * @return True to skip all further update processing, false otherwise.
      * @throws SDLException When something bad happens.
      */
-    protected boolean onDecide() throws SDLException {
+    boolean onDecide() throws SDLException {
         return false;
     }
 
@@ -166,7 +166,7 @@ public abstract class DummyMenuChooseStateSDL extends BaseStateSDL {
      * @return True to skip all further update processing, false otherwise.
      * @throws SDLException When something bad happens.
      */
-    protected boolean onCancel() throws SDLException {
+    boolean onCancel() throws SDLException {
         return false;
     }
 
@@ -177,7 +177,7 @@ public abstract class DummyMenuChooseStateSDL extends BaseStateSDL {
      * @return True to skip all further update processing, false otherwise.
      * @throws SDLException When something bad happens.
      */
-    protected boolean onPushButtonD() throws SDLException {
+    boolean onPushButtonD() throws SDLException {
         return false;
     }
 }

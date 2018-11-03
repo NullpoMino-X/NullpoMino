@@ -73,7 +73,7 @@ public class Piece implements Serializable {
     /**
      * default OfBlockOf Peace data (X-coordinate)
      */
-    public static final int[][][] DEFAULT_PIECE_DATA_X = {
+    private static final int[][][] DEFAULT_PIECE_DATA_X = {
             {{0, 1, 2, 3}, {2, 2, 2, 2}, {3, 2, 1, 0}, {1, 1, 1, 1}},    // I
             {{2, 2, 1, 0}, {2, 1, 1, 1}, {0, 0, 1, 2}, {0, 1, 1, 1}},    // L
             {{0, 1, 1, 0}, {1, 1, 0, 0}, {1, 0, 0, 1}, {0, 0, 1, 1}},    // O
@@ -90,7 +90,7 @@ public class Piece implements Serializable {
     /**
      * default OfBlockOf Peace data (Y-coordinate)
      */
-    public static final int[][][] DEFAULT_PIECE_DATA_Y = {
+    private static final int[][][] DEFAULT_PIECE_DATA_Y = {
             {{1, 1, 1, 1}, {0, 1, 2, 3}, {2, 2, 2, 2}, {3, 2, 1, 0}},    // I
             {{0, 1, 1, 1}, {2, 2, 1, 0}, {2, 1, 1, 1}, {0, 0, 1, 2}},    // L
             {{0, 0, 1, 1}, {0, 1, 1, 0}, {1, 1, 0, 0}, {1, 0, 0, 1}},    // O
@@ -276,7 +276,7 @@ public class Piece implements Serializable {
      *
      * @param pieceID BlockOf PeaceID
      */
-    public void initPiece(int pieceID) {
+    private void initPiece(int pieceID) {
         this.id = pieceID;
         this.direction = DIRECTION_UP;
         this.big = false;
@@ -299,7 +299,7 @@ public class Piece implements Serializable {
      *
      * @param p Copy source
      */
-    public void copy(Piece p) {
+    private void copy(Piece p) {
         id = p.id;
         direction = p.direction;
         big = p.big;
@@ -496,7 +496,7 @@ public class Piece implements Serializable {
      *
      * @param offsetX XArray of position correction amount (int[DIRECTION_COUNT])
      */
-    public void applyOffsetArrayX(int[] offsetX) {
+    private void applyOffsetArrayX(int[] offsetX) {
         offsetApplied = true;
 
         for (int i = 0; i < DIRECTION_COUNT; i++) {
@@ -512,7 +512,7 @@ public class Piece implements Serializable {
      *
      * @param offsetY YArray of position correction amount (int[DIRECTION_COUNT])
      */
-    public void applyOffsetArrayY(int[] offsetY) {
+    private void applyOffsetArrayY(int[] offsetY) {
         offsetApplied = true;
 
         for (int i = 0; i < DIRECTION_COUNT; i++) {
@@ -584,7 +584,7 @@ public class Piece implements Serializable {
      * @param fld field
      * @return 1One or moreBlockThefieldAttempts off target would be placed intrue, Otherwisefalse
      */
-    public boolean isPartialLockOut(int x, int y, int rt, Field fld) {
+    private boolean isPartialLockOut(int x, int y, int rt, Field fld) {
         // BigThe only treatment
         if (big == true) return isPartialLockOutBig(x, y, rt, fld);
 
@@ -607,7 +607,7 @@ public class Piece implements Serializable {
      * @param fld field
      * @return 1One or moreBlockThefieldAttempts off target would be placed intrue, Otherwisefalse
      */
-    protected boolean isPartialLockOutBig(int x, int y, int rt, Field fld) {
+    private boolean isPartialLockOutBig(int x, int y, int rt, Field fld) {
         boolean placed = false;
 
         for (int i = 0; i < getMaxBlock(); i++) {
@@ -645,7 +645,7 @@ public class Piece implements Serializable {
      * @param fld field
      * @return 1One or moreBlockAfieldI put in the frametrue, Otherwisefalse
      */
-    public boolean canPlaceToVisibleField(int x, int y, int rt, Field fld) {
+    private boolean canPlaceToVisibleField(int x, int y, int rt, Field fld) {
         // BigThe only treatment
         if (big == true) return canPlaceToVisibleFieldBig(x, y, rt, fld);
 
@@ -668,7 +668,7 @@ public class Piece implements Serializable {
      * @param fld field
      * @return 1One or moreBlockAfieldI put in the frametrue, Otherwisefalse
      */
-    protected boolean canPlaceToVisibleFieldBig(int x, int y, int rt, Field fld) {
+    private boolean canPlaceToVisibleFieldBig(int x, int y, int rt, Field fld) {
         boolean placed = false;
 
         for (int i = 0; i < getMaxBlock(); i++) {
@@ -906,7 +906,7 @@ public class Piece implements Serializable {
      * @param fld field
      * @return BlockI was overlaptrue, They do not overlapfalse
      */
-    protected boolean checkCollisionBig(int x, int y, int rt, Field fld) {
+    private boolean checkCollisionBig(int x, int y, int rt, Field fld) {
         for (int i = 0; i < getMaxBlock(); i++) {
             int x2 = (x + dataX[rt][i] * 2);
             int y2 = (y + dataY[rt][i] * 2);

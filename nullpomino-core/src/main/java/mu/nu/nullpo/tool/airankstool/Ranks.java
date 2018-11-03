@@ -71,7 +71,7 @@ public class Ranks implements Serializable {
             {2, 2, 2, 2}  //L3
     };
 
-    public static final int[][][] PIECES_HEIGHTS = {
+    private static final int[][][] PIECES_HEIGHTS = {
             {{1, 1, 1, 1}, {4}, {1, 1, 1, 1}, {4}}, //I
             {{1, 1, 2}, {3, 1}, {2, 1, 1}, {1, 3}}, //L
             {{2, 2}, {2, 2}, {2, 2}, {2, 2}},     //O
@@ -84,7 +84,7 @@ public class Ranks implements Serializable {
             {{1, 1, 1}, {3}, {1, 1, 1}, {3}},    //I3
             {{2, 1}, {2, 1}, {1, 2}, {1, 2}}     //L3
     };
-    public static final int[][][] PIECES_LOWESTS = {
+    private static final int[][][] PIECES_LOWESTS = {
             {{1, 1, 1, 1}, {3}, {2, 2, 2, 2}, {3}}, //I
             {{1, 1, 1}, {2, 2}, {2, 1, 1}, {0, 2}}, //L
             {{1, 1}, {1, 1}, {1, 1}, {1, 1}},     //O
@@ -228,7 +228,7 @@ public class Ranks implements Serializable {
 
     }
 
-    public void setRank(int[] surface, int[] surfaceDecodedWork) {
+    private void setRank(int[] surface, int[] surfaceDecodedWork) {
         int currentSurfaceNum = encode(surface);
         setRankValue(currentSurfaceNum, getRank(surface, surfaceDecodedWork));
         synchronized (this) {
@@ -359,7 +359,7 @@ public class Ranks implements Serializable {
         return fits;
     }
 
-    public boolean surfaceAddPossible(int[] surfaceDecodedWork, int piece, int rotation, int x) {
+    private boolean surfaceAddPossible(int[] surfaceDecodedWork, int piece, int rotation, int x) {
         boolean addPossible = true;
         if (x > 0) {
             surfaceDecodedWork[x - 1] += PIECES_HEIGHTS[piece][rotation][0];

@@ -40,7 +40,7 @@ public class GameKeyDummy {
     /**
      * Player ID
      */
-    public int player;
+    protected int player;
 
     /**
      * Button input flag and length

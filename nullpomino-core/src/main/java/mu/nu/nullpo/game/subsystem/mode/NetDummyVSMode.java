@@ -26,12 +26,12 @@ public class NetDummyVSMode extends NetDummyMode {
     /**
      * NET-VS: Max number of players
      */
-    protected static final int NETVS_MAX_PLAYERS = 6;
+    static final int NETVS_MAX_PLAYERS = 6;
 
     /**
      * NET-VS: Numbers of seats numbers corresponding to frames on player's screen
      */
-    protected static final int[][] NETVS_GAME_SEAT_NUMBERS =
+    private static final int[][] NETVS_GAME_SEAT_NUMBERS =
             {
                     {0, 1, 2, 3, 4, 5},
                     {1, 0, 2, 3, 4, 5},
@@ -44,7 +44,7 @@ public class NetDummyVSMode extends NetDummyMode {
     /**
      * NET-VS: Each player's garbage block color
      */
-    protected static final int[] NETVS_PLAYER_COLOR_BLOCK = {
+    static final int[] NETVS_PLAYER_COLOR_BLOCK = {
             Block.BLOCK_COLOR_RED, Block.BLOCK_COLOR_BLUE, Block.BLOCK_COLOR_GREEN,
             Block.BLOCK_COLOR_YELLOW, Block.BLOCK_COLOR_PURPLE, Block.BLOCK_COLOR_CYAN
     };
@@ -52,7 +52,7 @@ public class NetDummyVSMode extends NetDummyMode {
     /**
      * NET-VS: Each player's frame color
      */
-    protected static final int[] NETVS_PLAYER_COLOR_FRAME = {
+    private static final int[] NETVS_PLAYER_COLOR_FRAME = {
             GameEngine.FRAME_COLOR_RED, GameEngine.FRAME_COLOR_BLUE, GameEngine.FRAME_COLOR_GREEN,
             GameEngine.FRAME_COLOR_YELLOW, GameEngine.FRAME_COLOR_PURPLE, GameEngine.FRAME_COLOR_CYAN
     };
@@ -60,7 +60,7 @@ public class NetDummyVSMode extends NetDummyMode {
     /**
      * NET-VS: Team font colors
      */
-    protected static final int[] NETVS_TEAM_FONT_COLORS = {
+    private static final int[] NETVS_TEAM_FONT_COLORS = {
             EventReceiver.COLOR_WHITE,
             EventReceiver.COLOR_RED, EventReceiver.COLOR_GREEN, EventReceiver.COLOR_BLUE, EventReceiver.COLOR_YELLOW,
             EventReceiver.COLOR_PURPLE, EventReceiver.COLOR_CYAN
@@ -69,183 +69,183 @@ public class NetDummyVSMode extends NetDummyMode {
     /**
      * NET-VS: Default time before forced piece lock
      */
-    protected static final int NETVS_PIECE_AUTO_LOCK_TIME = 30 * 60;
+    private static final int NETVS_PIECE_AUTO_LOCK_TIME = 30 * 60;
 
     /* -------------------- Variables -------------------- */
     /**
      * NET-VS: Local player's seat ID (-1:Spectator)
      */
-    protected int netvsMySeatID;
+    private int netvsMySeatID;
 
     /**
      * NET-VS: Number of players
      */
-    protected int netvsNumPlayers;
+    private int netvsNumPlayers;
 
     /**
      * NET-VS: Number of players in current game
      */
-    protected int netvsNumNowPlayers;
+    private int netvsNumNowPlayers;
 
     /**
      * NET-VS: Number of players still alive in current game
      */
-    protected int netvsNumAlivePlayers;
+    int netvsNumAlivePlayers;
 
     /**
      * NET-VS: Player exist flag
      */
-    protected boolean[] netvsPlayerExist;
+    boolean[] netvsPlayerExist;
 
     /**
      * NET-VS: Player ready flag
      */
-    protected boolean[] netvsPlayerReady;
+    private boolean[] netvsPlayerReady;
 
     /**
      * NET-VS: Player dead flag
      */
-    protected boolean[] netvsPlayerDead;
+    boolean[] netvsPlayerDead;
 
     /**
      * NET-VS: Player active flag (false if newcomer)
      */
-    protected boolean[] netvsPlayerActive;
+    private boolean[] netvsPlayerActive;
 
     /**
      * NET-VS: Player's Seat ID array (-1:No Player)
      */
-    protected int[] netvsPlayerSeatID;
+    int[] netvsPlayerSeatID;
 
     /**
      * NET-VS: Player's UID array (-1:No Player)
      */
-    protected int[] netvsPlayerUID;
+    int[] netvsPlayerUID;
 
     /**
      * NET-VS: Player's place
      */
-    protected int[] netvsPlayerPlace;
+    int[] netvsPlayerPlace;
 
     /**
      * NET-VS: Player's win count
      */
-    protected int[] netvsPlayerWinCount;
+    int[] netvsPlayerWinCount;
 
     /**
      * NET-VS: Player's game count
      */
-    protected int[] netvsPlayerPlayCount;
+    int[] netvsPlayerPlayCount;
 
     /**
      * NET-VS: Player's team colors
      */
-    protected int[] netvsPlayerTeamColor;
+    private int[] netvsPlayerTeamColor;
 
     /**
      * NET-VS: Player names
      */
-    protected String[] netvsPlayerName;
+    private String[] netvsPlayerName;
 
     /**
      * NET-VS: Player team names
      */
-    protected String[] netvsPlayerTeam;
+    private String[] netvsPlayerTeam;
 
     /**
      * NET-VS: Player's skins
      */
-    protected int[] netvsPlayerSkin;
+    int[] netvsPlayerSkin;
 
     /**
      * NET-VS: true if it's ready to show player's result
      */
-    protected boolean[] netvsPlayerResultReceived;
+    boolean[] netvsPlayerResultReceived;
 
     /**
      * NET-VS: true if automatic start timer is activated
      */
-    protected boolean netvsAutoStartTimerActive;
+    private boolean netvsAutoStartTimerActive;
 
     /**
      * NET-VS: Time left until the game starts automatically
      */
-    protected int netvsAutoStartTimer;
+    private int netvsAutoStartTimer;
 
     /**
      * NET-VS: true if room game is in progress
      */
-    protected boolean netvsIsGameActive;
+    boolean netvsIsGameActive;
 
     /**
      * NET-VS: true if room game is finished
      */
-    protected boolean netvsIsGameFinished;
+    private boolean netvsIsGameFinished;
 
     /**
      * NET-VS: true if waiting for ready status change
      */
-    protected boolean netvsIsReadyChangePending;
+    private boolean netvsIsReadyChangePending;
 
     /**
      * NET-VS: true if waiting for dead status change
      */
-    protected boolean netvsIsDeadPending;
+    private boolean netvsIsDeadPending;
 
     /**
      * NET-VS: true if local player joined game in progress
      */
-    protected boolean netvsIsNewcomer;
+    boolean netvsIsNewcomer;
 
     /**
      * NET-VS: Elapsed timer active flag
      */
-    protected boolean netvsPlayTimerActive;
+    boolean netvsPlayTimerActive;
 
     /**
      * NET-VS: Elapsed time
      */
-    protected int netvsPlayTimer;
+    int netvsPlayTimer;
 
     /**
      * NET-VS: true if practice mode
      */
-    protected boolean netvsIsPractice;
+    boolean netvsIsPractice;
 
     /**
      * NET-VS: true if can exit from practice game
      */
-    protected boolean netvsIsPracticeExitAllowed;
+    boolean netvsIsPracticeExitAllowed;
 
     /**
      * NET-VS: How long current piece is active
      */
-    protected int netvsPieceMoveTimer;
+    private int netvsPieceMoveTimer;
 
     /**
      * NET-VS: Time before forced piece lock
      */
-    protected int netvsPieceMoveTimerMax;
+    private int netvsPieceMoveTimerMax;
 
     /**
      * NET-VS: Map number to use
      */
-    protected int netvsMapNo;
+    private int netvsMapNo;
 
     /**
      * NET-VS: Random for selecting map in Practice mode
      */
-    protected Random netvsRandMap;
+    private Random netvsRandMap;
 
     /**
      * NET-VS: Practice mode last used map number
      */
-    protected int netvsMapPreviousPracticeMap;
+    private int netvsMapPreviousPracticeMap;
 
     /**
      * NET-VS: UID of player who attacked local player last (-1: Suicide or Unknown)
      */
-    protected int netvsLastAttackerUID;
+    int netvsLastAttackerUID;
 
     /*
      * Mode Name
@@ -310,7 +310,7 @@ public class NetDummyVSMode extends NetDummyMode {
     /**
      * NET-VS: Init some variables
      */
-    protected void netvsResetFlags() {
+    private void netvsResetFlags() {
         netvsPlayerResultReceived = new boolean[NETVS_MAX_PLAYERS];
         netvsPlayerDead = new boolean[NETVS_MAX_PLAYERS];
         netvsPlayerPlace = new int[NETVS_MAX_PLAYERS];
@@ -337,7 +337,7 @@ public class NetDummyVSMode extends NetDummyMode {
     /**
      * @return true if watch mode
      */
-    protected boolean netvsIsWatch() {
+    boolean netvsIsWatch() {
         try {
             return (netLobby.netPlayerClient.getYourPlayerInfo().seatID == -1);
         } catch (Exception e) {
@@ -349,7 +349,7 @@ public class NetDummyVSMode extends NetDummyMode {
      * NET-VS: Update player variables
      */
     @Override
-    protected void netUpdatePlayerExist() {
+    void netUpdatePlayerExist() {
         netvsMySeatID = netLobby.netPlayerClient.getYourPlayerInfo().seatID;
         netvsNumPlayers = 0;
         netNumSpectators = 0;
@@ -433,7 +433,7 @@ public class NetDummyVSMode extends NetDummyMode {
      * NET-VS: Initialize various NetPlay variables. Usually called from playerInit.
      */
     @Override
-    protected void netPlayerInit(GameEngine engine, int playerID) {
+    void netPlayerInit(GameEngine engine, int playerID) {
         log.debug("netPlayerInit(engine, " + playerID + ") on NetDummyVSMode");
 
         super.netPlayerInit(engine, playerID);
@@ -449,7 +449,7 @@ public class NetDummyVSMode extends NetDummyMode {
      * NET-VS: Draw player's name
      */
     @Override
-    protected void netDrawPlayerName(GameEngine engine) {
+    void netDrawPlayerName(GameEngine engine) {
         int playerID = engine.playerID;
         int x = owner.receiver.getFieldDisplayPositionX(engine, playerID);
         int y = owner.receiver.getFieldDisplayPositionY(engine, playerID);
@@ -477,7 +477,7 @@ public class NetDummyVSMode extends NetDummyMode {
      * NET-VS: Send field to everyone. It won't do anything in practice game.
      */
     @Override
-    protected void netSendField(GameEngine engine) {
+    void netSendField(GameEngine engine) {
         if (!netvsIsPractice && (engine.playerID == 0) && (!netIsWatch)) {
             super.netSendField(engine);
         }
@@ -487,7 +487,7 @@ public class NetDummyVSMode extends NetDummyMode {
      * NET-VS: Send next and hold piece informations to everyone. It won't do anything in practice game.
      */
     @Override
-    protected void netSendNextAndHold(GameEngine engine) {
+    void netSendNextAndHold(GameEngine engine) {
         if (!netvsIsPractice && (engine.playerID == 0) && (!netIsWatch)) {
             super.netSendNextAndHold(engine);
         }
@@ -507,7 +507,7 @@ public class NetDummyVSMode extends NetDummyMode {
     /**
      * NET-VS: Set locked rule/Revert to user rule
      */
-    protected void netvsSetLockedRule() {
+    private void netvsSetLockedRule() {
         if ((netCurrentRoomInfo != null) && (netCurrentRoomInfo.ruleLock)) {
             // Set to locked rule
             if ((netLobby != null) && (netLobby.ruleOptLock != null)) {
@@ -532,7 +532,7 @@ public class NetDummyVSMode extends NetDummyMode {
     /**
      * Set game screen layout
      */
-    protected void netvsSetGameScreenLayout() {
+    private void netvsSetGameScreenLayout() {
         for (int i = 0; i < getPlayers(); i++) {
             netvsSetGameScreenLayout(owner.engine[i]);
         }
@@ -543,7 +543,7 @@ public class NetDummyVSMode extends NetDummyMode {
      *
      * @param engine GameEngine
      */
-    protected void netvsSetGameScreenLayout(GameEngine engine) {
+    private void netvsSetGameScreenLayout(GameEngine engine) {
         // Set display size
         if (((engine.playerID == 0) && !netvsIsWatch()) ||
                 ((netCurrentRoomInfo != null) && (netCurrentRoomInfo.maxPlayers == 2) && (engine.playerID <= 1))) {
@@ -582,7 +582,7 @@ public class NetDummyVSMode extends NetDummyMode {
      *
      * @param engine GameEngine to apply settings
      */
-    protected void netvsApplyRoomSettings(GameEngine engine) {
+    void netvsApplyRoomSettings(GameEngine engine) {
         if (netCurrentRoomInfo != null) {
             engine.speed.gravity = netCurrentRoomInfo.gravity;
             engine.speed.denominator = netCurrentRoomInfo.denominator;
@@ -614,7 +614,7 @@ public class NetDummyVSMode extends NetDummyMode {
      * @param seat The seat ID want to know
      * @return Player number
      */
-    protected int netvsGetPlayerIDbySeatID(int seat) {
+    int netvsGetPlayerIDbySeatID(int seat) {
         return netvsGetPlayerIDbySeatID(seat, netvsMySeatID);
     }
 
@@ -625,7 +625,7 @@ public class NetDummyVSMode extends NetDummyMode {
      * @param myseat Your seat number (-1 if spectator)
      * @return Player number
      */
-    protected int netvsGetPlayerIDbySeatID(int seat, int myseat) {
+    private int netvsGetPlayerIDbySeatID(int seat, int myseat) {
         int myseat2 = myseat;
         if (myseat2 < 0) myseat2 = 0;
         return NETVS_GAME_SEAT_NUMBERS[myseat2][seat];
@@ -636,7 +636,7 @@ public class NetDummyVSMode extends NetDummyMode {
      *
      * @param engine GameEngine
      */
-    protected void netvsStartPractice(GameEngine engine) {
+    private void netvsStartPractice(GameEngine engine) {
         netvsIsPractice = true;
         netvsIsPracticeExitAllowed = false;
 
@@ -672,7 +672,7 @@ public class NetDummyVSMode extends NetDummyMode {
      *
      * @param message Message
      */
-    protected void netvsRecvEndGameStats(String[] message) {
+    void netvsRecvEndGameStats(String[] message) {
         int seatID = Integer.parseInt(message[2]);
         int playerID = netvsGetPlayerIDbySeatID(seatID);
 
@@ -686,7 +686,7 @@ public class NetDummyVSMode extends NetDummyMode {
      *
      * @return Number of teams alive
      */
-    protected int netvsGetNumberOfTeamsAlive() {
+    int netvsGetNumberOfTeamsAlive() {
         LinkedList<String> listTeamName = new LinkedList<>();
         int noTeamCount = 0;
 
@@ -711,7 +711,7 @@ public class NetDummyVSMode extends NetDummyMode {
      * @param playerID Player ID (to attack)
      * @return true if playerID can be attacked
      */
-    protected boolean netvsIsAttackable(int playerID) {
+    boolean netvsIsAttackable(int playerID) {
         // Can't attack self
         if (playerID <= 0) return false;
 
@@ -739,7 +739,7 @@ public class NetDummyVSMode extends NetDummyMode {
      * @param x      X position
      * @param y      Y position
      */
-    protected void netvsDrawRoomInfoBox(GameEngine engine, int x, int y) {
+    private void netvsDrawRoomInfoBox(GameEngine engine, int x, int y) {
         if (netCurrentRoomInfo != null) {
             owner.receiver.drawDirectFont(engine, 0, x, y + 0, "PLAYERS", EventReceiver.COLOR_CYAN, 0.5f);
             owner.receiver.drawDirectFont(engine, 0, x, y + 8, "" + netvsNumPlayers, EventReceiver.COLOR_WHITE, 0.5f);

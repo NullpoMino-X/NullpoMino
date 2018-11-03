@@ -27,7 +27,7 @@ public abstract class ResourceHolder {
     /**
      * Block sticky flag
      */
-    public static List<Boolean> blockStickyFlagList;
+    private static List<Boolean> blockStickyFlagList;
 
     public abstract AbstractImage getImgNormalBlock(int skin);
 
