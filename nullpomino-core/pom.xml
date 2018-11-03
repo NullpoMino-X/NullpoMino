@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>nullpomino-core</artifactId>
-    <parent>
-        <groupId>mu.nu.nullpo</groupId>
-        <artifactId>nullpomino-parent</artifactId>
-        <version>7.6.0-SNAPSHOT</version>
-        <relativePath>../nullpomino-parent</relativePath>
-    </parent>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>nullpomino-core</artifactId>
+	<parent>
+		<groupId>mu.nu.nullpo</groupId>
+		<artifactId>nullpomino-parent</artifactId>
+		<version>7.6.0-SNAPSHOT</version>
+		<relativePath>../nullpomino-parent</relativePath>
+	</parent>
 
     <repositories>
         <repository>
@@ -26,57 +26,47 @@
         </repository>
     </repositories>
 
-    <dependencies>
+	<dependencies>
         <dependency>
             <groupId>mu.nu.nullpo.local</groupId>
             <artifactId>sdljava</artifactId>
             <version>LOCAL</version>
         </dependency>
-        <dependency>
-            <groupId>mu.nu.nullpo.local</groupId>
-            <artifactId>jogg-0.0.7</artifactId>
-            <version>LOCAL</version>
-        </dependency>
-        <dependency>
-            <groupId>org.lwjgl.lwjgl</groupId>
-            <artifactId>lwjgl</artifactId>
-            <version>2.9.3</version>
-        </dependency>
-        <dependency>
-            <groupId>mu.nu.nullpo.local</groupId>
-            <artifactId>ibxm</artifactId>
-            <version>LOCAL</version>
-        </dependency>
-        <dependency>
-            <groupId>mu.nu.nullpo.local</groupId>
-            <artifactId>jorbis-0.0.15</artifactId>
-            <version>LOCAL</version>
-        </dependency>
-        <dependency>
-            <groupId>mu.nu.nullpo.local</groupId>
-            <artifactId>swing-worker-1.2</artifactId>
-            <version>LOCAL</version>
-        </dependency>
-        <dependency>
-            <groupId>mu.nu.nullpo.local</groupId>
-            <artifactId>swing-layout-1.0.4</artifactId>
-            <version>LOCAL</version>
-        </dependency>
-        <dependency>
-            <groupId>mu.nu.nullpo.local</groupId>
-            <artifactId>jinput</artifactId>
-            <version>LOCAL</version>
-        </dependency>
-        <dependency>
-            <groupId>mu.nu.nullpo.local</groupId>
-            <artifactId>slick</artifactId>
-            <version>LOCAL</version>
-        </dependency>
-        <dependency>
-            <groupId>mu.nu.nullpo.local</groupId>
-            <artifactId>log4j-1.2.15</artifactId>
-            <version>LOCAL</version>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.lwjgl.lwjgl</groupId>
+			<artifactId>lwjgl</artifactId>
+			<version>2.9.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slick2d</groupId>
+			<artifactId>slick2d-core</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jcraft</groupId>
+			<artifactId>jorbis</artifactId>
+			<version>0.0.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.swinglabs</groupId>
+			<artifactId>swing-worker</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.swinglabs</groupId>
+			<artifactId>swing-layout</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>net.java.jinput</groupId>
+			<artifactId>jinput</artifactId>
+			<version>2.0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+	</dependencies>
 
 </project>
