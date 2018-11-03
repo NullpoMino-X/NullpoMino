@@ -242,7 +242,7 @@ public class GameManager {
         bgmStatus.reset();
         backgroundStatus.reset();
         if (!replayMode) replayProp = new CustomProperties();
-        for (int i = 0; i < engine.length; i++) engine[i].init();
+        for (GameEngine anEngine : engine) anEngine.init();
     }
 
     /**
@@ -284,8 +284,8 @@ public class GameManager {
      */
     public boolean getQuitFlag() {
         if (engine != null) {
-            for (int i = 0; i < engine.length; i++) {
-                if ((engine[i] != null) && (engine[i].quitflag == true))
+            for (GameEngine anEngine : engine) {
+                if ((anEngine != null) && (anEngine.quitflag == true))
                     return true;
             }
         }
@@ -300,8 +300,8 @@ public class GameManager {
      */
     public boolean isGameActive() {
         if (engine != null) {
-            for (int i = 0; i < engine.length; i++) {
-                if ((engine[i] != null) && (engine[i].gameActive == true))
+            for (GameEngine anEngine : engine) {
+                if ((anEngine != null) && (anEngine.gameActive == true))
                     return true;
             }
         }
@@ -330,8 +330,8 @@ public class GameManager {
      * Update every GameEngine
      */
     public void updateAll() {
-        for (int i = 0; i < engine.length; i++) {
-            engine[i].update();
+        for (GameEngine anEngine : engine) {
+            anEngine.update();
         }
         bgmStatus.fadeUpdate();
         backgroundStatus.fadeUpdate();
@@ -341,8 +341,8 @@ public class GameManager {
      * Dispatches all render events to EventReceiver
      */
     public void renderAll() {
-        for (int i = 0; i < engine.length; i++) {
-            engine[i].render();
+        for (GameEngine anEngine : engine) {
+            anEngine.render();
         }
     }
 
@@ -351,8 +351,8 @@ public class GameManager {
      */
     public void saveReplay() {
         replayProp = new CustomProperties();
-        for (int i = 0; i < engine.length; i++) {
-            engine[i].saveReplay();
+        for (GameEngine anEngine : engine) {
+            anEngine.saveReplay();
         }
         receiver.saveReplay(this, replayProp);
     }

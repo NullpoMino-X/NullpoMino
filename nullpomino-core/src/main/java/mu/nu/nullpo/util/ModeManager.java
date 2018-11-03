@@ -48,7 +48,7 @@ public class ModeManager {
     /**
      * Mode Dynamic array of
      */
-    public ArrayList<GameMode> modelist = new ArrayList<GameMode>();
+    public ArrayList<GameMode> modelist = new ArrayList<>();
 
     /**
      * Constructor
@@ -83,9 +83,7 @@ public class ModeManager {
     public int getNumberOfModes(boolean netplay) {
         int count = 0;
 
-        for (int i = 0; i < modelist.size(); i++) {
-            GameMode mode = modelist.get(i);
-
+        for (GameMode mode : modelist) {
             if ((mode != null) && (mode.isNetplayMode() == netplay))
                 count++;
         }
@@ -119,9 +117,7 @@ public class ModeManager {
         String[] strings = new String[num];
         int j = 0;
 
-        for (int i = 0; i < modelist.size(); i++) {
-            GameMode mode = modelist.get(i);
-
+        for (GameMode mode : modelist) {
             if ((mode != null) && (mode.isNetplayMode() == netplay)) {
                 strings[j] = mode.getName();
                 j++;

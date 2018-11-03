@@ -177,10 +177,10 @@ public class ResourceHolderSDL {
         }
         log.debug(numBlocks + " block skins found");
 
-        imgNormalBlockList = new LinkedList<SDLSurface>();
-        imgSmallBlockList = new LinkedList<SDLSurface>();
-        imgBigBlockList = new LinkedList<SDLSurface>();
-        blockStickyFlagList = new LinkedList<Boolean>();
+        imgNormalBlockList = new LinkedList<>();
+        imgSmallBlockList = new LinkedList<>();
+        imgBigBlockList = new LinkedList<>();
+        blockStickyFlagList = new LinkedList<>();
 
         for (int i = 0; i < numBlocks; i++) {
             SDLSurface imgNormal = loadImage(skindir + "/graphics/blockskin/normal/n" + i + ".png");

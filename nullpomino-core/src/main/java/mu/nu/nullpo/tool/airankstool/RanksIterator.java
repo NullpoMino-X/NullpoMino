@@ -139,10 +139,7 @@ public class RanksIterator extends JDialog implements PropertyChangeListener, Ac
 
                 } catch (FileNotFoundException e) {
                     ranksFrom = new Ranks(4, 9);
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
@@ -160,10 +157,7 @@ public class RanksIterator extends JDialog implements PropertyChangeListener, Ac
                 oneIteration.execute();
                 try {
                     oneIteration.get();
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
+                } catch (InterruptedException | ExecutionException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }

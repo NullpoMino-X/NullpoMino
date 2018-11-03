@@ -248,7 +248,7 @@ public class MusicListEditor extends JFrame implements ActionListener {
         pButtons.add(btnCancel);
 
         // File Filter
-        hashmapFileFilters = new HashMap<String, SimpleFileFilter>();
+        hashmapFileFilters = new HashMap<>();
         hashmapFileFilters.put(".wav", new SimpleFileFilter(".wav", getUIText("FileChooser_wav")));
         hashmapFileFilters.put(".xm", new SimpleFileFilter(".xm", getUIText("FileChooser_xm")));
         hashmapFileFilters.put(".mod", new SimpleFileFilter(".mod", getUIText("FileChooser_mod")));
@@ -259,9 +259,7 @@ public class MusicListEditor extends JFrame implements ActionListener {
         // File selection dialog
         fileChooser = new JFileChooser();
 
-        Iterator<SimpleFileFilter> it = hashmapFileFilters.values().iterator();
-        while (it.hasNext()) {
-            SimpleFileFilter filter = it.next();
+        for (SimpleFileFilter filter : hashmapFileFilters.values()) {
             fileChooser.addChoosableFileFilter(filter);
         }
     }

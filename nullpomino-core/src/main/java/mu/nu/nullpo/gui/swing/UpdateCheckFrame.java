@@ -361,42 +361,32 @@ public class UpdateCheckFrame extends JFrame implements ActionListener, UpdateCh
     }
 
     public void onUpdateCheckerStart() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                lStatus.setText(NullpoMinoSwing.getUIText("UpdateCheck_Label_Status_Checking"));
-            }
-        });
+        SwingUtilities.invokeLater(() -> lStatus.setText(NullpoMinoSwing.getUIText("UpdateCheck_Label_Status_Checking")));
     }
 
     public void onUpdateCheckerEnd(int status) {
         btnCheckNow.setEnabled(true);
 
         if (status == UpdateChecker.STATUS_ERROR) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    lStatus.setText(NullpoMinoSwing.getUIText("UpdateCheck_Label_Status_Failed"));
-                }
-            });
+            SwingUtilities.invokeLater(() -> lStatus.setText(NullpoMinoSwing.getUIText("UpdateCheck_Label_Status_Failed")));
         } else if (status == UpdateChecker.STATUS_COMPLETE) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    String strURL = UpdateChecker.getStrDownloadURL();
-                    String strInstaller = UpdateChecker.getStrWindowsInstallerURL();
+            SwingUtilities.invokeLater(() -> {
+                String strURL = UpdateChecker.getStrDownloadURL();
+                String strInstaller = UpdateChecker.getStrWindowsInstallerURL();
 
-                    lStatus.setText(NullpoMinoSwing.getUIText("UpdateCheck_Label_Status_Complete"));
-                    txtfldLatestVersion.setText(UpdateChecker.getLatestVersionFullString());
-                    txtfldReleaseDate.setText(UpdateChecker.getStrReleaseDate());
-                    txtfldDownloadURL.setText(strURL);
-                    txtfldWindowsInstallerURL.setText(strInstaller);
+                lStatus.setText(NullpoMinoSwing.getUIText("UpdateCheck_Label_Status_Complete"));
+                txtfldLatestVersion.setText(UpdateChecker.getLatestVersionFullString());
+                txtfldReleaseDate.setText(UpdateChecker.getStrReleaseDate());
+                txtfldDownloadURL.setText(strURL);
+                txtfldWindowsInstallerURL.setText(strInstaller);
 
-                    if (UpdateChecker.isNewVersionAvailable(GameManager.getVersionMajor(), GameManager.getVersionMinor())) {
-                        txtfldLatestVersion.setForeground(Color.red);
-                        txtfldWindowsInstallerURL.setForeground(Color.red);
-                    }
-
-                    btnOpenDownloadURL.setEnabled(((strURL != null) && (strURL.length() > 0)));
-                    btnOpenInstallerURL.setEnabled(((strInstaller != null) && (strInstaller.length() > 0)));
+                if (UpdateChecker.isNewVersionAvailable(GameManager.getVersionMajor(), GameManager.getVersionMinor())) {
+                    txtfldLatestVersion.setForeground(Color.red);
+                    txtfldWindowsInstallerURL.setForeground(Color.red);
                 }
+
+                btnOpenDownloadURL.setEnabled(((strURL != null) && (strURL.length() > 0)));
+                btnOpenInstallerURL.setEnabled(((strInstaller != null) && (strInstaller.length() > 0)));
             });
         }
     }

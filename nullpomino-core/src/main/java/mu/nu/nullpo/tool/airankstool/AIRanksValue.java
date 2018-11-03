@@ -34,10 +34,7 @@ public class AIRanksValue {
                 System.out.println(rank2);
             } catch (FileNotFoundException e) {
                 ranks = new Ranks(4, 9);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }

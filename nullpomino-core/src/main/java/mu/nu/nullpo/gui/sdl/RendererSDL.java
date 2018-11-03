@@ -105,7 +105,7 @@ public class RendererSDL extends EventReceiver {
      */
     public RendererSDL() {
         graphics = null;
-        effectlist = new ArrayList<EffectObject>(10 * 4);
+        effectlist = new ArrayList<>(10 * 4);
 
         showbg = NullpoMinoSDL.propConfig.getProperty("option.showbg", true);
         showlineeffect = NullpoMinoSDL.propConfig.getProperty("option.showlineeffect", true);
@@ -1723,9 +1723,7 @@ public class RendererSDL extends EventReceiver {
     protected void effectUpdate() {
         boolean emptyflag = true;
 
-        for (int i = 0; i < effectlist.size(); i++) {
-            EffectObject obj = effectlist.get(i);
-
+        for (EffectObject obj : effectlist) {
             if (obj.effect != 0) emptyflag = false;
 
             // Normal Block
@@ -1747,9 +1745,7 @@ public class RendererSDL extends EventReceiver {
      * Render effects
      */
     protected void effectRender() {
-        for (int i = 0; i < effectlist.size(); i++) {
-            EffectObject obj = effectlist.get(i);
-
+        for (EffectObject obj : effectlist) {
             // Normal Block
             if (obj.effect == 1) {
                 int x = obj.x - 40;

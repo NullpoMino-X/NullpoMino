@@ -170,10 +170,10 @@ public class ResourceHolderSlick {
         }
         log.debug(numBlocks + " block skins found");
 
-        imgNormalBlockList = new LinkedList<Image>();
-        imgSmallBlockList = new LinkedList<Image>();
-        imgBigBlockList = new LinkedList<Image>();
-        blockStickyFlagList = new LinkedList<Boolean>();
+        imgNormalBlockList = new LinkedList<>();
+        imgSmallBlockList = new LinkedList<>();
+        imgBigBlockList = new LinkedList<>();
+        blockStickyFlagList = new LinkedList<>();
 
         for (int i = 0; i < numBlocks; i++) {
             Image imgNormal = loadImage(skindir + "/graphics/blockskin/normal/n" + i + ".png");

@@ -297,43 +297,43 @@ public class NetServer {
     /**
      * Lobby chat message history
      */
-    private static LinkedList<NetChatMessage> lobbyChatList = new LinkedList<NetChatMessage>();
+    private static LinkedList<NetChatMessage> lobbyChatList = new LinkedList<>();
 
     /**
      * List of SocketChannel
      */
-    private LinkedList<SocketChannel> channelList = new LinkedList<SocketChannel>();
+    private LinkedList<SocketChannel> channelList = new LinkedList<>();
 
     /**
      * Last communication time
      */
-    private Map<SocketChannel, Long> lastCommTimeMap = new HashMap<SocketChannel, Long>();
+    private Map<SocketChannel, Long> lastCommTimeMap = new HashMap<>();
 
     /**
      * Incomplete packet buffer
      */
-    private Map<SocketChannel, StringBuilder> notCompletePacketMap = new HashMap<SocketChannel, StringBuilder>();
+    private Map<SocketChannel, StringBuilder> notCompletePacketMap = new HashMap<>();
 
     /**
      * Player info
      */
-    private Map<SocketChannel, NetPlayerInfo> playerInfoMap = new HashMap<SocketChannel, NetPlayerInfo>();
+    private Map<SocketChannel, NetPlayerInfo> playerInfoMap = new HashMap<>();
 
 
     /**
      * Room info list
      */
-    private LinkedList<NetRoomInfo> roomInfoList = new LinkedList<NetRoomInfo>();
+    private LinkedList<NetRoomInfo> roomInfoList = new LinkedList<>();
 
     /**
      * Observer list
      */
-    private LinkedList<SocketChannel> observerList = new LinkedList<SocketChannel>();
+    private LinkedList<SocketChannel> observerList = new LinkedList<>();
 
     /**
      * Admin list
      */
-    private LinkedList<SocketChannel> adminList = new LinkedList<SocketChannel>();
+    private LinkedList<SocketChannel> adminList = new LinkedList<>();
 
     /**
      * Number of players connected so far (Used for assigning player ID)
@@ -378,12 +378,12 @@ public class NetServer {
     /**
      * A list of ChangeRequest instances
      */
-    private LinkedList<ChangeRequest> pendingChanges = new LinkedList<ChangeRequest>();
+    private LinkedList<ChangeRequest> pendingChanges = new LinkedList<>();
 
     /**
      * Maps a SocketChannel to a list of ByteBuffer instances
      */
-    private HashMap<SocketChannel, List<ByteBuffer>> pendingData = new HashMap<SocketChannel, List<ByteBuffer>>();
+    private HashMap<SocketChannel, List<ByteBuffer>> pendingData = new HashMap<>();
 
     /**
      * Load rated-game room presets from the server config
@@ -398,7 +398,7 @@ public class NetServer {
             log.warn("Failed to load config file", e);
         }
 
-        ratedInfoList = new LinkedList<String>();
+        ratedInfoList = new LinkedList<>();
 
         String strInfo = "";
         int i = 0;
@@ -420,8 +420,8 @@ public class NetServer {
         ruleList = new LinkedList[GameEngine.MAX_GAMESTYLE];
         ruleSettingIDList = new LinkedList[GameEngine.MAX_GAMESTYLE];
         for (int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
-            ruleList[i] = new LinkedList<RuleOptions>();
-            ruleSettingIDList[i] = new LinkedList<Integer>();
+            ruleList[i] = new LinkedList<>();
+            ruleSettingIDList[i] = new LinkedList<>();
         }
 
         try {
@@ -470,7 +470,7 @@ public class NetServer {
                         rule.readProperty(prop, 0);
 
                         ruleList[style].add(rule);
-                        ruleSettingIDList[style].add(Integer.valueOf(settingID));
+                        ruleSettingIDList[style].add(settingID);
                     } catch (Exception e2) {
                         log.warn("Failed to load rule file", e2);
                     }
@@ -491,8 +491,8 @@ public class NetServer {
         mpModeList = new LinkedList[GameEngine.MAX_GAMESTYLE];
         mpModeIsRace = new LinkedList[GameEngine.MAX_GAMESTYLE];
         for (int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
-            mpModeList[i] = new LinkedList<String>();
-            mpModeIsRace[i] = new LinkedList<Boolean>();
+            mpModeList[i] = new LinkedList<>();
+            mpModeIsRace[i] = new LinkedList<>();
         }
 
         try {
@@ -540,7 +540,7 @@ public class NetServer {
         log.info("Loading Multiplayer Ranking...");
         mpRankingList = new LinkedList[GameEngine.MAX_GAMESTYLE];
         for (int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
-            mpRankingList[i] = new LinkedList<NetPlayerInfo>();
+            mpRankingList[i] = new LinkedList<>();
         }
 
         for (int style = 0; style < GameEngine.MAX_GAMESTYLE; style++) {
@@ -659,13 +659,13 @@ public class NetServer {
     private static void loadSPRankingList() {
         log.info("Loading Single Player Ranking...");
 
-        spRankingListAlltime = new LinkedList<NetSPRanking>();
-        spRankingListDaily = new LinkedList<NetSPRanking>();
+        spRankingListAlltime = new LinkedList<>();
+        spRankingListDaily = new LinkedList<>();
 
         // Load mode list
         spModeList = new LinkedList[GameEngine.MAX_GAMESTYLE];
         for (int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
-            spModeList[i] = new LinkedList<String>();
+            spModeList[i] = new LinkedList<>();
         }
 
         // Daily last-update
@@ -796,7 +796,7 @@ public class NetServer {
      */
     private static NetSPRanking getSPRankingAllRules(String mode, int gtype, boolean isDaily) {
         LinkedList<NetSPRanking> list = isDaily ? spRankingListDaily : spRankingListAlltime;
-        LinkedList<NetSPRanking> allRanks = new LinkedList<NetSPRanking>();
+        LinkedList<NetSPRanking> allRanks = new LinkedList<>();
         for (NetSPRanking r : list) {
             if (r.strModeName.equals(mode) && r.gameType == gtype) {
                 allRanks.add(r);
@@ -924,7 +924,7 @@ public class NetServer {
      * Load ban list from a file
      */
     private static void loadBanList() {
-        banList = new LinkedList<NetServerBan>();
+        banList = new LinkedList<>();
 
         try {
             BufferedReader txtBanList = new BufferedReader(new FileReader("config/setting/netserver_banlist.cfg"));
@@ -969,7 +969,7 @@ public class NetServer {
      * Load lobby chat history file
      */
     private static void loadLobbyChatHistory() {
-        if (lobbyChatList == null) lobbyChatList = new LinkedList<NetChatMessage>();
+        if (lobbyChatList == null) lobbyChatList = new LinkedList<>();
         else lobbyChatList.clear();
 
         try {
@@ -1526,7 +1526,7 @@ public class NetServer {
                 pInfo.connected = false;
                 pInfo.ready = false;
 
-                LinkedList<NetRoomInfo> deleteList = new LinkedList<NetRoomInfo>();    // Room delete check list
+                LinkedList<NetRoomInfo> deleteList = new LinkedList<>();    // Room delete check list
 
                 for (NetRoomInfo roomInfo : roomInfoList) {
                     if (roomInfo.playerList.contains(pInfo)) {
@@ -1606,14 +1606,14 @@ public class NetServer {
     private int killTimeoutConnections(long timeout) {
         if (timeout <= 0) return 0;
 
-        LinkedList<SocketChannel> clients = new LinkedList<SocketChannel>(channelList);
+        LinkedList<SocketChannel> clients = new LinkedList<>(channelList);
         int killCount = 0;
 
         for (SocketChannel client : clients) {
             Long lasttimeL = lastCommTimeMap.get(client);
 
             if (lasttimeL != null) {
-                long lasttime = lasttimeL.longValue();
+                long lasttime = lasttimeL;
                 long nowtime = System.currentTimeMillis();
 
                 if (nowtime - lasttime >= timeout) {
@@ -1643,7 +1643,7 @@ public class NetServer {
             synchronized (this.pendingData) {
                 List<ByteBuffer> queue = (List<ByteBuffer>) this.pendingData.get(client);
                 if (queue == null) {
-                    queue = new ArrayList<ByteBuffer>();
+                    queue = new ArrayList<>();
                     this.pendingData.put(client, queue);
                 }
                 queue.add(ByteBuffer.wrap(bytes));
@@ -2057,9 +2057,8 @@ public class NetServer {
         if (message[0].equals("getpresets")) {
             String str = "ratedpresets";
 
-            Iterator<String> iter = ratedInfoList.iterator();
-            while (iter.hasNext()) {
-                str += "\t" + iter.next();
+            for (String aRatedInfoList : ratedInfoList) {
+                str += "\t" + aRatedInfoList;
             }
 
             str += "\n";
@@ -2330,8 +2329,7 @@ public class NetServer {
 
                     int maxMap = strMaps.length;
 
-                    for (int i = 0; i < maxMap; i++) {
-                        String strMap = strMaps[i];
+                    for (String strMap : strMaps) {
                         roomInfo.mapList.add(strMap);
                     }
 
@@ -2645,7 +2643,7 @@ public class NetServer {
                 if ((seat != -1) && (roomInfo.autoStartActive) && (!roomInfo.singleplayer)) {
                     if (roomInfo.autoStartTNET2) {
                         // Move all non-ready players to spectators
-                        LinkedList<NetPlayerInfo> pList = new LinkedList<NetPlayerInfo>();
+                        LinkedList<NetPlayerInfo> pList = new LinkedList<>();
                         pList.addAll(roomInfo.playerSeat);
 
                         for (NetPlayerInfo p : pList) {
@@ -3045,7 +3043,7 @@ public class NetServer {
                 count = banList.size();
                 banList.clear();
             } else {
-                LinkedList<NetServerBan> tempList = new LinkedList<NetServerBan>();
+                LinkedList<NetServerBan> tempList = new LinkedList<>();
                 tempList.addAll(banList);
 
                 for (NetServerBan ban : tempList) {
@@ -3062,7 +3060,7 @@ public class NetServer {
         // Ban List
         if (message[0].equals("banlist")) {
             // Cleanup expired bans
-            LinkedList<NetServerBan> tempList = new LinkedList<NetServerBan>();
+            LinkedList<NetServerBan> tempList = new LinkedList<>();
             tempList.addAll(banList);
 
             for (NetServerBan ban : tempList) {
@@ -3284,7 +3282,7 @@ public class NetServer {
     private void forceDeleteRoom(NetRoomInfo roomInfo) throws IOException {
         if (roomInfo != null) {
             if (!roomInfo.playerList.isEmpty()) {
-                LinkedList<NetPlayerInfo> tempList = new LinkedList<NetPlayerInfo>(roomInfo.playerList);
+                LinkedList<NetPlayerInfo> tempList = new LinkedList<>(roomInfo.playerList);
                 for (NetPlayerInfo pInfo : tempList) {
                     if (pInfo != null) {
                         SocketChannel client = getSocketChannelByPlayer(pInfo);
@@ -3688,7 +3686,7 @@ public class NetServer {
      * @return Number of players kicked
      */
     private int ban(String strIP, int banLength) {
-        LinkedList<SocketChannel> banChannels = new LinkedList<SocketChannel>();
+        LinkedList<SocketChannel> banChannels = new LinkedList<>();
 
         for (SocketChannel ch : channelList) {
             String ip = getHostAddress(ch);

@@ -225,8 +225,8 @@ public class GeneralUtil {
 
         int count = 0;
 
-        for (int i = 0; i < pieceEnable.length; i++) {
-            if (pieceEnable[i]) count++;
+        for (boolean aPieceEnable : pieceEnable) {
+            if (aPieceEnable) count++;
         }
 
         return count;

@@ -281,7 +281,7 @@ public class AIRanksTool extends JFrame implements ActionListener {
 
         //Speed Limit
         speedLimitLabel = new JLabel(getUIText("Main_Speed_Limit_Label"));
-        speedLimitField = new JFormattedTextField(new Integer(speedLimit));
+        speedLimitField = new JFormattedTextField(speedLimit);
         speedLimitField.setToolTipText(getUIText("Main_Speed_Limit_Tip"));
 
         // Save config Button
@@ -459,13 +459,10 @@ public class AIRanksTool extends JFrame implements ActionListener {
                         in.close();
                     } catch (FileNotFoundException e1) {
                         ranks = new Ranks(4, 9);
-                    } catch (IOException e1) {
+                    } catch (IOException | ClassNotFoundException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
 
-                    } catch (ClassNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
                     }
 
                 }

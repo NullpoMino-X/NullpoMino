@@ -370,7 +370,7 @@ public class NetDummyVSMode extends NetDummyMode {
         }
 
         LinkedList<NetPlayerInfo> pList = netLobby.updateSameRoomPlayerInfoList();
-        LinkedList<String> teamList = new LinkedList<String>();
+        LinkedList<String> teamList = new LinkedList<>();
 
         for (NetPlayerInfo pInfo : pList) {
             if (pInfo.roomID == netCurrentRoomInfo.roomID) {
@@ -687,7 +687,7 @@ public class NetDummyVSMode extends NetDummyMode {
      * @return Number of teams alive
      */
     protected int netvsGetNumberOfTeamsAlive() {
-        LinkedList<String> listTeamName = new LinkedList<String>();
+        LinkedList<String> listTeamName = new LinkedList<>();
         int noTeamCount = 0;
 
         for (int i = 0; i < getPlayers(); i++) {

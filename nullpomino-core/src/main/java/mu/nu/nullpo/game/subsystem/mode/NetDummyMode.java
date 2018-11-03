@@ -1304,8 +1304,8 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      */
     protected void netRecvNetPlayRanking(GameEngine engine, String[] message) {
         String strDebugTemp = "";
-        for (int i = 0; i < message.length; i++) {
-            strDebugTemp += message[i] + " ";
+        for (String aMessage : message) {
+            strDebugTemp += aMessage + " ";
         }
         log.debug(strDebugTemp);
 
@@ -1320,17 +1320,17 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
 
             netRankingNoDataFlag[d] = false;
             netRankingReady[d] = false;
-            netRankingPlace[d] = new LinkedList<Integer>();
-            netRankingName[d] = new LinkedList<String>();
-            netRankingDate[d] = new LinkedList<Calendar>();
-            netRankingGamerate[d] = new LinkedList<Float>();
-            netRankingTime[d] = new LinkedList<Integer>();
-            netRankingScore[d] = new LinkedList<Integer>();
-            netRankingPiece[d] = new LinkedList<Integer>();
-            netRankingPPS[d] = new LinkedList<Float>();
-            netRankingLines[d] = new LinkedList<Integer>();
-            netRankingSPL[d] = new LinkedList<Double>();
-            netRankingRollclear[d] = new LinkedList<Integer>();
+            netRankingPlace[d] = new LinkedList<>();
+            netRankingName[d] = new LinkedList<>();
+            netRankingDate[d] = new LinkedList<>();
+            netRankingGamerate[d] = new LinkedList<>();
+            netRankingTime[d] = new LinkedList<>();
+            netRankingScore[d] = new LinkedList<>();
+            netRankingPiece[d] = new LinkedList<>();
+            netRankingPPS[d] = new LinkedList<>();
+            netRankingLines[d] = new LinkedList<>();
+            netRankingSPL[d] = new LinkedList<>();
+            netRankingRollclear[d] = new LinkedList<>();
 
             for (int i = 0; i < maxRecords; i++) {
                 String[] arrayData = arrayRow[i].split(",");

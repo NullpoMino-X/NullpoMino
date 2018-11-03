@@ -104,7 +104,7 @@ public class NetBaseClient extends Thread {
     /**
      * Interface receiving messages
      */
-    protected LinkedList<NetMessageListener> listeners = new LinkedList<NetMessageListener>();
+    protected LinkedList<NetMessageListener> listeners = new LinkedList<>();
 
     /**
      * pingHit count(From serverpongReset When a message is received)

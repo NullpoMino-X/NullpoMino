@@ -331,7 +331,7 @@ public class UpdateChecker implements Runnable {
      */
     public static void addListener(UpdateCheckerListener l) {
         if (listeners == null) {
-            listeners = new LinkedList<UpdateCheckerListener>();
+            listeners = new LinkedList<>();
         }
         if (listeners.contains(l)) {
             return;

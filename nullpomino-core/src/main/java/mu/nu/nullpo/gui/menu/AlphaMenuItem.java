@@ -16,6 +16,6 @@ public class AlphaMenuItem extends NumericMenuItem {
     }
 
     public AlphaMenuItem(String name, int color, String[] choiceList) {
-        this(name, color, new Vector<String>(Arrays.asList(choiceList)));
+        this(name, color, new Vector<>(Arrays.asList(choiceList)));
     }
 }

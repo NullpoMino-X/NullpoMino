@@ -146,7 +146,7 @@ public class StateConfigAISelectSDL extends BaseStateSDL {
      * @return AIList
      */
     public String[] loadAIList(BufferedReader bf) {
-        ArrayList<String> aiArrayList = new ArrayList<String>();
+        ArrayList<String> aiArrayList = new ArrayList<>();
 
         while (true) {
             String name = null;

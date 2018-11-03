@@ -73,7 +73,7 @@ public class ReplayData implements Serializable {
      */
     public void reset() {
         if (inputDataArray == null)
-            inputDataArray = new ArrayList<Integer>(DEFAULT_ARRAYLIST_SIZE);
+            inputDataArray = new ArrayList<>(DEFAULT_ARRAYLIST_SIZE);
         else
             inputDataArray.clear();
     }

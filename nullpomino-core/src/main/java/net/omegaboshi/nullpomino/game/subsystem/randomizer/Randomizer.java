@@ -47,8 +47,8 @@ public abstract class Randomizer {
     }
 
     protected boolean isPieceSZOOnly() {
-        for (int i = 0; i < pieces.length; i++) {
-            if (pieces[i] != Piece.PIECE_O && pieces[i] != Piece.PIECE_Z && pieces[i] != Piece.PIECE_S)
+        for (int piece : pieces) {
+            if (piece != Piece.PIECE_O && piece != Piece.PIECE_Z && piece != Piece.PIECE_S)
                 return false;
         }
 

@@ -48,12 +48,12 @@ public class NetPlayerClient extends NetBaseClient {
     /**
      * PlayerInformation
      */
-    protected LinkedList<NetPlayerInfo> playerInfoList = new LinkedList<NetPlayerInfo>();
+    protected LinkedList<NetPlayerInfo> playerInfoList = new LinkedList<>();
 
     /**
      * Room Information
      */
-    protected LinkedList<NetRoomInfo> roomInfoList = new LinkedList<NetRoomInfo>();
+    protected LinkedList<NetRoomInfo> roomInfoList = new LinkedList<>();
 
     /**
      * OwnPlayerName
@@ -254,15 +254,19 @@ public class NetPlayerClient extends NetBaseClient {
             NetPlayerInfo p = getPlayerInfoByUID(Integer.parseInt(message[2]));
 
             if (p != null) {
-                if (message[1].equals("watchonly")) {
-                    p.seatID = -1;
-                    p.queueID = -1;
-                } else if (message[1].equals("joinqueue")) {
-                    p.seatID = -1;
-                    p.queueID = Integer.parseInt(message[4]);
-                } else if (message[1].equals("joinseat")) {
-                    p.seatID = Integer.parseInt(message[4]);
-                    p.queueID = -1;
+                switch (message[1]) {
+                    case "watchonly":
+                        p.seatID = -1;
+                        p.queueID = -1;
+                        break;
+                    case "joinqueue":
+                        p.seatID = -1;
+                        p.queueID = Integer.parseInt(message[4]);
+                        break;
+                    case "joinseat":
+                        p.seatID = Integer.parseInt(message[4]);
+                        p.queueID = -1;
+                        break;
                 }
             }
         }

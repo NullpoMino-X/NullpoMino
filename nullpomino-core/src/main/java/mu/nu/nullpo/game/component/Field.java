@@ -455,10 +455,8 @@ public class Field implements Serializable {
     public boolean setBlock(int x, int y, Block blk) {
         try {
             setBlockE(x, y, blk);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
             return false;
-        } catch (NullPointerException e) {
-            return false;    // There is a possible NPE here in avalanche modes
         }
 
         return true;
@@ -721,7 +719,7 @@ public class Field implements Serializable {
         int lines = 0;
 
         if (lastLinesCleared == null) {
-            lastLinesCleared = new ArrayList<Block[]>();
+            lastLinesCleared = new ArrayList<>();
         }
         lastLinesCleared.clear();
 
@@ -1130,8 +1128,8 @@ public class Field implements Serializable {
         }
 
         int lines = 0;
-        for (int i = 0; i < lineflag.length; i++) {
-            if (lineflag[i]) lines++;
+        for (boolean aLineflag : lineflag) {
+            if (aLineflag) lines++;
         }
 
         return lines;
@@ -1515,7 +1513,7 @@ public class Field implements Serializable {
      * The TGM attack is the lines of the last line clear flipped vertically and without the blocks that caused it.
      */
     public ArrayList<Block[]> getLastLinesAsTGMAttack() {
-        ArrayList<Block[]> attack = new ArrayList<Block[]>();
+        ArrayList<Block[]> attack = new ArrayList<>();
 
         for (Block[] row : lastLinesCleared) {
             Block[] row2 = new Block[getWidth()];
@@ -1995,7 +1993,7 @@ public class Field implements Serializable {
         if (flag) {
             setAllAttribute(Block.BLOCK_ATTRIBUTE_ERASE, false);
             if (lineColorsCleared == null)
-                lineColorsCleared = new ArrayList<Integer>();
+                lineColorsCleared = new ArrayList<>();
             gemsCleared = 0;
         }
         int total = 0;
@@ -2024,7 +2022,7 @@ public class Field implements Serializable {
                     if (!flag)
                         continue;
                     if (count == size)
-                        lineColorsCleared.add(new Integer(lineColor));
+                        lineColorsCleared.add(lineColor);
                     x = j;
                     y = i;
                     blockColor = lineColor;
@@ -2521,8 +2519,8 @@ public class Field implements Serializable {
     public String rowToString(Block[] row) {
         String strResult = "";
 
-        for (int x = 0; x < row.length; x++) {
-            strResult += row[x];
+        for (Block aRow : row) {
+            strResult += aRow;
         }
 
         return strResult;
@@ -2640,9 +2638,9 @@ public class Field implements Serializable {
     public String attrRowToString(Block[] row) {
         String strResult = "";
 
-        for (int x = 0; x < row.length; x++) {
-            strResult += Integer.toString(row[x].color, 16) + "/";
-            strResult += Integer.toString(row[x].attribute, 16) + ";";
+        for (Block aRow : row) {
+            strResult += Integer.toString(aRow.color, 16) + "/";
+            strResult += Integer.toString(aRow.attribute, 16) + ";";
         }
 
         return strResult;
@@ -3022,8 +3020,8 @@ public class Field implements Serializable {
         int minCount = count / colors.length;
         int maxCount = (count + colors.length - 1) / colors.length;
         boolean done = true;
-        for (int i = 0; i < colorCounts.length; i++)
-            if (colorCounts[i] > maxCount) {
+        for (int colorCount1 : colorCounts)
+            if (colorCount1 > maxCount) {
                 done = false;
                 break;
             }
@@ -3115,8 +3113,8 @@ public class Field implements Serializable {
                     }
             }
             boolean balanced = true;
-            for (int i = 0; i < colorCounts.length; i++)
-                if (colorCounts[i] > maxCount) {
+            for (int colorCount : colorCounts)
+                if (colorCount > maxCount) {
                     balanced = false;
                     break;
                 }

@@ -30,13 +30,7 @@ public class RanksResult extends JDialog implements ActionListener, PropertyChan
 
         public int compare(Integer o1, Integer o2) {
 
-            if ((factorCompare * (ranks.getRankValue(o2.intValue()))) > (factorCompare * ranks.getRankValue(o1.intValue()))) {
-                return 1;
-            } else if ((factorCompare * (ranks.getRankValue(o2.intValue()))) < (factorCompare * ranks.getRankValue(o1.intValue()))) {
-                return -1;
-            } else {
-                return 0;
-            }
+            return Integer.compare(factorCompare * (ranks.getRankValue(o2)), factorCompare * ranks.getRankValue(o1));
         }
 
     }
@@ -60,11 +54,7 @@ public class RanksResult extends JDialog implements ActionListener, PropertyChan
 
         public int compareTo(SurfaceRank o) {
 
-            if ((factorCompare * ((o).getRank())) > (factorCompare * rank)) {
-                return 1;
-            } else if ((factorCompare * ((o).getRank())) < (factorCompare * rank)) {
-                return -1;
-            } else return 0;
+            return Integer.compare(factorCompare * ((o).getRank()), factorCompare * rank);
         }
 
     }
@@ -98,7 +88,7 @@ public class RanksResult extends JDialog implements ActionListener, PropertyChan
 
             int progress = 0;
             setProgress(0);
-            ArrayList<SurfaceRank> surfaceRankBestsList = new ArrayList<SurfaceRank>(bestNRanks + 1);
+            ArrayList<SurfaceRank> surfaceRankBestsList = new ArrayList<>(bestNRanks + 1);
             for (int i = 0; i < bestNRanks; i++) {
                 int rank = ranks.getRankValue(i);
                 surfaceRankBestsList.add(new SurfaceRank(i, rank));

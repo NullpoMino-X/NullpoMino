@@ -72,7 +72,7 @@ public class SoundManager {
      */
     public SoundManager(int maxClips) {
         this.maxClips = maxClips;
-        clipMap = new HashMap<String, Sound>(maxClips);
+        clipMap = new HashMap<>(maxClips);
     }
 
     /**

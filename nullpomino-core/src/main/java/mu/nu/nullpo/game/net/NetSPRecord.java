@@ -202,7 +202,7 @@ public class NetSPRecord implements Serializable {
         strModeName = "";
         strRuleName = "";
         stats = null;
-        listCustomStats = new LinkedList<String>();
+        listCustomStats = new LinkedList<>();
         strReplayProp = "";
         strTimeStamp = "";
         gameType = 0;
@@ -222,7 +222,7 @@ public class NetSPRecord implements Serializable {
         if (s.stats == null) stats = null;
         else stats = new Statistics(s.stats);
 
-        listCustomStats = new LinkedList<String>(s.listCustomStats);
+        listCustomStats = new LinkedList<>(s.listCustomStats);
 
         strReplayProp = s.strReplayProp;
         strTimeStamp = s.strTimeStamp;
@@ -253,13 +253,13 @@ public class NetSPRecord implements Serializable {
      * @param s String (Split by ,)
      */
     public void importCustomStats(String s) {
-        if (listCustomStats == null) listCustomStats = new LinkedList<String>();
+        if (listCustomStats == null) listCustomStats = new LinkedList<>();
         else listCustomStats.clear();
         if ((s == null) || (s.length() <= 0)) return;
 
         String[] array = s.split(",");
-        for (int i = 0; i < array.length; i++) {
-            listCustomStats.add(array[i]);
+        for (String anArray : array) {
+            listCustomStats.add(anArray);
         }
     }
 
@@ -333,7 +333,7 @@ public class NetSPRecord implements Serializable {
         strRuleName = NetUtil.urlDecode(s[2]);
         if (s[3].length() <= 0) stats = null;
         else stats = new Statistics(NetUtil.decompressString(s[3]));
-        if (s[4].length() <= 0) listCustomStats = new LinkedList<String>();
+        if (s[4].length() <= 0) listCustomStats = new LinkedList<>();
         else importCustomStats(NetUtil.decompressString(s[4]));
         strReplayProp = s[5];
         gameType = Integer.parseInt(s[6]);
@@ -387,8 +387,7 @@ public class NetSPRecord implements Serializable {
      * @return Value (null if not found)
      */
     public String getCustomStat(String name) {
-        for (int i = 0; i < listCustomStats.size(); i++) {
-            String strTemp = listCustomStats.get(i);
+        for (String strTemp : listCustomStats) {
             String[] strArray = strTemp.split(";");
 
             if (strArray[0].equals(name)) {

@@ -79,13 +79,13 @@ public class StateSelectModeFolder extends DummyMenuScrollState {
      * Load folder list file
      */
     public static void loadFolderListFile() {
-        if (listTopLevelModes == null) listTopLevelModes = new LinkedList<String>();
+        if (listTopLevelModes == null) listTopLevelModes = new LinkedList<>();
         else listTopLevelModes.clear();
 
-        if (listFolder == null) listFolder = new LinkedList<String>();
+        if (listFolder == null) listFolder = new LinkedList<>();
         else listFolder.clear();
 
-        if (mapFolder == null) mapFolder = new HashMap<String, LinkedList<String>>();
+        if (mapFolder == null) mapFolder = new HashMap<>();
         else mapFolder.clear();
 
         strCurrentFolder = NullpoMinoSlick.propGlobal.getProperty("name.folder", "");
@@ -105,7 +105,7 @@ public class StateSelectModeFolder extends DummyMenuScrollState {
                     strFolder = str.substring(1);
                     if (!listFolder.contains(strFolder)) {
                         listFolder.add(strFolder);
-                        LinkedList<String> listMode = new LinkedList<String>();
+                        LinkedList<String> listMode = new LinkedList<>();
                         mapFolder.put(strFolder, listMode);
                     }
                 } else if (str.length() > 0) {

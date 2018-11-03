@@ -235,12 +235,12 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
     /**
      * Event listeners
      */
-    protected LinkedList<NetLobbyListener> listeners = new LinkedList<NetLobbyListener>();
+    protected LinkedList<NetLobbyListener> listeners = new LinkedList<>();
 
     /**
      * Preset info
      */
-    protected LinkedList<NetRoomInfo> presets = new LinkedList<NetRoomInfo>();
+    protected LinkedList<NetRoomInfo> presets = new LinkedList<>();
 
     /**
      * Current game mode (act as special NetLobbyListener)
@@ -1058,11 +1058,11 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
         // Rated-game rule name list
         listRatedRuleName = new LinkedList[GameEngine.MAX_GAMESTYLE];
         for (int i = 0; i < GameEngine.MAX_GAMESTYLE; i++) {
-            listRatedRuleName[i] = new LinkedList<String>();
+            listRatedRuleName[i] = new LinkedList<>();
         }
 
         // Map list
-        mapList = new LinkedList<String>();
+        mapList = new LinkedList<>();
 
         // Rule files
         String[] strRuleFileList = getRuleFileList();
@@ -1620,7 +1620,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
         splitRoomChat.setLeftComponent(spTxtpaneRoomChatLog);
 
         // **** PlayerList(Room screen)
-        sameRoomPlayerInfoList = new LinkedList<NetPlayerInfo>();
+        sameRoomPlayerInfoList = new LinkedList<>();
         listmodelRoomChatPlayerList = new DefaultListModel();
         listboxRoomChatPlayerList = new JList(listmodelRoomChatPlayerList);
         listboxRoomChatPlayerList.setComponentPopupMenu(new ListBoxPopupMenu(listboxRoomChatPlayerList));
@@ -2400,11 +2400,9 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
         loadModeList(listmodelCreateRoom1PModeList, "config/list/netlobby_singlemode.lst");
 
         listboxCreateRoom1PModeList = new JList(listmodelCreateRoom1PModeList);
-        listboxCreateRoom1PModeList.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                String strMode = (String) listboxCreateRoom1PModeList.getSelectedValue();
-                labelCreateRoom1PGameMode.setText(getModeDesc(strMode));
-            }
+        listboxCreateRoom1PModeList.addListSelectionListener(e -> {
+            String strMode = (String) listboxCreateRoom1PModeList.getSelectedValue();
+            labelCreateRoom1PGameMode.setText(getModeDesc(strMode));
         });
         listboxCreateRoom1PModeList.setSelectedValue(propConfig.getProperty("createroom1p.listboxCreateRoom1PModeList.value", ""), true);
         JScrollPane spCreateRoom1PModeList = new JScrollPane(listboxCreateRoom1PModeList);
@@ -2987,11 +2985,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
      * @param str     The string to add
      */
     public void addSystemChatLogLater(final JTextPane txtpane, final String str) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                addSystemChatLog(txtpane, str);
-            }
-        });
+        SwingUtilities.invokeLater(() -> addSystemChatLog(txtpane, str));
     }
 
     /**
@@ -3002,11 +2996,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
      * @param fgcolor Letter color(nullYes)
      */
     public void addSystemChatLogLater(final JTextPane txtpane, final String str, final Color fgcolor) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                addSystemChatLog(txtpane, str, fgcolor);
-            }
-        });
+        SwingUtilities.invokeLater(() -> addSystemChatLog(txtpane, str, fgcolor));
     }
 
     /**
@@ -3055,11 +3045,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
      * @param str      Message
      */
     public void addUserChatLogLater(final JTextPane txtpane, final String username, final Calendar calendar, final String str) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                addUserChatLog(txtpane, username, calendar, str);
-            }
-        });
+        SwingUtilities.invokeLater(() -> addUserChatLog(txtpane, username, calendar, str));
     }
 
     /**
@@ -3112,11 +3098,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
      * @param str      Message
      */
     public void addRecordedUserChatLogLater(final JTextPane txtpane, final String username, final Calendar calendar, final String str) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                addRecordedUserChatLog(txtpane, username, calendar, str);
-            }
-        });
+        SwingUtilities.invokeLater(() -> addRecordedUserChatLog(txtpane, username, calendar, str));
     }
 
     /**
@@ -3447,14 +3429,12 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
      * Lobby screenPlayerList update
      */
     public void updateLobbyUserList() {
-        LinkedList<NetPlayerInfo> pList = new LinkedList<NetPlayerInfo>(netPlayerClient.getPlayerInfoList());
+        LinkedList<NetPlayerInfo> pList = new LinkedList<>(netPlayerClient.getPlayerInfoList());
 
         if (!pList.isEmpty()) {
             listmodelLobbyChatPlayerList.clear();
 
-            for (int i = 0; i < pList.size(); i++) {
-                NetPlayerInfo pInfo = pList.get(i);
-
+            for (NetPlayerInfo pInfo : pList) {
                 // Name
                 String name = getPlayerNameWithTripCode(pInfo);
                 if (pInfo.uid == netPlayerClient.getPlayerUID()) name = "*" + getPlayerNameWithTripCode(pInfo);
@@ -3502,7 +3482,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
         NetRoomInfo roomInfo = netPlayerClient.getRoomInfo(netPlayerClient.getYourPlayerInfo().roomID);
         if (roomInfo == null) return;
 
-        LinkedList<NetPlayerInfo> pList = new LinkedList<NetPlayerInfo>(netPlayerClient.getPlayerInfoList());
+        LinkedList<NetPlayerInfo> pList = new LinkedList<>(netPlayerClient.getPlayerInfoList());
 
         if (!pList.isEmpty()) {
             listmodelRoomChatPlayerList.clear();
@@ -3511,9 +3491,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
                 listmodelRoomChatPlayerList.addElement("[" + (i + 1) + "]");
             }
 
-            for (int i = 0; i < pList.size(); i++) {
-                NetPlayerInfo pInfo = pList.get(i);
-
+            for (NetPlayerInfo pInfo : pList) {
                 if (pInfo.roomID == roomInfo.roomID) {
                     // Name
                     String name = getPlayerNameWithTripCode(pInfo);
@@ -3562,7 +3540,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
      * @return Being in the same roomPlayerList
      */
     public LinkedList<NetPlayerInfo> updateSameRoomPlayerInfoList() {
-        LinkedList<NetPlayerInfo> pList = new LinkedList<NetPlayerInfo>(netPlayerClient.getPlayerInfoList());
+        LinkedList<NetPlayerInfo> pList = new LinkedList<>(netPlayerClient.getPlayerInfoList());
         int roomID = netPlayerClient.getYourPlayerInfo().roomID;
         sameRoomPlayerInfoList.clear();
 
@@ -4043,11 +4021,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
     public String[] getRuleFileList() {
         File dir = new File("config/rule");
 
-        FilenameFilter filter = new FilenameFilter() {
-            public boolean accept(File dir1, String name) {
-                return name.endsWith(".rul");
-            }
-        };
+        FilenameFilter filter = (dir1, name) -> name.endsWith(".rul");
 
         String[] list = dir.list(filter);
 
@@ -4065,18 +4039,18 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
      * @param filelist Rule file list
      */
     public void createRuleEntries(String[] filelist) {
-        ruleEntries = new LinkedList<RuleEntry>();
+        ruleEntries = new LinkedList<>();
 
-        for (int i = 0; i < filelist.length; i++) {
+        for (String aFilelist : filelist) {
             RuleEntry entry = new RuleEntry();
 
-            File file = new File("config/rule/" + filelist[i]);
-            entry.filename = filelist[i];
+            File file = new File("config/rule/" + aFilelist);
+            entry.filename = aFilelist;
             entry.filepath = file.getPath();
 
             CustomProperties prop = new CustomProperties();
             try {
-                FileInputStream in = new FileInputStream("config/rule/" + filelist[i]);
+                FileInputStream in = new FileInputStream("config/rule/" + aFilelist);
                 prop.load(in);
                 in.close();
                 entry.rulename = prop.getProperty("0.ruleopt.strRuleName", "");
@@ -4097,10 +4071,10 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
      * @return Subset of rule entries
      */
     public LinkedList<RuleEntry> getSubsetEntries(int currentStyle) {
-        LinkedList<RuleEntry> subEntries = new LinkedList<RuleEntry>();
-        for (int i = 0; i < ruleEntries.size(); i++) {
-            if (ruleEntries.get(i).style == currentStyle) {
-                subEntries.add(ruleEntries.get(i));
+        LinkedList<RuleEntry> subEntries = new LinkedList<>();
+        for (RuleEntry ruleEntry : ruleEntries) {
+            if (ruleEntry.style == currentStyle) {
+                subEntries.add(ruleEntry);
             }
         }
         return subEntries;
@@ -4795,18 +4769,10 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
         // PlayerList
         if (message[0].equals("playerlist") || message[0].equals("playerupdate") ||
                 message[0].equals("playernew") || message[0].equals("playerlogout")) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    updateLobbyUserList();
-                }
-            });
+            SwingUtilities.invokeLater(this::updateLobbyUserList);
 
             if (tabLobbyAndRoom.isEnabledAt(1)) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        updateRoomUserList();
-                    }
-                });
+                SwingUtilities.invokeLater(this::updateRoomUserList);
 
                 if (message[0].equals("playerlogout")) {
                     NetPlayerInfo p = new NetPlayerInfo(message[1]);
@@ -4984,11 +4950,9 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
                     }
                 }
 
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        setRoomButtonsEnabled(true);
-                        updateRoomUserList();
-                    }
+                SwingUtilities.invokeLater(() -> {
+                    setRoomButtonsEnabled(true);
+                    updateRoomUserList();
                 });
 
                 String strTitle = roomInfo.strName;
@@ -5044,8 +5008,8 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
             mapList.clear();
 
             int maxMap = strMaps.length;
-            for (int i = 0; i < maxMap; i++) {
-                mapList.add(strMaps[i]);
+            for (String strMap : strMaps) {
+                mapList.add(strMap);
             }
 
             log.debug("Received " + mapList.size() + " maps");
@@ -5086,26 +5050,29 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
             NetPlayerInfo pInfo = netPlayerClient.getPlayerInfoByUID(uid);
 
             if (pInfo != null) {
-                if (message[1].equals("watchonly")) {
-                    String strTemp = String.format(getUIText("SysMsg_StatusChange_Spectator"), getPlayerNameWithTripCode(pInfo));
-                    addSystemChatLogLater(txtpaneRoomChatLog, strTemp, Color.blue);
-                    if (uid == netPlayerClient.getPlayerUID()) setRoomJoinButtonVisible(true);
-                } else if (message[1].equals("joinqueue")) {
-                    String strTemp = String.format(getUIText("SysMsg_StatusChange_Queue"), getPlayerNameWithTripCode(pInfo));
-                    addSystemChatLogLater(txtpaneRoomChatLog, strTemp, Color.blue);
-                    if (uid == netPlayerClient.getPlayerUID()) setRoomJoinButtonVisible(false);
-                } else if (message[1].equals("joinseat")) {
-                    String strTemp = String.format(getUIText("SysMsg_StatusChange_Joined"), getPlayerNameWithTripCode(pInfo));
-                    addSystemChatLogLater(txtpaneRoomChatLog, strTemp, Color.blue);
-                    if (uid == netPlayerClient.getPlayerUID()) setRoomJoinButtonVisible(false);
+                switch (message[1]) {
+                    case "watchonly": {
+                        String strTemp = String.format(getUIText("SysMsg_StatusChange_Spectator"), getPlayerNameWithTripCode(pInfo));
+                        addSystemChatLogLater(txtpaneRoomChatLog, strTemp, Color.blue);
+                        if (uid == netPlayerClient.getPlayerUID()) setRoomJoinButtonVisible(true);
+                        break;
+                    }
+                    case "joinqueue": {
+                        String strTemp = String.format(getUIText("SysMsg_StatusChange_Queue"), getPlayerNameWithTripCode(pInfo));
+                        addSystemChatLogLater(txtpaneRoomChatLog, strTemp, Color.blue);
+                        if (uid == netPlayerClient.getPlayerUID()) setRoomJoinButtonVisible(false);
+                        break;
+                    }
+                    case "joinseat": {
+                        String strTemp = String.format(getUIText("SysMsg_StatusChange_Joined"), getPlayerNameWithTripCode(pInfo));
+                        addSystemChatLogLater(txtpaneRoomChatLog, strTemp, Color.blue);
+                        if (uid == netPlayerClient.getPlayerUID()) setRoomJoinButtonVisible(false);
+                        break;
+                    }
                 }
             }
 
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    updateRoomUserList();
-                }
-            });
+            SwingUtilities.invokeLater(this::updateRoomUserList);
         }
         // Automatically start timerStart
         if (message[0].equals("autostartbegin")) {
@@ -5194,8 +5161,8 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
             }
 
             tablemodelGameStat1P.setRowCount(0);
-            for (int i = 0; i < rowData.length; i++) {
-                String[] strTempArray = rowData[i].split(";");
+            for (String aRowData : rowData) {
+                String[] strTempArray = aRowData.split(";");
                 tablemodelGameStat1P.addRow(strTempArray);
 
                 if ((writerRoomLog != null) && (strTempArray.length > 1)) {
@@ -5244,8 +5211,8 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
             String strPData = NetUtil.decompressString(message[3]);
             String[] strPDataA = strPData.split("\t");
 
-            for (int i = 0; i < strPDataA.length; i++) {
-                String[] strRankData = strPDataA[i].split(";");
+            for (String aStrPDataA : strPDataA) {
+                String[] strRankData = aStrPDataA.split(";");
                 String[] strRowData = new String[MPRANKING_COLUMNNAMES.length];
                 int rank = Integer.parseInt(strRankData[0]);
                 if (rank == -1) {
@@ -5307,12 +5274,10 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
      * When it is cut
      */
     public void netOnDisconnect(NetBaseClient client, Throwable ex) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                setLobbyButtonsEnabled(0);
-                setRoomButtonsEnabled(false);
-                tablemodelRoomList.setRowCount(0);
-            }
+        SwingUtilities.invokeLater(() -> {
+            setLobbyButtonsEnabled(0);
+            setRoomButtonsEnabled(false);
+            tablemodelRoomList.setRowCount(0);
         });
 
         if (ex != null) {

@@ -90,7 +90,7 @@ public class WaveEngine implements LineListener {
      */
     public WaveEngine(int maxClips) {
         this.maxClips = maxClips;
-        clipMap = new HashMap<String, Clip>(maxClips);
+        clipMap = new HashMap<>(maxClips);
     }
 
     /**

@@ -40,8 +40,6 @@ public class FixedSequenceRandomizer extends Randomizer {
                 sequence.append(text);
 
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

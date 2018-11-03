@@ -1617,7 +1617,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      * @return I read a text fileVector&lt;String&gt;
      */
     public Vector<String> getTextFileVector(String filename) {
-        Vector<String> vec = new Vector<String>();
+        Vector<String> vec = new Vector<>();
 
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
@@ -1640,10 +1640,9 @@ public class RuleEditor extends JFrame implements ActionListener {
      * @return Was processedVector&lt;String&gt;
      */
     public Vector<String> createShortStringVector(Vector<String> vecSrc) {
-        Vector<String> vec = new Vector<String>();
+        Vector<String> vec = new Vector<>();
 
-        for (int i = 0; i < vecSrc.size(); i++) {
-            String str = vecSrc.get(i);
+        for (String str : vecSrc) {
             int last = str.lastIndexOf('.');
 
             String newStr = "";

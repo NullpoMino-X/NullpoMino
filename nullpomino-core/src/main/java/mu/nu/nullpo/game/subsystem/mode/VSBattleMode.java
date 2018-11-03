@@ -554,7 +554,7 @@ public class VSBattleMode extends AbstractMode {
         lastb2b[playerID] = false;
         lastcombo[playerID] = 0;
 
-        garbageEntries[playerID] = new LinkedList<GarbageEntry>();
+        garbageEntries[playerID] = new LinkedList<>();
 
         hurryupCount[playerID] = 0;
 
