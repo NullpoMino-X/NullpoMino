@@ -70,62 +70,62 @@ public class UpdateCheckFrame extends JFrame implements ActionListener, UpdateCh
     /**
      * Parent window
      */
-    protected NullpoMinoSwing owner;
+    private NullpoMinoSwing owner;
 
     /**
      * State labels
      */
-    protected JLabel lStatus;
+    private JLabel lStatus;
 
     /**
      * The latest version ofVersion number
      */
-    protected JTextField txtfldLatestVersion;
+    private JTextField txtfldLatestVersion;
 
     /**
      * The release date of the latest version
      */
-    protected JTextField txtfldReleaseDate;
+    private JTextField txtfldReleaseDate;
 
     /**
      * Download the latest versionURL
      */
-    protected JTextField txtfldDownloadURL;
+    private JTextField txtfldDownloadURL;
 
     /**
      * Windows Installer URL
      */
-    protected JTextField txtfldWindowsInstallerURL;
+    private JTextField txtfldWindowsInstallerURL;
 
     /**
      * Update Now check Button
      */
-    protected JButton btnCheckNow;
+    private JButton btnCheckNow;
 
     /**
      * Download button in the browser
      */
-    protected JButton btnOpenDownloadURL;
+    private JButton btnOpenDownloadURL;
 
     /**
      * Installer download button
      */
-    protected JButton btnOpenInstallerURL;
+    private JButton btnOpenInstallerURL;
 
     /**
      * Update check  is enabled
      */
-    protected JCheckBox chkboxEnable;
+    private JCheckBox chkboxEnable;
 
     /**
      * XMLOfURL
      */
-    protected JTextField txtfldXMLURL;
+    private JTextField txtfldXMLURL;
 
     /**
      * This startup countUpdated every check
      */
-    protected JTextField txtfldStartupMax;
+    private JTextField txtfldStartupMax;
 
     /**
      * Constructor
@@ -145,7 +145,7 @@ public class UpdateCheckFrame extends JFrame implements ActionListener, UpdateCh
         pack();
     }
 
-    protected void initUI() {
+    private void initUI() {
         this.getContentPane().setLayout(new BorderLayout());
 
         // Tab

@@ -45,7 +45,7 @@ public class GameKeySDL extends GameKeyDummy {
     /**
      * Default key mappings
      */
-    public static int[][][] DEFAULTKEYS =
+    private static int[][][] DEFAULTKEYS =
             {
                     // Ingame
                     {
@@ -112,7 +112,7 @@ public class GameKeySDL extends GameKeyDummy {
      *
      * @param pl Player number
      */
-    public GameKeySDL(int pl) {
+    private GameKeySDL(int pl) {
         super(pl);
     }
 
@@ -243,7 +243,7 @@ public class GameKeySDL extends GameKeyDummy {
      *
      * @param type Settings type (0=Blockbox 1=Guideline 2=NullpoMino-Classic)
      */
-    public void loadDefaultGameKeymap(int type) {
+    private void loadDefaultGameKeymap(int type) {
         for (int i = 0; i < keymap.length; i++) {
             keymap[i] = DEFAULTKEYS[0][type][i];
         }
@@ -254,7 +254,7 @@ public class GameKeySDL extends GameKeyDummy {
      *
      * @param type Settings type (0=Blockbox 1=Guideline 2=NullpoMino-Classic)
      */
-    public void loadDefaultMenuKeymap(int type) {
+    private void loadDefaultMenuKeymap(int type) {
         for (int i = 0; i < keymapNav.length; i++) {
             keymapNav[i] = DEFAULTKEYS[1][type][i];
         }

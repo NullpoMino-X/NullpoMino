@@ -60,36 +60,38 @@ public abstract class AbstractMode implements GameMode {
     /**
      * GameManager that owns this mode
      */
-    protected GameManager owner;
+    GameManager owner;
 
     /**
      * Drawing and event handling EventReceiver
      */
-    protected EventReceiver receiver;
+    EventReceiver receiver;
 
     /**
      * Current state of menu for drawMenu
      */
-    protected int statcMenu, menuColor, menuY;
+    private int statcMenu;
+    int menuColor;
+    private int menuY;
 
-    protected ArrayList<AbstractMenuItem> menu;
+    ArrayList<AbstractMenuItem> menu;
 
     /**
      * Name of mode in properties file
      */
-    protected String propName;
+    String propName;
 
     /**
      * Position of cursor in menu
      */
-    protected int menuCursor;
+    int menuCursor;
 
     /**
      * Number of frames spent in menu
      */
-    protected int menuTime;
+    int menuTime;
 
-    public AbstractMode() {
+    AbstractMode() {
         statcMenu = 0;
         menuCursor = 0;
         menuTime = 0;
@@ -99,12 +101,12 @@ public abstract class AbstractMode implements GameMode {
         propName = "dummy";
     }
 
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         for (AbstractMenuItem item : menu)
             item.load(-1, prop, propName);
     }
 
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         for (AbstractMenuItem item : menu)
             item.save(-1, prop, propName);
     }
@@ -293,7 +295,7 @@ public abstract class AbstractMode implements GameMode {
      * @param maxCursor Max value of cursor position
      * @return -1 if Left key is pressed, 1 if Right key is pressed, 0 otherwise
      */
-    protected int updateCursor(GameEngine engine, int maxCursor) {
+    int updateCursor(GameEngine engine, int maxCursor) {
         return updateCursor(engine, maxCursor, 0);
     }
 
@@ -305,7 +307,7 @@ public abstract class AbstractMode implements GameMode {
      * @param playerID  Player ID (unused)
      * @return -1 if Left key is pressed, 1 if Right key is pressed, 0 otherwise
      */
-    protected int updateCursor(GameEngine engine, int maxCursor, int playerID) {
+    int updateCursor(GameEngine engine, int maxCursor, int playerID) {
         // Up
         if (engine.ctrl.isMenuRepeatKey(Controller.BUTTON_UP)) {
             menuCursor--;
@@ -325,7 +327,7 @@ public abstract class AbstractMode implements GameMode {
         return 0;
     }
 
-    protected void updateMenu(GameEngine engine) {
+    void updateMenu(GameEngine engine) {
         // Configuration changes
         int change = updateCursor(engine, menu.size() - 1);
 
@@ -338,19 +340,19 @@ public abstract class AbstractMode implements GameMode {
         }
     }
 
-    protected void initMenu(int y, int color, int statc) {
+    void initMenu(int y, int color, int statc) {
         menuY = y;
         menuColor = color;
         statcMenu = statc;
     }
 
-    protected void initMenu(int color, int statc) {
+    void initMenu(int color, int statc) {
         menuY = 0;
         statcMenu = statc;
         menuColor = color;
     }
 
-    protected void drawMenu(GameEngine engine, int playerID, EventReceiver receiver, String... str) {
+    void drawMenu(GameEngine engine, int playerID, EventReceiver receiver, String... str) {
         for (int i = 0; i < str.length; i++) {
             if ((i & 1) == 0)
                 receiver.drawMenuFont(engine, playerID, 0, menuY, str[i], menuColor);
@@ -365,15 +367,15 @@ public abstract class AbstractMode implements GameMode {
         }
     }
 
-    protected void drawMenu(GameEngine engine, int playerID, EventReceiver receiver,
-                            int y, int color, int statc, String... str) {
+    void drawMenu(GameEngine engine, int playerID, EventReceiver receiver,
+                  int y, int color, int statc, String... str) {
         menuY = y;
         menuColor = color;
         statcMenu = statc;
         drawMenu(engine, playerID, receiver, str);
     }
 
-    protected void drawMenuCompact(GameEngine engine, int playerID, EventReceiver receiver, String... str) {
+    void drawMenuCompact(GameEngine engine, int playerID, EventReceiver receiver, String... str) {
         for (int i = 0; i < str.length - 1; i += 2) {
             receiver.drawMenuFont(engine, playerID, 1, menuY, str[i] + ":", menuColor);
             if (menuCursor == statcMenu && !engine.owner.replayMode) {
@@ -394,53 +396,53 @@ public abstract class AbstractMode implements GameMode {
         drawMenuCompact(engine, playerID, receiver, str);
     }
 
-    protected void drawResult(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, String... str) {
+    void drawResult(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, String... str) {
         drawResultScale(engine, playerID, receiver, y, color, 1.0f, str);
     }
 
-    protected void drawResultScale(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, float scale, String... str) {
+    void drawResultScale(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, float scale, String... str) {
         for (int i = 0; i < str.length; i++)
             receiver.drawMenuFont(engine, playerID, 0, y + i, str[i], ((i & 1) == 0) ? color : EventReceiver.COLOR_WHITE, scale);
     }
 
-    protected void drawResultRank(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, int rank) {
+    void drawResultRank(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, int rank) {
         drawResultRankScale(engine, playerID, receiver, y, color, 1.0f, rank);
     }
 
-    protected void drawResultRankScale(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, float scale, int rank) {
+    private void drawResultRankScale(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, float scale, int rank) {
         if (rank != -1) {
             receiver.drawMenuFont(engine, playerID, 0, y, "RANK", color, scale);
             receiver.drawMenuFont(engine, playerID, 0, y + 1, String.format("%10d", rank + 1), scale);
         }
     }
 
-    protected void drawResultNetRank(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, int rank) {
+    void drawResultNetRank(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, int rank) {
         drawResultNetRankScale(engine, playerID, receiver, y, color, 1.0f, rank);
     }
 
-    protected void drawResultNetRankScale(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, float scale, int rank) {
+    private void drawResultNetRankScale(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, float scale, int rank) {
         if (rank != -1) {
             receiver.drawMenuFont(engine, playerID, 0, y, "NET-RANK", color, scale);
             receiver.drawMenuFont(engine, playerID, 0, y + 1, String.format("%10d", rank + 1), scale);
         }
     }
 
-    protected void drawResultNetRankDaily(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, int rank) {
+    void drawResultNetRankDaily(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, int rank) {
         drawResultNetRankDailyScale(engine, playerID, receiver, y, color, 1.0f, rank);
     }
 
-    protected void drawResultNetRankDailyScale(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, float scale, int rank) {
+    private void drawResultNetRankDailyScale(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, float scale, int rank) {
         if (rank != -1) {
             receiver.drawMenuFont(engine, playerID, 0, y, "DAILY-RANK", color, scale);
             receiver.drawMenuFont(engine, playerID, 0, y + 1, String.format("%10d", rank + 1), scale);
         }
     }
 
-    protected void drawResultStats(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, Statistic... stats) {
+    void drawResultStats(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, Statistic... stats) {
         drawResultStatsScale(engine, playerID, receiver, y, color, 1.0f, stats);
     }
 
-    protected void drawResultStatsScale(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, float scale, Statistic... stats) {
+    private void drawResultStatsScale(GameEngine engine, int playerID, EventReceiver receiver, int y, int color, float scale, Statistic... stats) {
         for (Statistic stat : stats) {
             switch (stat) {
                 case SCORE:

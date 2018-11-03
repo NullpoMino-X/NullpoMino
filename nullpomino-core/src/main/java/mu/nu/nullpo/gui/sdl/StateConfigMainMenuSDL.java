@@ -52,7 +52,7 @@ public class StateConfigMainMenuSDL extends DummyMenuChooseStateSDL {
     /**
      * Player number
      */
-    protected int player = 0;
+    private int player = 0;
 
     public StateConfigMainMenuSDL() {
         maxCursor = 7;

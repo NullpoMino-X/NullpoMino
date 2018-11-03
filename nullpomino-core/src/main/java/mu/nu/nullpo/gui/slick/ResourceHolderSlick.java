@@ -47,16 +47,16 @@ import org.newdawn.slick.openal.SoundStore;
 /**
  * Class to the management of image and sound
  */
-public class ResourceHolderSlick {
+class ResourceHolderSlick {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(ResourceHolderSlick.class);
+    private static Logger log = Logger.getLogger(ResourceHolderSlick.class);
 
     /**
      * BackgroundOfcount
      */
-    public static final int BACKGROUND_MAX = 20;
+    private static final int BACKGROUND_MAX = 20;
 
     /**
      * Number of images for block spatter animation during line clears
@@ -66,7 +66,7 @@ public class ResourceHolderSlick {
     /**
      * Number of image splits for block spatter animation during line clears
      */
-    public static final int BLOCK_BREAK_SEGMENTS = 2;
+    private static final int BLOCK_BREAK_SEGMENTS = 2;
 
     /**
      * Number of gem block clear effects
@@ -140,7 +140,7 @@ public class ResourceHolderSlick {
     /**
      * BGM
      */
-    public static Music[] bgm;
+    private static Music[] bgm;
 
     /**
      * Current BGM number
@@ -347,7 +347,7 @@ public class ResourceHolderSlick {
      * @param filename Filename
      * @return Image data
      */
-    public static Image loadImage(String filename) {
+    private static Image loadImage(String filename) {
         if (NullpoMinoSlick.useBigImageTextureLoad) {
             return (Image) loadBigImage(filename);
         }
@@ -360,7 +360,7 @@ public class ResourceHolderSlick {
      * @param filename Filename
      * @return Image data
      */
-    public static Image loadNormalImage(String filename) {
+    private static Image loadNormalImage(String filename) {
         log.debug("Loading image from " + filename);
 
         Image img = null;
@@ -383,7 +383,7 @@ public class ResourceHolderSlick {
      * @param filename Filename
      * @return Image data
      */
-    public static BigImage loadBigImage(String filename) {
+    private static BigImage loadBigImage(String filename) {
         log.debug("Loading big image from " + filename);
 
         BigImage bigImg = null;
@@ -402,7 +402,7 @@ public class ResourceHolderSlick {
      * @param no      BGM number
      * @param showerr displayed on the console when an exception occurs
      */
-    public static void bgmLoad(int no, boolean showerr) {
+    private static void bgmLoad(int no, boolean showerr) {
         if (NullpoMinoSlick.propConfig.getProperty("option.bgm", false) == false) return;
 
         if (bgm[no] == null) {

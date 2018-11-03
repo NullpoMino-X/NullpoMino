@@ -19,14 +19,14 @@ import javax.swing.ProgressMonitor;
 
 import org.jdesktop.swingworker.SwingWorker;
 
-public class RanksResult extends JDialog implements ActionListener, PropertyChangeListener {
+class RanksResult extends JDialog implements ActionListener, PropertyChangeListener {
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
     //private JFrame parent;
-    class SurfaceComparator implements Comparator<Integer> {
+    private class SurfaceComparator implements Comparator<Integer> {
 
         public int compare(Integer o1, Integer o2) {
 
@@ -39,15 +39,15 @@ public class RanksResult extends JDialog implements ActionListener, PropertyChan
         private int surface;
         private int rank;
 
-        public int getSurface() {
+        int getSurface() {
             return surface;
         }
 
-        public int getRank() {
+        int getRank() {
             return rank;
         }
 
-        public SurfaceRank(int surface, int rank2) {
+        SurfaceRank(int surface, int rank2) {
             this.surface = surface;
             this.rank = rank2;
         }

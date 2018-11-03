@@ -269,7 +269,7 @@ public class DigChallengeMode extends NetDummyMode {
      *
      * @param engine GameEngine
      */
-    public void setSpeed(GameEngine engine) {
+    private void setSpeed(GameEngine engine) {
         if (goaltype == GOALTYPE_REALTIME) {
             engine.speed.gravity = 0;
             engine.speed.denominator = 60;
@@ -950,7 +950,7 @@ public class DigChallengeMode extends NetDummyMode {
      *
      * @param prop Property file
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         goaltype = prop.getProperty("digchallenge.goaltype", GOALTYPE_NORMAL);
         startlevel = prop.getProperty("digchallenge.startlevel", 0);
         bgmno = prop.getProperty("digchallenge.bgmno", 0);
@@ -969,7 +969,7 @@ public class DigChallengeMode extends NetDummyMode {
      *
      * @param prop Property file
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("digchallenge.goaltype", goaltype);
         prop.setProperty("digchallenge.startlevel", startlevel);
         prop.setProperty("digchallenge.bgmno", bgmno);
@@ -990,7 +990,7 @@ public class DigChallengeMode extends NetDummyMode {
      * @param ruleName Rule name
      */
     @Override
-    protected void loadRanking(CustomProperties prop, String ruleName) {
+    void loadRanking(CustomProperties prop, String ruleName) {
         for (int i = 0; i < RANKING_MAX; i++) {
             for (int j = 0; j < GOALTYPE_MAX; j++) {
                 rankingScore[j][i] = prop.getProperty("digchallenge.ranking." + ruleName + "." + j + ".score." + i, 0);
@@ -1069,7 +1069,7 @@ public class DigChallengeMode extends NetDummyMode {
      * @param engine GameEngine
      */
     @Override
-    protected void netSendStats(GameEngine engine) {
+    void netSendStats(GameEngine engine) {
         int bg = engine.owner.backgroundStatus.fadesw ? engine.owner.backgroundStatus.fadebg : engine.owner.backgroundStatus.bg;
         String msg = "game\tstats\t";
         msg += engine.statistics.score + "\t" + engine.statistics.lines + "\t" + engine.statistics.totalPieceLocked + "\t";
@@ -1134,7 +1134,7 @@ public class DigChallengeMode extends NetDummyMode {
      * @param engine GameEngine
      */
     @Override
-    protected void netSendOptions(GameEngine engine) {
+    void netSendOptions(GameEngine engine) {
         String msg = "game\toption\t";
         msg += goaltype + "\t" + startlevel + "\t" + bgmno + "\t";
         msg += tspinEnableType + "\t" + enableTSpinKick + "\t" + spinCheckType + "\t" + tspinEnableEZ + "\t";
@@ -1171,7 +1171,7 @@ public class DigChallengeMode extends NetDummyMode {
      * NET: It returns true when the current settings doesn't prevent leaderboard screen from showing.
      */
     @Override
-    protected boolean netIsNetRankingViewOK(GameEngine engine) {
+    boolean netIsNetRankingViewOK(GameEngine engine) {
         return ((startlevel == 0) && (engine.ai == null));
     }
 }

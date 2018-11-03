@@ -42,162 +42,165 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
     /**
      * NET: Lobby (Declared in NetDummyMode)
      */
-    protected NetLobbyFrame netLobby;
+    NetLobbyFrame netLobby;
 
     /**
      * NET: GameManager (Declared in NetDummyMode; Don't override it!)
      */
-    protected GameManager owner;
+    GameManager owner;
 
     /**
      * NET: true if netplay (Declared in NetDummyMode)
      */
-    protected boolean netIsNetPlay;
+    boolean netIsNetPlay;
 
     /**
      * NET: true if watch mode (Declared in NetDummyMode)
      */
-    protected boolean netIsWatch;
+    boolean netIsWatch;
 
     /**
      * NET: Current room info. Sometimes null. (Declared in NetDummyMode)
      */
-    protected NetRoomInfo netCurrentRoomInfo;
+    NetRoomInfo netCurrentRoomInfo;
 
     /**
      * NET: Number of spectators (Declared in NetDummyMode)
      */
-    protected int netNumSpectators;
+    int netNumSpectators;
 
     /**
      * NET: Send all movements even if there are no spectators
      */
-    protected boolean netForceSendMovements;
+    boolean netForceSendMovements;
 
     /**
      * NET: Previous piece informations (Declared in NetDummyMode)
      */
-    protected int netPrevPieceID, netPrevPieceX, netPrevPieceY, netPrevPieceDir;
+    private int netPrevPieceID;
+    private int netPrevPieceX;
+    private int netPrevPieceY;
+    private int netPrevPieceDir;
 
     /**
      * NET: The skin player using (Declared in NetDummyMode)
      */
-    protected int netPlayerSkin;
+    private int netPlayerSkin;
 
     /**
      * NET: If true, NetDummyMode will always send attributes when sending the field (Declared in NetDummyMode)
      */
-    protected boolean netAlwaysSendFieldAttributes;
+    boolean netAlwaysSendFieldAttributes;
 
     /**
      * NET: Player name (Declared in NetDummyMode)
      */
-    protected String netPlayerName;
+    String netPlayerName;
 
     /**
      * NET: Replay send status (0:Before Send 1:Sending 2:Sent) (Declared in NetDummyMode)
      */
-    protected int netReplaySendStatus;
+    int netReplaySendStatus;
 
     /**
      * NET: Current round's online ranking rank (Declared in NetDummyMode)
      */
-    protected int[] netRankingRank;
+    int[] netRankingRank;
 
     /**
      * NET: True if new personal record (Declared in NetDummyMode)
      */
-    protected boolean netIsPB;
+    boolean netIsPB;
 
     /**
      * NET: True if net ranking display mode (Declared in NetDummyMode)
      */
-    protected boolean netIsNetRankingDisplayMode;
+    boolean netIsNetRankingDisplayMode;
 
     /**
      * NET: Net ranking cursor position (Declared in NetDummyMode)
      */
-    protected int[] netRankingCursor;
+    private int[] netRankingCursor;
 
     /**
      * NET: Net ranking player's current rank (Declared in NetDummyMode)
      */
-    protected int[] netRankingMyRank;
+    private int[] netRankingMyRank;
 
     /**
      * NET: 0 if viewing all-time ranking, 1 if viewing daily ranking (Declared in NetDummyMode)
      */
-    protected int netRankingView;
+    private int netRankingView;
 
     /**
      * NET: Net ranking type (Declared in NetDummyMode)
      */
-    protected int netRankingType;
+    private int netRankingType;
 
     /**
      * NET: True if no data is present. [0] for all-time and [1] for daily. (Declared in NetDummyMode)
      */
-    protected boolean[] netRankingNoDataFlag;
+    private boolean[] netRankingNoDataFlag;
 
     /**
      * NET: True if loading is complete. [0] for all-time and [1] for daily. (Declared in NetDummyMode)
      */
-    protected boolean[] netRankingReady;
+    private boolean[] netRankingReady;
 
     /**
      * NET: Net Rankings' rank (Declared in NetDummyMode)
      */
-    protected LinkedList<Integer>[] netRankingPlace;
+    private LinkedList<Integer>[] netRankingPlace;
 
     /**
      * NET: Net Rankings' names (Declared in NetDummyMode)
      */
-    protected LinkedList<String>[] netRankingName;
+    private LinkedList<String>[] netRankingName;
 
     /**
      * NET: Net Rankings' timestamps (Declared in NetDummyMode)
      */
-    protected LinkedList<Calendar>[] netRankingDate;
+    private LinkedList<Calendar>[] netRankingDate;
 
     /**
      * NET: Net Rankings' gamerates (Declared in NetDummyMode)
      */
-    protected LinkedList<Float>[] netRankingGamerate;
+    private LinkedList<Float>[] netRankingGamerate;
 
     /**
      * NET: Net Rankings' times (Declared in NetDummyMode)
      */
-    protected LinkedList<Integer>[] netRankingTime;
+    private LinkedList<Integer>[] netRankingTime;
 
     /**
      * NET: Net Rankings' score (Declared in NetDummyMode)
      */
-    protected LinkedList<Integer>[] netRankingScore;
+    private LinkedList<Integer>[] netRankingScore;
 
     /**
      * NET: Net Rankings' piece counts (Declared in NetDummyMode)
      */
-    protected LinkedList<Integer>[] netRankingPiece;
+    private LinkedList<Integer>[] netRankingPiece;
 
     /**
      * NET: Net Rankings' PPS values (Declared in NetDummyMode)
      */
-    protected LinkedList<Float>[] netRankingPPS;
+    private LinkedList<Float>[] netRankingPPS;
 
     /**
      * NET: Net Rankings' line counts (Declared in NetDummyMode)
      */
-    protected LinkedList<Integer>[] netRankingLines;
+    private LinkedList<Integer>[] netRankingLines;
 
     /**
      * NET: Net Rankings' score/line (Declared in NetDummyMode)
      */
-    protected LinkedList<Double>[] netRankingSPL;
+    private LinkedList<Double>[] netRankingSPL;
 
     /**
      * NET: Net Rankings' roll completed flag (Declared in NetDummyMode)
      */
-    protected LinkedList<Integer>[] netRankingRollclear;
+    private LinkedList<Integer>[] netRankingRollclear;
 
     /*
      * NET: Mode name
@@ -286,7 +289,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param engine   GameEngine
      * @param playerID Player ID
      */
-    protected void netPlayerInit(GameEngine engine, int playerID) {
+    void netPlayerInit(GameEngine engine, int playerID) {
         netPrevPieceID = Piece.PIECE_NONE;
         netPrevPieceX = 0;
         netPrevPieceY = 0;
@@ -486,7 +489,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * NET: Update menu cursor. NetDummyMode will signal cursor movement to all spectators.
      */
     @Override
-    protected int updateCursor(GameEngine engine, int maxCursor, int playerID) {
+    int updateCursor(GameEngine engine, int maxCursor, int playerID) {
         // NET: Don't execute in watch mode
         if (netIsWatch) return 0;
 
@@ -688,7 +691,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param client   NetPlayerClient
      * @param roomInfo NetRoomInfo
      */
-    protected void netOnJoin(NetLobbyFrame lobby, NetPlayerClient client, NetRoomInfo roomInfo) {
+    void netOnJoin(NetLobbyFrame lobby, NetPlayerClient client, NetRoomInfo roomInfo) {
         log.debug("onJoin on NetDummyMode");
 
         netCurrentRoomInfo = roomInfo;
@@ -722,13 +725,13 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param prop     Property file
      * @param ruleName Rule name
      */
-    protected void loadRanking(CustomProperties prop, String ruleName) {
+    void loadRanking(CustomProperties prop, String ruleName) {
     }
 
     /**
      * NET: Update player count
      */
-    protected void netUpdatePlayerExist() {
+    void netUpdatePlayerExist() {
         netNumSpectators = 0;
         netPlayerName = "";
 
@@ -751,7 +754,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      *
      * @param engine GameEngine
      */
-    protected void netDrawAllPlayersCount(GameEngine engine) {
+    void netDrawAllPlayersCount(GameEngine engine) {
         if ((netLobby != null) && (netLobby.netPlayerClient != null) && (netLobby.netPlayerClient.isConnected())) {
             int fontcolor = EventReceiver.COLOR_BLUE;
             if (netLobby.netPlayerClient.getObserverCount() > 0) fontcolor = EventReceiver.COLOR_GREEN;
@@ -767,7 +770,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      *
      * @param engine GameEngine
      */
-    protected void netDrawGameRate(GameEngine engine) {
+    void netDrawGameRate(GameEngine engine) {
         if (netIsNetPlay && !netIsWatch && engine.gameStarted && (engine.startTime != 0)) {
             float gamerate = 0f;
             if (engine.endTime != 0) {
@@ -795,7 +798,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param x      X offset
      * @param y      Y offset
      */
-    protected void netDrawSpectatorsCount(GameEngine engine, int x, int y) {
+    void netDrawSpectatorsCount(GameEngine engine, int x, int y) {
         if (netIsNetPlay) {
             int fontcolor = netIsWatch ? EventReceiver.COLOR_GREEN : EventReceiver.COLOR_RED;
             owner.receiver.drawScoreFont(engine, engine.playerID, x, y + 0, "SPECTATORS", fontcolor);
@@ -815,7 +818,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      *
      * @param engine GameEngine
      */
-    protected void netDrawPlayerName(GameEngine engine) {
+    void netDrawPlayerName(GameEngine engine) {
         if ((netPlayerName != null) && (netPlayerName.length() > 0)) {
             String name = netPlayerName;
             owner.receiver.drawTTFDirectFont(
@@ -834,7 +837,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      *                  (if <code>false</code>, it won't send a message unless there is a movement)
      * @return <code>true</code> if the message is sent
      */
-    protected boolean netSendPieceMovement(GameEngine engine, boolean forceSend) {
+    boolean netSendPieceMovement(GameEngine engine, boolean forceSend) {
         if (((engine.nowPieceObject == null) && (netPrevPieceID != Piece.PIECE_NONE)) || (engine.manualLock)) {
             netPrevPieceID = Piece.PIECE_NONE;
             netLobby.netPlayerClient.send("game\tpiece\t" + netPrevPieceID + "\t" + netPrevPieceX + "\t" + netPrevPieceY + "\t" +
@@ -864,7 +867,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param engine  GameEngine
      * @param message Message array
      */
-    protected void netRecvPieceMovement(GameEngine engine, String[] message) {
+    void netRecvPieceMovement(GameEngine engine, String[] message) {
         int id = Integer.parseInt(message[4]);
 
         if (id >= 0) {
@@ -908,7 +911,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      *
      * @param engine GameEngine
      */
-    protected void netSendField(GameEngine engine) {
+    void netSendField(GameEngine engine) {
         if (owner.receiver.isStickySkin(engine) || netAlwaysSendFieldAttributes) {
             // Send with attributes
             String strSrcFieldData = engine.field.attrFieldToString();
@@ -957,7 +960,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param engine  GameEngine
      * @param message Message array
      */
-    protected void netRecvField(GameEngine engine, String[] message) {
+    void netRecvField(GameEngine engine, String[] message) {
         if (message[3].equals("fieldattr")) {
             // With attributes
             if (message.length > 4) {
@@ -1003,7 +1006,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      *
      * @param engine GameEngine
      */
-    protected void netSendNextAndHold(GameEngine engine) {
+    void netSendNextAndHold(GameEngine engine) {
         int holdID = Piece.PIECE_NONE;
         int holdDirection = Piece.DIRECTION_UP;
         int holdColor = Block.BLOCK_COLOR_GRAY;
@@ -1036,7 +1039,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param engine  GameEngine
      * @param message Message array
      */
-    protected void netRecvNextAndHold(GameEngine engine, String[] message) {
+    void netRecvNextAndHold(GameEngine engine, String[] message) {
         int maxNext = Integer.parseInt(message[4]);
         engine.ruleopt.nextDisplay = maxNext;
         engine.holdDisable = Boolean.parseBoolean(message[5]);
@@ -1081,7 +1084,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param engine   GameEngine
      * @param goaltype Goal Type
      */
-    protected void netOnUpdateNetPlayRanking(GameEngine engine, int goaltype) {
+    void netOnUpdateNetPlayRanking(GameEngine engine, int goaltype) {
         if (netIsNetRankingDisplayMode) {
             int d = netRankingView;
 
@@ -1132,7 +1135,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param playerID Player ID
      * @param receiver EventReceiver
      */
-    protected void netOnRenderNetPlayRanking(GameEngine engine, int playerID, EventReceiver receiver) {
+    void netOnRenderNetPlayRanking(GameEngine engine, int playerID, EventReceiver receiver) {
         if (netIsNetRankingDisplayMode) {
             String strBtnA = receiver.getKeyNameByButtonID(engine, Controller.BUTTON_A);
             String strBtnB = receiver.getKeyNameByButtonID(engine, Controller.BUTTON_B);
@@ -1278,7 +1281,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param playerID Player ID
      * @param goaltype Game Type
      */
-    protected void netEnterNetPlayRankingScreen(GameEngine engine, int playerID, int goaltype) {
+    void netEnterNetPlayRankingScreen(GameEngine engine, int playerID, int goaltype) {
         if (netRankingPlace != null) {
             netRankingPlace[0] = null;
             netRankingPlace[1] = null;
@@ -1302,7 +1305,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param engine  GameEngine
      * @param message Message array
      */
-    protected void netRecvNetPlayRanking(GameEngine engine, String[] message) {
+    private void netRecvNetPlayRanking(GameEngine engine, String[] message) {
         String strDebugTemp = "";
         for (String aMessage : message) {
             strDebugTemp += aMessage + " ";
@@ -1398,7 +1401,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      *
      * @param engine GameEngine
      */
-    protected void netSendStats(GameEngine engine) {
+    void netSendStats(GameEngine engine) {
     }
 
     /**
@@ -1408,7 +1411,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param engine  GameEngine
      * @param message Message array
      */
-    protected void netRecvStats(GameEngine engine, String[] message) {
+    void netRecvStats(GameEngine engine, String[] message) {
     }
 
     /**
@@ -1417,7 +1420,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      *
      * @param engine GameEngine
      */
-    protected void netSendEndGameStats(GameEngine engine) {
+    void netSendEndGameStats(GameEngine engine) {
     }
 
     /**
@@ -1426,7 +1429,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      *
      * @param engine GameEngine
      */
-    protected void netSendOptions(GameEngine engine) {
+    void netSendOptions(GameEngine engine) {
     }
 
     /**
@@ -1436,7 +1439,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param engine  GameEngine
      * @param message Message array
      */
-    protected void netRecvOptions(GameEngine engine, String[] message) {
+    void netRecvOptions(GameEngine engine, String[] message) {
     }
 
     /**
@@ -1445,7 +1448,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      *
      * @param engine GameEngine
      */
-    protected void netSendReplay(GameEngine engine) {
+    private void netSendReplay(GameEngine engine) {
         if (netIsNetRankingSendOK(engine)) {
             NetSPRecord record = new NetSPRecord();
             record.setReplayProp(owner.replayProp);
@@ -1470,7 +1473,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      *
      * @return Goal type (default implementation will return 0)
      */
-    protected int netGetGoalType() {
+    int netGetGoalType() {
         return 0;
     }
 
@@ -1481,7 +1484,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param engine GameEngine
      * @return <code>true</code> when the current settings doesn't prevent leaderboard screen from showing.
      */
-    protected boolean netIsNetRankingViewOK(GameEngine engine) {
+    boolean netIsNetRankingViewOK(GameEngine engine) {
         return false;
     }
 
@@ -1492,7 +1495,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
      * @param engine GameEngine
      * @return <code>true</code> when the current settings doesn't prevent replay data from sending.
      */
-    protected boolean netIsNetRankingSendOK(GameEngine engine) {
+    boolean netIsNetRankingSendOK(GameEngine engine) {
         return netIsNetRankingViewOK(engine);
     }
 }

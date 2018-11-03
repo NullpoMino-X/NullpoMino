@@ -48,12 +48,12 @@ public class EventReceiver {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(EventReceiver.class);
+    private static Logger log = Logger.getLogger(EventReceiver.class);
 
     /**
      * Field X position
      */
-    public static final int[][][] NEW_FIELD_OFFSET_X = {
+    private static final int[][][] NEW_FIELD_OFFSET_X = {
             {    // TETROMINO
                     {119, 247, 375, 503, 247, 375}, // Small
                     {32, 432, 432, 432, 432, 432}, // Normal
@@ -78,7 +78,7 @@ public class EventReceiver {
     /**
      * Field Y position
      */
-    public static final int[][][] NEW_FIELD_OFFSET_Y = {
+    private static final int[][][] NEW_FIELD_OFFSET_Y = {
             {    // TETROMINO
                     {80, 80, 80, 80, 286, 286}, // Small
                     {32, 32, 32, 32, 32, 32}, // Normal
@@ -104,7 +104,7 @@ public class EventReceiver {
     /**
      * Field X position (Big side preview)
      */
-    public static final int[][][] NEW_FIELD_OFFSET_X_BSP = {
+    private static final int[][][] NEW_FIELD_OFFSET_X_BSP = {
             {    // TETROMINO
                     {208, 320, 432, 544, 320, 432}, // Small
                     {64, 400, 400, 400, 400, 400}, // Normal
@@ -129,7 +129,7 @@ public class EventReceiver {
     /**
      * Field Y position (Big side preview)
      */
-    public static final int[][][] NEW_FIELD_OFFSET_Y_BSP = {
+    private static final int[][][] NEW_FIELD_OFFSET_Y_BSP = {
             {    // TETROMINO
                     {80, 80, 80, 80, 286, 286}, // Small
                     {32, 32, 32, 32, 32, 32}, // Normal
@@ -292,7 +292,7 @@ public class EventReceiver {
      * @param flag     Any boolean variable
      * @param scale    Font size
      */
-    public void drawMenuFont(GameEngine engine, int playerID, int x, int y, String str, boolean flag, float scale) {
+    private void drawMenuFont(GameEngine engine, int playerID, int x, int y, String str, boolean flag, float scale) {
         if (flag == false) {
             drawMenuFont(engine, playerID, x, y, str, COLOR_WHITE, scale);
         } else {
@@ -312,7 +312,7 @@ public class EventReceiver {
      * @param str      String to draw
      * @param color    Font color
      */
-    public void drawTTFMenuFont(GameEngine engine, int playerID, int x, int y, String str, int color) {
+    protected void drawTTFMenuFont(GameEngine engine, int playerID, int x, int y, String str, int color) {
     }
 
     /**
@@ -502,7 +502,7 @@ public class EventReceiver {
      * @param str      String to draw
      * @param color    Font color
      */
-    public void drawTTFScoreFont(GameEngine engine, int playerID, int x, int y, String str, int color) {
+    protected void drawTTFScoreFont(GameEngine engine, int playerID, int x, int y, String str, int color) {
     }
 
     /**
@@ -671,7 +671,7 @@ public class EventReceiver {
      * @param str      String to draw
      * @param flag     Any boolean variable
      */
-    public void drawDirectFont(GameEngine engine, int playerID, int x, int y, String str, boolean flag, float scale) {
+    private void drawDirectFont(GameEngine engine, int playerID, int x, int y, String str, boolean flag, float scale) {
         if (flag == false) {
             drawDirectFont(engine, playerID, x, y, str, COLOR_WHITE, scale);
         } else {
@@ -882,7 +882,7 @@ public class EventReceiver {
      * @param playerID Player ID
      * @return X position of score display area
      */
-    public int getScoreDisplayPositionX(GameEngine engine, int playerID) {
+    protected int getScoreDisplayPositionX(GameEngine engine, int playerID) {
         int xOffset = (getNextDisplayType() == 2) ? 256 : 216;
         if (engine.displaysize == 1) xOffset += 32;
         return getFieldDisplayPositionX(engine, playerID) + xOffset;
@@ -895,7 +895,7 @@ public class EventReceiver {
      * @param playerID Player ID
      * @return Y position of score display area
      */
-    public int getScoreDisplayPositionY(GameEngine engine, int playerID) {
+    protected int getScoreDisplayPositionY(GameEngine engine, int playerID) {
         return getFieldDisplayPositionY(engine, playerID) + 48;
     }
 
@@ -916,7 +916,7 @@ public class EventReceiver {
      * @param skin Skin ID
      * @return true if the skin is sticky type
      */
-    public boolean isStickySkin(int skin) {
+    protected boolean isStickySkin(int skin) {
         return false;
     }
 
@@ -1396,7 +1396,7 @@ public class EventReceiver {
      * @param prop       CustomProperties where the replay is going to stored
      * @param foldername Replay folder name
      */
-    public void saveReplay(GameManager owner, CustomProperties prop, String foldername) {
+    protected void saveReplay(GameManager owner, CustomProperties prop, String foldername) {
         if (owner.mode.isNetplayMode()) return;
 
         String filename = foldername + "/" + GeneralUtil.getReplayFilename();

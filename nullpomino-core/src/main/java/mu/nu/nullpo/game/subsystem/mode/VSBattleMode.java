@@ -1420,12 +1420,12 @@ public class VSBattleMode extends AbstractMode {
         /**
          * garbage blockcount
          */
-        public int lines = 0;
+        int lines = 0;
 
         /**
          * Source
          */
-        public int playerID = 0;
+        int playerID = 0;
 
         /**
          * Constructor
@@ -1450,7 +1450,7 @@ public class VSBattleMode extends AbstractMode {
          * @param g garbage blockcount
          * @param p Source
          */
-        public GarbageEntry(int g, int p) {
+        GarbageEntry(int g, int p) {
             lines = g;
             playerID = p;
         }

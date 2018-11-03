@@ -23,7 +23,7 @@ public class BaseStandardWallkick implements Wallkick {
      * @param ctrl        Button input status (it may be null, when controlled by an AI)
      * @return Wallkick Table. You may return null if you don't want to execute a kick.
      */
-    protected int[][][] getKickTable(int x, int y, int rtDir, int rtOld, int rtNew, boolean allowUpward, Piece piece, Field field, Controller ctrl) {
+    int[][][] getKickTable(int x, int y, int rtDir, int rtOld, int rtNew, boolean allowUpward, Piece piece, Field field, Controller ctrl) {
         return null;
     }
 

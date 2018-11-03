@@ -3,14 +3,14 @@ package mu.nu.nullpo.game.subsystem.mode.menu;
 import mu.nu.nullpo.util.CustomProperties;
 
 public abstract class AbstractMenuItem<T> {
-    public final String name;
+    final String name;
     public final String displayName;
     public final int color;
-    public final T DEFAULT_VALUE;
+    final T DEFAULT_VALUE;
     public T value;
 
-    public AbstractMenuItem(String name, String displayName, int color,
-                            T defaultValue) {
+    AbstractMenuItem(String name, String displayName, int color,
+                     T defaultValue) {
         this.name = name;
         this.displayName = displayName;
         this.color = color;

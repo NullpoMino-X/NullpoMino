@@ -827,7 +827,7 @@ public class PhysicianVSMode extends AbstractMode {
      *
      * @param engine GameEngine
      */
-    public void setSpeed(GameEngine engine) {
+    private void setSpeed(GameEngine engine) {
 		/*
 		engine.speed.gravity = BASE_SPEEDS[speed[playerID]]*(10+(engine.statistics.totalPieceLocked/10));
 		engine.speed.denominator = 3600;

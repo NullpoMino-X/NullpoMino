@@ -19,7 +19,7 @@ public class StateConfigRuleStyleSelect extends DummyMenuChooseState {
     /**
      * Player number
      */
-    protected int player = 0;
+    int player = 0;
 
     public StateConfigRuleStyleSelect() {
         super();

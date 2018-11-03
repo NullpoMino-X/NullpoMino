@@ -1063,7 +1063,7 @@ public class TimeAttackMode extends NetDummyMode {
      *
      * @param prop CustomProperties
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         goaltype = prop.getProperty("timeattack.gametype", 0);
         startlevel = prop.getProperty("timeattack.startlevel", 0);
         big = prop.getProperty("timeattack.big", false);
@@ -1076,7 +1076,7 @@ public class TimeAttackMode extends NetDummyMode {
      *
      * @param prop CustomProperties
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("timeattack.gametype", goaltype);
         prop.setProperty("timeattack.startlevel", startlevel);
         prop.setProperty("timeattack.big", big);
@@ -1091,7 +1091,7 @@ public class TimeAttackMode extends NetDummyMode {
      * @param ruleName Rule name
      */
     @Override
-    protected void loadRanking(CustomProperties prop, String ruleName) {
+    void loadRanking(CustomProperties prop, String ruleName) {
         for (int i = 0; i < RANKING_MAX; i++) {
             for (int type = 0; type < GAMETYPE_MAX; type++) {
                 rankingLines[type][i] = prop.getProperty("timeattack.ranking." + ruleName + "." + type + ".lines." + i, 0);
@@ -1243,7 +1243,7 @@ public class TimeAttackMode extends NetDummyMode {
      * @param engine GameEngine
      */
     @Override
-    protected void netSendOptions(GameEngine engine) {
+    void netSendOptions(GameEngine engine) {
         String msg = "game\toption\t";
         msg += goaltype + "\t" + startlevel + "\t" + showsectiontime + "\t" + big + "\n";
         netLobby.netPlayerClient.send(msg);
@@ -1264,7 +1264,7 @@ public class TimeAttackMode extends NetDummyMode {
      * NET: Get goal type
      */
     @Override
-    protected int netGetGoalType() {
+    int netGetGoalType() {
         return goaltype;
     }
 

@@ -8,7 +8,7 @@ import mu.nu.nullpo.game.play.GameEngine;
 
 public abstract class AbstractRenderer extends EventReceiver {
 
-    ResourceHolder resources;
+    private ResourceHolder resources;
 
     public void drawMenuFont(GameEngine engine, int playerID, int x, int y, String str, int color, float scale) {
         int x2 = (scale == 0.5f) ? x * 8 : x * 16;
@@ -62,8 +62,8 @@ public abstract class AbstractRenderer extends EventReceiver {
         printTTFFontSpecific(x, y, str, color);
     }
 
-    protected void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha,
-                             float scale, int attr) {
+    private void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha,
+                           float scale, int attr) {
 
         if (!doesGraphicsExist()) return;
 
@@ -124,7 +124,7 @@ public abstract class AbstractRenderer extends EventReceiver {
      * @param alpha    Transparency
      * @param scale    Enlargement factor
      */
-    protected void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha, float scale) {
+    private void drawBlock(int x, int y, int color, int skin, boolean bone, float darkness, float alpha, float scale) {
         drawBlock(x, y, color, skin, bone, darkness, alpha, scale, 0);
     }
 
@@ -147,7 +147,7 @@ public abstract class AbstractRenderer extends EventReceiver {
      * @param blk   BlockInstance of a class
      * @param scale Enlargement factor
      */
-    protected void drawBlock(int x, int y, Block blk, float scale) {
+    private void drawBlock(int x, int y, Block blk, float scale) {
         drawBlock(x, y, blk.getDrawColor(), blk.skin, blk.getAttribute(Block.BLOCK_ATTRIBUTE_BONE), blk.darkness, blk.alpha, scale, blk.attribute);
     }
 
@@ -188,7 +188,7 @@ public abstract class AbstractRenderer extends EventReceiver {
      * @param piece Peace to draw
      * @param scale Enlargement factor
      */
-    protected void drawPiece(int x, int y, Piece piece, float scale) {
+    private void drawPiece(int x, int y, Piece piece, float scale) {
         drawPiece(x, y, piece, scale, 0f);
     }
 
@@ -201,7 +201,7 @@ public abstract class AbstractRenderer extends EventReceiver {
      * @param scale    Enlargement factor
      * @param darkness Lightness or darkness
      */
-    protected void drawPiece(int x, int y, Piece piece, float scale, float darkness) {
+    private void drawPiece(int x, int y, Piece piece, float scale, float darkness) {
         for (int i = 0; i < piece.getMaxBlock(); i++) {
             int x2 = x + (int) (piece.dataX[piece.direction][i] * 16 * scale);
             int y2 = y + (int) (piece.dataY[piece.direction][i] * 16 * scale);

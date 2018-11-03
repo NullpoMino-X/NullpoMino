@@ -46,27 +46,27 @@ public class SoundManagerSDL {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(SoundManagerSDL.class);
+    private static Logger log = Logger.getLogger(SoundManagerSDL.class);
 
     /**
      * You can registerWAVE file OfMaximumcount
      */
-    protected int maxClips;
+    private int maxClips;
 
     /**
      * WAVE file  data (Name-> dataBody)
      */
-    protected HashMap<String, MixChunk> clipMap;
+    private HashMap<String, MixChunk> clipMap;
 
     /**
      * Channel data (Name->Channel number)
      */
-    protected HashMap<String, Integer> channelMap;
+    private HashMap<String, Integer> channelMap;
 
     /**
      * Was registeredWAVE file count
      */
-    protected int counter = 0;
+    private int counter = 0;
 
     /**
      * Constructor
@@ -80,7 +80,7 @@ public class SoundManagerSDL {
      *
      * @param maxClips You can registerWAVE file OfMaximumcount
      */
-    public SoundManagerSDL(int maxClips) {
+    private SoundManagerSDL(int maxClips) {
         this.maxClips = maxClips;
         clipMap = new HashMap<>(maxClips);
         channelMap = new HashMap<>(maxClips);

@@ -93,7 +93,7 @@ public class SpeedParam implements Serializable {
     /**
      * Reset to defaults
      */
-    public void reset() {
+    private void reset() {
         gravity = 4;
         denominator = 256;
         are = 24;
@@ -108,7 +108,7 @@ public class SpeedParam implements Serializable {
      *
      * @param s Copy source
      */
-    public void copy(SpeedParam s) {
+    private void copy(SpeedParam s) {
         gravity = s.gravity;
         denominator = s.denominator;
         are = s.are;

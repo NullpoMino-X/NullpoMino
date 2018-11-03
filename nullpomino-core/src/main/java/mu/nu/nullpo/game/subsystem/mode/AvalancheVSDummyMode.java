@@ -47,12 +47,12 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
     /**
      * Enabled piece types
      */
-    public static final int[] PIECE_ENABLE = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0};
+    private static final int[] PIECE_ENABLE = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0};
 
     /**
      * Block colors
      */
-    public static final int[] BLOCK_COLORS =
+    static final int[] BLOCK_COLORS =
             {
                     Block.BLOCK_COLOR_RED,
                     Block.BLOCK_COLOR_GREEN,
@@ -64,7 +64,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
     /**
      * Fever map files list
      */
-    public static final String[] FEVER_MAPS =
+    static final String[] FEVER_MAPS =
             {
                     "Fever", "15th", "15thDS", "7", "Compendium"
             };
@@ -72,265 +72,273 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
     /**
      * Chain multipliers
      */
-    public static final int[] CHAIN_POWERS = {
+    static final int[] CHAIN_POWERS = {
             4, 12, 24, 33, 50, 101, 169, 254, 341, 428, 538, 648, 763, 876, 990, 999 //Arle
     };
 
     /**
      * Number of players
      */
-    public static final int MAX_PLAYERS = 2;
+    static final int MAX_PLAYERS = 2;
 
     /**
      * Ojama counter setting constants
      */
-    public static final int OJAMA_COUNTER_OFF = 0, OJAMA_COUNTER_ON = 1, OJAMA_COUNTER_FEVER = 2;
+    static final int OJAMA_COUNTER_OFF = 0;
+    private static final int OJAMA_COUNTER_ON = 1;
+    static final int OJAMA_COUNTER_FEVER = 2;
 
     /**
      * Names of ojama counter settings
      */
-    public static final String[] OJAMA_COUNTER_STRING = {"OFF", "ON", "FEVER"};
+    static final String[] OJAMA_COUNTER_STRING = {"OFF", "ON", "FEVER"};
 
     /**
      * Zenkeshi setting constants
      */
-    public static final int ZENKESHI_MODE_OFF = 0, ZENKESHI_MODE_ON = 1, ZENKESHI_MODE_FEVER = 2;
+    static final int ZENKESHI_MODE_OFF = 0;
+    static final int ZENKESHI_MODE_ON = 1;
+    static final int ZENKESHI_MODE_FEVER = 2;
 
     /**
      * Names of zenkeshi settings
      */
-    public static final String[] ZENKESHI_TYPE_NAMES = {"OFF", "ON", "FEVER"};
+    static final String[] ZENKESHI_TYPE_NAMES = {"OFF", "ON", "FEVER"};
 
     /**
      * Names of outline settings
      */
-    public static final String[] OUTLINE_TYPE_NAMES = {"NORMAL", "COLOR", "NONE"};
+    static final String[] OUTLINE_TYPE_NAMES = {"NORMAL", "COLOR", "NONE"};
 
     /**
      * Names of chain display settings
      */
-    public static final String[] CHAIN_DISPLAY_NAMES = {"OFF", "YELLOW", "PLAYER", "SIZE"};
+    static final String[] CHAIN_DISPLAY_NAMES = {"OFF", "YELLOW", "PLAYER", "SIZE"};
 
     /**
      * Constants for chain display settings
      */
-    public static final int CHAIN_DISPLAY_NONE = 0, CHAIN_DISPLAY_YELLOW = 1,
-            CHAIN_DISPLAY_PLAYER = 2, CHAIN_DISPLAY_SIZE = 3;
+    private static final int CHAIN_DISPLAY_NONE = 0;
+    public static final int CHAIN_DISPLAY_YELLOW = 1;
+    private static final int CHAIN_DISPLAY_PLAYER = 2;
+    private static final int CHAIN_DISPLAY_SIZE = 3;
 
     /**
      * Each player's frame color
      */
-    public static final int[] PLAYER_COLOR_FRAME = {GameEngine.FRAME_COLOR_RED, GameEngine.FRAME_COLOR_BLUE};
+    private static final int[] PLAYER_COLOR_FRAME = {GameEngine.FRAME_COLOR_RED, GameEngine.FRAME_COLOR_BLUE};
 
     /**
      * Rule settings for countering ojama not yet dropped
      */
-    protected int[] ojamaCounterMode;
+    int[] ojamaCounterMode;
 
     /**
      * Has accumulatedojama blockOfcount
      */
-    protected int[] ojama;
+    int[] ojama;
 
     /**
      * Had sentojama blockOfcount
      */
-    protected int[] ojamaSent;
+    int[] ojamaSent;
 
     /**
      * Time to display the most recent increase in score
      */
-    protected int[] scgettime;
+    int[] scgettime;
 
     /**
      * UseBGM
      */
-    protected int bgmno;
+    int bgmno;
 
     /**
      * Big
      */
-    protected boolean[] big;
+    boolean[] big;
 
     /**
      * Sound effectsON/OFF
      */
-    protected boolean[] enableSE;
+    boolean[] enableSE;
 
     /**
      * MapUse flag
      */
-    protected boolean[] useMap;
+    boolean[] useMap;
 
     /**
      * UseMapSet number
      */
-    protected int[] mapSet;
+    int[] mapSet;
 
     /**
      * Map number(-1Random in)
      */
-    protected int[] mapNumber;
+    int[] mapNumber;
 
     /**
      * Last preset number used
      */
-    protected int[] presetNumber;
+    int[] presetNumber;
 
     /**
      * Winner
      */
-    protected int winnerID;
+    int winnerID;
 
     /**
      * MapSets ofProperty file
      */
-    protected CustomProperties[] propMap;
+    CustomProperties[] propMap;
 
     /**
      * MaximumMap number
      */
-    protected int[] mapMaxNo;
+    int[] mapMaxNo;
 
     /**
      * For backupfield (MapUsed to save the replay)
      */
-    protected Field[] fldBackup;
+    Field[] fldBackup;
 
     /**
      * MapRan for selectioncount
      */
-    protected Random randMap;
+    private Random randMap;
 
     /**
      * Flag for all clear
      */
-    protected boolean[] zenKeshi;
+    boolean[] zenKeshi;
 
     /**
      * Amount of points earned from most recent clear
      */
-    protected int[] lastscore, lastmultiplier;
+    int[] lastscore;
+    int[] lastmultiplier;
 
     /**
      * Amount of ojama added in current chain
      */
-    protected int[] ojamaAdd;
+    int[] ojamaAdd;
 
     /**
      * Score
      */
-    protected int[] score;
+    int[] score;
 
     /**
      * Max amount of ojama dropped at once
      */
-    protected int[] maxAttack;
+    int[] maxAttack;
 
     /**
      * Number of colors to use
      */
-    protected int[] numColors;
+    int[] numColors;
 
     /**
      * Minimum chain count needed to send ojama
      */
-    protected int[] rensaShibari;
+    int[] rensaShibari;
 
     /**
      * Denominator for score-to-ojama conversion
      */
-    protected int[] ojamaRate;
+    int[] ojamaRate;
 
     /**
      * Settings for hard ojama blocks
      */
-    protected int[] ojamaHard;
+    int[] ojamaHard;
 
     /**
      * HurryupSeconds before the startcount(0InHurryupNo)
      */
-    protected int[] hurryupSeconds;
+    int[] hurryupSeconds;
 
     /**
      * Set to true when last drop resulted in a clear
      */
-    protected boolean[] cleared;
+    boolean[] cleared;
 
     /**
      * Set to true when dropping ojama blocks
      */
-    protected boolean[] ojamaDrop;
+    boolean[] ojamaDrop;
 
     /**
      * Time to display "ZENKESHI!"
      */
-    protected int[] zenKeshiDisplay;
+    int[] zenKeshiDisplay;
 
     /**
      * Zenkeshi reward type
      */
-    protected int[] zenKeshiType;
+    int[] zenKeshiType;
 
     /**
      * Selected fever map set file
      */
-    protected int[] feverMapSet;
+    int[] feverMapSet;
 
     /**
      * Selected fever map set file's subset list
      */
-    protected String[][] feverMapSubsets;
+    String[][] feverMapSubsets;
 
     /**
      * Fever map CustomProperties
      */
-    protected CustomProperties[] propFeverMap;
+    private CustomProperties[] propFeverMap;
 
     /**
      * Chain level boundaries for Fever Mode
      */
-    protected int[] feverChainMin, feverChainMax;
+    int[] feverChainMin;
+    int[] feverChainMax;
 
     /**
      * Selected outline type
      */
-    protected int[] outlineType;
+    int[] outlineType;
 
     /**
      * If true, both columns 3 and 4 are danger columns
      */
-    protected boolean[] dangerColumnDouble;
+    boolean[] dangerColumnDouble;
 
     /**
      * If true, red X's appear at tops of danger columns
      */
-    protected boolean[] dangerColumnShowX;
+    boolean[] dangerColumnShowX;
 
     /**
      * Time to display last chain
      */
-    protected int[] chainDisplay;
+    int[] chainDisplay;
 
     /**
      * Type of chain display
      */
-    protected int[] chainDisplayType;
+    int[] chainDisplayType;
 
     /**
      * True to use new (Fever) chain powers
      */
-    protected boolean[] newChainPower;
+    boolean[] newChainPower;
 
     /**
      * True to use slower falling animations, false to use faster
      */
-    protected boolean[] cascadeSlow;
+    boolean[] cascadeSlow;
 
     /**
      * True to use big field display
      */
-    protected boolean bigDisplay;
+    boolean bigDisplay;
 
     /*
      * Mode name
@@ -426,7 +434,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
      * @param prop   Property file to read from
      * @param preset Preset number
      */
-    protected void loadPreset(GameEngine engine, CustomProperties prop, int preset, String name) {
+    void loadPreset(GameEngine engine, CustomProperties prop, int preset, String name) {
         engine.speed.gravity = prop.getProperty("avalanchevs" + name + ".gravity." + preset, 4);
         engine.speed.denominator = prop.getProperty("avalanchevs" + name + ".denominator." + preset, 256);
         engine.speed.are = prop.getProperty("avalanchevs" + name + ".are." + preset, 30);
@@ -445,7 +453,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
      * @param prop   Property file to save to
      * @param preset Preset number
      */
-    protected void savePreset(GameEngine engine, CustomProperties prop, int preset, String name) {
+    void savePreset(GameEngine engine, CustomProperties prop, int preset, String name) {
         prop.setProperty("avalanchevs" + name + ".gravity." + preset, engine.speed.gravity);
         prop.setProperty("avalanchevs" + name + ".denominator." + preset, engine.speed.denominator);
         prop.setProperty("avalanchevs" + name + ".are." + preset, engine.speed.are);
@@ -464,7 +472,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
      * @param engine GameEngine
      * @param prop   Property file to read from
      */
-    protected void loadOtherSetting(GameEngine engine, CustomProperties prop, String name) {
+    void loadOtherSetting(GameEngine engine, CustomProperties prop, String name) {
         int playerID = engine.playerID;
         bgmno = prop.getProperty("avalanchevs" + name + ".bgmno", 0);
         ojamaCounterMode[playerID] = prop.getProperty("avalanchevs" + name + ".ojamaCounterMode", OJAMA_COUNTER_ON);
@@ -498,7 +506,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
      * @param engine GameEngine
      * @param prop   Property file to save to
      */
-    protected void saveOtherSetting(GameEngine engine, CustomProperties prop, String name) {
+    void saveOtherSetting(GameEngine engine, CustomProperties prop, String name) {
         int playerID = engine.playerID;
         prop.setProperty("avalanchevs" + name + ".bgmno", bgmno);
         prop.setProperty("avalanchevs" + name + ".ojamaCounterMode", ojamaCounterMode[playerID]);
@@ -533,7 +541,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
      * @param prop   Property file to read from
      * @param preset AnyID
      */
-    protected void loadMap(Field field, CustomProperties prop, int id) {
+    private void loadMap(Field field, CustomProperties prop, int id) {
         field.reset();
         //field.readProperty(prop, id);
         field.stringToField(prop.getProperty("map." + id, ""));
@@ -549,7 +557,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
      * @param prop  Property file to save to
      * @param id    AnyID
      */
-    protected void saveMap(Field field, CustomProperties prop, int id) {
+    void saveMap(Field field, CustomProperties prop, int id) {
         //field.writeProperty(prop, id);
         prop.setProperty("map." + id, field.fieldToString());
     }
@@ -562,7 +570,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
      * @param id          MapID
      * @param forceReload trueWhen youMapForce Reload the file
      */
-    protected void loadMapPreview(GameEngine engine, int playerID, int id, boolean forceReload) {
+    void loadMapPreview(GameEngine engine, int playerID, int id, boolean forceReload) {
         if ((propMap[playerID] == null) || (forceReload)) {
             mapMaxNo[playerID] = 0;
             propMap[playerID] = receiver.loadProperties("config/map/avalanche/" + mapSet[playerID] + ".map");
@@ -578,7 +586,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
         }
     }
 
-    protected void loadMapSetFever(GameEngine engine, int playerID, int id, boolean forceReload) {
+    void loadMapSetFever(GameEngine engine, int playerID, int id, boolean forceReload) {
         if ((propFeverMap[playerID] == null) || (forceReload)) {
             propFeverMap[playerID] = receiver.loadProperties("config/map/avalanche/" +
                     FEVER_MAPS[id] + ".map");
@@ -634,7 +642,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
         return false;
     }
 
-    public boolean readyInit(GameEngine engine, int playerID) {
+    boolean readyInit(GameEngine engine, int playerID) {
         engine.numColors = numColors[playerID];
         engine.lineGravityType = cascadeSlow[playerID] ? GameEngine.LineGravity.CASCADE_SLOW : GameEngine.LineGravity.CASCADE;
         engine.displaysize = bigDisplay ? 1 : 0;
@@ -769,25 +777,25 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
             cleared[playerID] = false;
     }
 
-    protected int calcPts(GameEngine engine, int playerID, int avalanche) {
+    private int calcPts(GameEngine engine, int playerID, int avalanche) {
         return avalanche * 10;
     }
 
-    protected int calcChainMultiplier(GameEngine engine, int playerID, int chain) {
+    private int calcChainMultiplier(GameEngine engine, int playerID, int chain) {
         if (newChainPower[playerID])
             return calcChainNewPower(engine, playerID, chain);
         else
             return calcChainClassicPower(engine, playerID, chain);
     }
 
-    protected int calcChainNewPower(GameEngine engine, int playerID, int chain) {
+    int calcChainNewPower(GameEngine engine, int playerID, int chain) {
         if (chain > CHAIN_POWERS.length)
             return CHAIN_POWERS[CHAIN_POWERS.length - 1];
         else
             return CHAIN_POWERS[chain - 1];
     }
 
-    protected int calcChainClassicPower(GameEngine engine, int playerID, int chain) {
+    private int calcChainClassicPower(GameEngine engine, int playerID, int chain) {
         if (chain == 2)
             return 8;
         else if (chain == 3)
@@ -798,10 +806,10 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
             return 0;
     }
 
-    protected void onClear(GameEngine engine, int playerID) {
+    void onClear(GameEngine engine, int playerID) {
     }
 
-    protected void addOjama(GameEngine engine, int playerID, int pts) {
+    void addOjama(GameEngine engine, int playerID, int pts) {
         int enemyID = 0;
         if (playerID == 0) enemyID = 1;
 
@@ -834,7 +842,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
             ojamaAdd[enemyID] += ojamaNew;
     }
 
-    protected int ptsToOjama(GameEngine engine, int playerID, int pts, int rate) {
+    int ptsToOjama(GameEngine engine, int playerID, int pts, int rate) {
         return (pts + rate - 1) / rate;
     }
 
@@ -844,7 +852,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
     /**
      * Check for game over
      */
-    protected void gameOverCheck(GameEngine engine, int playerID) {
+    void gameOverCheck(GameEngine engine, int playerID) {
         if (engine.field == null)
             return;
         if (big[playerID]) {
@@ -855,12 +863,12 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
             engine.stat = GameEngine.Status.GAMEOVER;
     }
 
-    protected void loadFeverMap(GameEngine engine, int playerID, int chain) {
+    void loadFeverMap(GameEngine engine, int playerID, int chain) {
         loadFeverMap(engine, playerID, engine.random, chain,
                 engine.random.nextInt(feverMapSubsets[playerID].length));
     }
 
-    protected void loadFeverMap(GameEngine engine, int playerID, Random rand, int chain, int subset) {
+    void loadFeverMap(GameEngine engine, int playerID, Random rand, int chain, int subset) {
         engine.createFieldIfNeeded();
         engine.field.reset();
         engine.field.stringToField(propFeverMap[playerID].getProperty(feverMapSubsets[playerID][subset] +
@@ -922,7 +930,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
         ojamaDrop[playerID] = false;
     }
 
-    protected void updateOjamaMeter(GameEngine engine, int playerID) {
+    void updateOjamaMeter(GameEngine engine, int playerID) {
         int width = 6;
         if (engine.field != null)
             width = engine.field.getWidth();
@@ -960,7 +968,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
             receiver.drawMenuFont(engine, playerID, baseX + 1, textHeight + 1, "ZENKESHI!", EventReceiver.COLOR_YELLOW);
     }
 
-    protected int getChainColor(GameEngine engine, int playerID) {
+    int getChainColor(GameEngine engine, int playerID) {
         if (chainDisplayType[playerID] == CHAIN_DISPLAY_PLAYER)
             return (playerID == 0) ? EventReceiver.COLOR_RED : EventReceiver.COLOR_BLUE;
         else if (chainDisplayType[playerID] == CHAIN_DISPLAY_SIZE)
@@ -969,7 +977,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
             return EventReceiver.COLOR_YELLOW;
     }
 
-    protected void drawX(GameEngine engine, int playerID) {
+    void drawX(GameEngine engine, int playerID) {
         if (!dangerColumnShowX[playerID]) return;
 
         int baseX = big[playerID] ? 1 : 2;
@@ -986,7 +994,7 @@ public abstract class AvalancheVSDummyMode extends AbstractMode {
         }
     }
 
-    protected void drawHardOjama(GameEngine engine, int playerID) {
+    void drawHardOjama(GameEngine engine, int playerID) {
         if (engine.field != null)
             for (int x = 0; x < engine.field.getWidth(); x++)
                 for (int y = 0; y < engine.field.getHeight(); y++) {

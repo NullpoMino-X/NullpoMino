@@ -3,7 +3,7 @@ package mu.nu.nullpo.game.subsystem.mode.menu;
 import mu.nu.nullpo.util.GeneralUtil;
 
 public class TimeMenuItem extends IntegerMenuItem {
-    public int increment;
+    private int increment;
 
     public TimeMenuItem(String name, String displayName, int color,
                         int defaultValue, int min, int max) {

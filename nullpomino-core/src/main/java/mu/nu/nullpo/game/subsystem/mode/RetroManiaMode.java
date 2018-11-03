@@ -518,7 +518,7 @@ public class RetroManiaMode extends AbstractMode {
     /**
      * Load the settings
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         startlevel = prop.getProperty("retromania.startlevel", 0);
         gametype = prop.getProperty("retromania.gametype", 0);
         big = prop.getProperty("retromania.big", false);
@@ -529,7 +529,7 @@ public class RetroManiaMode extends AbstractMode {
     /**
      * Save the settings
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("retromania.startlevel", startlevel);
         prop.setProperty("retromania.gametype", gametype);
         prop.setProperty("retromania.big", big);

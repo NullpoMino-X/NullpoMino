@@ -56,7 +56,7 @@ import org.apache.log4j.Logger;
 /**
  * Game screen frame
  */
-public class GameFrame extends JFrame implements Runnable {
+class GameFrame extends JFrame implements Runnable {
     /**
      * Serial version ID
      */
@@ -65,47 +65,47 @@ public class GameFrame extends JFrame implements Runnable {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(GameFrame.class);
+    private static Logger log = Logger.getLogger(GameFrame.class);
 
     /**
      * Parent window
      */
-    protected NullpoMinoSwing owner = null;
+    private NullpoMinoSwing owner = null;
 
     /**
      * The size of the border and title bar
      */
-    protected Insets insets = null;
+    private Insets insets = null;
 
     /**
      * BufferStrategy
      */
-    protected BufferStrategy bufferStrategy = null;
+    private BufferStrategy bufferStrategy = null;
 
     /**
      * Game loop thread
      */
-    protected Thread thread = null;
+    private Thread thread = null;
 
     /**
      * trueThread moves between
      */
-    public volatile boolean running = false;
+    private volatile boolean running = false;
 
     /**
      * FPSFor calculation
      */
-    protected long calcInterval = 0;
+    private long calcInterval = 0;
 
     /**
      * FPSFor calculation
      */
-    protected long prevCalcTime = 0;
+    private long prevCalcTime = 0;
 
     /**
      * frame count
      */
-    protected long frameCount = 0;
+    private long frameCount = 0;
 
     /**
      * MaximumFPS (Setting)
@@ -115,102 +115,102 @@ public class GameFrame extends JFrame implements Runnable {
     /**
      * Current MaximumFPS
      */
-    protected int maxfpsCurrent = 0;
+    private int maxfpsCurrent = 0;
 
     /**
      * Current Pause time
      */
-    protected long periodCurrent = 0;
+    private long periodCurrent = 0;
 
     /**
      * ActualFPS
      */
-    public double actualFPS = 0.0;
+    private double actualFPS = 0.0;
 
     /**
      * FPSDisplayDecimalFormat
      */
-    public DecimalFormat df = new DecimalFormat("0.0");
+    private DecimalFormat df = new DecimalFormat("0.0");
 
     /**
      * Used by perfect fps mode
      */
-    public long perfectFPSDelay = 0;
+    private long perfectFPSDelay = 0;
 
     /**
      * True to use perfect FPS
      */
-    public boolean perfectFPSMode = false;
+    private boolean perfectFPSMode = false;
 
     /**
      * Execute Thread.yield() during Perfect FPS mode
      */
-    public boolean perfectYield = true;
+    private boolean perfectYield = true;
 
     /**
      * True if execute Toolkit.getDefaultToolkit().sync() at the end of each frame
      */
-    public boolean syncDisplay = true;
+    private boolean syncDisplay = true;
 
     /**
      * Screen width
      */
-    protected int screenWidth = 640;
+    private int screenWidth = 640;
 
     /**
      * Screen height
      */
-    protected int screenHeight = 480;
+    private int screenHeight = 480;
 
     /**
      * Pause state
      */
-    protected boolean pause = false;
+    private boolean pause = false;
 
     /**
      * Pose hidden message
      */
-    protected boolean pauseMessageHide = false;
+    private boolean pauseMessageHide = false;
 
     /**
      * Pause menuOfCursor position
      */
-    protected int cursor = 0;
+    private int cursor = 0;
 
     /**
      * Number of frames remaining until pause key can be used
      */
-    protected int pauseFrame = 0;
+    private int pauseFrame = 0;
 
     /**
      * Double speedMode
      */
-    protected int fastforward = 0;
+    private int fastforward = 0;
 
     /**
      * ScreenshotCreating flag
      */
-    protected boolean ssflag = false;
+    private boolean ssflag = false;
 
     /**
      * ScreenshotUseImage
      */
-    protected Image ssImage = null;
+    private Image ssImage = null;
 
     /**
      * frame Step is enabled flag
      */
-    protected boolean enableframestep = false;
+    private boolean enableframestep = false;
 
     /**
      * FPSDisplay
      */
-    protected boolean showfps = true;
+    private boolean showfps = true;
 
     /**
      * Ingame flag
      */
-    public boolean[] isInGame;
+    private boolean[] isInGame;
 
     /**
      * If net playtrue
@@ -225,7 +225,7 @@ public class GameFrame extends JFrame implements Runnable {
     /**
      * Previous ingame flag (Used by title-bar text change)
      */
-    protected boolean prevInGameFlag = false;
+    private boolean prevInGameFlag = false;
 
     /**
      * Current game mode name
@@ -278,7 +278,7 @@ public class GameFrame extends JFrame implements Runnable {
     /**
      * End processing
      */
-    public void shutdown() {
+    private void shutdown() {
         if (ssImage != null) {
             ssImage.flush();
             ssImage = null;
@@ -423,7 +423,7 @@ public class GameFrame extends JFrame implements Runnable {
     /**
      * Update game state
      */
-    protected void gameUpdate() {
+    private void gameUpdate() {
         if (NullpoMinoSwing.gameManager == null) return;
 
         // Set ingame flag
@@ -605,7 +605,7 @@ public class GameFrame extends JFrame implements Runnable {
     /**
      * Update game state (for netplay)
      */
-    protected void gameUpdateNet() {
+    private void gameUpdateNet() {
         if (NullpoMinoSwing.gameManager == null) return;
 
         try {
@@ -696,7 +696,7 @@ public class GameFrame extends JFrame implements Runnable {
     /**
      * Rendering
      */
-    protected void gameRender() {
+    private void gameRender() {
         if (NullpoMinoSwing.gameManager == null) return;
 
         // Prepare the screen
@@ -794,7 +794,7 @@ public class GameFrame extends JFrame implements Runnable {
     /**
      * Rendering(For net play)
      */
-    protected void gameRenderNet() {
+    private void gameRenderNet() {
         if (NullpoMinoSwing.gameManager == null) return;
 
         // Prepare the screen
@@ -872,7 +872,7 @@ public class GameFrame extends JFrame implements Runnable {
      *
      * @param period FPSInterval to calculate the
      */
-    protected void calcFPS(long period) {
+    private void calcFPS(long period) {
         frameCount++;
         calcInterval += period;
 
@@ -912,7 +912,7 @@ public class GameFrame extends JFrame implements Runnable {
     /**
      * Save a screen shot
      */
-    protected void saveScreenShot() {
+    private void saveScreenShot() {
         // Create filename
         String dir = NullpoMinoSwing.propGlobal.getProperty("custom.screenshot.directory", "ss");
         Calendar c = Calendar.getInstance();
@@ -975,7 +975,7 @@ public class GameFrame extends JFrame implements Runnable {
     /**
      * Window event Processing
      */
-    protected class GameFrameWindowEvent extends WindowAdapter {
+    class GameFrameWindowEvent extends WindowAdapter {
         @Override
         public void windowClosing(WindowEvent e) {
             shutdown();
@@ -985,7 +985,7 @@ public class GameFrame extends JFrame implements Runnable {
     /**
      * Keyboard event Processing
      */
-    protected class GameFrameKeyEvent extends KeyAdapter {
+    class GameFrameKeyEvent extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
             setButtonPressedState(e.getKeyCode(), true);
@@ -996,7 +996,7 @@ public class GameFrame extends JFrame implements Runnable {
             setButtonPressedState(e.getKeyCode(), false);
         }
 
-        protected void setButtonPressedState(int keyCode, boolean pressed) {
+        void setButtonPressedState(int keyCode, boolean pressed) {
             for (int playerID = 0; playerID < GameKeySwing.gamekey.length; playerID++) {
                 int[] kmap = isInGame[playerID] ? GameKeySwing.gamekey[playerID].keymap : GameKeySwing.gamekey[playerID].keymapNav;
 

@@ -36,12 +36,20 @@ import sdljava.video.SDLSurface;
 /**
  * Normal display class string
  */
-public class NormalFontSDL {
+class NormalFontSDL {
     /**
      * Character constant colorcount
      */
-    public static final int COLOR_WHITE = 0, COLOR_BLUE = 1, COLOR_RED = 2, COLOR_PINK = 3, COLOR_GREEN = 4, COLOR_YELLOW = 5, COLOR_CYAN = 6,
-            COLOR_ORANGE = 7, COLOR_PURPLE = 8, COLOR_DARKBLUE = 9;
+    private static final int COLOR_WHITE = 0;
+    public static final int COLOR_BLUE = 1;
+    public static final int COLOR_RED = 2;
+    public static final int COLOR_PINK = 3;
+    public static final int COLOR_GREEN = 4;
+    public static final int COLOR_YELLOW = 5;
+    public static final int COLOR_CYAN = 6;
+    public static final int COLOR_ORANGE = 7;
+    private static final int COLOR_PURPLE = 8;
+    private static final int COLOR_DARKBLUE = 9;
 
     /**
      * Which to drawSDLSurface
@@ -54,7 +62,7 @@ public class NormalFontSDL {
      * @param fontColor font Color
      * @return font ColorSDLColor
      */
-    public static SDLColor getFontColorAsSDLColor(int fontColor) {
+    private static SDLColor getFontColorAsSDLColor(int fontColor) {
         switch (fontColor) {
             case COLOR_BLUE:
                 return new SDLColor(0, 0, 255);
@@ -202,7 +210,7 @@ public class NormalFontSDL {
      * @param fontColorTrue  flagThetrueText color in the case of
      * @throws SDLException If I failed to draw
      */
-    public static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue) throws SDLException {
+    private static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue) throws SDLException {
         if (!flag)
             printFont(fontX, fontY, fontStr, fontColorFalse);
         else
@@ -234,7 +242,7 @@ public class NormalFontSDL {
      * @param scale          Enlargement factor
      * @throws SDLException If I failed to draw
      */
-    public static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue, float scale) throws SDLException {
+    private static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue, float scale) throws SDLException {
         if (!flag)
             printFont(fontX, fontY, fontStr, fontColorFalse, scale);
         else

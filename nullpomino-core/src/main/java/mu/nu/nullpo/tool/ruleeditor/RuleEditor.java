@@ -86,7 +86,7 @@ import org.apache.log4j.PropertyConfigurator;
 /**
  * Rule Editor
  */
-public class RuleEditor extends JFrame implements ActionListener {
+class RuleEditor extends JFrame implements ActionListener {
     /**
      * Serial version
      */
@@ -95,22 +95,22 @@ public class RuleEditor extends JFrame implements ActionListener {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(RuleEditor.class);
+    private static Logger log = Logger.getLogger(RuleEditor.class);
 
     /**
      * SwingVersion ofSave settingsUseProperty file
      */
-    public CustomProperties propConfig;
+    private CustomProperties propConfig;
 
     /**
      * Default language file
      */
-    public CustomProperties propLangDefault;
+    private CustomProperties propLangDefault;
 
     /**
      * UIFor translationProperty file
      */
-    public CustomProperties propLang;
+    private CustomProperties propLang;
 
     //----------------------------------------------------------------------
     /**
@@ -666,7 +666,7 @@ public class RuleEditor extends JFrame implements ActionListener {
     /**
      * Constructor
      */
-    public RuleEditor() {
+    private RuleEditor() {
         super();
 
         init();
@@ -680,7 +680,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      *
      * @param filename Filename (Empty string ornullIt without parameters and toConstructorThe same behavior)
      */
-    public RuleEditor(String filename) {
+    private RuleEditor(String filename) {
         super();
 
         init();
@@ -1568,7 +1568,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      * @param url Image filesURL
      * @return Image file (Failurenull)
      */
-    public BufferedImage loadImage(URL url) {
+    private BufferedImage loadImage(URL url) {
         BufferedImage img = null;
         try {
             img = ImageIO.read(url);
@@ -1585,7 +1585,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      * @param str Filename
      * @return Resource FilesURL
      */
-    public URL getURL(String str) {
+    private URL getURL(String str) {
         URL url = null;
 
         try {
@@ -1616,7 +1616,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      * @param filename Filename
      * @return I read a text fileVector&lt;String&gt;
      */
-    public Vector<String> getTextFileVector(String filename) {
+    private Vector<String> getTextFileVector(String filename) {
         Vector<String> vec = new Vector<>();
 
         try {
@@ -1639,7 +1639,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      * @param vecSrc OriginalVector&lt;String&gt;
      * @return Was processedVector&lt;String&gt;
      */
-    public Vector<String> createShortStringVector(Vector<String> vecSrc) {
+    private Vector<String> createShortStringVector(Vector<String> vecSrc) {
         Vector<String> vec = new Vector<>();
 
         for (String str : vecSrc) {
@@ -1663,7 +1663,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      *
      * @param r Rule Set
      */
-    public void readRuleToUI(RuleOptions r) {
+    private void readRuleToUI(RuleOptions r) {
         txtfldRuleName.setText(String.valueOf(r.strRuleName));
         txtfldNextDisplay.setText(String.valueOf(r.nextDisplay));
         comboboxStyle.setSelectedIndex(r.style);
@@ -1782,7 +1782,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      *
      * @param r Rule Set
      */
-    public void writeRuleFromUI(RuleOptions r) {
+    private void writeRuleFromUI(RuleOptions r) {
         r.strRuleName = txtfldRuleName.getText();
         r.nextDisplay = getIntTextField(txtfldNextDisplay);
         r.style = comboboxStyle.getSelectedIndex();
@@ -1904,7 +1904,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      * @param filename Filename
      * @throws IOException When I failed to save
      */
-    public void save(String filename) throws IOException {
+    private void save(String filename) throws IOException {
         RuleOptions ruleopt = new RuleOptions();
         writeRuleFromUI(ruleopt);
 
@@ -1925,7 +1925,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      * @return Rule data
      * @throws IOException Failed to loadWhen it was
      */
-    public RuleOptions load(String filename) throws IOException {
+    private RuleOptions load(String filename) throws IOException {
         CustomProperties prop = new CustomProperties();
 
         FileInputStream in = new FileInputStream(filename);
@@ -1946,7 +1946,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      * @param str String
      * @return PosttranslationalUIString (If you do not acceptstrReturns)
      */
-    public String getUIText(String str) {
+    private String getUIText(String str) {
         String result = propLang.getProperty(str);
         if (result == null) {
             result = propLangDefault.getProperty(str, str);
@@ -1960,7 +1960,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      * @param txtfld Textfield
      * @return TextfieldIf you can get the value from its value, Failed0
      */
-    public int getIntTextField(JTextField txtfld) {
+    private int getIntTextField(JTextField txtfld) {
         int v = 0;
 
         try {
@@ -1977,7 +1977,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      * @param txtfld Textfield
      * @return TextfieldIf you can get the value from its value, Failed0f
      */
-    public float getFloatTextField(JTextField txtfld) {
+    private float getFloatTextField(JTextField txtfld) {
         float v = 0f;
 
         try {
@@ -2079,7 +2079,7 @@ public class RuleEditor extends JFrame implements ActionListener {
     /**
      * Filter file selection screen
      */
-    protected class FileFilterRUL extends FileFilter {
+    class FileFilterRUL extends FileFilter {
         @Override
         public boolean accept(File f) {
             if (f.isDirectory()) return true;
@@ -2097,7 +2097,7 @@ public class RuleEditor extends JFrame implements ActionListener {
      * Image displayComboItems in box<br>
      * <a href="http://www.javadrive.jp/tutorial/jcombobox/index20.html">Source</a>
      */
-    protected class ComboLabel {
+    class ComboLabel {
         private String text = "";
         private Icon icon = null;
 
@@ -2112,7 +2112,7 @@ public class RuleEditor extends JFrame implements ActionListener {
             this.icon = icon;
         }
 
-        public ComboLabel(String text, Icon icon) {
+        ComboLabel(String text, Icon icon) {
             this.text = text;
             this.icon = icon;
         }
@@ -2121,7 +2121,7 @@ public class RuleEditor extends JFrame implements ActionListener {
             this.text = text;
         }
 
-        public String getText() {
+        String getText() {
             return text;
         }
 
@@ -2129,7 +2129,7 @@ public class RuleEditor extends JFrame implements ActionListener {
             this.icon = icon;
         }
 
-        public Icon getIcon() {
+        Icon getIcon() {
             return icon;
         }
     }
@@ -2138,10 +2138,10 @@ public class RuleEditor extends JFrame implements ActionListener {
      * Image displayComboOf the boxListCellRenderer<br>
      * <a href="http://www.javadrive.jp/tutorial/jcombobox/index20.html">Source</a>
      */
-    protected class ComboLabelCellRenderer extends JLabel implements ListCellRenderer {
+    class ComboLabelCellRenderer extends JLabel implements ListCellRenderer {
         private static final long serialVersionUID = 1L;
 
-        public ComboLabelCellRenderer() {
+        ComboLabelCellRenderer() {
             this.setOpaque(true);
         }
 

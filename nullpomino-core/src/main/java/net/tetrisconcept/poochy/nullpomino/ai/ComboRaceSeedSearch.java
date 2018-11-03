@@ -10,7 +10,7 @@ import net.omegaboshi.nullpomino.game.subsystem.randomizer.BagNoSZORandomizer;
 
 import org.apache.log4j.Logger;
 
-public class ComboRaceSeedSearch extends DummyAI {
+class ComboRaceSeedSearch extends DummyAI {
     /**
      * Log (Apache log4j)
      */
@@ -34,21 +34,21 @@ public class ComboRaceSeedSearch extends DummyAI {
     /**
      * Number of pieces to think ahead
      */
-    protected static final int MAX_THINK_DEPTH = 6;
+    private static final int MAX_THINK_DEPTH = 6;
     /**
      * Length of piece queue
      */
-    protected static final int QUEUE_SIZE = 1400;
+    private static final int QUEUE_SIZE = 1400;
 
-    protected static int[] stateScores = {6, 7, 7, 6, 8, 3, 2, 9, 3, 4, 3, 1, 8, 4, 1, 3, 1, 1, 4, 3, 9, 2, 3, 8, 4, 8, 3, 3};
+    private static int[] stateScores = {6, 7, 7, 6, 8, 3, 2, 9, 3, 4, 3, 1, 8, 4, 1, 3, 1, 1, 4, 3, 9, 2, 3, 8, 4, 8, 3, 3};
 
-    protected static int[] pieceScores = {28, 18, 10, 9, 18, 18, 9};
-    protected static Transition[][] moves;
-    protected static int[] nextQueueIDs;
-    protected static int[] queue;
-    public static boolean bestHold;
-    public static int bestPts;
-    public static int bestNext;
+    private static int[] pieceScores = {28, 18, 10, 9, 18, 18, 9};
+    private static Transition[][] moves;
+    private static int[] nextQueueIDs;
+    private static int[] queue;
+    private static boolean bestHold;
+    private static int bestPts;
+    private static int bestNext;
 
     public static void main(String[] args) {
         //long start = System.currentTimeMillis();
@@ -108,7 +108,7 @@ public class ComboRaceSeedSearch extends DummyAI {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public static void thinkBestPosition(int state, int nextIndex, int holdID) {
+    private static void thinkBestPosition(int state, int nextIndex, int holdID) {
         if (state < 0)
             return;
 
@@ -162,7 +162,7 @@ public class ComboRaceSeedSearch extends DummyAI {
      * @param depth  Search depth
      * @return Evaluation score
      */
-    public static int thinkMain(int state, int holdID, int depth) {
+    private static int thinkMain(int state, int holdID, int depth) {
         if (state == -1)
             return 0;
         if (depth == nextQueueIDs.length) {
@@ -208,7 +208,7 @@ public class ComboRaceSeedSearch extends DummyAI {
     /**
      * Constructs the moves table if necessary.
      */
-    public static void createTables() {
+    private static void createTables() {
         if (moves != null)
             return;
 
@@ -338,7 +338,7 @@ public class ComboRaceSeedSearch extends DummyAI {
      * @param valleyX Leftmost x-coordinate of 4-block-wide valley to combo in
      * @return Field state int code.
      */
-    public static short fieldToCode(Field field, int valleyX) {
+    private static short fieldToCode(Field field, int valleyX) {
         int height = field.getHeight();
         short result = 0;
         for (int y = height - 3; y < height; y++)
@@ -350,7 +350,7 @@ public class ComboRaceSeedSearch extends DummyAI {
         return result;
     }
 
-    public static short fieldToCode(Field field) {
+    private static short fieldToCode(Field field) {
         return fieldToCode(field, 3);
     }
 
@@ -360,7 +360,7 @@ public class ComboRaceSeedSearch extends DummyAI {
      * @param field Field state int code
      * @return State index if found; -1 if not found.
      */
-    public static int fieldToIndex(short field) {
+    private static int fieldToIndex(short field) {
         int min = 0;
         int max = FIELDS.length - 1;
         int mid;
@@ -383,7 +383,7 @@ public class ComboRaceSeedSearch extends DummyAI {
      * @param valleyX Leftmost x-coordinate of 4-block-wide valley to combo in
      * @return State index if found; -1 if not found.
      */
-    public static int fieldToIndex(Field field, int valleyX) {
+    private static int fieldToIndex(Field field, int valleyX) {
         return fieldToIndex(fieldToCode(field, valleyX));
     }
 
@@ -391,9 +391,12 @@ public class ComboRaceSeedSearch extends DummyAI {
         return fieldToIndex(fieldToCode(field));
     }
 
-    protected static class Transition {
-        public int x, rt, rtSub, newField;
-        public Transition next;
+    static class Transition {
+        int x;
+        int rt;
+        int rtSub;
+        int newField;
+        Transition next;
 
         public Transition(int bestX, int bestRt, int bestRtSub, int newFld) {
             x = bestX;
@@ -409,7 +412,7 @@ public class ComboRaceSeedSearch extends DummyAI {
             newField = newFld;
         }
 
-        public Transition(int bestX, int bestRt, int bestRtSub, int newFld, Transition nxt) {
+        Transition(int bestX, int bestRt, int bestRtSub, int newFld, Transition nxt) {
             x = bestX;
             rt = bestRt;
             rtSub = bestRtSub;
@@ -417,7 +420,7 @@ public class ComboRaceSeedSearch extends DummyAI {
             next = nxt;
         }
 
-        public Transition(int bestX, int bestRt, int newFld, Transition nxt) {
+        Transition(int bestX, int bestRt, int newFld, Transition nxt) {
             x = bestX;
             rt = bestRt;
             rtSub = 0;

@@ -633,7 +633,7 @@ public class MarathonPlusMode extends NetDummyMode {
      *
      * @param engine GameEngine
      */
-    protected void bonusLevelProc(GameEngine engine) {
+    private void bonusLevelProc(GameEngine engine) {
         if (bonusFlashNow > 0) {
             engine.blockOutlineType = GameEngine.BLOCK_OUTLINE_NORMAL;
         } else {
@@ -1015,7 +1015,7 @@ public class MarathonPlusMode extends NetDummyMode {
      *
      * @param prop Property file
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         startlevel = prop.getProperty("marathonplus.startlevel", 0);
         tspinEnableType = prop.getProperty("marathonplus.tspinEnableType", 1);
         enableTSpin = prop.getProperty("marathonplus.enableTSpin", true);
@@ -1033,7 +1033,7 @@ public class MarathonPlusMode extends NetDummyMode {
      *
      * @param prop Property file
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("marathonplus.startlevel", startlevel);
         prop.setProperty("marathonplus.tspinEnableType", tspinEnableType);
         prop.setProperty("marathonplus.enableTSpin", enableTSpin);
@@ -1053,7 +1053,7 @@ public class MarathonPlusMode extends NetDummyMode {
      * @param ruleName Rule name
      */
     @Override
-    protected void loadRanking(CustomProperties prop, String ruleName) {
+    void loadRanking(CustomProperties prop, String ruleName) {
         for (int i = 0; i < RANKING_MAX; i++) {
             for (int j = 0; j < GAMETYPE_MAX; j++) {
                 rankingScore[j][i] = prop.getProperty("marathonplus.ranking." + ruleName + "." + j + ".score." + i, 0);
@@ -1173,7 +1173,7 @@ public class MarathonPlusMode extends NetDummyMode {
      * @param engine GameEngine
      */
     @Override
-    protected void netSendStats(GameEngine engine) {
+    void netSendStats(GameEngine engine) {
         int bg = engine.owner.backgroundStatus.fadesw ? engine.owner.backgroundStatus.fadebg : engine.owner.backgroundStatus.bg;
         String msg = "game\tstats\t";
         msg += engine.statistics.score + "\t" + engine.statistics.lines + "\t" + engine.statistics.totalPieceLocked + "\t";
@@ -1260,7 +1260,7 @@ public class MarathonPlusMode extends NetDummyMode {
      * @param engine GameEngine
      */
     @Override
-    protected void netSendOptions(GameEngine engine) {
+    void netSendOptions(GameEngine engine) {
         String msg = "game\toption\t";
         msg += startlevel + "\t" + tspinEnableType + "\t" + enableTSpinKick + "\t" + enableB2B + "\t";
         msg += enableCombo + "\t" + big + "\t" + spinCheckType + "\t" + tspinEnableEZ + "\n";
@@ -1286,7 +1286,7 @@ public class MarathonPlusMode extends NetDummyMode {
      * NET: Get goal type
      */
     @Override
-    protected int netGetGoalType() {
+    int netGetGoalType() {
         return (startlevel == 20) ? 1 : 0;
     }
 

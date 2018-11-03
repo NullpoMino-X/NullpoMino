@@ -44,7 +44,7 @@ public class NetBaseClient extends Thread {
     /**
      * Log
      */
-    static final Logger log = Logger.getLogger(NetBaseClient.class);
+    private static final Logger log = Logger.getLogger(NetBaseClient.class);
 
     /**
      * default Port of number
@@ -54,7 +54,7 @@ public class NetBaseClient extends Thread {
     /**
      * The size of the read buffer
      */
-    public static final int BUF_SIZE = 2048;
+    private static final int BUF_SIZE = 2048;
 
     /**
      * Default ping interval (1000=1s)
@@ -64,7 +64,7 @@ public class NetBaseClient extends Thread {
     /**
      * This countOnlypingIf there is no reaction even hit the automatic disconnection
      */
-    public static final int PING_AUTO_DISCONNECT_COUNT = 6;
+    private static final int PING_AUTO_DISCONNECT_COUNT = 6;
 
     /**
      * trueThread moves between
@@ -79,52 +79,52 @@ public class NetBaseClient extends Thread {
     /**
      * Socket for connection
      */
-    protected Socket socket;
+    private Socket socket;
 
     /**
      * Destination host
      */
-    protected String host;
+    String host;
 
     /**
      * Destination port number
      */
-    protected int port;
+    int port;
 
     /**
      * IP address
      */
-    protected String ip;
+    private String ip;
 
     /**
      * Previous incomplete packet
      */
-    protected StringBuilder notCompletePacketBuffer;
+    private StringBuilder notCompletePacketBuffer;
 
     /**
      * Interface receiving messages
      */
-    protected LinkedList<NetMessageListener> listeners = new LinkedList<>();
+    private LinkedList<NetMessageListener> listeners = new LinkedList<>();
 
     /**
      * pingHit count(From serverpongReset When a message is received)
      */
-    protected int pingCount;
+    private int pingCount;
 
     /**
      * Ping task
      */
-    protected TimerTask taskPing;
+    private TimerTask taskPing;
 
     /**
      * AutomaticpingHitTimer
      */
-    protected Timer timerPing;
+    private Timer timerPing;
 
     /**
      * Default constructor
      */
-    public NetBaseClient() {
+    NetBaseClient() {
         super();
         this.host = null;
         this.port = DEFAULT_PORT;
@@ -135,7 +135,7 @@ public class NetBaseClient extends Thread {
      *
      * @param host Destination host
      */
-    public NetBaseClient(String host) {
+    NetBaseClient(String host) {
         super("NET_" + host);
         this.host = host;
         this.port = DEFAULT_PORT;
@@ -227,7 +227,7 @@ public class NetBaseClient extends Thread {
      * @param fullMessage Received Messages
      * @throws IOException If there are any errors
      */
-    protected void processPacket(String fullMessage) throws IOException {
+    void processPacket(String fullMessage) throws IOException {
         String[] message = fullMessage.split("\t");    // Tab delimited
 
         // pingReply
@@ -330,7 +330,7 @@ public class NetBaseClient extends Thread {
     /**
      * Start Ping timer task
      */
-    public void startPingTask() {
+    private void startPingTask() {
         startPingTask(PING_INTERVAL);
     }
 
@@ -359,7 +359,7 @@ public class NetBaseClient extends Thread {
     /**
      * Ping task
      */
-    protected class PingTask extends TimerTask {
+    class PingTask extends TimerTask {
         @Override
         public void run() {
             try {

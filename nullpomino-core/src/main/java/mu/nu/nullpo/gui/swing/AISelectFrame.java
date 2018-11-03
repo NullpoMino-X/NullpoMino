@@ -55,7 +55,7 @@ import org.apache.log4j.Logger;
 /**
  * AISelection screen frame
  */
-public class AISelectFrame extends JFrame implements ActionListener {
+class AISelectFrame extends JFrame implements ActionListener {
     /**
      * Serial version ID
      */
@@ -64,84 +64,84 @@ public class AISelectFrame extends JFrame implements ActionListener {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(AISelectFrame.class);
+    private static Logger log = Logger.getLogger(AISelectFrame.class);
 
     /**
      * Parent window
      */
-    protected NullpoMinoSwing owner;
+    private NullpoMinoSwing owner;
 
     /**
      * Player number
      */
-    protected int playerID;
+    private int playerID;
 
     /**
      * AIList of classes
      */
-    protected String[] aiPathList;
+    private String[] aiPathList;
 
     /**
      * AIOfNameList
      */
-    protected String[] aiNameList;
+    private String[] aiNameList;
 
     /**
      * Current AIClass of
      */
-    protected String currentAI;
+    private String currentAI;
 
     /**
      * AIOfID
      */
-    protected int aiID = 0;
+    private int aiID = 0;
 
     /**
      * AIMovement interval of
      */
-    protected int aiMoveDelay = 0;
+    private int aiMoveDelay = 0;
 
     /**
      * AIThinking of waiting time
      */
-    protected int aiThinkDelay = 0;
+    private int aiThinkDelay = 0;
 
     /**
      * AIUsing threads in
      */
-    protected boolean aiUseThread = false;
+    private boolean aiUseThread = false;
 
-    protected boolean aiShowHint = false;
+    private boolean aiShowHint = false;
 
-    protected boolean aiPrethink = false;
+    private boolean aiPrethink = false;
 
-    protected boolean aiShowState = false;
+    private boolean aiShowState = false;
 
     /**
      * AIList list box
      */
-    protected JList listboxAI;
+    private JList listboxAI;
 
     /**
      * AIText box of the movement interval
      */
-    protected JTextField txtfldAIMoveDelay;
+    private JTextField txtfldAIMoveDelay;
 
     /**
      * AIThinking of waiting timeText box
      */
-    protected JTextField txtfldAIThinkDelay;
+    private JTextField txtfldAIThinkDelay;
 
     /**
      * AIThread Usage in check Box
      */
-    protected JCheckBox chkboxAIUseThread;
+    private JCheckBox chkboxAIUseThread;
 
-    protected JCheckBox chkBoxAIShowHint;
+    private JCheckBox chkBoxAIShowHint;
 
-    protected JCheckBox chkBoxAIPrethink;
+    private JCheckBox chkBoxAIPrethink;
 
-    protected JCheckBox chkBoxAIShowState;
+    private JCheckBox chkBoxAIShowState;
 
 
     /**
@@ -211,7 +211,7 @@ public class AISelectFrame extends JFrame implements ActionListener {
      * @param bf To read from a text file
      * @return AIList
      */
-    public String[] loadAIList(BufferedReader bf) {
+    private String[] loadAIList(BufferedReader bf) {
         ArrayList<String> aiArrayList = new ArrayList<>();
 
         while (true) {
@@ -240,7 +240,7 @@ public class AISelectFrame extends JFrame implements ActionListener {
      * @param aiPath AIList of classes
      * @return AIOfNameList
      */
-    public String[] loadAINames(String[] aiPath) {
+    private String[] loadAINames(String[] aiPath) {
         String[] aiName = new String[aiPath.length];
 
         for (int i = 0; i < aiPath.length; i++) {
@@ -265,7 +265,7 @@ public class AISelectFrame extends JFrame implements ActionListener {
     /**
      * GUIAInitialization
      */
-    protected void initUI() {
+    private void initUI() {
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         // AIList

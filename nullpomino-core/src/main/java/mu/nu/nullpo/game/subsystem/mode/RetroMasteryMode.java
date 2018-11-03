@@ -580,7 +580,7 @@ public class RetroMasteryMode extends AbstractMode {
      *
      * @param prop CustomProperties
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         gametype = prop.getProperty("retromastery.gametype", 0);
         startlevel = prop.getProperty("retromastery.startlevel", 0);
         big = prop.getProperty("retromastery.big", false);
@@ -592,7 +592,7 @@ public class RetroMasteryMode extends AbstractMode {
      *
      * @param prop CustomProperties
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("retromastery.gametype", gametype);
         prop.setProperty("retromastery.startlevel", startlevel);
         prop.setProperty("retromastery.big", big);

@@ -55,7 +55,7 @@ import javax.swing.ListCellRenderer;
 /**
  * Tuning Settings screen frame
  */
-public class GameTuningFrame extends JFrame implements ActionListener {
+class GameTuningFrame extends JFrame implements ActionListener {
     /**
      * Serial version ID
      */
@@ -64,7 +64,7 @@ public class GameTuningFrame extends JFrame implements ActionListener {
     /**
      * Outline type names (before translation)
      */
-    protected static final String[] OUTLINE_TYPE_NAMES = {
+    private static final String[] OUTLINE_TYPE_NAMES = {
             "GameTuning_OutlineType_Auto", "GameTuning_OutlineType_None", "GameTuning_OutlineType_Normal",
             "GameTuning_OutlineType_Connect", "GameTuning_OutlineType_SameColor"
     };
@@ -72,84 +72,84 @@ public class GameTuningFrame extends JFrame implements ActionListener {
     /**
      * Parent window
      */
-    protected NullpoMinoSwing owner;
+    private NullpoMinoSwing owner;
 
     /**
      * Player number
      */
-    protected int playerID;
+    private int playerID;
 
     /**
      * A buttonInrotationDirectionFollow the rules
      */
-    protected JRadioButton radioRotateButtonDefaultRightAuto;
+    private JRadioButton radioRotateButtonDefaultRightAuto;
     /**
      * A buttonInrotationDirectionLeftrotationFixed on
      */
-    protected JRadioButton radioRotateButtonDefaultRightLeft;
+    private JRadioButton radioRotateButtonDefaultRightLeft;
     /**
      * A buttonInrotationDirectionRightrotationFixed on
      */
-    protected JRadioButton radioRotateButtonDefaultRightRight;
+    private JRadioButton radioRotateButtonDefaultRightRight;
 
     /**
      * Of pictureComboBox
      */
-    protected JComboBox comboboxSkin;
+    private JComboBox comboboxSkin;
     /**
      * BlockImage
      */
-    protected BufferedImage[] imgBlockSkins;
+    private BufferedImage[] imgBlockSkins;
 
     /**
      * Outline type combobox
      */
-    protected JComboBox comboboxBlockOutlineType;
+    private JComboBox comboboxBlockOutlineType;
 
     /**
      * MinimumDAS
      */
-    protected JTextField txtfldMinDAS;
+    private JTextField txtfldMinDAS;
     /**
      * MaximumDAS
      */
-    protected JTextField txtfldMaxDAS;
+    private JTextField txtfldMaxDAS;
 
     /**
      * Lateral movement speed
      */
-    protected JTextField txtfldDasDelay;
+    private JTextField txtfldDasDelay;
 
     /**
      * Checkbox to enable swapping the roles of up/down buttons in-game
      */
-    protected JCheckBox chkboxReverseUpDown;
+    private JCheckBox chkboxReverseUpDown;
 
     /**
      * Diagonal move: Auto
      */
-    protected JRadioButton radioMoveDiagonalAuto;
+    private JRadioButton radioMoveDiagonalAuto;
     /**
      * Diagonal move: Disable
      */
-    protected JRadioButton radioMoveDiagonalDisable;
+    private JRadioButton radioMoveDiagonalDisable;
     /**
      * Diagonal move: Enable
      */
-    protected JRadioButton radioMoveDiagonalEnable;
+    private JRadioButton radioMoveDiagonalEnable;
 
     /**
      * Show Outline Only: Auto
      */
-    protected JRadioButton radioBlockShowOutlineOnlyAuto;
+    private JRadioButton radioBlockShowOutlineOnlyAuto;
     /**
      * Show Outline Only: Disable
      */
-    protected JRadioButton radioBlockShowOutlineOnlyDisable;
+    private JRadioButton radioBlockShowOutlineOnlyDisable;
     /**
      * Show Outline Only: Enable
      */
-    protected JRadioButton radioBlockShowOutlineOnlyEnable;
+    private JRadioButton radioBlockShowOutlineOnlyEnable;
 
     /**
      * Constructor
@@ -175,7 +175,7 @@ public class GameTuningFrame extends JFrame implements ActionListener {
     /**
      * GUIOfInitialization
      */
-    protected void initUI() {
+    private void initUI() {
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         // ---------- A buttonInrotationDirection ----------
@@ -348,7 +348,7 @@ public class GameTuningFrame extends JFrame implements ActionListener {
     /**
      * BlockLoad an image
      */
-    protected void loadBlockSkins() {
+    private void loadBlockSkins() {
         int numSkins = ResourceHolderSwing.imgNormalBlockList.size();
         imgBlockSkins = new BufferedImage[numSkins];
 
@@ -408,7 +408,7 @@ public class GameTuningFrame extends JFrame implements ActionListener {
     /**
      * Save
      */
-    protected void save() {
+    private void save() {
         int owRotateButtonDefaultRight = -1;
         if (radioRotateButtonDefaultRightAuto.isSelected()) owRotateButtonDefaultRight = -1;
         if (radioRotateButtonDefaultRightLeft.isSelected()) owRotateButtonDefaultRight = 0;
@@ -464,14 +464,14 @@ public class GameTuningFrame extends JFrame implements ActionListener {
      * Image displayComboItems in box<br>
      * <a href="http://www.javadrive.jp/tutorial/jcombobox/index20.html">Source</a>
      */
-    protected class ComboLabel {
+    class ComboLabel {
         private String text = "";
         private Icon icon = null;
 
         public ComboLabel() {
         }
 
-        public ComboLabel(String text) {
+        ComboLabel(String text) {
             this.text = text;
         }
 
@@ -479,7 +479,7 @@ public class GameTuningFrame extends JFrame implements ActionListener {
             this.icon = icon;
         }
 
-        public ComboLabel(String text, Icon icon) {
+        ComboLabel(String text, Icon icon) {
             this.text = text;
             this.icon = icon;
         }
@@ -488,7 +488,7 @@ public class GameTuningFrame extends JFrame implements ActionListener {
             this.text = text;
         }
 
-        public String getText() {
+        String getText() {
             return text;
         }
 
@@ -496,7 +496,7 @@ public class GameTuningFrame extends JFrame implements ActionListener {
             this.icon = icon;
         }
 
-        public Icon getIcon() {
+        Icon getIcon() {
             return icon;
         }
     }
@@ -505,10 +505,10 @@ public class GameTuningFrame extends JFrame implements ActionListener {
      * Image displayComboOf the boxListCellRenderer<br>
      * <a href="http://www.javadrive.jp/tutorial/jcombobox/index20.html">Source</a>
      */
-    protected class ComboLabelCellRenderer extends JLabel implements ListCellRenderer {
+    class ComboLabelCellRenderer extends JLabel implements ListCellRenderer {
         private static final long serialVersionUID = 1L;
 
-        public ComboLabelCellRenderer() {
+        ComboLabelCellRenderer() {
             this.setOpaque(true);
         }
 

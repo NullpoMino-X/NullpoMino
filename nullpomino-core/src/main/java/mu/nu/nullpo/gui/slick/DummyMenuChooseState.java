@@ -36,28 +36,28 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * Dummy class for menus where the player picks from a list of options
  */
-public abstract class DummyMenuChooseState extends BaseGameState {
+abstract class DummyMenuChooseState extends BaseGameState {
     /**
      * Cursor position
      */
-    protected int cursor = 0;
+    int cursor = 0;
 
     /**
      * Max cursor value
      */
-    protected int maxCursor;
+    int maxCursor;
 
     /**
      * Top choice's y-coordinate
      */
-    protected int minChoiceY;
+    int minChoiceY;
 
     /**
      * Set to false to ignore mouse input
      */
-    protected boolean mouseEnabled;
+    private boolean mouseEnabled;
 
-    public DummyMenuChooseState() {
+    DummyMenuChooseState() {
         maxCursor = -1;
         minChoiceY = 3;
         mouseEnabled = true;
@@ -115,7 +115,7 @@ public abstract class DummyMenuChooseState extends BaseGameState {
         }
     }
 
-    protected boolean updateMouseInput(Input input) {
+    boolean updateMouseInput(Input input) {
         MouseInputSlick.mouseInput.update(input);
         if (MouseInputSlick.mouseInput.isMouseClicked()) {
             int y = MouseInputSlick.mouseInput.getMouseY() >> 4;
@@ -134,7 +134,7 @@ public abstract class DummyMenuChooseState extends BaseGameState {
         renderChoices(x, minChoiceY, choices);
     }
 
-    protected void renderChoices(int x, int y, String[] choices) {
+    void renderChoices(int x, int y, String[] choices) {
         NormalFontSlick.printFontGrid(x - 1, y + cursor, "b", NormalFontSlick.COLOR_RED);
         for (int i = 0; i < choices.length; i++)
             NormalFontSlick.printFontGrid(x, y + i, choices[i], (cursor == i));
@@ -143,7 +143,7 @@ public abstract class DummyMenuChooseState extends BaseGameState {
     /**
      * Called when left or right is pressed.
      */
-    protected void onChange(GameContainer container, StateBasedGame game, int delta, int change) {
+    void onChange(GameContainer container, StateBasedGame game, int delta, int change) {
     }
 
     /**
@@ -151,7 +151,7 @@ public abstract class DummyMenuChooseState extends BaseGameState {
      *
      * @return True to skip all further update processing, false otherwise.
      */
-    protected boolean onDecide(GameContainer container, StateBasedGame game, int delta) {
+    boolean onDecide(GameContainer container, StateBasedGame game, int delta) {
         return false;
     }
 
@@ -160,7 +160,7 @@ public abstract class DummyMenuChooseState extends BaseGameState {
      *
      * @return True to skip all further update processing, false otherwise.
      */
-    protected boolean onCancel(GameContainer container, StateBasedGame game, int delta) {
+    boolean onCancel(GameContainer container, StateBasedGame game, int delta) {
         return false;
     }
 
@@ -170,7 +170,7 @@ public abstract class DummyMenuChooseState extends BaseGameState {
      *
      * @return True to skip all further update processing, false otherwise.
      */
-    protected boolean onPushButtonD(GameContainer container, StateBasedGame game, int delta) {
+    boolean onPushButtonD(GameContainer container, StateBasedGame game, int delta) {
         return false;
     }
 }

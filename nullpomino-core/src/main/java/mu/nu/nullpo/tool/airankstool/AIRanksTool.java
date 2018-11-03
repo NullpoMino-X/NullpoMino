@@ -33,21 +33,21 @@ import org.jdesktop.layout.GroupLayout.ParallelGroup;
 
 import mu.nu.nullpo.util.CustomProperties;
 
-public class AIRanksTool extends JFrame implements ActionListener {
+class AIRanksTool extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
     /**
      * Log
      */
-    static final Logger log = Logger.getLogger(AIRanksConstants.class);
+    private static final Logger log = Logger.getLogger(AIRanksConstants.class);
 
     /**
      * Default language file
      */
-    public static CustomProperties propLangDefault;
+    private static CustomProperties propLangDefault;
     /**
      * Primary language file
      */
-    public static CustomProperties propLang;
+    private static CustomProperties propLang;
 
     /**
      * UI
@@ -120,7 +120,7 @@ public class AIRanksTool extends JFrame implements ActionListener {
 
     private String newFileText;
 
-    public AIRanksTool() {
+    private AIRanksTool() {
         super();
 
         setTitle(getUIText("Main_Title"));
@@ -497,7 +497,7 @@ public class AIRanksTool extends JFrame implements ActionListener {
 
     }
 
-    public void setDefaults() {
+    private void setDefaults() {
         CustomProperties ranksAIConfig = new CustomProperties();
         ranksAIConfig.setProperty("ranksai.file", (String) ranksFileUsedComboBox.getSelectedItem());
         ranksAIConfig.setProperty("ranksai.numpreviews", (Integer) numPreviewsSpinner.getValue());
@@ -512,7 +512,7 @@ public class AIRanksTool extends JFrame implements ActionListener {
         }
     }
 
-    public void setEnabledBWButtons(boolean b) {
+    private void setEnabledBWButtons(boolean b) {
         viewBestsButton.setEnabled(b);
         viewWorstsButton.setEnabled(b);
 

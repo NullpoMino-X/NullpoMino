@@ -58,7 +58,7 @@ public class StateNetGame extends BasicGameState implements NetLobbyListener {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(StateNetGame.class);
+    private static Logger log = Logger.getLogger(StateNetGame.class);
 
     /**
      * This state's ID
@@ -68,7 +68,7 @@ public class StateNetGame extends BasicGameState implements NetLobbyListener {
     /**
      * Game main class
      */
-    public GameManager gameManager = null;
+    private GameManager gameManager = null;
 
     /**
      * Lobby
@@ -78,32 +78,32 @@ public class StateNetGame extends BasicGameState implements NetLobbyListener {
     /**
      * Screenshot flag
      */
-    protected boolean ssflag = false;
+    private boolean ssflag = false;
 
     /**
      * Show background flag
      */
-    protected boolean showbg = true;
+    private boolean showbg = true;
 
     /**
      * Previous ingame flag (Used by title-bar text change)
      */
-    protected boolean prevInGameFlag = false;
+    private boolean prevInGameFlag = false;
 
     /**
      * AppGameContainer (Used by title-bar text change)
      */
-    protected AppGameContainer appContainer = null;
+    private AppGameContainer appContainer = null;
 
     /**
      * Mode name to enter (null=Exit)
      */
-    protected String strModeToEnter = "";
+    private String strModeToEnter = "";
 
     /**
      * Current game mode name
      */
-    protected String modeName;
+    private String modeName;
 
     /*
      * Fetch this state's ID
@@ -415,7 +415,7 @@ public class StateNetGame extends BasicGameState implements NetLobbyListener {
     /**
      * Update title bar text
      */
-    public void updateTitleBarCaption() {
+    private void updateTitleBarCaption() {
         String strTitle = "NullpoMino Netplay - " + modeName;
 
         if (modeName.equals("NET-DUMMY")) {

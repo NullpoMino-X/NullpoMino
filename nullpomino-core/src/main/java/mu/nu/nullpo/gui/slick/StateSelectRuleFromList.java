@@ -23,7 +23,7 @@ public class StateSelectRuleFromList extends DummyMenuScrollState {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(StateSelectRuleFromList.class);
+    private static Logger log = Logger.getLogger(StateSelectRuleFromList.class);
 
     /**
      * This state's ID
@@ -33,17 +33,17 @@ public class StateSelectRuleFromList extends DummyMenuScrollState {
     /**
      * Number of rules in one page
      */
-    public static final int PAGE_HEIGHT = 24;
+    private static final int PAGE_HEIGHT = 24;
 
     /**
      * HashMap of rules (ModeName->RuleEntry)
      */
-    protected HashMap<String, RuleEntry> mapRuleEntries;
+    private HashMap<String, RuleEntry> mapRuleEntries;
 
     /**
      * Current mode
      */
-    protected String strCurrentMode;
+    private String strCurrentMode;
 
     /**
      * Constructor
@@ -71,7 +71,7 @@ public class StateSelectRuleFromList extends DummyMenuScrollState {
     /**
      * Load list file
      */
-    protected void loadRecommendedRuleList() {
+    private void loadRecommendedRuleList() {
         mapRuleEntries = new HashMap<>();
 
         try {
@@ -123,7 +123,7 @@ public class StateSelectRuleFromList extends DummyMenuScrollState {
     /**
      * Prepare rule list
      */
-    protected void prepareRuleList() {
+    private void prepareRuleList() {
         strCurrentMode = NullpoMinoSlick.propGlobal.getProperty("name.mode", "");
         if (strCurrentMode != null) {
             RuleEntry entry = mapRuleEntries.get(strCurrentMode);
@@ -211,8 +211,8 @@ public class StateSelectRuleFromList extends DummyMenuScrollState {
     /**
      * RuleEntry
      */
-    protected class RuleEntry {
-        public LinkedList<String> listPath = new LinkedList<>();
-        public LinkedList<String> listName = new LinkedList<>();
+    class RuleEntry {
+        LinkedList<String> listPath = new LinkedList<>();
+        LinkedList<String> listName = new LinkedList<>();
     }
 }

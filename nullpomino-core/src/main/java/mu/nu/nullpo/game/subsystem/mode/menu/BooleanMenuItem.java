@@ -3,8 +3,8 @@ package mu.nu.nullpo.game.subsystem.mode.menu;
 import mu.nu.nullpo.util.CustomProperties;
 
 public class BooleanMenuItem extends AbstractMenuItem<Boolean> {
-    public BooleanMenuItem(String name, String displayName, int color,
-                           boolean defaultValue) {
+    BooleanMenuItem(String name, String displayName, int color,
+                    boolean defaultValue) {
         super(name, displayName, color, defaultValue);
     }
 

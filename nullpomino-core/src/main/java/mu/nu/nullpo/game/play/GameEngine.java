@@ -56,7 +56,7 @@ public class GameEngine {
     /**
      * Log (Apache log4j)
      */
-    static Logger log = Logger.getLogger(GameEngine.class);
+    private static Logger log = Logger.getLogger(GameEngine.class);
 
     /**
      * Constants of game style (Currently not directly used by GameEngine, but from game modes)
@@ -88,7 +88,7 @@ public class GameEngine {
     /**
      * Number of free status counters (used by statc array)
      */
-    public static final int MAX_STATC = 10;
+    private static final int MAX_STATC = 10;
 
     /**
      * Constants of last successful movements
@@ -106,7 +106,10 @@ public class GameEngine {
     /**
      * Default duration of Ready->Go
      */
-    public static final int READY_START = 0, READY_END = 49, GO_START = 50, GO_END = 100;
+    private static final int READY_START = 0;
+    private static final int READY_END = 49;
+    private static final int GO_START = 50;
+    private static final int GO_END = 100;
 
     /**
      * Constants of frame colors
@@ -131,13 +134,14 @@ public class GameEngine {
     /**
      * Constants of T-Spin Mini detection type
      */
-    public static final int TSPINMINI_TYPE_ROTATECHECK = 0, TSPINMINI_TYPE_WALLKICKFLAG = 1;
+    private static final int TSPINMINI_TYPE_ROTATECHECK = 0;
+    private static final int TSPINMINI_TYPE_WALLKICKFLAG = 1;
 
     /**
      * Spin detection type
      */
-    public static final int SPINTYPE_4POINT = 0,
-            SPINTYPE_IMMOBILE = 1;
+    private static final int SPINTYPE_4POINT = 0;
+    private static final int SPINTYPE_IMMOBILE = 1;
 
     /**
      * Constants of combo type
@@ -167,7 +171,7 @@ public class GameEngine {
     /**
      * Table for color-block item
      */
-    public static final int[] ITEM_COLOR_BRIGHT_TABLE =
+    private static final int[] ITEM_COLOR_BRIGHT_TABLE =
             {
                     10, 10, 9, 9, 8, 8, 8, 7, 7, 7,
                     6, 6, 6, 5, 5, 5, 4, 4, 4, 4,
@@ -178,7 +182,7 @@ public class GameEngine {
     /**
      * Default list of block colors to use for random block colors.
      */
-    public static final int[] BLOCK_COLORS_DEFAULT = {
+    private static final int[] BLOCK_COLORS_DEFAULT = {
             Block.BLOCK_COLOR_RED,
             Block.BLOCK_COLOR_ORANGE,
             Block.BLOCK_COLOR_YELLOW,
@@ -237,7 +241,7 @@ public class GameEngine {
     /**
      * Gravity counter (The piece falls when this reaches to the value of speed.denominator)
      */
-    public int gcount;
+    private int gcount;
 
     /**
      * The first random-seed
@@ -252,7 +256,7 @@ public class GameEngine {
     /**
      * ReplayData: Manages input data for replays
      */
-    public ReplayData replayData;
+    private ReplayData replayData;
 
     /**
      * AIPlayer: AI for auto playing
@@ -347,22 +351,22 @@ public class GameEngine {
     /**
      * Major version
      */
-    public float versionMajor;
+    private float versionMajor;
 
     /**
      * Minor version
      */
-    public int versionMinor;
+    private int versionMinor;
 
     /**
      * OLD minor version (Used for 6.9 or earlier replays)
      */
-    public float versionMinorOld;
+    private float versionMinorOld;
 
     /**
      * Dev build flag
      */
-    public boolean versionIsDevBuild;
+    private boolean versionIsDevBuild;
 
     /**
      * Game quit flag
@@ -437,7 +441,7 @@ public class GameEngine {
     /**
      * Number of lines currently clearing
      */
-    public int lineClearing;
+    private int lineClearing;
 
     /**
      * Line gravity type (Native, Cascade, etc)
@@ -467,57 +471,57 @@ public class GameEngine {
     /**
      * DAS direction (-1:Left 0:None 1:Right)
      */
-    public int dasDirection;
+    private int dasDirection;
 
     /**
      * DAS delay counter
      */
-    public int dasSpeedCount;
+    private int dasSpeedCount;
 
     /**
      * Repeat statMove() for instant DAS
      */
-    public boolean dasRepeat;
+    private boolean dasRepeat;
 
     /**
      * In the middle of an instant DAS loop
      */
-    public boolean dasInstant;
+    private boolean dasInstant;
 
     /**
      * Disallow shift while locking key is pressed
      */
-    public int shiftLock;
+    private int shiftLock;
 
     /**
      * IRS direction
      */
-    public int initialRotateDirection;
+    private int initialRotateDirection;
 
     /**
      * Last IRS direction
      */
-    public int initialRotateLastDirection;
+    private int initialRotateLastDirection;
 
     /**
      * IRS continuous use flag
      */
-    public boolean initialRotateContinuousUse;
+    private boolean initialRotateContinuousUse;
 
     /**
      * IHS
      */
-    public boolean initialHoldFlag;
+    private boolean initialHoldFlag;
 
     /**
      * IHS continuous use flag
      */
-    public boolean initialHoldContinuousUse;
+    private boolean initialHoldContinuousUse;
 
     /**
      * Number of current piece movement
      */
-    public int nowPieceMoveCount;
+    private int nowPieceMoveCount;
 
     /**
      * Number of current piece rotations
@@ -527,22 +531,22 @@ public class GameEngine {
     /**
      * Number of current piece failed rotations
      */
-    public int nowPieceRotateFailCount;
+    private int nowPieceRotateFailCount;
 
     /**
      * Number of movement while touching to the floor
      */
-    public int extendedMoveCount;
+    private int extendedMoveCount;
 
     /**
      * Number of rotations while touching to the floor
      */
-    public int extendedRotateCount;
+    private int extendedRotateCount;
 
     /**
      * Number of wallkicks used by current piece
      */
-    public int nowWallkickCount;
+    private int nowWallkickCount;
 
     /**
      * Number of upward wallkicks used by current piece
@@ -562,12 +566,12 @@ public class GameEngine {
     /**
      * Soft drop continuous use flag
      */
-    public boolean softdropContinuousUse;
+    private boolean softdropContinuousUse;
 
     /**
      * Hard drop continuous use flag
      */
-    public boolean harddropContinuousUse;
+    private boolean harddropContinuousUse;
 
     /**
      * true if the piece was manually locked by player
@@ -577,7 +581,7 @@ public class GameEngine {
     /**
      * Last successful movement
      */
-    public LastMove lastmove;
+    private LastMove lastmove;
 
     /**
      * ture if T-Spin
@@ -602,7 +606,7 @@ public class GameEngine {
     /**
      * B2B counter
      */
-    public int b2bcount;
+    private int b2bcount;
 
     /**
      * Number of combos
@@ -627,7 +631,7 @@ public class GameEngine {
     /**
      * T-Spin Mini detection type
      */
-    public int tspinminiType;
+    private int tspinminiType;
 
     /**
      * Spin detection type
@@ -697,17 +701,17 @@ public class GameEngine {
     /**
      * Set when ARE or line delay is canceled
      */
-    public boolean delayCancel;
+    private boolean delayCancel;
 
     /**
      * Piece must move left after canceled delay
      */
-    public boolean delayCancelMoveLeft;
+    private boolean delayCancelMoveLeft;
 
     /**
      * Piece must move right after canceled delay
      */
-    public boolean delayCancelMoveRight;
+    private boolean delayCancelMoveRight;
 
     /**
      * Use bone blocks [][][][]
@@ -732,7 +736,7 @@ public class GameEngine {
     /**
      * true if wallkick is used
      */
-    public boolean kickused;
+    private boolean kickused;
 
     /**
      * Field size (-1:Default)
@@ -807,12 +811,12 @@ public class GameEngine {
     /**
      * Lag flag (Infinite length of ARE will happen after placing a piece until this flag is set to false)
      */
-    public boolean lagARE;
+    private boolean lagARE;
 
     /**
      * Lag flag (Pause the game completely)
      */
-    public boolean lagStop;
+    private boolean lagStop;
 
     /**
      * Field display size (-1 for mini, 1 for big, 0 for normal)
@@ -857,7 +861,7 @@ public class GameEngine {
     /**
      * Field edit screen: Previous game status number
      */
-    public Status fldeditPreviousStat;
+    private Status fldeditPreviousStat;
 
     /**
      * Field edit screen: Frame counter
@@ -882,7 +886,7 @@ public class GameEngine {
     /**
      * RollRoll (Auto rotation) interval
      */
-    public int itemRollRollInterval;
+    private int itemRollRollInterval;
 
     /**
      * X-RAY enable flag
@@ -892,7 +896,7 @@ public class GameEngine {
     /**
      * X-RAY counter
      */
-    public int itemXRayCount;
+    private int itemXRayCount;
 
     /**
      * Color-block enable flag
@@ -902,7 +906,7 @@ public class GameEngine {
     /**
      * Color-block counter
      */
-    public int itemColorCount;
+    private int itemColorCount;
 
     /**
      * Gameplay-interruptable item
@@ -912,12 +916,12 @@ public class GameEngine {
     /**
      * Post-status of interruptable item
      */
-    public Status interruptItemPreviousStat;
+    private Status interruptItemPreviousStat;
 
     /**
      * Backup field for Mirror item
      */
-    public Field interruptItemMirrorField;
+    private Field interruptItemMirrorField;
 
     /**
      * A button direction -1=Auto(Use rule settings) 0=Left 1=Right
@@ -997,7 +1001,7 @@ public class GameEngine {
     /**
      * If true, line color clears can be diagonal.
      */
-    public boolean lineColorDiagonals;
+    private boolean lineColorDiagonals;
 
     /**
      * If true, gems count as the same color as their respectively-colored normal blocks
@@ -1067,7 +1071,7 @@ public class GameEngine {
      * @param wallkick   WallkickSystem
      * @param randomizer BlockGeneration algorithm of the order of appearance of the piece
      */
-    public GameEngine(GameManager owner, int playerID, RuleOptions ruleopt, Wallkick wallkick, Randomizer randomizer) {
+    private GameEngine(GameManager owner, int playerID, RuleOptions ruleopt, Wallkick wallkick, Randomizer randomizer) {
         this(owner, playerID);
         this.ruleopt = ruleopt;
         this.wallkick = wallkick;
@@ -1451,14 +1455,14 @@ public class GameEngine {
     /**
      * @return Controller.BUTTON_UP if controls are normal, Controller.BUTTON_DOWN if up/down are reversed
      */
-    public int getUp() {
+    private int getUp() {
         return owReverseUpDown ? Controller.BUTTON_DOWN : Controller.BUTTON_UP;
     }
 
     /**
      * @return Controller.BUTTON_DOWN if controls are normal, Controller.BUTTON_UP if up/down are reversed
      */
-    public int getDown() {
+    private int getDown() {
         return owReverseUpDown ? Controller.BUTTON_UP : Controller.BUTTON_DOWN;
     }
 
@@ -1467,7 +1471,7 @@ public class GameEngine {
      *
      * @return Lateral movement speed
      */
-    public int getDASDelay() {
+    private int getDASDelay() {
         if ((ruleopt == null) || (owDasDelay >= 0)) {
             return owDasDelay;
         }
@@ -1502,7 +1506,7 @@ public class GameEngine {
      *
      * @return true if diagonal movement is enabled
      */
-    public boolean isDiagonalMoveEnabled() {
+    private boolean isDiagonalMoveEnabled() {
         if ((ruleopt == null) || (owMoveDiagonal >= 0)) {
             return (owMoveDiagonal == 1);
         }
@@ -1532,7 +1536,7 @@ public class GameEngine {
     /**
      * SoftHard drop· Hold preceding precedingrotationRestrictions on the use of release
      */
-    public void checkDropContinuousUse() {
+    private void checkDropContinuousUse() {
         if (gameActive) {
             if ((!ctrl.isPress(getDown())) || (!ruleopt.softdropLimit))
                 softdropContinuousUse = false;
@@ -1560,7 +1564,7 @@ public class GameEngine {
      *
      * @return -1:Left 0:No 1:Right
      */
-    public int getMoveDirection() {
+    private int getMoveDirection() {
         if (ctrl.isPress(Controller.BUTTON_LEFT) && ctrl.isPress(Controller.BUTTON_RIGHT)) {
             if (ruleopt.moveLeftAndRightAllow) {
                 if (ctrl.buttonTime[Controller.BUTTON_LEFT] > ctrl.buttonTime[Controller.BUTTON_RIGHT])
@@ -1580,7 +1584,7 @@ public class GameEngine {
     /**
      * Processing horizontal reservoir
      */
-    public void padRepeat() {
+    private void padRepeat() {
         int moveDirection = getMoveDirection();
         if (moveDirection != 0) {
             dasCount++;
@@ -1594,7 +1598,7 @@ public class GameEngine {
      * Called if delay doesn't allow charging but dasRedirectInDelay == true
      * Updates dasDirection so player can change direction without dropping charge on entry.
      */
-    public void dasRedirect() {
+    private void dasRedirect() {
         dasDirection = getMoveDirection();
     }
 
@@ -1603,7 +1607,7 @@ public class GameEngine {
      *
      * @return Move countI have exceeded the limittrue
      */
-    public boolean isMoveCountExceed() {
+    private boolean isMoveCountExceed() {
         if (ruleopt.lockresetLimitShareCount == true) {
             if ((extendedMoveCount + extendedRotateCount >= ruleopt.lockresetLimitMove) && (ruleopt.lockresetLimitMove >= 0))
                 return true;
@@ -1620,7 +1624,7 @@ public class GameEngine {
      *
      * @return rotation countI have exceeded the limittrue
      */
-    public boolean isRotateCountExceed() {
+    private boolean isRotateCountExceed() {
         if (ruleopt.lockresetLimitShareCount == true) {
             if ((extendedMoveCount + extendedRotateCount >= ruleopt.lockresetLimitMove) && (ruleopt.lockresetLimitMove >= 0))
                 return true;
@@ -1640,7 +1644,7 @@ public class GameEngine {
      * @param piece Current piece object
      * @param fld   Field object
      */
-    public void setTSpin(int x, int y, Piece piece, Field fld) {
+    private void setTSpin(int x, int y, Piece piece, Field fld) {
         if ((piece == null) || (piece.id != Piece.PIECE_T)) {
             tspin = false;
             return;
@@ -1724,7 +1728,7 @@ public class GameEngine {
      * @param piece Current BlockPeace
      * @param fld   field
      */
-    public void setAllSpin(int x, int y, Piece piece, Field fld) {
+    private void setAllSpin(int x, int y, Piece piece, Field fld) {
         tspin = false;
         tspinmini = false;
         tspinez = false;
@@ -1876,7 +1880,7 @@ public class GameEngine {
     /**
      * PrecedingrotationHold processing and precedence
      */
-    public void initialRotate() {
+    private void initialRotate() {
         initialRotateDirection = 0;
         initialHoldFlag = false;
 
@@ -1898,7 +1902,7 @@ public class GameEngine {
     /**
      * fieldOfBlock stateUpdate
      */
-    public void fieldUpdate() {
+    private void fieldUpdate() {
         boolean outlineOnly = blockShowOutlineOnly;    // Show outline only flag
         if (owBlockShowOutlineOnly == 0) outlineOnly = false;
         if (owBlockShowOutlineOnly == 1) outlineOnly = true;
@@ -2294,7 +2298,7 @@ public class GameEngine {
     /**
      * Processing when the setup screen before the start of
      */
-    public void statSetting() {
+    private void statSetting() {
         //  event 発生
         if (owner.mode != null) {
             if (owner.mode.onSetting(this, playerID) == true) return;
@@ -2309,7 +2313,7 @@ public class GameEngine {
     /**
      * Ready→GoProcessing time
      */
-    public void statReady() {
+    private void statReady() {
         //  event 発生
         if (owner.mode != null) {
             if (owner.mode.onReady(this, playerID) == true) return;
@@ -2430,7 +2434,7 @@ public class GameEngine {
     /**
      * BlockProcess of moving the pieces
      */
-    public void statMove() {
+    private void statMove() {
         dasRepeat = false;
 
         //  event 発生
@@ -3098,7 +3102,7 @@ public class GameEngine {
     /**
      * BlockSparkling happens when fixed immediately after
      */
-    public void statLockFlash() {
+    private void statLockFlash() {
         //  event 発生
         if (owner.mode != null) {
             if (owner.mode.onLockFlash(this, playerID) == true) return;
@@ -3135,7 +3139,7 @@ public class GameEngine {
     /**
      * Line clearProcessing
      */
-    public void statLineClear() {
+    private void statLineClear() {
         //  event 発生
         if (owner.mode != null) {
             if (owner.mode.onLineClear(this, playerID) == true) return;
@@ -3386,18 +3390,18 @@ public class GameEngine {
         statc[0]++;
     }
 
-    public int getCascadeDelay() {
+    private int getCascadeDelay() {
         return cascadeDelay;
     }
 
-    public int getCascadeClearDelay() {
+    private int getCascadeClearDelay() {
         return cascadeClearDelay;
     }
 
     /**
      * AREProcessing during
      */
-    public void statARE() {
+    private void statARE() {
         //  event 発生
         if (owner.mode != null) {
             if (owner.mode.onARE(this, playerID) == true) return;
@@ -3452,7 +3456,7 @@ public class GameEngine {
     /**
      * EndingRush processing
      */
-    public void statEndingStart() {
+    private void statEndingStart() {
         //  event 発生
         if (owner.mode != null) {
             if (owner.mode.onEndingStart(this, playerID) == true) return;
@@ -3512,7 +3516,7 @@ public class GameEngine {
     /**
      * Each gameMode Treatment of status that can be freely used
      */
-    public void statCustom() {
+    private void statCustom() {
         //  event 発生
         if (owner.mode != null) {
             if (owner.mode.onCustom(this, playerID) == true) return;
@@ -3523,7 +3527,7 @@ public class GameEngine {
     /**
      * EndingScreen
      */
-    public void statExcellent() {
+    private void statExcellent() {
         //  event 発生
         if (owner.mode != null) {
             if (owner.mode.onExcellent(this, playerID) == true) return;
@@ -3554,7 +3558,7 @@ public class GameEngine {
     /**
      * game overProcessing
      */
-    public void statGameOver() {
+    private void statGameOver() {
         //  event 発生
         if (owner.mode != null) {
             if (owner.mode.onGameOver(this, playerID) == true) return;
@@ -3649,7 +3653,7 @@ public class GameEngine {
     /**
      * Results screen
      */
-    public void statResult() {
+    private void statResult() {
         // Event
         if (owner.mode != null) {
             if (owner.mode.onResult(this, playerID) == true) return;
@@ -3683,7 +3687,7 @@ public class GameEngine {
     /**
      * fieldEdit screen
      */
-    public void statFieldEdit() {
+    private void statFieldEdit() {
         //  event 発生
         if (owner.mode != null) {
             if (owner.mode.onFieldEdit(this, playerID) == true) return;
@@ -3760,7 +3764,7 @@ public class GameEngine {
     /**
      * Effective treatment interruption Play items
      */
-    public void statInterruptItem() {
+    private void statInterruptItem() {
         boolean contFlag = false;    // Continue flag
 
         switch (interruptItemNumber) {
@@ -3781,7 +3785,7 @@ public class GameEngine {
      *
      * @return When true,Process continues Miller
      */
-    public boolean interruptItemMirrorProc() {
+    private boolean interruptItemMirrorProc() {
         if (statc[0] == 0) {
             // fieldCopy the backup
             interruptItemMirrorField = new Field(field);

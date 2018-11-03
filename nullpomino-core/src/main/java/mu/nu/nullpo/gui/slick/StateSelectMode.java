@@ -53,7 +53,7 @@ public class StateSelectMode extends DummyMenuScrollState {
     /**
      * Number of game modes in one page
      */
-    public static final int PAGE_HEIGHT = 24;
+    private static final int PAGE_HEIGHT = 24;
 
     /**
      * true if top-level folder
@@ -63,7 +63,7 @@ public class StateSelectMode extends DummyMenuScrollState {
     /**
      * Current folder name
      */
-    protected String strCurrentFolder;
+    private String strCurrentFolder;
 
     /**
      * Constructor
@@ -90,7 +90,7 @@ public class StateSelectMode extends DummyMenuScrollState {
     /**
      * Prepare mode list
      */
-    protected void prepareModeList() {
+    private void prepareModeList() {
         strCurrentFolder = StateSelectModeFolder.strCurrentFolder;
 
         // Get mode list
@@ -135,7 +135,7 @@ public class StateSelectMode extends DummyMenuScrollState {
      * @param name Name of mode
      * @return ID (-1 if not found)
      */
-    protected int getIDbyName(String name) {
+    private int getIDbyName(String name) {
         if ((name == null) || (list == null)) return -1;
 
         for (int i = 0; i < list.length; i++) {
@@ -153,7 +153,7 @@ public class StateSelectMode extends DummyMenuScrollState {
      * @param str Mode name
      * @return Description
      */
-    protected String getModeDesc(String str) {
+    private String getModeDesc(String str) {
         String str2 = str.replace(' ', '_');
         str2 = str2.replace('(', 'l');
         str2 = str2.replace(')', 'r');

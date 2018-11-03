@@ -59,7 +59,7 @@ public class StateConfigMainMenu extends DummyMenuChooseState {
     /**
      * Player number
      */
-    protected int player = 0;
+    private int player = 0;
 
     public StateConfigMainMenu() {
         maxCursor = 7;

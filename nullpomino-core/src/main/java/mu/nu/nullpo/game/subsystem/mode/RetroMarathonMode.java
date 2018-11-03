@@ -594,7 +594,7 @@ public class RetroMarathonMode extends AbstractMode {
      *
      * @param prop CustomProperties
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         gametype = prop.getProperty("retromarathon.gametype", 0);
         startlevel = prop.getProperty("retromarathon.startlevel", 0);
         startheight = prop.getProperty("retromarathon.startheight", 0);
@@ -607,7 +607,7 @@ public class RetroMarathonMode extends AbstractMode {
      *
      * @param prop CustomProperties
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("retromarathon.gametype", gametype);
         prop.setProperty("retromarathon.startlevel", startlevel);
         prop.setProperty("retromarathon.startheight", startheight);

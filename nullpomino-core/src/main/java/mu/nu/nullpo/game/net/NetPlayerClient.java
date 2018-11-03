@@ -48,47 +48,47 @@ public class NetPlayerClient extends NetBaseClient {
     /**
      * PlayerInformation
      */
-    protected LinkedList<NetPlayerInfo> playerInfoList = new LinkedList<>();
+    private LinkedList<NetPlayerInfo> playerInfoList = new LinkedList<>();
 
     /**
      * Room Information
      */
-    protected LinkedList<NetRoomInfo> roomInfoList = new LinkedList<>();
+    private LinkedList<NetRoomInfo> roomInfoList = new LinkedList<>();
 
     /**
      * OwnPlayerName
      */
-    protected String playerName;
+    private String playerName;
 
     /**
      * OwnTeam name
      */
-    protected String playerTeam;
+    private String playerTeam;
 
     /**
      * OwnPlayerIdentification number
      */
-    protected int playerUID;
+    private int playerUID;
 
     /**
      * ServerVersion
      */
-    protected float serverVersion = -1f;
+    private float serverVersion = -1f;
 
     /**
      * Number of players
      */
-    protected int playerCount = -1;
+    private int playerCount = -1;
 
     /**
      * Observercount
      */
-    protected int observerCount = -1;
+    private int observerCount = -1;
 
     /**
      * Default constructor
      */
-    public NetPlayerClient() {
+    private NetPlayerClient() {
         super();
     }
 
@@ -97,7 +97,7 @@ public class NetPlayerClient extends NetBaseClient {
      *
      * @param host Destination host
      */
-    public NetPlayerClient(String host) {
+    private NetPlayerClient(String host) {
         super(host);
     }
 
@@ -107,7 +107,7 @@ public class NetPlayerClient extends NetBaseClient {
      * @param host Destination host
      * @param port Destination port number
      */
-    public NetPlayerClient(String host, int port) {
+    private NetPlayerClient(String host, int port) {
         super(host, port);
     }
 
@@ -118,7 +118,7 @@ public class NetPlayerClient extends NetBaseClient {
      * @param port Destination port number
      * @param name PlayerOfName
      */
-    public NetPlayerClient(String host, int port, String name) {
+    private NetPlayerClient(String host, int port, String name) {
         super();
         this.host = host;
         this.port = port;
@@ -363,7 +363,7 @@ public class NetPlayerClient extends NetBaseClient {
     /**
      * @return Current room ID
      */
-    public int getCurrentRoomID() {
+    private int getCurrentRoomID() {
         try {
             return getYourPlayerInfo().roomID;
         } catch (NullPointerException e) {

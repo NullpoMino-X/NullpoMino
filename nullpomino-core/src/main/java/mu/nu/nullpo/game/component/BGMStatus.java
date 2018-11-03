@@ -110,7 +110,7 @@ public class BGMStatus implements Serializable {
      *
      * @param b Copy source
      */
-    public void copy(BGMStatus b) {
+    private void copy(BGMStatus b) {
         bgm = b.bgm;
         volume = b.volume;
         fadesw = b.fadesw;

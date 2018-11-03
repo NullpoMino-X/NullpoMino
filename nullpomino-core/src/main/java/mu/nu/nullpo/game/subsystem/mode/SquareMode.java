@@ -45,12 +45,12 @@ public class SquareMode extends AbstractMode {
      */
     private static final int CURRENT_VERSION = 1;
 
-    public int[] tableGravityChangeScore =
+    private int[] tableGravityChangeScore =
             {
                     150, 300, 400, 500, 600, 700, 800, 900, 1000, 1500, 2500, 4000, 5000
             };
 
-    public int[] tableGravityValue =
+    private int[] tableGravityValue =
             {
                     1, 2, 3, 4, 6, 8, 10, 20, 30, 60, 120, 180, 300, -1
             };
@@ -203,7 +203,7 @@ public class SquareMode extends AbstractMode {
      *
      * @param engine GameEngine
      */
-    public void setSpeed(GameEngine engine) {
+    private void setSpeed(GameEngine engine) {
         if (gametype == 0) {
             int speedlv = engine.statistics.score;
             if (speedlv < 0) speedlv = 0;
@@ -718,7 +718,7 @@ public class SquareMode extends AbstractMode {
      *
      * @param prop CustomProperties to read
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         gametype = prop.getProperty("square.gametype", 0);
         outlinetype = prop.getProperty("square.outlinetype", 0);
         tspinEnableType = prop.getProperty("square.tspinEnableType", 2);
@@ -735,7 +735,7 @@ public class SquareMode extends AbstractMode {
      *
      * @param prop CustomProperties to write
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("square.gametype", gametype);
         prop.setProperty("square.outlinetype", outlinetype);
         prop.setProperty("square.tspinEnableType", tspinEnableType);

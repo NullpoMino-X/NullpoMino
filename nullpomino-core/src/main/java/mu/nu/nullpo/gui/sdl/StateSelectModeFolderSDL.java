@@ -14,16 +14,16 @@ import sdljava.video.SDLSurface;
 /**
  * Mode folder select (SDL)
  */
-public class StateSelectModeFolderSDL extends DummyMenuScrollStateSDL {
+class StateSelectModeFolderSDL extends DummyMenuScrollStateSDL {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(StateSelectModeFolderSDL.class);
+    private static Logger log = Logger.getLogger(StateSelectModeFolderSDL.class);
 
     /**
      * Number of folders in one page
      */
-    public static final int PAGE_HEIGHT = 24;
+    private static final int PAGE_HEIGHT = 24;
 
     /**
      * Top-level mode list
@@ -33,7 +33,7 @@ public class StateSelectModeFolderSDL extends DummyMenuScrollStateSDL {
     /**
      * Folder names list
      */
-    public static LinkedList<String> listFolder;
+    private static LinkedList<String> listFolder;
 
     /**
      * HashMap of mode folder (FolderName->ModeNames)
@@ -59,7 +59,7 @@ public class StateSelectModeFolderSDL extends DummyMenuScrollStateSDL {
     /**
      * Load folder list file
      */
-    public static void loadFolderListFile() {
+    private static void loadFolderListFile() {
         if (listTopLevelModes == null) listTopLevelModes = new LinkedList<>();
         else listTopLevelModes.clear();
 
@@ -114,7 +114,7 @@ public class StateSelectModeFolderSDL extends DummyMenuScrollStateSDL {
     /**
      * Prepare folder list
      */
-    protected void prepareFolderList() {
+    private void prepareFolderList() {
         list = new String[listFolder.size() + 1];
         maxCursor = list.length - 1;
         for (int i = 0; i < listFolder.size(); i++) {
@@ -133,7 +133,7 @@ public class StateSelectModeFolderSDL extends DummyMenuScrollStateSDL {
      * @param str Folder name
      * @return Description
      */
-    protected String getFolderDesc(String str) {
+    private String getFolderDesc(String str) {
         String str2 = str.replace(' ', '_');
         str2 = str2.replace('(', 'l');
         str2 = str2.replace(')', 'r');

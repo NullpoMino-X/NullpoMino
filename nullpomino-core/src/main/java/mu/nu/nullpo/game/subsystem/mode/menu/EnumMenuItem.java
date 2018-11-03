@@ -1,7 +1,7 @@
 package mu.nu.nullpo.game.subsystem.mode.menu;
 
 public abstract class EnumMenuItem extends IntegerMenuItem {
-    public final String[] CHOICE_NAMES;
+    private final String[] CHOICE_NAMES;
 
     public EnumMenuItem(String name, String displayName, int color,
                         int defaultValue, String[] choiceNames) {

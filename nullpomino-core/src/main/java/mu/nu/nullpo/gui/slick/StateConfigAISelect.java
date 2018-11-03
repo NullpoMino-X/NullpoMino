@@ -59,7 +59,7 @@ public class StateConfigAISelect extends BaseGameState {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(StateConfigAISelect.class);
+    private static Logger log = Logger.getLogger(StateConfigAISelect.class);
 
     /**
      * Player ID
@@ -69,48 +69,48 @@ public class StateConfigAISelect extends BaseGameState {
     /**
      * AIList of classes
      */
-    protected String[] aiPathList;
+    private String[] aiPathList;
 
     /**
      * AIOfNameList
      */
-    protected String[] aiNameList;
+    private String[] aiNameList;
 
     /**
      * Current AIClass of
      */
-    protected String currentAI;
+    private String currentAI;
 
     /**
      * AIOfID
      */
-    protected int aiID = 0;
+    private int aiID = 0;
 
     /**
      * AIMovement interval of
      */
-    protected int aiMoveDelay = 0;
+    private int aiMoveDelay = 0;
 
     /**
      * AIThinking of waiting time
      */
-    protected int aiThinkDelay = 0;
+    private int aiThinkDelay = 0;
 
     /**
      * AIUsing threads in
      */
-    protected boolean aiUseThread = false;
+    private boolean aiUseThread = false;
 
-    protected boolean aiShowHint = false;
+    private boolean aiShowHint = false;
 
-    protected boolean aiPrethink = false;
+    private boolean aiPrethink = false;
 
-    protected boolean aiShowState = false;
+    private boolean aiShowState = false;
 
     /**
      * Cursor position
      */
-    protected int cursor = 0;
+    private int cursor = 0;
 
     /*
      * Fetch this state's ID
@@ -160,7 +160,7 @@ public class StateConfigAISelect extends BaseGameState {
      * @param bf To read from a text file
      * @return AIList
      */
-    public String[] loadAIList(BufferedReader bf) {
+    private String[] loadAIList(BufferedReader bf) {
         ArrayList<String> aiArrayList = new ArrayList<>();
 
         while (true) {
@@ -189,7 +189,7 @@ public class StateConfigAISelect extends BaseGameState {
      * @param aiPath AIList of classes
      * @return AIOfNameList
      */
-    public String[] loadAINames(String[] aiPath) {
+    private String[] loadAINames(String[] aiPath) {
         String[] aiName = new String[aiPath.length];
 
         for (int i = 0; i < aiPath.length; i++) {

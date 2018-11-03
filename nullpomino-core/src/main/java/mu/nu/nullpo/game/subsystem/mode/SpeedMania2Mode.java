@@ -404,7 +404,7 @@ public class SpeedMania2Mode extends AbstractMode {
      * @param prop        Property file
      * @param strRuleName Rule name
      */
-    protected void loadSetting(CustomProperties prop, String strRuleName) {
+    private void loadSetting(CustomProperties prop, String strRuleName) {
         startlevel = prop.getProperty("speedmania2.startlevel", 0);
         lvstopse = prop.getProperty("speedmania2.lvstopse", true);
         showsectiontime = prop.getProperty("speedmania2.showsectiontime", false);
@@ -425,7 +425,7 @@ public class SpeedMania2Mode extends AbstractMode {
      * @param prop        Property file
      * @param strRuleName Rule name
      */
-    protected void saveSetting(CustomProperties prop, String strRuleName) {
+    private void saveSetting(CustomProperties prop, String strRuleName) {
         prop.setProperty("speedmania2.startlevel", startlevel);
         prop.setProperty("speedmania2.lvstopse", lvstopse);
         prop.setProperty("speedmania2.showsectiontime", showsectiontime);

@@ -50,7 +50,7 @@ public class NetSPRecord implements Serializable {
     /**
      * List of custom stats (Each String is NAME;VALUE format)
      */
-    public LinkedList<String> listCustomStats;
+    private LinkedList<String> listCustomStats;
 
     /**
      * Replay data (Compressed)
@@ -80,7 +80,7 @@ public class NetSPRecord implements Serializable {
      * @param r2   Record 2
      * @return <code>true</code> if r1 is better than r2
      */
-    public static boolean compareRecords(int type, NetSPRecord r1, NetSPRecord r2) {
+    private static boolean compareRecords(int type, NetSPRecord r1, NetSPRecord r2) {
         Statistics s1 = r1.stats;
         Statistics s2 = r2.stats;
 
@@ -197,7 +197,7 @@ public class NetSPRecord implements Serializable {
     /**
      * Initialization
      */
-    public void reset() {
+    private void reset() {
         strPlayerName = "";
         strModeName = "";
         strRuleName = "";
@@ -235,7 +235,7 @@ public class NetSPRecord implements Serializable {
      *
      * @return String (Split by ,)
      */
-    public String exportCustomStats() {
+    private String exportCustomStats() {
         if ((listCustomStats != null) && (listCustomStats.size() > 0)) {
             String strResult = "";
             for (int i = 0; i < listCustomStats.size(); i++) {
@@ -252,7 +252,7 @@ public class NetSPRecord implements Serializable {
      *
      * @param s String (Split by ,)
      */
-    public void importCustomStats(String s) {
+    private void importCustomStats(String s) {
         if (listCustomStats == null) listCustomStats = new LinkedList<>();
         else listCustomStats.clear();
         if ((s == null) || (s.length() <= 0)) return;
@@ -291,7 +291,7 @@ public class NetSPRecord implements Serializable {
      *
      * @return String Array (String[9])
      */
-    public String[] exportStringArray() {
+    private String[] exportStringArray() {
         String[] s = new String[9];
         s[0] = NetUtil.urlEncode(strPlayerName);
         s[1] = NetUtil.urlEncode(strModeName);
@@ -327,7 +327,7 @@ public class NetSPRecord implements Serializable {
      *
      * @param s String Array (String[9])
      */
-    public void importStringArray(String[] s) {
+    private void importStringArray(String[] s) {
         strPlayerName = NetUtil.urlDecode(s[0]);
         strModeName = NetUtil.urlDecode(s[1]);
         strRuleName = NetUtil.urlDecode(s[2]);
@@ -346,7 +346,7 @@ public class NetSPRecord implements Serializable {
      *
      * @param s String (Split by ;)
      */
-    public void importString(String s) {
+    private void importString(String s) {
         importStringArray(s.split(";"));
     }
 
@@ -386,7 +386,7 @@ public class NetSPRecord implements Serializable {
      * @param name Custom stat name
      * @return Value (null if not found)
      */
-    public String getCustomStat(String name) {
+    private String getCustomStat(String name) {
         for (String strTemp : listCustomStats) {
             String[] strArray = strTemp.split(";");
 

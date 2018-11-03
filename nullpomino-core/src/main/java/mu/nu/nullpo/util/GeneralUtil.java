@@ -50,7 +50,7 @@ public class GeneralUtil {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(GeneralUtil.class);
+    private static Logger log = Logger.getLogger(GeneralUtil.class);
 
     /**
      * Converts play time into a String

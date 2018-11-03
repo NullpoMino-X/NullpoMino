@@ -44,43 +44,43 @@ public class Block implements Serializable {
     /**
      * Block colorConstantcount
      */
-    public static final int BLOCK_COLOR_INVALID = -1,
-            BLOCK_COLOR_NONE = 0,
-            BLOCK_COLOR_GRAY = 1,
-            BLOCK_COLOR_RED = 2,
-            BLOCK_COLOR_ORANGE = 3,
-            BLOCK_COLOR_YELLOW = 4,
-            BLOCK_COLOR_GREEN = 5,
-            BLOCK_COLOR_CYAN = 6,
-            BLOCK_COLOR_BLUE = 7,
-            BLOCK_COLOR_PURPLE = 8,
-            BLOCK_COLOR_GEM_RED = 9,
-            BLOCK_COLOR_GEM_ORANGE = 10,
-            BLOCK_COLOR_GEM_YELLOW = 11,
-            BLOCK_COLOR_GEM_GREEN = 12,
-            BLOCK_COLOR_GEM_CYAN = 13,
-            BLOCK_COLOR_GEM_BLUE = 14,
-            BLOCK_COLOR_GEM_PURPLE = 15,
-            BLOCK_COLOR_SQUARE_GOLD_1 = 16,
-            BLOCK_COLOR_SQUARE_GOLD_2 = 17,
-            BLOCK_COLOR_SQUARE_GOLD_3 = 18,
-            BLOCK_COLOR_SQUARE_GOLD_4 = 19,
-            BLOCK_COLOR_SQUARE_GOLD_5 = 20,
-            BLOCK_COLOR_SQUARE_GOLD_6 = 21,
-            BLOCK_COLOR_SQUARE_GOLD_7 = 22,
-            BLOCK_COLOR_SQUARE_GOLD_8 = 23,
-            BLOCK_COLOR_SQUARE_GOLD_9 = 24,
-            BLOCK_COLOR_SQUARE_SILVER_1 = 25,
-            BLOCK_COLOR_SQUARE_SILVER_2 = 26,
-            BLOCK_COLOR_SQUARE_SILVER_3 = 27,
-            BLOCK_COLOR_SQUARE_SILVER_4 = 28,
-            BLOCK_COLOR_SQUARE_SILVER_5 = 29,
-            BLOCK_COLOR_SQUARE_SILVER_6 = 30,
-            BLOCK_COLOR_SQUARE_SILVER_7 = 31,
-            BLOCK_COLOR_SQUARE_SILVER_8 = 32,
-            BLOCK_COLOR_SQUARE_SILVER_9 = 33,
-            BLOCK_COLOR_RAINBOW = 34,
-            BLOCK_COLOR_GEM_RAINBOW = 35;
+    public static final int BLOCK_COLOR_INVALID = -1;
+    public static final int BLOCK_COLOR_NONE = 0;
+    public static final int BLOCK_COLOR_GRAY = 1;
+    public static final int BLOCK_COLOR_RED = 2;
+    public static final int BLOCK_COLOR_ORANGE = 3;
+    public static final int BLOCK_COLOR_YELLOW = 4;
+    public static final int BLOCK_COLOR_GREEN = 5;
+    public static final int BLOCK_COLOR_CYAN = 6;
+    public static final int BLOCK_COLOR_BLUE = 7;
+    public static final int BLOCK_COLOR_PURPLE = 8;
+    public static final int BLOCK_COLOR_GEM_RED = 9;
+    public static final int BLOCK_COLOR_GEM_ORANGE = 10;
+    public static final int BLOCK_COLOR_GEM_YELLOW = 11;
+    public static final int BLOCK_COLOR_GEM_GREEN = 12;
+    public static final int BLOCK_COLOR_GEM_CYAN = 13;
+    public static final int BLOCK_COLOR_GEM_BLUE = 14;
+    public static final int BLOCK_COLOR_GEM_PURPLE = 15;
+    public static final int BLOCK_COLOR_SQUARE_GOLD_1 = 16;
+    public static final int BLOCK_COLOR_SQUARE_GOLD_2 = 17;
+    public static final int BLOCK_COLOR_SQUARE_GOLD_3 = 18;
+    public static final int BLOCK_COLOR_SQUARE_GOLD_4 = 19;
+    public static final int BLOCK_COLOR_SQUARE_GOLD_5 = 20;
+    public static final int BLOCK_COLOR_SQUARE_GOLD_6 = 21;
+    public static final int BLOCK_COLOR_SQUARE_GOLD_7 = 22;
+    public static final int BLOCK_COLOR_SQUARE_GOLD_8 = 23;
+    private static final int BLOCK_COLOR_SQUARE_GOLD_9 = 24;
+    public static final int BLOCK_COLOR_SQUARE_SILVER_1 = 25;
+    public static final int BLOCK_COLOR_SQUARE_SILVER_2 = 26;
+    public static final int BLOCK_COLOR_SQUARE_SILVER_3 = 27;
+    public static final int BLOCK_COLOR_SQUARE_SILVER_4 = 28;
+    public static final int BLOCK_COLOR_SQUARE_SILVER_5 = 29;
+    public static final int BLOCK_COLOR_SQUARE_SILVER_6 = 30;
+    public static final int BLOCK_COLOR_SQUARE_SILVER_7 = 31;
+    public static final int BLOCK_COLOR_SQUARE_SILVER_8 = 32;
+    private static final int BLOCK_COLOR_SQUARE_SILVER_9 = 33;
+    private static final int BLOCK_COLOR_RAINBOW = 34;
+    public static final int BLOCK_COLOR_GEM_RAINBOW = 35;
 
     /**
      * Constant-itemcount
@@ -218,7 +218,7 @@ public class Block implements Serializable {
     /**
      * What number I put in the game since the start ofBlockOr (NegativecountIf it was I or initial placementgarbage block)
      */
-    public int pieceNum;
+    private int pieceNum;
 
     /**
      * Item number
@@ -238,7 +238,7 @@ public class Block implements Serializable {
     /**
      * Color-shift phase for rainbow blocks
      */
-    public static int rainbowPhase = 0;
+    private static int rainbowPhase = 0;
 
     /**
      * Color to turn into when garbage block turns into a regular block
@@ -305,7 +305,7 @@ public class Block implements Serializable {
     /**
      * SettingsReset to defaults
      */
-    public void reset() {
+    private void reset() {
         color = BLOCK_COLOR_NONE;
         skin = 0;
         attribute = 0;
@@ -419,7 +419,7 @@ public class Block implements Serializable {
     /**
      * @return the character representing the color of this block
      */
-    public char blockToChar() {
+    private char blockToChar() {
         //'0'-'9','A'-'Z' represent colors 0-35.
         //Colors beyond that would follow the ASCII table starting at '['.
         if (color >= 10) {
@@ -453,7 +453,7 @@ public class Block implements Serializable {
         return blkColor;
     }
 
-    public static void updateRainbowPhase(int time) {
+    private static void updateRainbowPhase(int time) {
         rainbowPhase = time % 21;
     }
 

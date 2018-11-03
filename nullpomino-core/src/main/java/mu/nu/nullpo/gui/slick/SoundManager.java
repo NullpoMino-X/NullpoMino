@@ -41,22 +41,22 @@ public class SoundManager {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(SoundManager.class);
+    private static Logger log = Logger.getLogger(SoundManager.class);
 
     /**
      * You can registerWAVE file OfMaximumcount
      */
-    protected int maxClips;
+    private int maxClips;
 
     /**
      * WAVE file  data (Name-> dataBody)
      */
-    protected HashMap<String, Sound> clipMap;
+    private HashMap<String, Sound> clipMap;
 
     /**
      * Was registeredWAVE file count
      */
-    protected int counter = 0;
+    private int counter = 0;
 
     /**
      * Constructor
@@ -70,7 +70,7 @@ public class SoundManager {
      *
      * @param maxClips You can registerWAVE file OfMaximumcount
      */
-    public SoundManager(int maxClips) {
+    private SoundManager(int maxClips) {
         this.maxClips = maxClips;
         clipMap = new HashMap<>(maxClips);
     }

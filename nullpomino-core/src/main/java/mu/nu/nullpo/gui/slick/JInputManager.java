@@ -13,11 +13,11 @@ import net.java.games.input.Keyboard;
 /**
  * JInput keyboard input manager
  */
-public class JInputManager {
+class JInputManager {
     /**
      * Logger
      */
-    static Logger log = Logger.getLogger(JInputManager.class);
+    private static Logger log = Logger.getLogger(JInputManager.class);
 
     /**
      * Number of keycodes found in Slick
@@ -27,22 +27,22 @@ public class JInputManager {
     /**
      * ControllerEnvironment: Main object of JInput
      */
-    public static ControllerEnvironment controllerEnvironment;
+    private static ControllerEnvironment controllerEnvironment;
 
     /**
      * All available controllers
      */
-    public static Controller[] controllers;
+    private static Controller[] controllers;
 
     /**
      * JInput keyboard
      */
-    public static Keyboard keyboard;
+    private static Keyboard keyboard;
 
     /**
      * Keysym map
      */
-    public static HashMap<Integer, Component.Identifier.Key> keyMap;
+    private static HashMap<Integer, Component.Identifier.Key> keyMap;
 
     /**
      * Init keysym mappings

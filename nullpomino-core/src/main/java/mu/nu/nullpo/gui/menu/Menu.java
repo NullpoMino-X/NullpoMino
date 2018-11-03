@@ -2,7 +2,7 @@ package mu.nu.nullpo.gui.menu;
 
 import java.util.Vector;
 
-public class Menu {
+class Menu {
     @SuppressWarnings("unused")
     private String title;
     @SuppressWarnings("unused")
@@ -11,14 +11,14 @@ public class Menu {
 
     private Vector<MenuItem> menuItems;
 
-    public Menu(String title, String subTitle, Vector<MenuItem> menuItems) {
+    private Menu(String title, String subTitle, Vector<MenuItem> menuItems) {
         this.title = title;
         this.subTitle = subTitle;
         this.menuItems = menuItems;
         this.selectedIndex = 0;
     }
 
-    public Menu(String title, String subTitle) {
+    Menu(String title, String subTitle) {
         this(title, subTitle, new Vector<>());
     }
 

@@ -61,7 +61,7 @@ public class NetSPPersonalBest implements Serializable {
     /**
      * Initialization
      */
-    public void reset() {
+    private void reset() {
         strPlayerName = "";
         listRecord = new LinkedList<>();
     }
@@ -71,7 +71,7 @@ public class NetSPPersonalBest implements Serializable {
      *
      * @param s Source
      */
-    public void copy(NetSPPersonalBest s) {
+    private void copy(NetSPPersonalBest s) {
         strPlayerName = s.strPlayerName;
         listRecord = new LinkedList<>();
         for (int i = 0; i < s.listRecord.size(); i++) {
@@ -175,7 +175,7 @@ public class NetSPPersonalBest implements Serializable {
      *
      * @return String (Split by ;)
      */
-    public String exportListRecord() {
+    private String exportListRecord() {
         String strResult = "";
         for (int i = 0; i < listRecord.size(); i++) {
             if (i > 0) strResult += ";";
@@ -189,7 +189,7 @@ public class NetSPPersonalBest implements Serializable {
      *
      * @param s String (Split by ;)
      */
-    public void importListRecord(String s) {
+    private void importListRecord(String s) {
         listRecord.clear();
 
         String[] array = s.split(";");
@@ -205,7 +205,7 @@ public class NetSPPersonalBest implements Serializable {
      *
      * @return String Array (String[2])
      */
-    public String[] exportStringArray() {
+    private String[] exportStringArray() {
         String[] s = new String[2];
         s[0] = NetUtil.urlEncode(strPlayerName);
         s[1] = exportListRecord();
@@ -235,7 +235,7 @@ public class NetSPPersonalBest implements Serializable {
      *
      * @param s String Array (String[8])
      */
-    public void importStringArray(String[] s) {
+    private void importStringArray(String[] s) {
         if (s.length > 0) strPlayerName = NetUtil.urlDecode(s[0]);
         if (s.length > 1) importListRecord(s[1]);
     }

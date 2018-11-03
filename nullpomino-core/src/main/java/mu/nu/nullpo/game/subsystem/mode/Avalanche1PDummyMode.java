@@ -41,7 +41,7 @@ public abstract class Avalanche1PDummyMode extends AbstractMode {
     /**
      * Enabled piece types
      */
-    public static final int[] PIECE_ENABLE = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0};
+    private static final int[] PIECE_ENABLE = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0};
 
     /**
      * Enabled piece types
@@ -51,12 +51,12 @@ public abstract class Avalanche1PDummyMode extends AbstractMode {
                     4, 12, 24, 32, 48, 96, 160, 240, 320, 400, 500, 600, 700, 800, 900, 999
             };
 
-    public int[] tableSpeedChangeLevel =
+    private int[] tableSpeedChangeLevel =
             {
                     80, 90, 96, 97, Integer.MAX_VALUE
             };
 
-    public int[] tableSpeedValue =
+    private int[] tableSpeedValue =
             {
                     30, 45, 120, 480, -1
             };
@@ -64,7 +64,7 @@ public abstract class Avalanche1PDummyMode extends AbstractMode {
     /**
      * Block colors
      */
-    public static final int[] BLOCK_COLORS =
+    static final int[] BLOCK_COLORS =
             {
                     Block.BLOCK_COLOR_RED,
                     Block.BLOCK_COLOR_GREEN,
@@ -76,109 +76,112 @@ public abstract class Avalanche1PDummyMode extends AbstractMode {
     /**
      * Fever map files list
      */
-    public static final String[] FEVER_MAPS =
+    static final String[] FEVER_MAPS =
             {
                     "Fever", "15th", "15thDS", "7", "Poochy7"
             };
 
-    public static final int DAS = 10;
+    private static final int DAS = 10;
 
     /**
      * Amount of points earned from most recent clear
      */
-    protected int lastscore, lastmultiplier;
+    int lastscore;
+    int lastmultiplier;
 
     /**
      * Elapsed time from last line clear (lastscore is displayed to screen until this reaches to 120)
      */
-    protected int scgettime;
+    int scgettime;
 
     /**
      * Outline type
      */
-    protected int outlinetype;
+    int outlinetype;
 
     /**
      * Flag for all clear
      */
-    protected boolean zenKeshi;
+    boolean zenKeshi;
 
     /**
      * Amount of garbage sent
      */
-    protected int garbageSent, garbageAdd;
+    int garbageSent;
+    int garbageAdd;
 
     /**
      * Number of colors to use
      */
-    protected int numColors;
+    int numColors;
 
     /**
      * Time to display last chain
      */
-    protected int chainDisplay;
+    int chainDisplay;
 
     /**
      * Number of all clears
      */
-    protected int zenKeshiCount;
+    int zenKeshiCount;
 
     /**
      * Score before adding zenkeshi bonus and max chain bonus
      */
-    protected int scoreBeforeBonus;
+    int scoreBeforeBonus;
 
     /**
      * Zenkeshi bonus and max chain bonus amounts
      */
-    protected int zenKeshiBonus, maxChainBonus;
+    int zenKeshiBonus;
+    int maxChainBonus;
 
     /**
      * Blocks cleared
      */
-    protected int blocksCleared;
+    int blocksCleared;
 
     /**
      * Current level
      */
-    protected int level;
+    int level;
 
     /**
      * Maximum level
      */
-    protected int maxLevel;
+    private int maxLevel;
 
     /**
      * Blocks cleared needed to reach next level
      */
-    protected int toNextLevel;
+    private int toNextLevel;
 
     /**
      * Blocks cleared needed to reach next level
      */
-    protected int blocksPerLevel;
+    private int blocksPerLevel;
 
     /**
      * True to use slower falling animations, false to use faster
      */
-    protected boolean cascadeSlow;
+    boolean cascadeSlow;
 
     /**
      * True to use big field display
      */
-    protected boolean bigDisplay;
+    boolean bigDisplay;
 
     /**
      * 1 ojama is generated per this many points.
      */
-    protected int ojamaRate;
+    int ojamaRate;
 
     /**
      * Index of current speed value in table
      */
-    protected int speedIndex;
+    private int speedIndex;
 
-    public Avalanche1PDummyMode() {
+    Avalanche1PDummyMode() {
         blocksPerLevel = 15;
         maxLevel = 99;
         ojamaRate = 120;
@@ -255,7 +258,7 @@ public abstract class Avalanche1PDummyMode extends AbstractMode {
      *
      * @param engine GameEngine
      */
-    public void setSpeed(GameEngine engine) {
+    void setSpeed(GameEngine engine) {
         if (level <= 40) {
             engine.speed.gravity = 1;
             engine.speed.denominator = Math.max(43 - level - ((level % 10) << 1), 2);
@@ -274,7 +277,7 @@ public abstract class Avalanche1PDummyMode extends AbstractMode {
         return false;
     }
 
-    protected boolean readyInit(GameEngine engine, int playerID) {
+    boolean readyInit(GameEngine engine, int playerID) {
         engine.numColors = numColors;
         engine.lineGravityType = cascadeSlow ? GameEngine.LineGravity.CASCADE_SLOW : GameEngine.LineGravity.CASCADE;
         engine.displaysize = bigDisplay ? 1 : 0;
@@ -346,7 +349,7 @@ public abstract class Avalanche1PDummyMode extends AbstractMode {
         return false;
     }
 
-    protected void addBonus(GameEngine engine, int playerID) {
+    void addBonus(GameEngine engine, int playerID) {
         scoreBeforeBonus = engine.statistics.score;
         if (numColors >= 5)
             zenKeshiBonus = zenKeshiCount * zenKeshiCount * 1000;
@@ -426,15 +429,15 @@ public abstract class Avalanche1PDummyMode extends AbstractMode {
         }
     }
 
-    protected int calcOjama(int score, int avalanche, int pts, int multiplier) {
+    int calcOjama(int score, int avalanche, int pts, int multiplier) {
         return (score + ojamaRate - 1) / ojamaRate;
     }
 
-    protected int calcPts(int avalanche) {
+    int calcPts(int avalanche) {
         return avalanche * 10;
     }
 
-    protected int calcChainMultiplier(int chain) {
+    int calcChainMultiplier(int chain) {
         if (chain == 2)
             return 8;
         else if (chain == 3)
@@ -445,7 +448,7 @@ public abstract class Avalanche1PDummyMode extends AbstractMode {
             return 0;
     }
 
-    protected void onClear(GameEngine engine, int playerID) {
+    void onClear(GameEngine engine, int playerID) {
         chainDisplay = 60;
     }
 

@@ -69,12 +69,12 @@ public class Field implements Serializable {
     /**
      * Attributes of the coordinate (Usually)
      */
-    public static final int COORD_NORMAL = 0;
+    private static final int COORD_NORMAL = 0;
 
     /**
      * Attributes of the coordinate (Invisible part)
      */
-    public static final int COORD_HIDDEN = 1;
+    private static final int COORD_HIDDEN = 1;
 
     /**
      * Attributes of the coordinate (Was placedBlockDisappears)
@@ -89,17 +89,17 @@ public class Field implements Serializable {
     /**
      * fieldThe width of the
      */
-    protected int width;
+    private int width;
 
     /**
      * Field height
      */
-    protected int height;
+    private int height;
 
     /**
      * fieldThe height of the invisible part of the above
      */
-    protected int hidden_height;
+    private int hidden_height;
 
     /*
      *	Oct. 6th, 2010: Changed block_field[][] and block_hidden[][] to [row][column] format,
@@ -114,32 +114,32 @@ public class Field implements Serializable {
     /**
      * fieldOfBlock
      */
-    protected Block[][] block_field;
+    private Block[][] block_field;
 
     /**
      * fieldInvisible on the part ofBlock
      */
-    protected Block[][] block_hidden;
+    private Block[][] block_hidden;
 
     /**
      * Line clear flag
      */
-    protected boolean[] lineflag_field;
+    private boolean[] lineflag_field;
 
     /**
      * I do not look the part ofLine clear flag
      */
-    protected boolean[] lineflag_hidden;
+    private boolean[] lineflag_hidden;
 
     /**
      * HURRY UPOf groundcount
      */
-    protected int hurryupFloorLines;
+    private int hurryupFloorLines;
 
     /**
      * Presence or absence of a ceiling
      */
-    public boolean ceiling;
+    private boolean ceiling;
 
     /**
      * Number of total blocks above minimum required in color clears
@@ -169,7 +169,7 @@ public class Field implements Serializable {
     /**
      * List of last rows cleared in most recent horizontal line clear.
      */
-    public ArrayList<Block[]> lastLinesCleared;
+    private ArrayList<Block[]> lastLinesCleared;
 
     /** Used for TGM garbage, can later be extended to all types */
     //public ArrayList<Block[]> pendingGarbage;
@@ -383,7 +383,7 @@ public class Field implements Serializable {
      * @param y height of the row in the field
      * @return a reference to the row
      */
-    public Block[] getRow(int y) {
+    private Block[] getRow(int y) {
         try {
             return getRowE(y);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -396,7 +396,7 @@ public class Field implements Serializable {
      * @return a reference to the row
      * @throws ArrayIndexOutOfBoundsException
      */
-    public Block[] getRowE(int y) throws ArrayIndexOutOfBoundsException {
+    private Block[] getRowE(int y) throws ArrayIndexOutOfBoundsException {
         if (y >= 0) {
             try {
                 return block_field[y];
@@ -436,7 +436,7 @@ public class Field implements Serializable {
      * @return Is located at the specified coordinatesBlockObject
      * @throws ArrayIndexOutOfBoundsException The specified coordinates out of range
      */
-    public Block getBlockE(int x, int y) throws ArrayIndexOutOfBoundsException {
+    private Block getBlockE(int x, int y) throws ArrayIndexOutOfBoundsException {
         try {
             return getRowE(y)[x];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -1000,7 +1000,7 @@ public class Field implements Serializable {
      * @param big BigWhether
      * @return T-SpinIf it was a hole I cantrue
      */
-    public boolean isTSlot(int x, int y, boolean big) {
+    private boolean isTSlot(int x, int y, boolean big) {
         // I wonder if the central buried
         if (big == true) {
             if (!getBlockEmptyF(x + 2, y + 2)) {
@@ -1108,7 +1108,7 @@ public class Field implements Serializable {
      * @param big BigWhether(Not supported)
      * @return T-SpinI disappearLinescount(T-SpinFor example, if not the0)
      */
-    public int getTSlotLineClear(int x, int y, boolean big) {
+    private int getTSlotLineClear(int x, int y, boolean big) {
         if (!isTSlot(x, y, big)) return 0;
 
         boolean[] lineflag = new boolean[2];
@@ -1304,7 +1304,7 @@ public class Field implements Serializable {
      * @param y Y-coordinate
      * @return If there is a gap under the specified coordinatestrue
      */
-    public boolean isHoleBelow(int x, int y) {
+    private boolean isHoleBelow(int x, int y) {
         if (!getBlockEmpty(x, y) && getBlockEmpty(x, y + 1)) return true;
         return false;
     }
@@ -1401,7 +1401,7 @@ public class Field implements Serializable {
      * @param x ExamineX-coordinate
      * @return The depth of the valley (If you do not have0)
      */
-    public int getValleyDepth(int x) {
+    private int getValleyDepth(int x) {
         int depth = 0;
 
         int highest = getHighestBlockY(x - 1);
@@ -1456,7 +1456,7 @@ public class Field implements Serializable {
      *
      * @param lines shifting stagecount
      */
-    public void pushDown(int lines) {
+    private void pushDown(int lines) {
         for (int k = 0; k < lines; k++) {
             for (int i = getHeightWithoutHurryupFloor() - 1; i > (hidden_height * -1); i--) {
                 // BlockA1Copied from the rows above
@@ -2211,7 +2211,7 @@ public class Field implements Serializable {
      *
      * @return <code>true</code> if something falls. <code>false</code> if nothing falls.
      */
-    public boolean doCascadeGravity() {
+    private boolean doCascadeGravity() {
         boolean result = false;
 
         setAllAttribute(Block.BLOCK_ATTRIBUTE_CASCADE_FALL, false);
@@ -2287,7 +2287,7 @@ public class Field implements Serializable {
      *
      * @return <code>true</code> if something falls. <code>false</code> if nothing falls.
      */
-    public boolean doCascadeSlow() {
+    private boolean doCascadeSlow() {
         boolean result = false;
 
         setAllAttribute(Block.BLOCK_ATTRIBUTE_CASCADE_FALL, false);
@@ -2357,7 +2357,7 @@ public class Field implements Serializable {
      * @param x X coord
      * @param y Y coord
      */
-    public void checkBlockLink(int x, int y) {
+    private void checkBlockLink(int x, int y) {
         setAllAttribute(Block.BLOCK_ATTRIBUTE_TEMP_MARK, false);
         checkBlockLinkSub(x, y);
     }
@@ -2368,7 +2368,7 @@ public class Field implements Serializable {
      * @param x X coord
      * @param y Y coord
      */
-    protected void checkBlockLinkSub(int x, int y) {
+    private void checkBlockLinkSub(int x, int y) {
         Block blk = getBlock(x, y);
         if ((blk != null) && !blk.isEmpty() && !blk.getAttribute(Block.BLOCK_ATTRIBUTE_TEMP_MARK)) {
             blk.setAttribute(Block.BLOCK_ATTRIBUTE_TEMP_MARK, true);
@@ -2389,7 +2389,7 @@ public class Field implements Serializable {
      * @param x X coord
      * @param y Y coord
      */
-    public void setBlockLinkBroken(int x, int y) {
+    private void setBlockLinkBroken(int x, int y) {
         setAllAttribute(Block.BLOCK_ATTRIBUTE_TEMP_MARK, false);
         setBlockLinkBrokenSub(x, y);
     }
@@ -2400,7 +2400,7 @@ public class Field implements Serializable {
      * @param x X coord
      * @param y Y coord
      */
-    protected void setBlockLinkBrokenSub(int x, int y) {
+    private void setBlockLinkBrokenSub(int x, int y) {
         Block blk = getBlock(x, y);
         if ((blk != null) && !blk.isEmpty() && !blk.getAttribute(Block.BLOCK_ATTRIBUTE_TEMP_MARK) && blk.isNormalBlock()) {
             blk.setAttribute(Block.BLOCK_ATTRIBUTE_TEMP_MARK, true);
@@ -2429,7 +2429,7 @@ public class Field implements Serializable {
      * @param x X coord
      * @param y Y coord
      */
-    public void setBlockLinkByColor(int x, int y) {
+    private void setBlockLinkByColor(int x, int y) {
         setAllAttribute(Block.BLOCK_ATTRIBUTE_TEMP_MARK, false);
         setBlockLinkByColorSub(x, y);
     }
@@ -2440,7 +2440,7 @@ public class Field implements Serializable {
      * @param x X coord
      * @param y Y coord
      */
-    protected void setBlockLinkByColorSub(int x, int y) {
+    private void setBlockLinkByColorSub(int x, int y) {
         Block blk = getBlock(x, y);
         if ((blk != null) && !blk.isEmpty() && !blk.getAttribute(Block.BLOCK_ATTRIBUTE_TEMP_MARK) &&
                 !blk.getAttribute(Block.BLOCK_ATTRIBUTE_GARBAGE) && blk.isNormalBlock()) {
@@ -2516,7 +2516,7 @@ public class Field implements Serializable {
      * @param row Row of blocks
      * @return a String representing the row
      */
-    public String rowToString(Block[] row) {
+    private String rowToString(Block[] row) {
         String strResult = "";
 
         for (Block aRow : row) {
@@ -2557,7 +2557,7 @@ public class Field implements Serializable {
      * @param isWall    Row is a wall (i.e. hurry-up rows)
      * @return The row array
      */
-    public Block[] stringToRow(String str, int skin, boolean isGarbage, boolean isWall) {
+    private Block[] stringToRow(String str, int skin, boolean isGarbage, boolean isWall) {
         Block[] row = new Block[getWidth()];
         for (int j = 0; j < getWidth(); j++) {
 
@@ -2635,7 +2635,7 @@ public class Field implements Serializable {
      * @param row Row of blocks
      * @return a String representing the row with attributes
      */
-    public String attrRowToString(Block[] row) {
+    private String attrRowToString(Block[] row) {
         String strResult = "";
 
         for (Block aRow : row) {
@@ -2668,7 +2668,7 @@ public class Field implements Serializable {
         return attrStringToRow(str.split(";"), skin);
     }
 
-    public Block[] attrStringToRow(String[] strArray, int skin) {
+    private Block[] attrStringToRow(String[] strArray, int skin) {
         Block[] row = new Block[getWidth()];
 
         for (int j = 0; j < getWidth(); j++) {
@@ -2805,7 +2805,7 @@ public class Field implements Serializable {
         garbageDrop(engine, drop, big, hard, countdown, avoidColumn, Block.BLOCK_COLOR_GRAY);
     }
 
-    public void garbageDrop(GameEngine engine, int drop, boolean big, int hard, int countdown, int avoidColumn, int color) {
+    private void garbageDrop(GameEngine engine, int drop, boolean big, int hard, int countdown, int avoidColumn, int color) {
         int y = -1 * hidden_height;
         int actualWidth = width;
         if (big)
@@ -2859,7 +2859,7 @@ public class Field implements Serializable {
         return garbageDropPlace(x, y, big, hard, color, 0);
     }
 
-    public boolean garbageDropPlace(int x, int y, boolean big, int hard, int color, int countdown) {
+    private boolean garbageDropPlace(int x, int y, boolean big, int hard, int color, int countdown) {
         Block b = getBlock(x, y);
         if (b == null)
             return false;
@@ -3153,7 +3153,7 @@ public class Field implements Serializable {
         }
     }
 
-    public boolean addHoverBlock(int x, int y, int color) {
+    private boolean addHoverBlock(int x, int y, int color) {
         Block b = getBlock(x, y);
         if (b == null)
             return false;
@@ -3267,7 +3267,7 @@ public class Field implements Serializable {
             delLine(y);
     }
 
-    public void delLine(int y) {
+    private void delLine(int y) {
         for (int x = 0; x < width; x++) {
             Block b = getBlock(x, y);
             if (b != null)

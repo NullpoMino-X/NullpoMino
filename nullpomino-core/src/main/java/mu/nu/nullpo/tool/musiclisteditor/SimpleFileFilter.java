@@ -35,16 +35,16 @@ import javax.swing.filechooser.FileFilter;
 /**
  * A simple file filter
  */
-public class SimpleFileFilter extends FileFilter {
+class SimpleFileFilter extends FileFilter {
     /**
      * Extension
      */
-    protected String extension;
+    private String extension;
 
     /**
      * Display name
      */
-    protected String description;
+    private String description;
 
     /**
      * Constructor

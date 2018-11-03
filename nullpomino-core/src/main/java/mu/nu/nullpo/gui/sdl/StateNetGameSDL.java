@@ -57,32 +57,32 @@ public class StateNetGameSDL extends BaseStateSDL implements NetLobbyListener {
     /**
      * Log
      */
-    static final Logger log = Logger.getLogger(StateNetGameSDL.class);
+    private static final Logger log = Logger.getLogger(StateNetGameSDL.class);
 
     /**
      * Game main class
      */
-    protected GameManager gameManager;
+    private GameManager gameManager;
 
     /**
      * Lobby
      */
-    public NetLobbyFrame netLobby;
+    private NetLobbyFrame netLobby;
 
     /**
      * Mode name to enter (null=Exit)
      */
-    protected String strModeToEnter = "";
+    private String strModeToEnter = "";
 
     /**
      * Previous ingame flag (Used by title-bar text change)
      */
-    protected boolean prevInGameFlag = false;
+    private boolean prevInGameFlag = false;
 
     /**
      * Current game mode name
      */
-    protected String modeName;
+    private String modeName;
 
     /*
      * Called when entering this state
@@ -364,7 +364,7 @@ public class StateNetGameSDL extends BaseStateSDL implements NetLobbyListener {
     /**
      * Update title bar text
      */
-    public void updateTitleBarCaption() {
+    private void updateTitleBarCaption() {
         String strTitle = "NullpoMino Netplay - " + modeName;
 
         if (modeName.equals("NET-DUMMY")) {

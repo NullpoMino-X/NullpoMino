@@ -54,7 +54,7 @@ public class AvalancheVSFeverMode extends AvalancheVSDummyMode {
     /**
      * Constants for chain display settings
      */
-    public static final int CHAIN_DISPLAY_FEVERSIZE = 4;
+    private static final int CHAIN_DISPLAY_FEVERSIZE = 4;
 
     /**
      * Version

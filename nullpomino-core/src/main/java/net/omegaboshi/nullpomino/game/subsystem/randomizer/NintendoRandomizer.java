@@ -2,8 +2,8 @@ package net.omegaboshi.nullpomino.game.subsystem.randomizer;
 
 public class NintendoRandomizer extends Randomizer {
 
-    int prev;
-    int roll;
+    private int prev;
+    private int roll;
 
     public NintendoRandomizer() {
         super();

@@ -620,7 +620,7 @@ public class AvalancheVSBombBattleMode extends AvalancheVSDummyMode {
     }
 
     @Override
-    protected void updateOjamaMeter(GameEngine engine, int playerID) {
+    void updateOjamaMeter(GameEngine engine, int playerID) {
         int width = 6;
         if (engine.field != null)
             width = engine.field.getWidth();

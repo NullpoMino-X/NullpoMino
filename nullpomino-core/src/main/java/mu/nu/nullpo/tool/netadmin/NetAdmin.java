@@ -119,7 +119,7 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(NetAdmin.class);
+    private static Logger log = Logger.getLogger(NetAdmin.class);
 
     /**
      * ServerAdmin properties
@@ -279,7 +279,7 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
     /**
      * Constructor
      */
-    public NetAdmin() {
+    private NetAdmin() {
         super();
         init();
     }
@@ -709,7 +709,7 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
     /**
      * Shutdown this program
      */
-    public void shutdown() {
+    private void shutdown() {
         logout();
         saveConfig();
         System.exit(0);
@@ -1517,7 +1517,7 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
         private Action deleteAction;
         private Action selectAllAction;
 
-        public TextComponentPopupMenu(final JTextComponent field) {
+        TextComponentPopupMenu(final JTextComponent field) {
             super();
 
             add(cutAction = new AbstractAction(getUIText("Popup_Cut")) {
@@ -1580,7 +1580,7 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
         @SuppressWarnings("unused")
         private Action clearAction;
 
-        public LogPopupMenu(final JTextComponent field) {
+        LogPopupMenu(final JTextComponent field) {
             super();
 
             add(copyAction = new AbstractAction(getUIText("Popup_Copy")) {
@@ -1626,7 +1626,7 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
         private Action kickAction;
         private Action banAction;
 
-        public UserPopupMenu(final JTable table) {
+        UserPopupMenu(final JTable table) {
             super();
 
             add(copyAction = new AbstractAction(getUIText("Popup_Copy")) {
@@ -1676,7 +1676,7 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
         private Action copyAction;
         private Action deleteAction;
 
-        public MPRankingPopupMenu(final JTable table) {
+        MPRankingPopupMenu(final JTable table) {
             super();
 
             add(copyAction = new AbstractAction(getUIText("Popup_Copy")) {
@@ -1717,7 +1717,7 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
         private Action copyAction;
         private Action deleteAction;
 
-        public RoomTablePopupMenu(final JTable table) {
+        RoomTablePopupMenu(final JTable table) {
             super();
 
             add(copyAction = new AbstractAction(getUIText("Popup_Copy")) {

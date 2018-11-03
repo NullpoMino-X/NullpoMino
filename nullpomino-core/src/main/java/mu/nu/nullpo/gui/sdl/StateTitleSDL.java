@@ -55,7 +55,7 @@ public class StateTitleSDL extends DummyMenuChooseStateSDL {
     /**
      * true when new version is already checked
      */
-    protected boolean isNewVersionChecked = false;
+    private boolean isNewVersionChecked = false;
 
     public StateTitleSDL() {
         maxCursor = 4;

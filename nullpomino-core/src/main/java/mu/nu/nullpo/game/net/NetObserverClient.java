@@ -46,22 +46,22 @@ public class NetObserverClient extends NetBaseClient {
     /**
      * ServerVersion
      */
-    protected volatile float serverVersion = 0f;
+    private volatile float serverVersion = 0f;
 
     /**
      * Number of players
      */
-    protected volatile int playerCount = 0;
+    private volatile int playerCount = 0;
 
     /**
      * Observercount
      */
-    protected volatile int observerCount = 0;
+    private volatile int observerCount = 0;
 
     /**
      * Default constructor
      */
-    public NetObserverClient() {
+    private NetObserverClient() {
         super();
     }
 
@@ -70,7 +70,7 @@ public class NetObserverClient extends NetBaseClient {
      *
      * @param host Destination host
      */
-    public NetObserverClient(String host) {
+    private NetObserverClient(String host) {
         super(host);
     }
 

@@ -939,7 +939,7 @@ public class NetVSBattleMode extends NetDummyVSMode {
      * Send stats
      */
     @Override
-    protected void netSendStats(GameEngine engine) {
+    void netSendStats(GameEngine engine) {
         if ((engine.playerID == 0) && !netvsIsPractice && !netvsIsWatch()) {
             netLobby.netPlayerClient.send("game\tstats\t" + garbage[engine.playerID] + "\n");
         }
@@ -1083,17 +1083,17 @@ public class NetVSBattleMode extends NetDummyVSMode {
         /**
          * Number of garbage lines
          */
-        public int lines = 0;
+        int lines = 0;
 
         /**
          * Sender's playerID
          */
-        public int playerID = 0;
+        int playerID = 0;
 
         /**
          * Sender's UID
          */
-        public int uid = 0;
+        int uid = 0;
 
         /**
          * Constructor
@@ -1118,7 +1118,7 @@ public class NetVSBattleMode extends NetDummyVSMode {
          * @param g Lines
          * @param p Sender's playerID
          */
-        public GarbageEntry(int g, int p) {
+        GarbageEntry(int g, int p) {
             lines = g;
             playerID = p;
         }
@@ -1130,7 +1130,7 @@ public class NetVSBattleMode extends NetDummyVSMode {
          * @param p Sender's playerID
          * @param s Sender's UID
          */
-        public GarbageEntry(int g, int p, int s) {
+        GarbageEntry(int g, int p, int s) {
             lines = g;
             playerID = p;
             uid = s;

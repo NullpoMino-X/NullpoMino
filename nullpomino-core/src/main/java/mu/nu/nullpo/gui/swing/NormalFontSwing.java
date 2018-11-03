@@ -33,12 +33,20 @@ import java.awt.Graphics2D;
 /**
  * Normal display class string (SwingFor)
  */
-public class NormalFontSwing {
+class NormalFontSwing {
     /**
      * Character constant colorcount
      */
-    public static final int COLOR_WHITE = 0, COLOR_BLUE = 1, COLOR_RED = 2, COLOR_PINK = 3, COLOR_GREEN = 4, COLOR_YELLOW = 5, COLOR_CYAN = 6,
-            COLOR_ORANGE = 7, COLOR_PURPLE = 8, COLOR_DARKBLUE = 9;
+    private static final int COLOR_WHITE = 0;
+    public static final int COLOR_BLUE = 1;
+    public static final int COLOR_RED = 2;
+    public static final int COLOR_PINK = 3;
+    public static final int COLOR_GREEN = 4;
+    public static final int COLOR_YELLOW = 5;
+    public static final int COLOR_CYAN = 6;
+    public static final int COLOR_ORANGE = 7;
+    public static final int COLOR_PURPLE = 8;
+    public static final int COLOR_DARKBLUE = 9;
 
     /**
      * To draw
@@ -117,7 +125,7 @@ public class NormalFontSwing {
      * @param fontColorFalse flagThefalseText color in the case of
      * @param fontColorTrue  flagThetrueText color in the case of
      */
-    public static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue) {
+    private static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue) {
         if (!flag)
             printFont(fontX, fontY, fontStr, fontColorFalse);
         else
@@ -147,7 +155,7 @@ public class NormalFontSwing {
      * @param fontColorTrue  flagThetrueText color in the case of
      * @param scale          Enlargement factor
      */
-    public static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue, float scale) {
+    private static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue, float scale) {
         if (!flag)
             printFont(fontX, fontY, fontStr, fontColorFalse, scale);
         else

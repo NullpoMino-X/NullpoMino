@@ -46,7 +46,7 @@ public class GemManiaMode extends AbstractMode {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(GemManiaMode.class);
+    private static Logger log = Logger.getLogger(GemManiaMode.class);
 
     /**
      * Current version
@@ -583,7 +583,7 @@ public class GemManiaMode extends AbstractMode {
      *
      * @param prop Property file
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         startstage = prop.getProperty("gemmania.startstage", 0);
         stageset = prop.getProperty("gemmania.stageset", -1);
         alwaysghost = prop.getProperty("gemmania.alwaysghost", false);
@@ -600,7 +600,7 @@ public class GemManiaMode extends AbstractMode {
      *
      * @param prop Property file
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("gemmania.startstage", startstage);
         prop.setProperty("gemmania.stageset", stageset);
         prop.setProperty("gemmania.alwaysghost", alwaysghost);

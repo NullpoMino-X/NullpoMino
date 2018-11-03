@@ -47,31 +47,31 @@ import sdljava.video.SDLVideo;
 /**
  * Class to the management of image and sound
  */
-public class ResourceHolderSDL {
+class ResourceHolderSDL {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(ResourceHolderSDL.class);
+    private static Logger log = Logger.getLogger(ResourceHolderSDL.class);
 
     /**
      * BackgroundOfcount
      */
-    public static final int BACKGROUND_MAX = 20;
+    private static final int BACKGROUND_MAX = 20;
 
     /**
      * Number of images for block spatter animation during line clears
      */
-    public static final int BLOCK_BREAK_MAX = 8;
+    private static final int BLOCK_BREAK_MAX = 8;
 
     /**
      * Number of image splits for block spatter animation during line clears
      */
-    public static final int BLOCK_BREAK_SEGMENTS = 2;
+    private static final int BLOCK_BREAK_SEGMENTS = 2;
 
     /**
      * Number of gem block clear effects
      */
-    public static final int PERASE_MAX = 7;
+    private static final int PERASE_MAX = 7;
 
 
     /**
@@ -147,7 +147,7 @@ public class ResourceHolderSDL {
     /**
      * BGM
      */
-    public static MixMusic[] bgm;
+    private static MixMusic[] bgm;
 
     /**
      * Current BGM number
@@ -352,7 +352,7 @@ public class ResourceHolderSDL {
      * @param filename Filename
      * @return Image data
      */
-    public static SDLSurface loadImage(String filename) {
+    private static SDLSurface loadImage(String filename) {
         SDLSurface img = null;
 
         try {
@@ -374,7 +374,7 @@ public class ResourceHolderSDL {
      * @param no      BGM number
      * @param showerr displayed on the console when an exception occurs
      */
-    public static void bgmLoad(int no, boolean showerr) {
+    private static void bgmLoad(int no, boolean showerr) {
         if (NullpoMinoSDL.propConfig.getProperty("option.bgm", false) == false) return;
 
         if (bgm[no] == null) {

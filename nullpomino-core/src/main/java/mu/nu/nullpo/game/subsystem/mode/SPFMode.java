@@ -50,7 +50,7 @@ public class SPFMode extends AbstractMode {
     /**
      * Log (Apache log4j)
      */
-    static Logger log = Logger.getLogger(SPFMode.class);
+    private static Logger log = Logger.getLogger(SPFMode.class);
 
     /**
      * Current version
@@ -927,7 +927,7 @@ public class SPFMode extends AbstractMode {
         }
     }
 
-    public static double getAttackMultiplier(int set, int map) {
+    private static double getAttackMultiplier(int set, int map) {
         try {
             return DROP_PATTERNS_ATTACK_MULTIPLIERS[set][map];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -935,7 +935,7 @@ public class SPFMode extends AbstractMode {
         }
     }
 
-    public static double getDefendMultiplier(int set, int map) {
+    private static double getDefendMultiplier(int set, int map) {
         try {
             return DROP_PATTERNS_DEFEND_MULTIPLIERS[set][map];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -1235,18 +1235,18 @@ public class SPFMode extends AbstractMode {
             ojama[enemyID] += ojamaSend;
     }
 
-    public static double getRowValue(int row) {
+    private static double getRowValue(int row) {
         return ROW_VALUES[Math.min(Math.max(row, 0), ROW_VALUES.length - 1)];
     }
 
-    public void checkAll(GameEngine engine, int playerID) {
+    private void checkAll(GameEngine engine, int playerID) {
         boolean recheck = checkCountdown(engine, playerID);
         if (recheck)
             log.debug("Converted garbage blocks to regular blocks. Rechecking squares.");
         checkSquares(engine, playerID, recheck);
     }
 
-    public boolean checkCountdown(GameEngine engine, int playerID) {
+    private boolean checkCountdown(GameEngine engine, int playerID) {
         if (countdownDecremented[playerID])
             return false;
         countdownDecremented[playerID] = true;
@@ -1268,7 +1268,7 @@ public class SPFMode extends AbstractMode {
         return result;
     }
 
-    public void checkSquares(GameEngine engine, int playerID, boolean forceRecheck) {
+    private void checkSquares(GameEngine engine, int playerID, boolean forceRecheck) {
         if (engine.field == null)
             return;
         if (engine.statistics.time == lastSquareCheck[playerID] && !forceRecheck)

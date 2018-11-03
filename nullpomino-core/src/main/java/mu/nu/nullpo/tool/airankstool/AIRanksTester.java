@@ -7,14 +7,14 @@ import mu.nu.nullpo.game.subsystem.ai.RanksAI;
 import net.omegaboshi.nullpomino.game.subsystem.randomizer.*;
 
 
-public class AIRanksTester {
+class AIRanksTester {
     private Randomizer randomizer;
     private int numTries;
     private RanksAI ranksAI;
     private int[] pieces;
     private int totalPieces;
 
-    public AIRanksTester(int numTries) {
+    private AIRanksTester(int numTries) {
         this.numTries = numTries;
 
         this.totalPieces = 0;
@@ -54,7 +54,7 @@ public class AIRanksTester {
 
     }
 
-    public void test() {
+    private void test() {
         for (int i = 0; i < numTries; i++) {
             int tempTotalPieces = totalPieces;
             playGame();

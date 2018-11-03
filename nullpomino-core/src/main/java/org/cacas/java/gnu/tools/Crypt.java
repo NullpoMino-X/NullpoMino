@@ -520,7 +520,7 @@ public class Crypt {
         return out;
     }
 
-    public static final String alphabet = "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static final String alphabet = "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     public static final String crypt(String salt, String original) {
         // wwb -- Should do some sanity checks: salt needs to be 2 chars, in alpha.

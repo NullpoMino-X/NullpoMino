@@ -697,7 +697,7 @@ public class AvalancheVSSPFMode extends AvalancheVSDummyMode {
         }
     }
 
-    public static double getAttackMultiplier(int set, int map) {
+    private static double getAttackMultiplier(int set, int map) {
         try {
             return DROP_PATTERNS_ATTACK_MULTIPLIERS[set][map];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -705,7 +705,7 @@ public class AvalancheVSSPFMode extends AvalancheVSDummyMode {
         }
     }
 
-    public static double getDefendMultiplier(int set, int map) {
+    private static double getDefendMultiplier(int set, int map) {
         try {
             return DROP_PATTERNS_DEFEND_MULTIPLIERS[set][map];
         } catch (ArrayIndexOutOfBoundsException e) {

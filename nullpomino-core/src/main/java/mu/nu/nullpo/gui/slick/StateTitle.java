@@ -67,7 +67,7 @@ public class StateTitle extends DummyMenuChooseState {
     /**
      * true when new version is already checked
      */
-    protected boolean isNewVersionChecked = false;
+    private boolean isNewVersionChecked = false;
 
     public StateTitle() {
         maxCursor = 4;

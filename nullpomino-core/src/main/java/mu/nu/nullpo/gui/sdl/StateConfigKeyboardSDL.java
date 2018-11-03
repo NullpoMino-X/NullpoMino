@@ -43,12 +43,12 @@ public class StateConfigKeyboardSDL extends BaseStateSDL {
     /**
      * Number of frames you have to wait
      */
-    public static final int KEYACCEPTFRAME = 15;
+    private static final int KEYACCEPTFRAME = 15;
 
     /**
      * Number of keys to set
      */
-    public static final int NUM_KEYS = 16;
+    private static final int NUM_KEYS = 16;
 
     /**
      * Player number
@@ -63,32 +63,32 @@ public class StateConfigKeyboardSDL extends BaseStateSDL {
     /**
      * Number of button currently being configured
      */
-    protected int keynum;
+    private int keynum;
 
     /**
      * Frame counter
      */
-    protected int frame;
+    private int frame;
 
     /**
      * Nunber of frames left in key-set mode
      */
-    protected int keyConfigRestFrame;
+    private int keyConfigRestFrame;
 
     /**
      * Button settings
      */
-    protected int[] keymap;
+    private int[] keymap;
 
     /**
      * Previous key input state
      */
-    protected boolean[] previousKeyPressedState;
+    private boolean[] previousKeyPressedState;
 
     /**
      * Button settings initialization
      */
-    protected void reset() {
+    private void reset() {
         keynum = 0;
         frame = 0;
         keyConfigRestFrame = 0;
@@ -111,7 +111,7 @@ public class StateConfigKeyboardSDL extends BaseStateSDL {
      * @param now  New input state
      * @return The newly pressed key code. It will return SDLKey.SDLK_UNKNOWN if none are pressed.
      */
-    protected int getPressedKeyNumber(boolean[] prev, boolean[] now) {
+    private int getPressedKeyNumber(boolean[] prev, boolean[] now) {
         for (int i = 0; i < now.length; i++) {
             if (prev[i] != now[i]) {
                 return i;
@@ -127,7 +127,7 @@ public class StateConfigKeyboardSDL extends BaseStateSDL {
      * @param key Keycode
      * @return Key name
      */
-    protected String getKeyName(int key) {
+    private String getKeyName(int key) {
         if ((key < 0) || (key >= NullpoMinoSDL.SDL_KEYNAMES.length)) {
             return "(" + key + ")";
         }

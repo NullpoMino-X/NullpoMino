@@ -5,16 +5,16 @@ import mu.nu.nullpo.game.component.Piece;
 public abstract class LimitedHistoryRandomizer extends Randomizer {
 
     int[] history;
-    int id;
+    private int id;
     int numrolls;
 
-    boolean firstPiece;
+    private boolean firstPiece;
 
-    public LimitedHistoryRandomizer() {
+    LimitedHistoryRandomizer() {
         super();
     }
 
-    public LimitedHistoryRandomizer(boolean[] pieceEnable, long seed) {
+    LimitedHistoryRandomizer(boolean[] pieceEnable, long seed) {
         super(pieceEnable, seed);
 
     }

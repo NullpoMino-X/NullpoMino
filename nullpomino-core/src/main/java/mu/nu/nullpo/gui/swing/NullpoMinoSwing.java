@@ -103,52 +103,52 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(NullpoMinoSwing.class);
+    private static Logger log = Logger.getLogger(NullpoMinoSwing.class);
 
     /**
      * Of the main window frame
      */
-    public static NullpoMinoSwing mainFrame;
+    private static NullpoMinoSwing mainFrame;
 
     /**
      * Of the game window frame
      */
-    public static GameFrame gameFrame;
+    private static GameFrame gameFrame;
 
     /**
      * Key Configuration screen frame
      */
-    public static KeyConfigFrame keyConfigFrame;
+    private static KeyConfigFrame keyConfigFrame;
 
     /**
      * Rules of selection screen frame
      */
-    public static RuleSelectFrame ruleSelectFrame;
+    private static RuleSelectFrame ruleSelectFrame;
 
     /**
      * AISelection screen frame
      */
-    public static AISelectFrame aiSelectFrame;
+    private static AISelectFrame aiSelectFrame;
 
     /**
      * Other Settings screen frame
      */
-    public static GeneralConfigFrame generalConfigFrame;
+    private static GeneralConfigFrame generalConfigFrame;
 
     /**
      * Tuning Settings screen frame
      */
-    public static GameTuningFrame gameTuningFrame;
+    private static GameTuningFrame gameTuningFrame;
 
     /**
      * Update check Setting screen frame
      */
-    public static UpdateCheckFrame updateCheckFrame;
+    private static UpdateCheckFrame updateCheckFrame;
 
     /**
      * Command that was passed to the programLinesArgumentcount
      */
-    public static String[] programArgs;
+    private static String[] programArgs;
 
     /**
      * Save settingsUseProperty file
@@ -163,37 +163,37 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * ObserverFor the functionProperty file
      */
-    public static CustomProperties propObserver;
+    private static CustomProperties propObserver;
 
     /**
      * Default language file
      */
-    public static CustomProperties propLangDefault;
+    private static CustomProperties propLangDefault;
 
     /**
      * Language file
      */
-    public static CustomProperties propLang;
+    private static CustomProperties propLang;
 
     /**
      * Default game mode description file
      */
-    public static CustomProperties propDefaultModeDesc;
+    private static CustomProperties propDefaultModeDesc;
 
     /**
      * Game mode description file
      */
-    public static CustomProperties propModeDesc;
+    private static CustomProperties propModeDesc;
 
     /**
      * Mode Management
      */
-    public static ModeManager modeManager;
+    private static ModeManager modeManager;
 
     /**
      * Layout manager of the main screen
      */
-    public static CardLayout mainLayout;
+    private static CardLayout mainLayout;
 
     /**
      * The main class of the game
@@ -203,32 +203,32 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * Game event Processing and rendering process
      */
-    public static RendererSwing rendererSwing;
+    private static RendererSwing rendererSwing;
 
     /**
      * GameMode nameAn array of
      */
-    public static String[] modeList;
+    private static String[] modeList;
 
     /**
      * Mode Selection list box
      */
-    public static JList listboxMode;
+    private static JList listboxMode;
 
     /**
      * Rule select listmodel
      */
-    public static DefaultListModel listmodelRule;
+    private static DefaultListModel listmodelRule;
 
     /**
      * Rule select listbox
      */
-    public static JList listboxRule;
+    private static JList listboxRule;
 
     /**
      * Replay file selection dialog
      */
-    public static JFileChooser replayFileChooser;
+    private static JFileChooser replayFileChooser;
 
     /**
      * Lobby screen
@@ -238,17 +238,17 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * ObserverClient
      */
-    public static NetObserverClient netObserverClient;
+    private static NetObserverClient netObserverClient;
 
     /**
      * Mode Select the on-screen label(NewVersionIf there is it switches)
      */
-    public static JLabel lModeSelect;
+    private static JLabel lModeSelect;
 
     /**
      * HashMap of rules (ModeName->RuleEntry)
      */
-    protected HashMap<String, RuleEntry> mapRuleEntries;
+    private HashMap<String, RuleEntry> mapRuleEntries;
 
     /**
      * Main functioncount
@@ -503,7 +503,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
      * @param str Mode name
      * @return Description
      */
-    protected static String getModeDesc(String str) {
+    private static String getModeDesc(String str) {
         String str2 = str.replace(' ', '_');
         str2 = str2.replace('(', 'l');
         str2 = str2.replace(')', 'r');
@@ -519,7 +519,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
      *
      * @throws HeadlessException Keyboard, Mouse, Exceptions such as the display if there is no
      */
-    public NullpoMinoSwing() throws HeadlessException {
+    private NullpoMinoSwing() throws HeadlessException {
         super();
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -572,7 +572,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * GUIOfInitialization
      */
-    protected void initUI() {
+    private void initUI() {
         mainLayout = new CardLayout();
         this.setLayout(mainLayout);
 
@@ -585,7 +585,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * Init top screen
      */
-    protected void initTopScreenUI(JComponent p) {
+    private void initTopScreenUI(JComponent p) {
         p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 
         // Label
@@ -641,7 +641,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * Menu OfInitialization
      */
-    protected void initMenu() {
+    private void initMenu() {
         JMenuBar menubar = new JMenuBar();
         this.setJMenuBar(menubar);
 
@@ -750,7 +750,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * Load list file
      */
-    protected void loadRecommendedRuleList() {
+    private void loadRecommendedRuleList() {
         mapRuleEntries = new HashMap<>();
 
         try {
@@ -802,7 +802,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * Prepare rule list
      */
-    protected void prepareRuleList(String strCurrentMode) {
+    private void prepareRuleList(String strCurrentMode) {
         listmodelRule.clear();
         listmodelRule.addElement(getUIText("Top_CurrentRule"));
 
@@ -826,7 +826,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * OffLinesStart game buttonWhen is pressed
      */
-    protected void onStartOfflineClicked() {
+    private void onStartOfflineClicked() {
         String strMode = (String) listboxMode.getSelectedValue();
         propGlobal.setProperty("name.mode", strMode);
 
@@ -1006,7 +1006,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * Hide all subwindows
      */
-    public void hideAllSubWindows() {
+    private void hideAllSubWindows() {
         if (keyConfigFrame != null) keyConfigFrame.setVisible(false);
         if (ruleSelectFrame != null) ruleSelectFrame.setVisible(false);
         if (aiSelectFrame != null) aiSelectFrame.setVisible(false);
@@ -1027,7 +1027,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
      *
      * @param strRulePath Rule file path (null if you want to use user-selected one)
      */
-    public void startNewGame(String strRulePath) {
+    private void startNewGame(String strRulePath) {
         rendererSwing = new RendererSwing();
         gameManager = new GameManager(rendererSwing);
 
@@ -1110,7 +1110,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
      *
      * @param filename Replay dataOfFilename
      */
-    public void startReplayGame(String filename) {
+    private void startReplayGame(String filename) {
         log.info("Loading Replay:" + filename);
         CustomProperties prop = new CustomProperties();
 
@@ -1180,7 +1180,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * NetPlay start processing
      */
-    public void startNetPlayGame() {
+    private void startNetPlayGame() {
         // gameManager Initialization
         rendererSwing = new RendererSwing();
         gameManager = new GameManager(rendererSwing);
@@ -1390,7 +1390,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * Filter for selecting files replay
      */
-    protected class ReplayFileFilter extends FileFilter {
+    class ReplayFileFilter extends FileFilter {
         /*
          * Decision whether or not to display the file
          */
@@ -1414,7 +1414,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * Mode For selection list boxMouseAdapter
      */
-    protected class ListboxModeMouseAdapter extends MouseAdapter {
+    class ListboxModeMouseAdapter extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
             if ((e.getClickCount() == 2) && (e.getButton() == MouseEvent.BUTTON1)) {
@@ -1426,8 +1426,8 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     /**
      * RuleEntry
      */
-    protected class RuleEntry {
-        public LinkedList<String> listPath = new LinkedList<>();
-        public LinkedList<String> listName = new LinkedList<>();
+    class RuleEntry {
+        LinkedList<String> listPath = new LinkedList<>();
+        LinkedList<String> listName = new LinkedList<>();
     }
 }

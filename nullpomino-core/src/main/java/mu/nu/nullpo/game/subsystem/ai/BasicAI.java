@@ -44,67 +44,67 @@ public class BasicAI extends DummyAI implements Runnable {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(BasicAI.class);
+    private static Logger log = Logger.getLogger(BasicAI.class);
 
     /**
      * After that I was groundedX-coordinate
      */
-    public int bestXSub;
+    private int bestXSub;
 
     /**
      * After that I was groundedY-coordinate
      */
-    public int bestYSub;
+    private int bestYSub;
 
     /**
      * After that I was groundedDirection(-1: None)
      */
-    public int bestRtSub;
+    private int bestRtSub;
 
     /**
      * The best moveEvaluation score
      */
-    public int bestPts;
+    private int bestPts;
 
     /**
      * Delay the move for changecount
      */
-    public int delay;
+    private int delay;
 
     /**
      * The GameEngine that owns this AI
      */
-    public GameEngine gEngine;
+    private GameEngine gEngine;
 
     /**
      * The GameManager that owns this AI
      */
-    public GameManager gManager;
+    private GameManager gManager;
 
     /**
      * When true,To threadThink routineInstructing the execution of the
      */
-    public boolean thinkRequest;
+    private boolean thinkRequest;
 
     /**
      * true when thread is executing the think routine.
      */
-    public boolean thinking;
+    private boolean thinking;
 
     /**
      * To stop a thread time
      */
-    public int thinkDelay;
+    private int thinkDelay;
 
     /**
      * When true,Running thread
      */
-    public volatile boolean threadRunning;
+    private volatile boolean threadRunning;
 
     /**
      * Thread for executing the think routine
      */
-    public Thread thread;
+    private Thread thread;
 
     /*
      * AIOfName
@@ -276,7 +276,7 @@ public class BasicAI extends DummyAI implements Runnable {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public void thinkBestPosition(GameEngine engine, int playerID) {
+    private void thinkBestPosition(GameEngine engine, int playerID) {
         bestHold = false;
         bestX = 0;
         bestY = 0;
@@ -523,7 +523,7 @@ public class BasicAI extends DummyAI implements Runnable {
      * @param depth     Compromise level (ranges from 0 through getMaxThinkDepth-1)
      * @return Evaluation score
      */
-    public int thinkMain(GameEngine engine, int x, int y, int rt, int rtOld, Field fld, Piece piece, Piece nextpiece, Piece holdpiece, int depth) {
+    int thinkMain(GameEngine engine, int x, int y, int rt, int rtOld, Field fld, Piece piece, Piece nextpiece, Piece holdpiece, int depth) {
         int pts = 0;
 
         // Add points for being adjacent to other blocks
@@ -662,7 +662,7 @@ public class BasicAI extends DummyAI implements Runnable {
      *
      * @return MaximumCompromise level
      */
-    public int getMaxThinkDepth() {
+    private int getMaxThinkDepth() {
         return 2;
     }
 

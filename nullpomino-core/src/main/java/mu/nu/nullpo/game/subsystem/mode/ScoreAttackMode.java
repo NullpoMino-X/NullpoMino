@@ -298,7 +298,7 @@ public class ScoreAttackMode extends AbstractMode {
     /**
      * Load the settings
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         startlevel = prop.getProperty("scoreattack.startlevel", 0);
         alwaysghost = prop.getProperty("scoreattack.alwaysghost", false);
         always20g = prop.getProperty("scoreattack.always20g", false);
@@ -310,7 +310,7 @@ public class ScoreAttackMode extends AbstractMode {
     /**
      * Save the settings
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("scoreattack.startlevel", startlevel);
         prop.setProperty("scoreattack.alwaysghost", alwaysghost);
         prop.setProperty("scoreattack.always20g", always20g);

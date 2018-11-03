@@ -49,7 +49,7 @@ public class ExtremeMode extends NetDummyMode {
     /**
      * Ending time
      */
-    protected static final int ROLLTIMELIMIT = 2968;
+    private static final int ROLLTIMELIMIT = 2968;
 
     /**
      * ARE table
@@ -278,7 +278,7 @@ public class ExtremeMode extends NetDummyMode {
      *
      * @param engine GameEngine
      */
-    public void setSpeed(GameEngine engine) {
+    private void setSpeed(GameEngine engine) {
         int lv = engine.statistics.level;
 
         if (lv < 0) lv = 0;
@@ -834,7 +834,7 @@ public class ExtremeMode extends NetDummyMode {
      *
      * @param prop Property file
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         startlevel = prop.getProperty("extreme.startlevel", 0);
         tspinEnableType = prop.getProperty("extreme.tspinEnableType", 1);
         enableTSpin = prop.getProperty("extreme.enableTSpin", true);
@@ -853,7 +853,7 @@ public class ExtremeMode extends NetDummyMode {
      *
      * @param prop Property file
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("extreme.startlevel", startlevel);
         prop.setProperty("extreme.tspinEnableType", tspinEnableType);
         prop.setProperty("extreme.enableTSpin", enableTSpin);
@@ -874,7 +874,7 @@ public class ExtremeMode extends NetDummyMode {
      * @param ruleName Rule name
      */
     @Override
-    protected void loadRanking(CustomProperties prop, String ruleName) {
+    void loadRanking(CustomProperties prop, String ruleName) {
         for (int i = 0; i < RANKING_MAX; i++) {
             for (int endlessIndex = 0; endlessIndex < 2; endlessIndex++) {
                 rankingScore[endlessIndex][i] = prop.getProperty("extreme.ranking." + ruleName + "." + endlessIndex + ".score." + i, 0);
@@ -1023,7 +1023,7 @@ public class ExtremeMode extends NetDummyMode {
      * @param engine GameEngine
      */
     @Override
-    protected void netSendOptions(GameEngine engine) {
+    void netSendOptions(GameEngine engine) {
         String msg = "game\toption\t";
         msg += startlevel + "\t" + tspinEnableType + "\t" + enableTSpinKick + "\t" + enableB2B + "\t";
         msg += enableCombo + "\t" + endless + "\t" + big + "\t" + spinCheckType + "\t" + tspinEnableEZ + "\n";
@@ -1050,7 +1050,7 @@ public class ExtremeMode extends NetDummyMode {
      * NET: Get goal type
      */
     @Override
-    protected int netGetGoalType() {
+    int netGetGoalType() {
         return endless ? 1 : 0;
     }
 

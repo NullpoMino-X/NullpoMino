@@ -341,7 +341,7 @@ public class FinalMode extends AbstractMode {
      *
      * @param prop CustomProperties
      */
-    protected void loadSetting(CustomProperties prop) {
+    void loadSetting(CustomProperties prop) {
         startlevel = prop.getProperty("final.startlevel", 0);
         lvstopse = prop.getProperty("final.lvstopse", false);
         showsectiontime = prop.getProperty("final.showsectiontime", false);
@@ -353,7 +353,7 @@ public class FinalMode extends AbstractMode {
      *
      * @param prop CustomProperties
      */
-    protected void saveSetting(CustomProperties prop) {
+    void saveSetting(CustomProperties prop) {
         prop.setProperty("final.startlevel", startlevel);
         prop.setProperty("final.lvstopse", lvstopse);
         prop.setProperty("final.showsectiontime", showsectiontime);

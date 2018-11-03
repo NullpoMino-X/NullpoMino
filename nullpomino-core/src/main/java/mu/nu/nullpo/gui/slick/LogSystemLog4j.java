@@ -34,11 +34,11 @@ import org.newdawn.slick.util.LogSystem;
 /**
  * SlickThe system loglog4jPassed on to the
  */
-public class LogSystemLog4j implements LogSystem {
+class LogSystemLog4j implements LogSystem {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger("Slick");
+    private static Logger log = Logger.getLogger("Slick");
 
     public void debug(String message) {
         log.debug(message);

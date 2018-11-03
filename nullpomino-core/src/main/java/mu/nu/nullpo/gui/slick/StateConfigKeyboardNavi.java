@@ -50,7 +50,7 @@ public class StateConfigKeyboardNavi extends DummyMenuChooseState {
     /**
      * StateBasedGame
      */
-    protected StateBasedGame gameObj;
+    private StateBasedGame gameObj;
 
     public StateConfigKeyboardNavi() {
         maxCursor = 1;

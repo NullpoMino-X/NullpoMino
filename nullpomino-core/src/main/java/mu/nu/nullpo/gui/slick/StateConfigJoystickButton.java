@@ -47,7 +47,7 @@ public class StateConfigJoystickButton extends BasicGameState {
     /**
      * Key input Accepted to be enabled. frame count
      */
-    public static final int KEYACCEPTFRAME = 20;
+    private static final int KEYACCEPTFRAME = 20;
 
     /**
      * Player number
@@ -57,27 +57,27 @@ public class StateConfigJoystickButton extends BasicGameState {
     /**
      * StateBasedGame
      */
-    protected StateBasedGame gameObj;
+    private StateBasedGame gameObj;
 
     /**
      * UseJoystick Of number
      */
-    protected int joyNumber;
+    private int joyNumber;
 
     /**
      * Number of button currently being configured
      */
-    protected int keynum;
+    private int keynum;
 
     /**
      * Course frame count
      */
-    protected int frame;
+    private int frame;
 
     /**
      * Button settings
      */
-    protected int buttonmap[];
+    private int[] buttonmap;
 
     /*
      * Fetch this state's ID
@@ -90,7 +90,7 @@ public class StateConfigJoystickButton extends BasicGameState {
     /**
      * Button settings initialization
      */
-    protected void reset() {
+    private void reset() {
         keynum = 4;
         frame = 0;
 
@@ -218,7 +218,7 @@ public class StateConfigJoystickButton extends BasicGameState {
      *
      * @param key Keycode
      */
-    protected void onKey(int key) {
+    private void onKey(int key) {
         if (frame >= KEYACCEPTFRAME) {
             // Up
             if (key == Input.KEY_UP) {

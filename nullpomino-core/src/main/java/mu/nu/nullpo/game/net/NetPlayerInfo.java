@@ -201,7 +201,7 @@ public class NetPlayerInfo implements Serializable {
      *
      * @param n Copy source
      */
-    public void copy(NetPlayerInfo n) {
+    private void copy(NetPlayerInfo n) {
         strName = n.strName;
         strCountry = n.strCountry;
         strHost = n.strHost;
@@ -242,7 +242,7 @@ public class NetPlayerInfo implements Serializable {
      *
      * @param pdata String array (String[27])
      */
-    public void importStringArray(String[] pdata) {
+    private void importStringArray(String[] pdata) {
         strName = NetUtil.urlDecode(pdata[0]);
         strCountry = NetUtil.urlDecode(pdata[1]);
         strHost = NetUtil.urlDecode(pdata[2]);
@@ -279,7 +279,7 @@ public class NetPlayerInfo implements Serializable {
      *
      * @param str String
      */
-    public void importString(String str) {
+    private void importString(String str) {
         importStringArray(str.split(";"));
     }
 
@@ -288,7 +288,7 @@ public class NetPlayerInfo implements Serializable {
      *
      * @return String array (String[27])
      */
-    public String[] exportStringArray() {
+    private String[] exportStringArray() {
         String[] pdata = new String[27];
         pdata[0] = NetUtil.urlEncode(strName);
         pdata[1] = NetUtil.urlEncode(strCountry);

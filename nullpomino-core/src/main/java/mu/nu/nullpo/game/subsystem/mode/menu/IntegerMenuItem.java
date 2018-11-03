@@ -3,7 +3,8 @@ package mu.nu.nullpo.game.subsystem.mode.menu;
 import mu.nu.nullpo.util.CustomProperties;
 
 public class IntegerMenuItem extends AbstractMenuItem<Integer> {
-    public int min, max;
+    int min;
+    int max;
 
     public IntegerMenuItem(String name, String displayName, int color,
                            int defaultValue, int min, int max) {

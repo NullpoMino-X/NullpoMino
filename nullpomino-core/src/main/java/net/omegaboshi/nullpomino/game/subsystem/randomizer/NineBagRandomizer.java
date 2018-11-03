@@ -2,9 +2,9 @@ package net.omegaboshi.nullpomino.game.subsystem.randomizer;
 
 public class NineBagRandomizer extends Randomizer {
 
-    int[] bag;
-    int baglen;
-    int pt;
+    private int[] bag;
+    private int baglen;
+    private int pt;
 
     public NineBagRandomizer() {
         super();
@@ -24,7 +24,7 @@ public class NineBagRandomizer extends Randomizer {
         shuffle();
     }
 
-    public void shuffle() {
+    private void shuffle() {
         for (int i = baglen; i > 1; i--) {
             int j = r.nextInt(i);
             int temp = bag[i - 1];

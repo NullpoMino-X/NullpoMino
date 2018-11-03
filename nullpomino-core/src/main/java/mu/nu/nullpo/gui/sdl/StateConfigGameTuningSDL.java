@@ -52,7 +52,7 @@ public class StateConfigGameTuningSDL extends BaseStateSDL {
     /**
      * UI Text identifier Strings
      */
-    protected static final String[] UI_TEXT = {
+    private static final String[] UI_TEXT = {
             "GameTuning_RotateButtonDefaultRight",
             "GameTuning_Skin",
             "GameTuning_MinDAS",
@@ -68,12 +68,12 @@ public class StateConfigGameTuningSDL extends BaseStateSDL {
     /**
      * Log
      */
-    static Logger log = Logger.getLogger(StateConfigGameTuningSDL.class);
+    private static Logger log = Logger.getLogger(StateConfigGameTuningSDL.class);
 
     /**
      * Outline type names
      */
-    protected static final String[] OUTLINE_TYPE_NAMES = {"AUTO", "NONE", "NORMAL", "CONNECT", "SAMECOLOR"};
+    private static final String[] OUTLINE_TYPE_NAMES = {"AUTO", "NONE", "NORMAL", "CONNECT", "SAMECOLOR"};
 
     /**
      * Player number
@@ -83,57 +83,58 @@ public class StateConfigGameTuningSDL extends BaseStateSDL {
     /**
      * Preview flag
      */
-    protected boolean isPreview;
+    private boolean isPreview;
 
     /**
      * Game Manager for preview
      */
-    protected GameManager gameManager;
+    private GameManager gameManager;
 
     /**
      * Cursor position
      */
-    protected int cursor;
+    private int cursor;
 
     /**
      * A button rotation -1=Auto 0=Always CCW 1=Always CW
      */
-    protected int owRotateButtonDefaultRight;
+    private int owRotateButtonDefaultRight;
 
     /**
      * Block Skin -1=Auto 0 or above=Fixed
      */
-    protected int owSkin;
+    private int owSkin;
 
     /**
      * Min/Max DAS -1=Auto 0 or above=Fixed
      */
-    protected int owMinDAS, owMaxDAS;
+    private int owMinDAS;
+    private int owMaxDAS;
 
     /**
      * DAS Delay -1=Auto 0 or above=Fixed
      */
-    protected int owDasDelay;
+    private int owDasDelay;
 
     /**
      * Reverse the roles of up/down keys in-game
      */
-    protected boolean owReverseUpDown;
+    private boolean owReverseUpDown;
 
     /**
      * Diagonal move (-1=Auto 0=Disable 1=Enable)
      */
-    protected int owMoveDiagonal;
+    private int owMoveDiagonal;
 
     /**
      * Outline type (-1:Auto 0orAbove:Fixed)
      */
-    protected int owBlockOutlineType;
+    private int owBlockOutlineType;
 
     /**
      * Show outline only flag (-1:Auto 0:Always Normal 1:Always Outline Only)
      */
-    protected int owBlockShowOutlineOnly;
+    private int owBlockShowOutlineOnly;
 
     /**
      * Constructor
@@ -148,7 +149,7 @@ public class StateConfigGameTuningSDL extends BaseStateSDL {
      *
      * @param prop Property file to read from
      */
-    protected void loadConfig(CustomProperties prop) {
+    private void loadConfig(CustomProperties prop) {
         owRotateButtonDefaultRight = prop.getProperty(player + ".tuning.owRotateButtonDefaultRight", -1);
         owSkin = prop.getProperty(player + ".tuning.owSkin", -1);
         owMinDAS = prop.getProperty(player + ".tuning.owMinDAS", -1);
@@ -165,7 +166,7 @@ public class StateConfigGameTuningSDL extends BaseStateSDL {
      *
      * @param prop Property file to save to
      */
-    protected void saveConfig(CustomProperties prop) {
+    private void saveConfig(CustomProperties prop) {
         prop.setProperty(player + ".tuning.owRotateButtonDefaultRight", owRotateButtonDefaultRight);
         prop.setProperty(player + ".tuning.owSkin", owSkin);
         prop.setProperty(player + ".tuning.owMinDAS", owMinDAS);
@@ -197,7 +198,7 @@ public class StateConfigGameTuningSDL extends BaseStateSDL {
     /**
      * Start the preview game
      */
-    protected void startPreviewGame() {
+    private void startPreviewGame() {
         NullpoMinoSDL.disableAutoInputUpdate = true;
 
         gameManager = new GameManager(new RendererSDL());
@@ -277,7 +278,7 @@ public class StateConfigGameTuningSDL extends BaseStateSDL {
     /**
      * Stop the preview game
      */
-    protected void stopPreviewGame() {
+    private void stopPreviewGame() {
         if (isPreview) {
             NullpoMinoSDL.disableAutoInputUpdate = false;
             isPreview = false;
