@@ -1,3 +1,9 @@
 #!/bin/sh
-cd "$(dirname $0)";
-XMODIFIERS=@im=none java -cp bin:NullpoMino.jar:lib/log4j-1.2.15.jar:lib/slick.jar:lib/lwjgl.jar:lib/jorbis-0.0.15.jar:lib/jogg-0.0.7.jar:lib/ibxm.jar:lib/jinput.jar -Djava.library.path=lib mu.nu.nullpo.gui.slick.NullpoMinoSlick
+cd `dirname $0`
+
+case "${OSTYPE}" in
+darwin*)
+  XMODIFIERS=@im=none java -Djava.library.path=./lib -cp ./NullpoMino.jar:lib/log4j.jar:lib/slick2d-core.jar:lib/lwjgl.jar:lib/lwjgl-platform-natives-osx.jar:lib/jorbis.jar:lib/jinput.jar:lib/jinput-platform-natives-osx.jar:lib/jutils.jar mu.nu.nullpo.gui.slick.NullpoMinoSlick;;
+linux*)
+  XMODIFIERS=@im=none java -Djava.library.path=./lib -cp ./NullpoMino.jar:lib/log4j.jar:lib/slick2d-core.jar:lib/lwjgl.jar:lib/lwjgl-platform-natives-linux.jar:lib/jorbis.jar:lib/jinput.jar:lib/jinput-platform-natives-linux.jar:lib/jutils.jar mu.nu.nullpo.gui.slick.NullpoMinoSlick;;
+esac

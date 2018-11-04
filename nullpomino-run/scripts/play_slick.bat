@@ -1,3 +1,1 @@
-@echo off
-set path=%path%;%systemroot%\SysWOW64
-start javaw -cp bin;NullpoMino.jar;lib\log4j-1.2.15.jar;lib\slick.jar;lib\lwjgl.jar;lib\jorbis-0.0.15.jar;lib\jogg-0.0.7.jar;lib\ibxm.jar;lib\jinput.jar -Djava.library.path=lib mu.nu.nullpo.gui.slick.NullpoMinoSlick
+java "-Djava.library.path=lib" -cp "NullpoMino.jar;lib\log4j.jar;lib\slick2d-core.jar;lib\lwjgl.jar;lib\lwjgl-platform-natives-windows.jar;lib\jorbis.jar;lib\jinput.jar;lib\jinput-platform-natives-windows.jar;lib\jutils.jar" mu.nu.nullpo.gui.slick.NullpoMinoSlick
