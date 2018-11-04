@@ -25,6 +25,8 @@ variables:
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
 
 before_script:
+    - apk update
+    - apk upgrade
     - apk add maven
     - cd nullpomino-parent
 
