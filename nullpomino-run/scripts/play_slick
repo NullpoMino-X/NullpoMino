@@ -6,4 +6,6 @@ darwin*)
   XMODIFIERS=@im=none java -Djava.library.path=./lib -cp ./NullpoMino.jar:lib/log4j.jar:lib/slick2d-core.jar:lib/lwjgl.jar:lib/lwjgl-platform-natives-osx.jar:lib/jorbis.jar:lib/jinput.jar:lib/jinput-platform-natives-osx.jar:lib/jutils.jar mu.nu.nullpo.gui.slick.NullpoMinoSlick;;
 linux*)
   XMODIFIERS=@im=none java -Djava.library.path=./lib -cp ./NullpoMino.jar:lib/log4j.jar:lib/slick2d-core.jar:lib/lwjgl.jar:lib/lwjgl-platform-natives-linux.jar:lib/jorbis.jar:lib/jinput.jar:lib/jinput-platform-natives-linux.jar:lib/jutils.jar mu.nu.nullpo.gui.slick.NullpoMinoSlick;;
+*)
+  XMODIFIERS=@im=none java -Djava.library.path=./lib -cp ./NullpoMino.jar:lib/log4j.jar:lib/slick2d-core.jar:lib/lwjgl.jar:lib/lwjgl-platform-natives-linux.jar:lib/jorbis.jar:lib/jinput.jar:lib/jinput-platform-natives-linux.jar:lib/jutils.jar mu.nu.nullpo.gui.slick.NullpoMinoSlick;;
 esac

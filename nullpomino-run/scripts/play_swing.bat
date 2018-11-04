@@ -1,3 +1,1 @@
-@echo off
-set path=%path%;%systemroot%\SysWOW64
-start javaw -cp bin;NullpoMino.jar;lib\log4j-1.2.15.jar -Dsun.java2d.translaccel=true -Dsun.java2d.d3dtexbpp=16 mu.nu.nullpo.gui.swing.NullpoMinoSwing
+java "-Djava.library.path=lib" -cp "NullpoMino.jar;lib\log4j.jar;lib/swing-layout.jar;lib/swing-worker.jar;lib\lwjgl.jar;lib\lwjgl-platform-natives-windows.jar;lib\jorbis.jar;lib\jinput.jar;lib\jinput-platform-natives-windows.jar;lib\jutils.jar" mu.nu.nullpo.gui.swing.NullpoMinoSwing
