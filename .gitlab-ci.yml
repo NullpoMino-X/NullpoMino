@@ -54,12 +54,12 @@ cache:
 # Validate merge requests using JDK8
 validate:jdk8:
   <<: *validate
-  image: maven:3.3.9-jdk-8
+  image: anapsix/alpine-java:jdk8
 
 # Verify merge requests using JDK8
 verify:jdk8:
   <<: *verify
-  image: maven:3.3.9-jdk-8
+  image: anapsix/alpine-java:jdk8
 
 
 # For `master` branch run `mvn deploy` automatically.
@@ -76,5 +76,5 @@ deploy:jdk8:
   artifacts:
     paths:
     - nullpomino-run/target/install/
-  image: maven:3.3.9-jdk-8
+  image: anapsix/alpine-java:jdk8
 
