@@ -45,6 +45,11 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+		<dependency>
+    		<groupId>biz.source_code</groupId>
+    		<artifactId>base64coder</artifactId>
+    		<version>2010-09-21</version>
+		</dependency>
 	</dependencies>
 
 </project>
