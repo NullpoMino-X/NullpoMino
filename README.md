@@ -1,4 +1,4 @@
-# ![alt text](https://gitlab.com/NullpoMino/nullpomino/raw/master/nullpomino-run/res/graphics/logo.png)
+# ![alt text](https://raw.githubusercontent.com/NullpoMino-X/NullpoMino/master/nullpomino-run/res/graphics/logo.png)
 
 **NullpoMino** is an open-source action puzzle game that works on the Java platform. It has a wide variety of single-player modes and netplay to allow players to compete over the Internet or LAN.
 
