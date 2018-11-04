@@ -1,0 +1,5 @@
+language: java
+before_install: 
+- cd nullpomino-parent
+jdk:
+- oraclejdk8
