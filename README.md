@@ -1,4 +1,4 @@
-﻿# ![alt text](https://gitlab.com/NullpoMino/nullpomino/raw/master/nullpomino-run/res/graphics/logo.png)
+# ![alt text](https://gitlab.com/NullpoMino/nullpomino/raw/master/nullpomino-run/res/graphics/logo.png)
 
 **NullpoMino** is an open-source action puzzle game that works on the Java platform. It has a wide variety of single-player modes and netplay to allow players to compete over the Internet or LAN.
 
@@ -27,14 +27,12 @@ This game needs Java Runtime Environment 1.5 or newer version to run. <https://w
 
 ### Windows
 
-Double-click `play_swing.bat`, `play_slick.bat`, `NullpoMino.exe` or `play_sdl.bat`.
+Double-click `play_swing.bat`, `play_slick.bat`, or `NullpoMino.exe`.
 
 * `play_swing.bat` starts Swing version of NullpoMino.
   * Does not use any OS-dependent libraries. However, performance and sound quality are poor. There is no support for joysticks. BGM is also missing.
 * `play_slick.bat` or `NullpoMino.exe` starts Slick version of NullpoMino.
   * An OpenGL compatible video card required, some PCs may have problems with keyboard. Has limited support of joysticks.
-* `play_sdl.bat` starts SDL version of NullpoMino.
-  * Aside from random crashing bug which I can't fix it, it's most stable for 32bit PCs, I think. Has best support of joysticks. Won't work with 64bit PCs.
 * `ruleeditor.bat` runs Rule Editor, where you can create your own ruleset.
 * `sequencer.bat` runs Sequence Viewer, which should be helpful for TASing. (Created by Zircean)
 * `musiclisteditor.bat` runs MusicListEditor, where you can configure which music file to use.
@@ -67,13 +65,6 @@ chmod +x play_slick
 ```sh
 chmod +x NullpoMino
 ./NullpoMino
-```
-
-#### To start SDL version
-
-```sh
-chmod +x play_sdl
-./play_sdl
 ```
 
 #### To start rule editor
@@ -149,18 +140,10 @@ However, when this option is used, the game will try to read keyboard input dire
 So you can play the game with SCIM enabled.
 Please note when `-j` option is used, some keys (such as ;) won't be detected.
 
-##### SDL version problems
-
-If you tried SDL version but it didn't work, you need to manually install libsdl.
-In Ubuntu 8.04, I think you can install it with following command:
-sudo apt-get install libsdl1.2debian
-SDL version requires i386 architecture CPU and 32bit OS to run.
-
 ### macOS
 
 Unfortunately I don't own any macOS PC now :(
 Slick version does seem to work with Linux version commandline.
-SDL version does not work, because sdljava (Java SDL wrapper) doesn't support macOS.
 I don't know anything about Swing version.
 
 ## How to play
@@ -239,7 +222,6 @@ If you want to reset settings, delete the following file(s):
 
 * Swing: config\setting\swing.cfg
 * Slick: config\setting\slick.cfg
-* SDL: config\setting\sdl.cfg
 * Global settings: config\setting\global.cfg
 * High-scores: config\setting\mode.cfg
 
