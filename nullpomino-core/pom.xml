@@ -9,29 +9,7 @@
 		<relativePath>../nullpomino-parent</relativePath>
 	</parent>
 
-    <repositories>
-        <repository>
-            <id>lib</id>
-            <name>lib</name>
-            <releases>
-                <checksumPolicy>ignore</checksumPolicy>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <layout>default</layout>
-            <url>${project.baseUri}/lib</url>
-        </repository>
-    </repositories>
-
 	<dependencies>
-        <dependency>
-            <groupId>mu.nu.nullpo.local</groupId>
-            <artifactId>sdljava</artifactId>
-            <version>LOCAL</version>
-        </dependency>
 		<dependency>
 			<groupId>org.lwjgl.lwjgl</groupId>
 			<artifactId>lwjgl</artifactId>
