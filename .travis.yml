@@ -1,7 +1,6 @@
 language: java
 os:
 - linux
-- windows
 - osx
 before_install: 
 - cd nullpomino-parent
