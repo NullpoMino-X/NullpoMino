@@ -5,6 +5,8 @@ os:
 install:
   - sh: sudo apt-get update
   - sh: sudo apt-get install icedtea-netx maven
+  - sh: cd /usr/share/icedtea-web
+  - sh: ls
 before_build:
   - cd nullpomino-parent
 build_script:
