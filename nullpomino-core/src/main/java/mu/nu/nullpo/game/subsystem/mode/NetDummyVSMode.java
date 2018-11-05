@@ -741,7 +741,7 @@ public class NetDummyVSMode extends NetDummyMode {
      */
     private void netvsDrawRoomInfoBox(GameEngine engine, int x, int y) {
         if (netCurrentRoomInfo != null) {
-            owner.receiver.drawDirectFont(engine, 0, x, y + 0, "PLAYERS", EventReceiver.COLOR_CYAN, 0.5f);
+            owner.receiver.drawDirectFont(engine, 0, x, y, "PLAYERS", EventReceiver.COLOR_CYAN, 0.5f);
             owner.receiver.drawDirectFont(engine, 0, x, y + 8, "" + netvsNumPlayers, EventReceiver.COLOR_WHITE, 0.5f);
             owner.receiver.drawDirectFont(engine, 0, x, y + 16, "SPECTATORS", EventReceiver.COLOR_CYAN, 0.5f);
             owner.receiver.drawDirectFont(engine, 0, x, y + 24, "" + netNumSpectators, EventReceiver.COLOR_WHITE, 0.5f);

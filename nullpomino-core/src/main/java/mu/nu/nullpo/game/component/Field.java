@@ -1012,11 +1012,11 @@ public class Field implements Serializable {
             //□ □ □ ※ ※ ※ □ □ □ □
             //□ □ □ ○ ※ ○ □ □ □ □
 
-            if (!getBlockEmptyF(x + 1, y + 0)) return false;
+            if (!getBlockEmptyF(x + 1, y)) return false;
             if (!getBlockEmptyF(x + 1, y + 1)) return false;
             if (!getBlockEmptyF(x + 1, y + 2)) return false;
 
-            if (!getBlockEmptyF(x + 0, y + 1)) return false;
+            if (!getBlockEmptyF(x, y + 1)) return false;
             if (!getBlockEmptyF(x + 2, y + 1)) return false;
 
             if (!getBlockEmptyF(x + 1, y - 1)) return false;

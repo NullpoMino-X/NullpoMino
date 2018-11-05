@@ -801,7 +801,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
     void netDrawSpectatorsCount(GameEngine engine, int x, int y) {
         if (netIsNetPlay) {
             int fontcolor = netIsWatch ? EventReceiver.COLOR_GREEN : EventReceiver.COLOR_RED;
-            owner.receiver.drawScoreFont(engine, engine.playerID, x, y + 0, "SPECTATORS", fontcolor);
+            owner.receiver.drawScoreFont(engine, engine.playerID, x, y, "SPECTATORS", fontcolor);
             owner.receiver.drawScoreFont(engine, engine.playerID, x, y + 1, "" + netNumSpectators, EventReceiver.COLOR_WHITE);
 
             if (engine.stat == GameEngine.Status.SETTING && !netIsWatch && netIsNetRankingViewOK(engine)) {

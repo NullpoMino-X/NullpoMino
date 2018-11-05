@@ -122,7 +122,7 @@ class NetServer {
     /**
      * Default time of timeout
      */
-    private static final long DEFAULT_TIMEOUT_TIME = 1000 * 60 * 1;
+    private static final long DEFAULT_TIMEOUT_TIME = 1000 * 60;
 
     /**
      * Default number of lobby chat histories

@@ -145,7 +145,7 @@ public class NetUtil {
         for (int i = 0; i < bTripKey.length; i++) {
             bSaltTemp[i] = bTripKey[i];
         }
-        bSaltTemp[bTripKey.length + 0] = (byte) 'H';
+        bSaltTemp[bTripKey.length] = (byte) 'H';
         bSaltTemp[bTripKey.length + 1] = (byte) '.';
         bSaltTemp[bTripKey.length + 2] = (byte) '.';
         byte[] bSalt = new byte[2];

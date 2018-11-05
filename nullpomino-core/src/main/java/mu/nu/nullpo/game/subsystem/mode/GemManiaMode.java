@@ -550,7 +550,7 @@ public class GemManiaMode extends AbstractMode {
         field.setAllAttribute(Block.BLOCK_ATTRIBUTE_OUTLINE, true);
         field.setAllAttribute(Block.BLOCK_ATTRIBUTE_SELFPLACED, false);
         limittimeStart = prop.getProperty(id + ".gemmania.limittimeStart", 3600 * 3);
-        stagetimeStart = prop.getProperty(id + ".gemmania.stagetimeStart", 3600 * 1);
+        stagetimeStart = prop.getProperty(id + ".gemmania.stagetimeStart", 3600);
         stagebgm = prop.getProperty(id + ".gemmania.stagebgm", BGMStatus.BGM_PUZZLE1);
         gimmickMirror = prop.getProperty(id + ".gemmania.gimmickMirror", 0);
         gimmickRoll = prop.getProperty(id + ".gemmania.gimmickRoll", 0);

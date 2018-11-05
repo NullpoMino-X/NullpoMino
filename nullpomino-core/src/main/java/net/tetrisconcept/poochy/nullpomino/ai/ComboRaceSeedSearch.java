@@ -53,7 +53,7 @@ class ComboRaceSeedSearch extends DummyAI {
     public static void main(String[] args) {
         //long start = System.currentTimeMillis();
         createTables();
-        long bestSeed = 0l;
+        long bestSeed = 0L;
         int bestResult = 0;
         int result, pos, fld, holdID;
         nextQueueIDs = new int[MAX_THINK_DEPTH];
@@ -62,7 +62,7 @@ class ComboRaceSeedSearch extends DummyAI {
         BagNoSZORandomizer rand = new BagNoSZORandomizer();
         rand.setPieceEnable(nextPieceEnable);
 
-        for (long seed = 0l; seed < Long.MAX_VALUE; seed++) {
+        for (long seed = 0L; seed < Long.MAX_VALUE; seed++) {
             fld = 0x13;
             rand = new BagNoSZORandomizer();
             rand.setState(nextPieceEnable, seed);
@@ -86,7 +86,7 @@ class ComboRaceSeedSearch extends DummyAI {
                 }
                 pos++;
                 result++;
-                if (result > 8l * QUEUE_SIZE * FIELDS.length) {
+                if (result > 8L * QUEUE_SIZE * FIELDS.length) {
                     System.out.println("Endless loop found! Seed = " + Long.toString(seed, 16));
                     //long end = System.currentTimeMillis();
                     //System.out.println("Runtime: " + (end - start) + "ms");

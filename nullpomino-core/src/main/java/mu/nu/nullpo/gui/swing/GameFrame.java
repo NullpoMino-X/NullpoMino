@@ -901,7 +901,7 @@ class GameFrame extends JFrame implements Runnable {
                 } else if (actualFPS > maxfps + 1) {
                     // Too fast
                     maxfpsCurrent--;
-                    if (maxfpsCurrent < maxfps - 0) maxfpsCurrent = maxfps - 0;
+                    if (maxfpsCurrent < maxfps) maxfpsCurrent = maxfps;
                     if (maxfpsCurrent < 0) maxfpsCurrent = 0;
                     periodCurrent = (long) (1.0 / maxfpsCurrent * 1000000000);
                 }

@@ -1749,8 +1749,8 @@ public class GameEngine {
                 boolean isLowSpot2 = false;
 
                 if (!fld.getBlockEmptyF(
-                        x + Piece.SPINBONUSDATA_HIGH_X[piece.id][piece.direction][i * 2 + 0] + offsetX,
-                        y + Piece.SPINBONUSDATA_HIGH_Y[piece.id][piece.direction][i * 2 + 0] + offsetY)) {
+                        x + Piece.SPINBONUSDATA_HIGH_X[piece.id][piece.direction][i * 2] + offsetX,
+                        y + Piece.SPINBONUSDATA_HIGH_Y[piece.id][piece.direction][i * 2] + offsetY)) {
                     isHighSpot1 = true;
                 }
                 if (!fld.getBlockEmptyF(
@@ -1759,8 +1759,8 @@ public class GameEngine {
                     isHighSpot2 = true;
                 }
                 if (!fld.getBlockEmptyF(
-                        x + Piece.SPINBONUSDATA_LOW_X[piece.id][piece.direction][i * 2 + 0] + offsetX,
-                        y + Piece.SPINBONUSDATA_LOW_Y[piece.id][piece.direction][i * 2 + 0] + offsetY)) {
+                        x + Piece.SPINBONUSDATA_LOW_X[piece.id][piece.direction][i * 2] + offsetX,
+                        y + Piece.SPINBONUSDATA_LOW_Y[piece.id][piece.direction][i * 2] + offsetY)) {
                     isLowSpot1 = true;
                 }
                 if (!fld.getBlockEmptyF(
@@ -1863,7 +1863,7 @@ public class GameEngine {
      * @return rotation buttonPiece after pressing theDirection
      */
     public int getRotateDirection(int move) {
-        int rt = 0 + move;
+        int rt = move;
         if (nowPieceObject != null) rt = nowPieceObject.direction + move;
 
         if (move == 2) {

@@ -659,7 +659,7 @@ class NullpoMinoSlick extends StateBasedGame {
                     int rgb =
                             ((color.getRed() & 0x000000FF) << 16) |
                                     ((color.getGreen() & 0x000000FF) << 8) |
-                                    ((color.getBlue() & 0x000000FF) << 0);
+                                    ((color.getBlue() & 0x000000FF));
 
                     ssImage.setRGB(i, j, rgb);
                 }
@@ -797,7 +797,7 @@ class NullpoMinoSlick extends StateBasedGame {
                     } else if (actualFPS > altMaxFPS + 1) {
                         // Too Fast
                         altMaxFPSCurrent--;
-                        if (altMaxFPSCurrent < altMaxFPS - 0) altMaxFPSCurrent = altMaxFPS - 0;
+                        if (altMaxFPSCurrent < altMaxFPS) altMaxFPSCurrent = altMaxFPS;
                         if (altMaxFPSCurrent < 1) altMaxFPSCurrent = 1;
                         periodCurrent = (long) (1.0 / altMaxFPSCurrent * 1000000000);
                     }
