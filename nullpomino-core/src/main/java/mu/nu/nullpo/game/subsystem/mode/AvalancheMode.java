@@ -289,8 +289,7 @@ public class AvalancheMode extends Avalanche1PDummyMode {
 
             if (menuTime >= 60)
                 menuCursor = 9;
-            else if (menuTime >= 120)
-                return false;
+            else return menuTime < 120;
         }
 
         return true;

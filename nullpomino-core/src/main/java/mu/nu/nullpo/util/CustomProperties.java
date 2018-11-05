@@ -33,6 +33,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**
@@ -315,7 +316,7 @@ public class CustomProperties extends Properties {
     public boolean decode(String source) {
         try {
             String decodedString = URLDecoder.decode(source, "UTF-8");
-            ByteArrayInputStream in = new ByteArrayInputStream(decodedString.getBytes("UTF-8"));
+            ByteArrayInputStream in = new ByteArrayInputStream(decodedString.getBytes(StandardCharsets.UTF_8));
             load(in);
         } catch (UnsupportedEncodingException e) {
             throw new Error("UTF-8 not supported", e);

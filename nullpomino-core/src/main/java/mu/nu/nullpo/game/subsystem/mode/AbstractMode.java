@@ -47,15 +47,13 @@ public abstract class AbstractMode implements GameMode {
     /**
      * Total score
      */
-    protected static enum Statistic {
+    protected enum Statistic {
         SCORE, LINES, TIME,
         LEVEL, LEVEL_MANIA, PIECE,
         MAXCOMBO, SPL, SPM, SPS,
         LPM, LPS, PPM, PPS,
         MAXCHAIN, LEVEL_ADD_DISP
     }
-
-    ;
 
     /**
      * GameManager that owns this mode

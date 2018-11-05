@@ -41,7 +41,7 @@ public interface NetMessageListener {
      * @param message Received Messages(Pre-tab-delimited)
      * @throws IOException If there are any errors
      */
-    public void netOnMessage(NetBaseClient client, String[] message) throws IOException;
+    void netOnMessage(NetBaseClient client, String[] message) throws IOException;
 
     /**
      * I called at the time of disconnection
@@ -49,5 +49,5 @@ public interface NetMessageListener {
      * @param client Client(NetBaseClientAnd its derived classes)
      * @param ex     Exception that caused the disconnection(If successful and if you do not knownull)
      */
-    public void netOnDisconnect(NetBaseClient client, Throwable ex);
+    void netOnDisconnect(NetBaseClient client, Throwable ex);
 }

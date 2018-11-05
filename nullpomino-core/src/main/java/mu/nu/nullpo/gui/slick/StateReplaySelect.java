@@ -95,14 +95,14 @@ public class StateReplaySelect extends DummyMenuScrollState {
     /*
      * State initialization
      */
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
     }
 
     /*
      * Called when entering this state
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
         list = getReplayFileList();
 
         if (list != null)

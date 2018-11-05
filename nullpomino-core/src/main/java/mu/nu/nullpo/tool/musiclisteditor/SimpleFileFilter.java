@@ -81,8 +81,7 @@ class SimpleFileFilter extends FileFilter {
     @Override
     public boolean accept(File f) {
         if (f.isDirectory()) return true;
-        if (f.getName().endsWith(extension)) return true;
-        return false;
+        return f.getName().endsWith(extension);
     }
 
     @Override

@@ -106,14 +106,14 @@ public class StateConfigJoystickButton extends BasicGameState {
     /*
      * State initialization
      */
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
         gameObj = game;
     }
 
     /*
      * Draw the screen
      */
-    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    public void render(GameContainer container, StateBasedGame game, Graphics g) {
         if (!container.hasFocus()) {
             if (!NullpoMinoSlick.alternateFPSTiming) NullpoMinoSlick.alternateFPSSleep();
             return;
@@ -163,7 +163,7 @@ public class StateConfigJoystickButton extends BasicGameState {
     /*
      * Update game state
      */
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    public void update(GameContainer container, StateBasedGame game, int delta) {
         if (!container.hasFocus()) {
             if (NullpoMinoSlick.alternateFPSTiming) NullpoMinoSlick.alternateFPSSleep();
             return;
@@ -262,7 +262,7 @@ public class StateConfigJoystickButton extends BasicGameState {
      * Called when entering this state
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
         reset();
     }
 
@@ -270,7 +270,7 @@ public class StateConfigJoystickButton extends BasicGameState {
      * Called when leaving this state
      */
     @Override
-    public void leave(GameContainer container, StateBasedGame game) throws SlickException {
+    public void leave(GameContainer container, StateBasedGame game) {
         reset();
     }
 }

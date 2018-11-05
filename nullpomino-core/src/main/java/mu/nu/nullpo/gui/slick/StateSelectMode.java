@@ -84,7 +84,7 @@ public class StateSelectMode extends DummyMenuScrollState {
     /*
      * State initialization
      */
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
     }
 
     /**
@@ -168,7 +168,7 @@ public class StateSelectMode extends DummyMenuScrollState {
      * Enter
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
         prepareModeList();
     }
 

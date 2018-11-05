@@ -32,6 +32,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
@@ -51,11 +52,7 @@ public class NetUtil {
      * @return String
      */
     public static String bytesToString(byte[] bytes) {
-        try {
-            return new String(bytes, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new Error("UTF-8 Not Supported", e);
-        }
+        return new String(bytes, StandardCharsets.UTF_8);
     }
 
     /**
@@ -65,11 +62,7 @@ public class NetUtil {
      * @return Byte array (byte[])
      */
     public static byte[] stringToBytes(String str) {
-        try {
-            return str.getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new Error("UTF-8 Not Supported", e);
-        }
+        return str.getBytes(StandardCharsets.UTF_8);
     }
 
     /**

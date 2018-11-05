@@ -72,7 +72,7 @@ abstract class DummyMenuScrollState extends DummyMenuChooseState {
      * Draw the screen
      */
     @Override
-    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics graphics) throws SlickException {
+    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics graphics) {
         // Background
         graphics.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
 

@@ -587,8 +587,7 @@ class Sequencer extends JFrame implements ActionListener {
         @Override
         public boolean accept(File f) {
             if (f.isDirectory()) return true;
-            if (f.getName().endsWith(".rep")) return true;
-            return false;
+            return f.getName().endsWith(".rep");
         }
 
         @Override
@@ -601,8 +600,7 @@ class Sequencer extends JFrame implements ActionListener {
         @Override
         public boolean accept(File f) {
             if (f.isDirectory()) return true;
-            if (f.getName().endsWith(".txt")) return true;
-            return false;
+            return f.getName().endsWith(".txt");
         }
 
         @Override

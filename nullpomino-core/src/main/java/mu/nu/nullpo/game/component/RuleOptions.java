@@ -873,9 +873,7 @@ public class RuleOptions implements Serializable {
         if (lineCancelHold != r.lineCancelHold) return false;
 
         if ((ignoreGraphicsSetting) && (skin != r.skin)) return false;
-        if (ghost != r.ghost) return false;
-
-        return true;
+        return ghost == r.ghost;
     }
 
     /**

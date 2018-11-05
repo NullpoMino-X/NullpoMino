@@ -987,9 +987,8 @@ public class Field implements Serializable {
             if (getBlockColor(x + tx[i], y + ty[i]) != Block.BLOCK_COLOR_NONE) count++;
         }
 
-        if (count >= 3) return true;
+        return count >= 3;
 
-        return false;
     }
 
     /**
@@ -1053,9 +1052,8 @@ public class Field implements Serializable {
             if (getBlockColor(x + tx[i], y + ty[i]) != Block.BLOCK_COLOR_NONE) count++;
         }
 
-        if (count == 3) return true;
+        return count == 3;
 
-        return false;
     }
 
     /**
@@ -1305,8 +1303,7 @@ public class Field implements Serializable {
      * @return If there is a gap under the specified coordinatestrue
      */
     private boolean isHoleBelow(int x, int y) {
-        if (!getBlockEmpty(x, y) && getBlockEmpty(x, y + 1)) return true;
-        return false;
+        return !getBlockEmpty(x, y) && getBlockEmpty(x, y + 1);
     }
 
     /**

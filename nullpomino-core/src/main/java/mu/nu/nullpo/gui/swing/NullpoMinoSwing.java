@@ -1357,7 +1357,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
     public void netlobbyOnLoginOK(NetLobbyFrame lobby, NetPlayerClient client) {
     }
 
-    public void netlobbyOnMessage(NetLobbyFrame lobby, NetPlayerClient client, String[] message) throws IOException {
+    public void netlobbyOnMessage(NetLobbyFrame lobby, NetPlayerClient client, String[] message) {
     }
 
     public void netlobbyOnRoomJoin(NetLobbyFrame lobby, NetPlayerClient client, NetRoomInfo roomInfo) {
@@ -1396,8 +1396,7 @@ public class NullpoMinoSwing extends JFrame implements ActionListener, NetLobbyL
         public boolean accept(File f) {
             // If the directory displayed unconditional
             // Or the end of the file is.repIf it was displayed
-            if (f.isDirectory() || f.getName().endsWith(".rep")) return true;
-            return false;
+            return f.isDirectory() || f.getName().endsWith(".rep");
         }
 
         /*

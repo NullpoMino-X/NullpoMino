@@ -40,7 +40,7 @@ public interface AIPlayer {
      *
      * @return AIOfName
      */
-    public String getName();
+    String getName();
 
     /**
      * Called at initialization
@@ -48,7 +48,7 @@ public interface AIPlayer {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public void init(GameEngine engine, int playerID);
+    void init(GameEngine engine, int playerID);
 
     /**
      * End processing
@@ -56,7 +56,7 @@ public interface AIPlayer {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public void shutdown(GameEngine engine, int playerID);
+    void shutdown(GameEngine engine, int playerID);
 
     /**
      * Set button input states
@@ -65,7 +65,7 @@ public interface AIPlayer {
      * @param playerID Player ID
      * @param ctrl     Button inputState management class
      */
-    public void setControl(GameEngine engine, int playerID, Controller ctrl);
+    void setControl(GameEngine engine, int playerID, Controller ctrl);
 
     /**
      * Called at the start of each frame
@@ -73,7 +73,7 @@ public interface AIPlayer {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public void onFirst(GameEngine engine, int playerID);
+    void onFirst(GameEngine engine, int playerID);
 
     /**
      * Called after every frame
@@ -81,7 +81,7 @@ public interface AIPlayer {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public void onLast(GameEngine engine, int playerID);
+    void onLast(GameEngine engine, int playerID);
 
     /**
      * Called to display internal state
@@ -89,7 +89,7 @@ public interface AIPlayer {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public void renderState(GameEngine engine, int playerID);
+    void renderState(GameEngine engine, int playerID);
 
     /**
      * Happens when a new piece appeared
@@ -97,7 +97,7 @@ public interface AIPlayer {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public void newPiece(GameEngine engine, int playerID);
+    void newPiece(GameEngine engine, int playerID);
 
     /**
      * Called to display additional hint information
@@ -105,5 +105,5 @@ public interface AIPlayer {
      * @param engine   The GameEngine that owns this AI
      * @param playerID Player ID
      */
-    public void renderHint(GameEngine engine, int playerID);
+    void renderHint(GameEngine engine, int playerID);
 }

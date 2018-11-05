@@ -124,7 +124,7 @@ public class StateConfigAISelect extends BaseGameState {
      * State initialization
      */
     @Override
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
         try {
             BufferedReader in = new BufferedReader(new FileReader("config/list/ai.lst"));
             aiPathList = loadAIList(in);
@@ -139,7 +139,7 @@ public class StateConfigAISelect extends BaseGameState {
      * Called when entering this state
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
         currentAI = NullpoMinoSlick.propGlobal.getProperty(player + ".ai", "");
         aiMoveDelay = NullpoMinoSlick.propGlobal.getProperty(player + ".aiMoveDelay", 0);
         aiThinkDelay = NullpoMinoSlick.propGlobal.getProperty(player + ".aiThinkDelay", 0);
@@ -215,7 +215,7 @@ public class StateConfigAISelect extends BaseGameState {
      * Draw the screen
      */
     @Override
-    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) {
         // Background
         g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
 
@@ -242,7 +242,7 @@ public class StateConfigAISelect extends BaseGameState {
      * Update game state
      */
     @Override
-    protected void updateImpl(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    protected void updateImpl(GameContainer container, StateBasedGame game, int delta) {
         // Update key input states
         GameKeySlick.gamekey[0].update(container.getInput());
 

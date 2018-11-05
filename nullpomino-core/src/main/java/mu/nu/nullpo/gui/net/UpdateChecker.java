@@ -234,9 +234,8 @@ public class UpdateChecker implements Runnable {
         int latestMinor = getLatestMinorVersionAsInt();
 
         if (latestMajor > nowMajor) return true;
-        if ((latestMajor == nowMajor) && (latestMinor > nowMinor)) return true;
+        return (latestMajor == nowMajor) && (latestMinor > nowMinor);
 
-        return false;
     }
 
     /**

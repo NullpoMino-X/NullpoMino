@@ -89,57 +89,44 @@ public class NetSPRecord implements Serializable {
                 return true;
             } else if ((s1.score == s2.score) && (s1.lines > s2.lines)) {
                 return true;
-            } else if ((s1.score == s2.score) && (s1.lines == s2.lines) && (s1.time < s2.time)) {
-                return true;
-            }
+            } else return (s1.score == s2.score) && (s1.lines == s2.lines) && (s1.time < s2.time);
         } else if (type == RANKINGTYPE_GENERIC_TIME) {
             if (s1.time < s2.time) {
                 return true;
             } else if ((s1.time == s2.time) && (s1.totalPieceLocked < s2.totalPieceLocked)) {
                 return true;
-            } else if ((s1.time == s2.time) && (s1.totalPieceLocked == s2.totalPieceLocked) && (s1.pps > s2.pps)) {
-                return true;
-            }
+            } else return (s1.time == s2.time) && (s1.totalPieceLocked == s2.totalPieceLocked) && (s1.pps > s2.pps);
         } else if (type == RANKINGTYPE_SCORERACE) {
             if (s1.time < s2.time) {
                 return true;
             } else if ((s1.time == s2.time) && (s1.lines < s2.lines)) {
                 return true;
-            } else if ((s1.time == s2.time) && (s1.lines == s2.lines) && (s1.spl > s2.spl)) {
-                return true;
-            }
+            } else return (s1.time == s2.time) && (s1.lines == s2.lines) && (s1.spl > s2.spl);
         } else if (type == RANKINGTYPE_DIGRACE) {
             if (s1.time < s2.time) {
                 return true;
             } else if ((s1.time == s2.time) && (s1.lines < s2.lines)) {
                 return true;
-            } else if ((s1.time == s2.time) && (s1.lines == s2.lines) && (s1.totalPieceLocked < s2.totalPieceLocked)) {
-                return true;
-            }
+            } else return (s1.time == s2.time) && (s1.lines == s2.lines) && (s1.totalPieceLocked < s2.totalPieceLocked);
         } else if (type == RANKINGTYPE_ULTRA) {
             if (s1.score > s2.score) {
                 return true;
             } else if ((s1.score == s2.score) && (s1.lines > s2.lines)) {
                 return true;
-            } else if ((s1.score == s2.score) && (s1.lines == s2.lines) && (s1.totalPieceLocked < s2.totalPieceLocked)) {
-                return true;
-            }
+            } else
+                return (s1.score == s2.score) && (s1.lines == s2.lines) && (s1.totalPieceLocked < s2.totalPieceLocked);
         } else if (type == RANKINGTYPE_COMBORACE) {
             if (s1.maxCombo > s2.maxCombo) {
                 return true;
             } else if ((s1.maxCombo == s2.maxCombo) && (s1.time < s2.time)) {
                 return true;
-            } else if ((s1.maxCombo == s2.maxCombo) && (s1.time == s2.time) && (s1.pps > s2.pps)) {
-                return true;
-            }
+            } else return (s1.maxCombo == s2.maxCombo) && (s1.time == s2.time) && (s1.pps > s2.pps);
         } else if (type == RANKINGTYPE_DIGCHALLENGE) {
             if (s1.score > s2.score) {
                 return true;
             } else if ((s1.score == s2.score) && (s1.lines > s2.lines)) {
                 return true;
-            } else if ((s1.score == s2.score) && (s1.lines == s2.lines) && (s1.time > s2.time)) {
-                return true;
-            }
+            } else return (s1.score == s2.score) && (s1.lines == s2.lines) && (s1.time > s2.time);
         } else if (type == RANKINGTYPE_TIMEATTACK) {
             // Cap the line count at 150 or 200
             int maxLines = (r1.gameType >= 5) ? 200 : 150;
@@ -152,9 +139,7 @@ public class NetSPRecord implements Serializable {
                 return true;
             } else if ((s1.rollclear == s2.rollclear) && (l1 == l2) && (s1.time < s2.time)) {
                 return true;
-            } else if ((s1.rollclear == s2.rollclear) && (l1 == l2) && (s1.time == s2.time) && (s1.pps > s2.pps)) {
-                return true;
-            }
+            } else return (s1.rollclear == s2.rollclear) && (l1 == l2) && (s1.time == s2.time) && (s1.pps > s2.pps);
         }
 
         return false;

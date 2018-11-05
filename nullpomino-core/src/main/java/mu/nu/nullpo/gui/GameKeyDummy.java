@@ -111,10 +111,8 @@ public class GameKeyDummy {
      * @return If the cursor movestrue
      */
     public boolean isMenuRepeatKey(int key) {
-        if ((inputstate[key] == 1) || ((inputstate[key] >= 25) && (inputstate[key] % 3 == 0)) || ((inputstate[key] >= 1) && isPressKey(BUTTON_C)))
-            return true;
+        return (inputstate[key] == 1) || ((inputstate[key] >= 25) && (inputstate[key] % 3 == 0)) || ((inputstate[key] >= 1) && isPressKey(BUTTON_C));
 
-        return false;
     }
 
     /**

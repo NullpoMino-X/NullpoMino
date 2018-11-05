@@ -2689,7 +2689,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
         imgTuningBlockSkins = new BufferedImage[numSkins];
 
         for (int i = 0; i < numSkins; i++) {
-            BufferedImage imgBlock = (BufferedImage) loadImage(getURL(skindir + "/graphics/blockskin/normal/n" + i + ".png"));
+            BufferedImage imgBlock = loadImage(getURL(skindir + "/graphics/blockskin/normal/n" + i + ".png"));
             boolean isSticky = ((imgBlock != null) && (imgBlock.getWidth() >= 400) && (imgBlock.getHeight() >= 304));
 
             imgTuningBlockSkins[i] = new BufferedImage(144, 16, BufferedImage.TYPE_INT_RGB);
@@ -3787,7 +3787,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
 
             int port = NetPlayerClient.DEFAULT_PORT;
             try {
-                String strPort = strServer.substring(portSpliter + 1, strServer.length());
+                String strPort = strServer.substring(portSpliter + 1);
                 port = Integer.parseInt(strPort);
             } catch (Exception e2) {
                 log.debug("Failed to get port number; Try to use default port");
@@ -3822,7 +3822,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
 
             int port = NetPlayerClient.DEFAULT_PORT;
             try {
-                String strPort = strServer.substring(portSpliter + 1, strServer.length());
+                String strPort = strServer.substring(portSpliter + 1);
                 port = Integer.parseInt(strPort);
             } catch (Exception e2) {
                 log.debug("Failed to get port number; Try to use default port");
@@ -4757,7 +4757,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
                 listboxCreateRoom1PRuleList.setSelectedIndex(0);
 
                 for (int i = 0; i < listRatedRuleName[style].size(); i++) {
-                    String name = (String) listRatedRuleName[style].get(i);
+                    String name = listRatedRuleName[style].get(i);
                     listmodelCreateRoom1PRuleList.addElement(name);
                 }
 
@@ -5718,7 +5718,7 @@ public class NetLobbyFrame extends JFrame implements ActionListener, NetMessageL
                                 if (column == 0) {
                                     strCopy += (String) selectedObject;
                                 } else {
-                                    strCopy += "," + (String) selectedObject;
+                                    strCopy += "," + selectedObject;
                                 }
                             }
                         }

@@ -328,11 +328,8 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
             }
         }
         // NET: Stop game in watch mode
-        if (netIsWatch) {
-            return true;
-        }
+        return netIsWatch;
 
-        return false;
     }
 
     /**
@@ -877,7 +874,7 @@ public class NetDummyMode extends AbstractMode implements NetLobbyListener {
             //int pieceBottomY = Integer.parseInt(message[8]);
             int pieceColor = Integer.parseInt(message[9]);
             int pieceSkin = Integer.parseInt(message[10]);
-            boolean pieceBig = (message.length > 11) ? Boolean.parseBoolean(message[11]) : false;
+            boolean pieceBig = (message.length > 11) && Boolean.parseBoolean(message[11]);
 
             engine.nowPieceObject = new Piece(id);
             engine.nowPieceObject.direction = pieceDir;

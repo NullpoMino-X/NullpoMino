@@ -337,7 +337,7 @@ class MusicListEditor extends JFrame implements ActionListener {
                     String strName = file.getName();
                     int lastPeriod = strName.lastIndexOf('.');
                     if (lastPeriod != -1) {
-                        String strExt = strName.substring(lastPeriod, strName.length());
+                        String strExt = strName.substring(lastPeriod);
                         fileChooser.setFileFilter(hashmapFileFilters.get(strExt));
                     }
                 } catch (Exception e2) {

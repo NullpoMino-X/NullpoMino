@@ -116,7 +116,7 @@ public class StateNetGame extends BasicGameState implements NetLobbyListener {
     /*
      * State initialization
      */
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
         appContainer = (AppGameContainer) container;
     }
 
@@ -124,7 +124,7 @@ public class StateNetGame extends BasicGameState implements NetLobbyListener {
      * Called when entering this state
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
         // Init variables
         showbg = NullpoMinoSlick.propConfig.getProperty("option.showbg", true);
         prevInGameFlag = false;
@@ -160,7 +160,7 @@ public class StateNetGame extends BasicGameState implements NetLobbyListener {
      * Called when leaving this state
      */
     @Override
-    public void leave(GameContainer container, StateBasedGame game) throws SlickException {
+    public void leave(GameContainer container, StateBasedGame game) {
         if (gameManager != null) {
             gameManager.shutdown();
             gameManager = null;
@@ -184,7 +184,7 @@ public class StateNetGame extends BasicGameState implements NetLobbyListener {
     /*
      * Draw the game screen
      */
-    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    public void render(GameContainer container, StateBasedGame game, Graphics g) {
         try {
             // Game screen
             if ((gameManager != null) && (gameManager.mode != null)) {
@@ -220,7 +220,7 @@ public class StateNetGame extends BasicGameState implements NetLobbyListener {
     /*
      * Update game state
      */
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    public void update(GameContainer container, StateBasedGame game, int delta) {
         try {
             // Clear input states if game window does not have focus
             if (!container.hasFocus() || netLobby.isFocused()) {
@@ -446,7 +446,7 @@ public class StateNetGame extends BasicGameState implements NetLobbyListener {
     public void netlobbyOnLoginOK(NetLobbyFrame lobby, NetPlayerClient client) {
     }
 
-    public void netlobbyOnMessage(NetLobbyFrame lobby, NetPlayerClient client, String[] message) throws IOException {
+    public void netlobbyOnMessage(NetLobbyFrame lobby, NetPlayerClient client, String[] message) {
     }
 
     public void netlobbyOnRoomJoin(NetLobbyFrame lobby, NetPlayerClient client, NetRoomInfo roomInfo) {

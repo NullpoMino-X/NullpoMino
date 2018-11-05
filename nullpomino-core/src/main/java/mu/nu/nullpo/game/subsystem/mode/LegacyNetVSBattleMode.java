@@ -623,11 +623,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
         // Is teammate?
         String myTeam = playerTeams[0];
         String thisTeam = playerTeams[playerID];
-        if ((myTeam.length() > 0) && (thisTeam.length() > 0) && myTeam.equals(thisTeam)) {
-            return false;
-        }
-
-        return true;
+        return (myTeam.length() <= 0) || (thisTeam.length() <= 0) || !myTeam.equals(thisTeam);
     }
 
     /**
@@ -862,11 +858,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
 
         for (int i = 0; i < getPlayers(); i++) {
             owner.engine[i].enableSE = false;
-            if (i >= numMaxPlayers) {
-                owner.engine[i].isVisible = false;
-            } else {
-                owner.engine[i].isVisible = true;
-            }
+            owner.engine[i].isVisible = i < numMaxPlayers;
         }
         if (playerSeatNumber >= 0) {
             owner.engine[0].displaysize = 0;
@@ -1359,11 +1351,8 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
             }
         }
 
-        if ((playerID != 0) || (playerSeatNumber == -1)) {
-            return true;
-        }
+        return (playerID != 0) || (playerSeatNumber == -1);
 
-        return false;
     }
 
     /*
@@ -1720,7 +1709,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
             playerAPM[0] = (tempGarbageSent * 3600) / (engine.statistics.time);
 
             if (engine.statistics.lines > 0) {
-                playerAPL[0] = (float) (tempGarbageSent / engine.statistics.lines);
+                playerAPL[0] = tempGarbageSent / engine.statistics.lines;
             } else {
                 playerAPL[0] = 0f;
             }
@@ -2084,9 +2073,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
                 engine.resetStatc();
                 return true;
             }
-            if ((engine.statc[0] < engine.field.getHeight() + 1) || (isPlayerResultReceived[playerID])) {
-                return false;
-            }
+            return (engine.statc[0] >= engine.field.getHeight() + 1) && (!isPlayerResultReceived[playerID]);
         }
 
         return true;
@@ -2325,7 +2312,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
     }
 
     @Override
-    public void netlobbyOnMessage(NetLobbyFrame lobby, NetPlayerClient client, String[] message) throws IOException {
+    public void netlobbyOnMessage(NetLobbyFrame lobby, NetPlayerClient client, String[] message) {
         // PlayerState change
         if (message[0].equals("playerupdate")) {
             NetPlayerInfo pInfo = new NetPlayerInfo(message[1]);
@@ -2690,7 +2677,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
                     //int pieceBottomY = Integer.parseInt(message[8]);
                     int pieceColor = Integer.parseInt(message[9]);
                     int pieceSkin = Integer.parseInt(message[10]);
-                    boolean pieceBig = (message.length > 11) ? Boolean.parseBoolean(message[11]) : false;
+                    boolean pieceBig = (message.length > 11) && Boolean.parseBoolean(message[11]);
 
                     owner.engine[playerID].nowPieceObject = new Piece(id);
                     owner.engine[playerID].nowPieceObject.direction = pieceDir;

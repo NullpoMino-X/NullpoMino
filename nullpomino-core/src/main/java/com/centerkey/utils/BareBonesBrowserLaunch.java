@@ -34,7 +34,7 @@ public class BareBonesBrowserLaunch {
             Class<?> d = Class.forName("java.awt.Desktop");
             d.getDeclaredMethod("browse", new Class[]{java.net.URI.class}).invoke(
                     d.getDeclaredMethod("getDesktop").invoke(null),
-                    new Object[]{java.net.URI.create(url)});
+                    java.net.URI.create(url));
             //above code mimicks:  java.awt.Desktop.getDesktop().browse()
         } catch (Exception ignore) {  //library not available or failed
             String osName = System.getProperty("os.name");
@@ -42,7 +42,7 @@ public class BareBonesBrowserLaunch {
                 if (osName.startsWith("Mac OS")) {
                     Class.forName("com.apple.eio.FileManager").getDeclaredMethod(
                             "openURL", new Class[]{String.class}).invoke(null,
-                            new Object[]{url});
+                            url);
                 } else if (osName.startsWith("Windows"))
                     Runtime.getRuntime().exec(
                             "rundll32 url.dll,FileProtocolHandler " + url);

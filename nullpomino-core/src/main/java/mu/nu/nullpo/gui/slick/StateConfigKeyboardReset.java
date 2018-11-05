@@ -40,14 +40,14 @@ public class StateConfigKeyboardReset extends DummyMenuChooseState {
      * State initialization
      */
     @Override
-    public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
+    public void init(GameContainer arg0, StateBasedGame arg1) {
     }
 
     /*
      * Draw the screen
      */
     @Override
-    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) {
         // Background
         g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
 
