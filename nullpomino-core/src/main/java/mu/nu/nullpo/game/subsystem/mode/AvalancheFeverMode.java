@@ -362,9 +362,7 @@ public class AvalancheFeverMode extends Avalanche1PDummyMode {
             menuTime++;
             menuCursor = -1;
 
-            if (menuTime >= 60) {
-                return false;
-            }
+            return menuTime < 60;
         }
 
         return true;

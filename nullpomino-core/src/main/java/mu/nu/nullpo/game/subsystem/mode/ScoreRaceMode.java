@@ -453,9 +453,7 @@ public class ScoreRaceMode extends NetDummyMode {
             if (menuTime >= 60) {
                 menuCursor = 10;
             }
-            if (menuTime >= 120) {
-                return false;
-            }
+            return menuTime < 120;
         }
 
         return true;

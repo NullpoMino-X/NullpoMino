@@ -66,12 +66,11 @@ class RanksIterator extends JDialog implements PropertyChangeListener, ActionLis
         }
 
         @Override
-        protected Void doInBackground() throws Exception {
+        protected Void doInBackground() {
             ranksIteratorPart = new RanksIteratorPart[totalParts];
 
             for (int i = 0; i < totalParts; i++) {
                 ranksIteratorPart[i] = new RanksIteratorPart(this, ranks, i, totalParts);
-                ;
                 ranksIteratorPart[i].start();
             }
             for (int i = 0; i < totalParts; i++) {
@@ -224,7 +223,6 @@ class RanksIterator extends JDialog implements PropertyChangeListener, ActionLis
 
         super(parent, AIRanksTool.getUIText("Progress_Message"));
         this.outputFile = outputFile;
-        ;
 
         this.numIterations = numIterations;
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -262,7 +260,6 @@ class RanksIterator extends JDialog implements PropertyChangeListener, ActionLis
 
     public void propertyChange(PropertyChangeEvent evt) {
         if ("progress" == evt.getPropertyName()) {
-            ;
             int totalCompletion = (100 * iteration + ranks.getCompletionPercentage()) / numIterations;
             progressBar.setValue(totalCompletion);
 

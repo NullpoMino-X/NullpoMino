@@ -349,7 +349,7 @@ class ResourceHolderSlick {
      */
     private static Image loadImage(String filename) {
         if (NullpoMinoSlick.useBigImageTextureLoad) {
-            return (Image) loadBigImage(filename);
+            return loadBigImage(filename);
         }
         return loadNormalImage(filename);
     }

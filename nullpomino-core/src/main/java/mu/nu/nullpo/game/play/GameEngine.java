@@ -79,11 +79,9 @@ public class GameEngine {
     /**
      * Constants of main game status
      */
-    public static enum Status {
+    public enum Status {
         NOTHING, SETTING, READY, MOVE, LOCKFLASH, LINECLEAR, ARE, ENDINGSTART, CUSTOM, EXCELLENT, GAMEOVER, RESULT, FIELDEDIT, INTERRUPTITEM
     }
-
-    ;
 
     /**
      * Number of free status counters (used by statc array)
@@ -191,7 +189,6 @@ public class GameEngine {
             Block.BLOCK_COLOR_BLUE,
             Block.BLOCK_COLOR_PURPLE
     };
-    ;
 
     /**
      * GameManager: Owner of this GameEngine
@@ -1495,8 +1492,7 @@ public class GameEngine {
      */
     public boolean isRotateButtonDefaultRight() {
         if ((ruleopt == null) || (owRotateButtonDefaultRight >= 0)) {
-            if (owRotateButtonDefaultRight == 0) return false;
-            else return true;
+            return owRotateButtonDefaultRight != 0;
         }
         return ruleopt.rotateButtonDefaultRight;
     }
@@ -1609,14 +1605,11 @@ public class GameEngine {
      */
     private boolean isMoveCountExceed() {
         if (ruleopt.lockresetLimitShareCount == true) {
-            if ((extendedMoveCount + extendedRotateCount >= ruleopt.lockresetLimitMove) && (ruleopt.lockresetLimitMove >= 0))
-                return true;
+            return (extendedMoveCount + extendedRotateCount >= ruleopt.lockresetLimitMove) && (ruleopt.lockresetLimitMove >= 0);
         } else {
-            if ((extendedMoveCount >= ruleopt.lockresetLimitMove) && (ruleopt.lockresetLimitMove >= 0))
-                return true;
+            return (extendedMoveCount >= ruleopt.lockresetLimitMove) && (ruleopt.lockresetLimitMove >= 0);
         }
 
-        return false;
     }
 
     /**
@@ -1626,14 +1619,11 @@ public class GameEngine {
      */
     private boolean isRotateCountExceed() {
         if (ruleopt.lockresetLimitShareCount == true) {
-            if ((extendedMoveCount + extendedRotateCount >= ruleopt.lockresetLimitMove) && (ruleopt.lockresetLimitMove >= 0))
-                return true;
+            return (extendedMoveCount + extendedRotateCount >= ruleopt.lockresetLimitMove) && (ruleopt.lockresetLimitMove >= 0);
         } else {
-            if ((extendedRotateCount >= ruleopt.lockresetLimitRotate) && (ruleopt.lockresetLimitRotate >= 0))
-                return true;
+            return (extendedRotateCount >= ruleopt.lockresetLimitRotate) && (ruleopt.lockresetLimitRotate >= 0);
         }
 
-        return false;
     }
 
     /**
@@ -1803,10 +1793,7 @@ public class GameEngine {
      * @return If you can holdtrue
      */
     public boolean isHoldOK() {
-        if ((!ruleopt.holdEnable) || (holdDisable) || ((holdUsedCount >= ruleopt.holdLimit) && (ruleopt.holdLimit >= 0)) || (initialHoldContinuousUse))
-            return false;
-
-        return true;
+        return (ruleopt.holdEnable) && (!holdDisable) && ((holdUsedCount < ruleopt.holdLimit) || (ruleopt.holdLimit < 0)) && (!initialHoldContinuousUse);
     }
 
     /**

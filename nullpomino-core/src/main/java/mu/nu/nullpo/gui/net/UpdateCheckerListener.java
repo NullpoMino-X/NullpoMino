@@ -35,12 +35,12 @@ public interface UpdateCheckerListener {
     /**
      * Update check At the beginning
      */
-    public void onUpdateCheckerStart();
+    void onUpdateCheckerStart();
 
     /**
      * Update check When finished
      *
      * @param status State(FailureSTATUS_ERROR, The successSTATUS_COMPLETE)
      */
-    public void onUpdateCheckerEnd(int status);
+    void onUpdateCheckerEnd(int status);
 }

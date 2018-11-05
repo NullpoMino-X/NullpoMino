@@ -42,7 +42,7 @@ public interface NetLobbyListener {
      *
      * @param lobby NetLobbyFrame
      */
-    public void netlobbyOnInit(NetLobbyFrame lobby);
+    void netlobbyOnInit(NetLobbyFrame lobby);
 
     /**
      * Login completed
@@ -50,7 +50,7 @@ public interface NetLobbyListener {
      * @param lobby  NetLobbyFrame
      * @param client NetClient
      */
-    public void netlobbyOnLoginOK(NetLobbyFrame lobby, NetPlayerClient client);
+    void netlobbyOnLoginOK(NetLobbyFrame lobby, NetPlayerClient client);
 
     /**
      * When you enter a room
@@ -59,7 +59,7 @@ public interface NetLobbyListener {
      * @param client   NetClient
      * @param roomInfo NetRoomInfo
      */
-    public void netlobbyOnRoomJoin(NetLobbyFrame lobby, NetPlayerClient client, NetRoomInfo roomInfo);
+    void netlobbyOnRoomJoin(NetLobbyFrame lobby, NetPlayerClient client, NetRoomInfo roomInfo);
 
     /**
      * When you returned to lobby
@@ -67,7 +67,7 @@ public interface NetLobbyListener {
      * @param lobby  NetLobbyFrame
      * @param client NetClient
      */
-    public void netlobbyOnRoomLeave(NetLobbyFrame lobby, NetPlayerClient client);
+    void netlobbyOnRoomLeave(NetLobbyFrame lobby, NetPlayerClient client);
 
     /**
      * When disconnected
@@ -76,7 +76,7 @@ public interface NetLobbyListener {
      * @param client NetClient
      * @param ex     A Throwable that caused disconnection (null if unknown or normal termination)
      */
-    public void netlobbyOnDisconnect(NetLobbyFrame lobby, NetPlayerClient client, Throwable ex);
+    void netlobbyOnDisconnect(NetLobbyFrame lobby, NetPlayerClient client, Throwable ex);
 
     /**
      * Message received
@@ -86,12 +86,12 @@ public interface NetLobbyListener {
      * @param message Message (Already sepatated by tabs)
      * @throws IOException When something bad occurs
      */
-    public void netlobbyOnMessage(NetLobbyFrame lobby, NetPlayerClient client, String[] message) throws IOException;
+    void netlobbyOnMessage(NetLobbyFrame lobby, NetPlayerClient client, String[] message) throws IOException;
 
     /**
      * When the lobby window is closed
      *
      * @param lobby NetLobbyFrame
      */
-    public void netlobbyOnExit(NetLobbyFrame lobby);
+    void netlobbyOnExit(NetLobbyFrame lobby);
 }

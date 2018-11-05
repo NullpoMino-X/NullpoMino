@@ -258,7 +258,6 @@ class RanksResult extends JDialog implements ActionListener, PropertyChangeListe
                 currentSurfaceMirrored = getMirroredSurface(currentSurface);
                 surfaceComponentMirrored.setSurface(currentSurfaceMirrored);
                 labelScoreMirrored.setText(AIRanksTool.getUIText("Result_Score") + surfaceRanksBestsMirrored[indexSurface].getRank());
-                ;
 
                 if (indexSurface < bestNRanks - 1) {
                     buttonNext.setEnabled(true);

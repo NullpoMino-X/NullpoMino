@@ -51,5 +51,5 @@ public interface Wallkick {
      * @param ctrl        Button input status (it may be null, when controlled by an AI)
      * @return WallkickResult object, or null if you don't want a kick
      */
-    public WallkickResult executeWallkick(int x, int y, int rtDir, int rtOld, int rtNew, boolean allowUpward, Piece piece, Field field, Controller ctrl);
+    WallkickResult executeWallkick(int x, int y, int rtDir, int rtOld, int rtNew, boolean allowUpward, Piece piece, Field field, Controller ctrl);
 }

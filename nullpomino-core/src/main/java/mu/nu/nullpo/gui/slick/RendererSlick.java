@@ -309,10 +309,7 @@ public class RendererSlick extends EventReceiver {
      */
     @Override
     public boolean isStickySkin(int skin) {
-        if ((skin >= 0) && (skin < ResourceHolderSlick.blockStickyFlagList.size()) && (ResourceHolderSlick.blockStickyFlagList.get(skin) == true)) {
-            return true;
-        }
-        return false;
+        return (skin >= 0) && (skin < ResourceHolderSlick.blockStickyFlagList.size()) && (ResourceHolderSlick.blockStickyFlagList.get(skin) == true);
     }
 
     /*

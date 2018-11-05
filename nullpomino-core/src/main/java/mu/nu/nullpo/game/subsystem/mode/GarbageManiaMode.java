@@ -527,9 +527,7 @@ public class GarbageManiaMode extends AbstractMode {
             menuTime++;
             menuCursor = -1;
 
-            if (menuTime >= 60) {
-                return false;
-            }
+            return menuTime < 60;
         }
 
         return true;

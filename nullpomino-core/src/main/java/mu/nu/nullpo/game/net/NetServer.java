@@ -580,7 +580,7 @@ class NetServer {
     private static int mpRankingIndexOf(int style, String name) {
         if (name == null) return -1;
         for (int i = 0; i < mpRankingList[style].size(); i++) {
-            NetPlayerInfo p2 = (NetPlayerInfo) mpRankingList[style].get(i);
+            NetPlayerInfo p2 = mpRankingList[style].get(i);
             if (name.equals(p2.strName)) {
                 return i;
             }
@@ -604,7 +604,7 @@ class NetServer {
         int place = -1;
         boolean rankin = false;
         for (int i = 0; i < mpRankingList[style].size(); i++) {
-            NetPlayerInfo p2 = (NetPlayerInfo) mpRankingList[style].get(i);
+            NetPlayerInfo p2 = mpRankingList[style].get(i);
             if (p.rating[style] > p2.rating[style]) {
                 mpRankingList[style].add(i, p);
                 place = i;
@@ -636,7 +636,7 @@ class NetServer {
             propMPRanking.setProperty(style + ".mpranking.count", count);
 
             for (int i = 0; i < count; i++) {
-                NetPlayerInfo p = (NetPlayerInfo) mpRankingList[style].get(i);
+                NetPlayerInfo p = mpRankingList[style].get(i);
                 propMPRanking.setProperty(style + ".mpranking.strName." + i, p.strName);
                 propMPRanking.setProperty(style + ".mpranking.rating." + i, p.rating[style]);
                 propMPRanking.setProperty(style + ".mpranking.playCount." + i, p.playCount[style]);
@@ -716,7 +716,7 @@ class NetServer {
                     for (int i = 0; i < ruleList[style].size() + 1; i++) {
                         String ruleName;
                         if (i < ruleList[style].size()) {
-                            RuleOptions ruleOpt = (RuleOptions) ruleList[style].get(i);
+                            RuleOptions ruleOpt = ruleList[style].get(i);
                             ruleName = ruleOpt.strRuleName;
                         } else {
                             ruleName = "any";
@@ -1253,7 +1253,7 @@ class NetServer {
                     synchronized (this.pendingChanges) {
                         Iterator<ChangeRequest> changes = this.pendingChanges.iterator();
                         while (changes.hasNext()) {
-                            ChangeRequest change = (ChangeRequest) changes.next();
+                            ChangeRequest change = changes.next();
                             SelectionKey key = change.socket.keyFor(this.selector);
 
                             if (key.isValid()) {
@@ -1289,7 +1289,7 @@ class NetServer {
                     // Iterate over the set of keys for which events are available
                     Iterator<SelectionKey> selectedKeys = this.selector.selectedKeys().iterator();
                     while (selectedKeys.hasNext()) {
-                        SelectionKey key = (SelectionKey) selectedKeys.next();
+                        SelectionKey key = selectedKeys.next();
                         selectedKeys.remove();
 
                         if (!key.isValid()) {
@@ -1445,11 +1445,11 @@ class NetServer {
         SocketChannel socketChannel = (SocketChannel) key.channel();
 
         synchronized (this.pendingData) {
-            List<ByteBuffer> queue = (List<ByteBuffer>) this.pendingData.get(socketChannel);
+            List<ByteBuffer> queue = this.pendingData.get(socketChannel);
 
             // Write until there's not more data ...
             while (!queue.isEmpty()) {
-                ByteBuffer buf = (ByteBuffer) queue.get(0);
+                ByteBuffer buf = queue.get(0);
                 socketChannel.write(buf);
                 if (buf.remaining() > 0) {
                     // ... or the socket's buffer fills up
@@ -1515,7 +1515,7 @@ class NetServer {
             lastCommTimeMap.remove(channel);
             notCompletePacketMap.remove(channel);
 
-            List<ByteBuffer> queue = (List<ByteBuffer>) this.pendingData.get(channel);
+            List<ByteBuffer> queue = this.pendingData.get(channel);
             if (queue != null) queue.clear();
 
             NetPlayerInfo pInfo = playerInfoMap.remove(channel);
@@ -1641,7 +1641,7 @@ class NetServer {
 
             // And queue the data we want written
             synchronized (this.pendingData) {
-                List<ByteBuffer> queue = (List<ByteBuffer>) this.pendingData.get(client);
+                List<ByteBuffer> queue = this.pendingData.get(client);
                 if (queue == null) {
                     queue = new ArrayList<>();
                     this.pendingData.put(client, queue);
@@ -2226,7 +2226,7 @@ class NetServer {
             int prevRating = -1;
             int nowRank = 0;
             for (int i = 0; i < mpRankingList[style].size(); i++) {
-                NetPlayerInfo p = (NetPlayerInfo) mpRankingList[style].get(i);
+                NetPlayerInfo p = mpRankingList[style].get(i);
                 if ((i == 0) || (p.rating[style] < prevRating)) {
                     prevRating = p.rating[style];
                     nowRank = i;
@@ -3767,9 +3767,8 @@ class NetServer {
      * Send rated-game rule list
      *
      * @param client Client
-     * @throws IOException When something bad occurs
      */
-    private void sendRatedRuleList(SocketChannel client) throws IOException {
+    private void sendRatedRuleList(SocketChannel client) {
         for (int style = 0; style < GameEngine.MAX_GAMESTYLE; style++) {
             String msg = "rulelist\t" + style;
 
@@ -3797,7 +3796,7 @@ class NetServer {
      */
     private RuleOptions getRatedRule(int style, String name) {
         for (int i = 0; i < ruleList[style].size(); i++) {
-            RuleOptions rule = (RuleOptions) ruleList[style].get(i);
+            RuleOptions rule = ruleList[style].get(i);
 
             if (name.equals(rule.strRuleName)) {
                 return rule;

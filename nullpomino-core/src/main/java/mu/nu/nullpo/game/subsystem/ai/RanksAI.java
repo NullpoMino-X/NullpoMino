@@ -295,7 +295,7 @@ public class RanksAI extends DummyAI implements Runnable {
         if ((engine.nowPieceObject != null) && (engine.stat == GameEngine.Status.MOVE) && (delay >= engine.aiMoveDelay) && (engine.statc[0] > 0) &&
                 (!engine.aiUseThread || (threadRunning && !thinking && (thinkCurrentPieceNo <= thinkLastPieceNo)))) {
             int totalPieceLocked = engine.statistics.totalPieceLocked + 1;
-            int tpm = (int) (totalPieceLocked * 3600f) / (int) engine.statistics.time;
+            int tpm = (int) (totalPieceLocked * 3600f) / engine.statistics.time;
             if ((tpm <= speedLimit) || (speedLimit <= 0)) {
                 int input = 0;
                 Piece pieceNow = engine.nowPieceObject;
@@ -606,7 +606,7 @@ public class RanksAI extends DummyAI implements Runnable {
                     for (int x = minX; x <= maxX; x++) {
 
                         // Run thinkmain on that move to get its score
-                        score = thinkMain(x, rt, heights, piecesCopy, holdPiece, (useHold == 1) ? false : true, numPreviews);
+                        score = thinkMain(x, rt, heights, piecesCopy, holdPiece, useHold != 1, numPreviews);
                         log.debug("MAIN  id=" + pieceNow + " posX=" + x + " rt=" + rt + " hold :" + useHold + " score:" + score);
 
                         //If the score is better than the previous best score, change it, and record the chosen move for further application by setControl
@@ -629,7 +629,7 @@ public class RanksAI extends DummyAI implements Runnable {
                     if (pieceNow == Piece.PIECE_I && ((rt == 1) || (rt == 3)) && currentHeightMin >= 4) {
 
                         // What are the consequences of scoring a 4-Line ?
-                        score = thinkMain(maxX + 1, rt, heights, piecesCopy, holdPiece, (useHold == 1) ? false : true, numPreviews);
+                        score = thinkMain(maxX + 1, rt, heights, piecesCopy, holdPiece, useHold != 1, numPreviews);
                         log.debug("MAIN (4 Lines) id=" + pieceNow + " posX=" + (maxX + 1) + " rt=" + rt + " hold :" + useHold + " score:" + score);
 
                         //If the score is better than the previous best score, change it, and record the chosen move for further application by setControl
@@ -674,7 +674,6 @@ public class RanksAI extends DummyAI implements Runnable {
         // Initialize maximum height and minimum height of the stack with dummy values
         int heightMin = 99;
         int heightMax = 0;
-        ;
         //Convert the heights to a surface to be able to check if the piece fits the surface
         int[] surface = ranks.heightsToSurface(heights);
 
@@ -788,7 +787,7 @@ public class RanksAI extends DummyAI implements Runnable {
                             for (int x2 = minX2; x2 <= maxX2; x2++) {
 
                                 // Recursive call to thinkMain to examine that move
-                                scoreCurrent = thinkMain(x2, rt2, heightsWork, pieces2, holdPiece2, (h2 == 1) ? false : true, numPreviews2);
+                                scoreCurrent = thinkMain(x2, rt2, heightsWork, pieces2, holdPiece2, h2 != 1, numPreviews2);
                                 log.debug("SUB " + numPreviews + " id=" + pieceNow + " posX=" + x2 + " rt=" + rt2 + " hold :" + h2 + " score " + scoreCurrent);
 
                                 // if the score is better than the previous best score, replace it.
@@ -803,7 +802,7 @@ public class RanksAI extends DummyAI implements Runnable {
                             if (isVerticalI2 && heightMin >= 4) {
 
                                 // Recursive call to thinkMain to examine that move
-                                scoreCurrent = thinkMain(maxX2 + 1, rt2, heightsWork, pieces2, holdPiece2, (h2 == 1) ? false : true, numPreviews2);
+                                scoreCurrent = thinkMain(maxX2 + 1, rt2, heightsWork, pieces2, holdPiece2, h2 != 1, numPreviews2);
                                 log.debug("SUB (4 Lines)" + numPreviews + " id=" + pieceNow + " posX=" + (maxX2 + 1) + " rt=" + rt2 + " hold :" + h2 + " score:" + scoreCurrent);
                                 // if the score is better than the previous best score, replace it.
                                 if (scoreCurrent.compareTo(bestScore) > 0) {

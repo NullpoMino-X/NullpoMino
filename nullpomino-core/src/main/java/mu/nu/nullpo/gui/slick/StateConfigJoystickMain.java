@@ -141,7 +141,7 @@ public class StateConfigJoystickMain extends BaseGameState {
      * Called when entering this state
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
         loadConfig(NullpoMinoSlick.propConfig);
     }
 
@@ -149,14 +149,14 @@ public class StateConfigJoystickMain extends BaseGameState {
      * State initialization
      */
     @Override
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
     }
 
     /*
      * Draw the game screen
      */
     @Override
-    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) {
         // Menu
         g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
 

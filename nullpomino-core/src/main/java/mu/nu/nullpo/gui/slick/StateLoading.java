@@ -70,14 +70,14 @@ class StateLoading extends BasicGameState {
     /*
      * State initialization
      */
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
     }
 
     /*
      * Called when entering this state
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
         preloadCount = 0;
         preloadSet = 0;
 
@@ -101,7 +101,7 @@ class StateLoading extends BasicGameState {
     /*
      * Draw the screen
      */
-    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    public void render(GameContainer container, StateBasedGame game, Graphics g) {
         // Be cached in memory by drawing on a huge screen image in advance
         if (preloadSet == 0) {
             if (preloadCount < ResourceHolderSlick.BLOCK_BREAK_MAX) {
@@ -151,12 +151,12 @@ class StateLoading extends BasicGameState {
     /*
      * Update game
      */
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    public void update(GameContainer container, StateBasedGame game, int delta) {
         if (preloadSet > 2) {
             // Change title bar caption
             if (container instanceof AppGameContainer) {
                 ((AppGameContainer) container).setTitle("NullpoMino version" + GameManager.getVersionString());
-                ((AppGameContainer) container).setUpdateOnlyWhenVisible(true);
+                container.setUpdateOnlyWhenVisible(true);
             }
 
             // First run

@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 import java.util.Locale;
 import javax.swing.AbstractAction;
@@ -773,10 +774,10 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
                 InputStreamReader reader = null;
                 try {
                     reader = new InputStreamReader(
-                            new FileInputStream("config/lang/netadmin_help_" + Locale.getDefault().getCountry() + ".txt"), "UTF-8"
+                            new FileInputStream("config/lang/netadmin_help_" + Locale.getDefault().getCountry() + ".txt"), StandardCharsets.UTF_8
                     );
                 } catch (IOException e2) {
-                    reader = new InputStreamReader(new FileInputStream("config/lang/netadmin_help_default.txt"), "UTF-8");
+                    reader = new InputStreamReader(new FileInputStream("config/lang/netadmin_help_default.txt"), StandardCharsets.UTF_8);
                 }
 
                 BufferedReader txtHelp = new BufferedReader(reader);
@@ -947,7 +948,7 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
                     if (column == 0) {
                         strCopy += (String) selectedObject;
                     } else {
-                        strCopy += "," + (String) selectedObject;
+                        strCopy += "," + selectedObject;
                     }
                 }
             }
@@ -1095,7 +1096,7 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
 
                 serverPort = NetBaseClient.DEFAULT_PORT;
                 try {
-                    String strPort = strHost.substring(portSpliter + 1, strHost.length());
+                    String strPort = strHost.substring(portSpliter + 1);
                     serverPort = Integer.parseInt(strPort);
                 } catch (Exception e2) {
                 }
@@ -1348,9 +1349,8 @@ public class NetAdmin extends JFrame implements ActionListener, NetMessageListen
      *
      * @param client  NetBaseClient
      * @param message Message
-     * @throws IOException When something bad happens
      */
-    private void onAdminResultMessage(NetBaseClient client, String[] message) throws IOException {
+    private void onAdminResultMessage(NetBaseClient client, String[] message) {
         // Client list
         if (message[0].equals("clientlist")) {
             // Get current selected IP and Type

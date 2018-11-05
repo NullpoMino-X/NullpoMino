@@ -78,14 +78,14 @@ public class StateConfigMainMenu extends DummyMenuChooseState {
      * State initialization
      */
     @Override
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
     }
 
     /*
      * Draw the screen
      */
     @Override
-    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) {
         // Background
         g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
 

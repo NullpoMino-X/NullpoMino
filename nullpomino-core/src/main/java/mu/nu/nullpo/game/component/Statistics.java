@@ -362,12 +362,12 @@ public class Statistics implements Serializable {
             spl = (double) (score) / (double) (lines);
         }
         if (time > 0) {
-            spm = (double) (score * 3600.0) / (double) (time);
-            sps = (double) (score * 60.0) / (double) (time);
-            lpm = (float) (lines * 3600f) / (float) (time);
-            lps = (float) (lines * 60f) / (float) (time);
-            ppm = (float) (totalPieceLocked * 3600f) / (float) (time);
-            pps = (float) (totalPieceLocked * 60f) / (float) (time);
+            spm = (score * 3600.0) / (double) (time);
+            sps = (score * 60.0) / (double) (time);
+            lpm = (lines * 3600f) / (float) (time);
+            lps = (lines * 60f) / (float) (time);
+            ppm = (totalPieceLocked * 3600f) / (float) (time);
+            pps = (totalPieceLocked * 60f) / (float) (time);
         }
     }
 

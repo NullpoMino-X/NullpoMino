@@ -725,11 +725,7 @@ public class NetDummyVSMode extends NetDummyMode {
         // Is teammate?
         String myTeam = netvsPlayerTeam[0];
         String thisTeam = netvsPlayerTeam[playerID];
-        if ((myTeam.length() > 0) && (thisTeam.length() > 0) && myTeam.equals(thisTeam)) {
-            return false;
-        }
-
-        return true;
+        return (myTeam.length() <= 0) || (thisTeam.length() <= 0) || !myTeam.equals(thisTeam);
     }
 
     /**
@@ -1064,9 +1060,7 @@ public class NetDummyVSMode extends NetDummyMode {
                 engine.resetStatc();
                 return true;
             }
-            if ((engine.statc[0] < engine.field.getHeight() + 1) || (netvsPlayerResultReceived[playerID])) {
-                return false;
-            }
+            return (engine.statc[0] >= engine.field.getHeight() + 1) && (!netvsPlayerResultReceived[playerID]);
         }
 
         return true;

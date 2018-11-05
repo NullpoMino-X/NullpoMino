@@ -69,7 +69,7 @@ public class StateConfigKeyboardNavi extends DummyMenuChooseState {
      * State initialization
      */
     @Override
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
         gameObj = game;
     }
 
@@ -88,7 +88,7 @@ public class StateConfigKeyboardNavi extends DummyMenuChooseState {
      * Draw the screen
      */
     @Override
-    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) {
         g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
 
         NormalFontSlick.printFontGrid(1, 1, "KEYBOARD NAVIGATION SETTING (" + (player + 1) + "P)", NormalFontSlick.COLOR_ORANGE);
@@ -130,13 +130,13 @@ public class StateConfigKeyboardNavi extends DummyMenuChooseState {
      * Called when entering this state
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
     }
 
     /**
      * Called when leaving this state
      */
     @Override
-    public void leave(GameContainer container, StateBasedGame game) throws SlickException {
+    public void leave(GameContainer container, StateBasedGame game) {
     }
 }

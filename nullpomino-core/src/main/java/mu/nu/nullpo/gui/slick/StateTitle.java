@@ -86,14 +86,14 @@ public class StateTitle extends DummyMenuChooseState {
      * State initialization
      */
     @Override
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
     }
 
     /*
      * Called when entering this state
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
         // Observer start
         NullpoMinoSlick.startObserverClient();
         // Call GC
@@ -102,7 +102,7 @@ public class StateTitle extends DummyMenuChooseState {
         // Update title bar
         if (container instanceof AppGameContainer) {
             ((AppGameContainer) container).setTitle("NullpoMino version" + GameManager.getVersionString());
-            ((AppGameContainer) container).setUpdateOnlyWhenVisible(true);
+            container.setUpdateOnlyWhenVisible(true);
         }
 
         // New Version check
@@ -131,7 +131,7 @@ public class StateTitle extends DummyMenuChooseState {
      * Draw the screen
      */
     @Override
-    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) {
         // Background
         g.drawImage(ResourceHolderSlick.imgTitle, 0, 0);
 

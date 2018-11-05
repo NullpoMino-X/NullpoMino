@@ -130,7 +130,7 @@ public class StateInGame extends BasicGameState {
     /*
      * State initialization
      */
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
         appContainer = (AppGameContainer) container;
     }
 
@@ -138,7 +138,7 @@ public class StateInGame extends BasicGameState {
      * Called when entering this state
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
         enableframestep = NullpoMinoSlick.propConfig.getProperty("option.enableframestep", false);
         showbg = NullpoMinoSlick.propConfig.getProperty("option.showbg", true);
         fastforward = 0;
@@ -340,7 +340,7 @@ public class StateInGame extends BasicGameState {
      * Called when leaving this state
      */
     @Override
-    public void leave(GameContainer container, StateBasedGame game) throws SlickException {
+    public void leave(GameContainer container, StateBasedGame game) {
         container.setClearEachFrame(false);
         shutdown();
     }
@@ -348,7 +348,7 @@ public class StateInGame extends BasicGameState {
     /*
      * Draw the screen
      */
-    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    public void render(GameContainer container, StateBasedGame game, Graphics g) {
         if (!container.hasFocus()) {
             if (!NullpoMinoSlick.alternateFPSTiming) NullpoMinoSlick.alternateFPSSleep(true);
             return;

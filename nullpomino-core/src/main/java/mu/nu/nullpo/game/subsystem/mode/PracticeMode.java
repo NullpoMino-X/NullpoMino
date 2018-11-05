@@ -845,7 +845,7 @@ public class PracticeMode extends AbstractMode {
             String strHiddenFrames = "NONE";
             if (blockHidden == -2) strHiddenFrames = "LOCK FLASH (" + engine.ruleopt.lockflash + "F)";
             if (blockHidden >= 0)
-                strHiddenFrames = String.format("%d (%.2f SEC.)", blockHidden, (float) (blockHidden / 60f));
+                strHiddenFrames = String.format("%d (%.2f SEC.)", blockHidden, (blockHidden / 60f));
             receiver.drawMenuFont(engine, playerID, 2, 4, "BLOCK HIDDEN FRAMES:" + strHiddenFrames, (menuCursor == 24));
             receiver.drawMenuFont(engine, playerID, 2, 5, "BLOCK HIDDEN ANIM:" + GeneralUtil.getONorOFF(blockHiddenAnim),
                     (menuCursor == 25));

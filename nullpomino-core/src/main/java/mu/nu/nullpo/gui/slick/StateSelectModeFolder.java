@@ -70,7 +70,7 @@ public class StateSelectModeFolder extends DummyMenuScrollState {
     /*
      * State initialization
      */
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
         loadFolderListFile();
         prepareFolderList();
     }

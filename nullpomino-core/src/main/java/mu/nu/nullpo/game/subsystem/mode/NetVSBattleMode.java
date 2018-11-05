@@ -675,7 +675,7 @@ public class NetVSBattleMode extends NetDummyVSMode {
             playerAPM[0] = (tempGarbageSent * 3600) / (engine.statistics.time);
 
             if (engine.statistics.lines > 0) {
-                playerAPL[0] = (float) (tempGarbageSent / engine.statistics.lines);
+                playerAPL[0] = tempGarbageSent / engine.statistics.lines;
             } else {
                 playerAPL[0] = 0f;
             }

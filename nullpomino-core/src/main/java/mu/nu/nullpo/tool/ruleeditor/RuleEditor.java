@@ -1547,7 +1547,7 @@ class RuleEditor extends JFrame implements ActionListener {
         imgBlockSkins = new BufferedImage[numBlocks];
 
         for (int i = 0; i < numBlocks; i++) {
-            BufferedImage imgBlock = (BufferedImage) loadImage(getURL(skindir + "/graphics/blockskin/normal/n" + i + ".png"));
+            BufferedImage imgBlock = loadImage(getURL(skindir + "/graphics/blockskin/normal/n" + i + ".png"));
             boolean isSticky = ((imgBlock != null) && (imgBlock.getWidth() >= 400) && (imgBlock.getHeight() >= 304));
 
             imgBlockSkins[i] = new BufferedImage(144, 16, BufferedImage.TYPE_INT_RGB);
@@ -2083,8 +2083,7 @@ class RuleEditor extends JFrame implements ActionListener {
         @Override
         public boolean accept(File f) {
             if (f.isDirectory()) return true;
-            if (f.getName().endsWith(".rul")) return true;
-            return false;
+            return f.getName().endsWith(".rul");
         }
 
         @Override

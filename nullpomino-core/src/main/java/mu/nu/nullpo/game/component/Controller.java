@@ -202,12 +202,9 @@ public class Controller implements Serializable {
      * @return If the cursor movestrue
      */
     public boolean isMenuRepeatKey(int key, boolean enableCButton) {
-        if ((buttonTime[key] == 1) || ((buttonTime[key] >= 25) && (buttonTime[key] % 3 == 0)) ||
-                ((buttonTime[key] >= 1) && isPress(BUTTON_C) && enableCButton)) {
-            return true;
-        }
+        return (buttonTime[key] == 1) || ((buttonTime[key] >= 25) && (buttonTime[key] % 3 == 0)) ||
+                ((buttonTime[key] >= 1) && isPress(BUTTON_C) && enableCButton);
 
-        return false;
     }
 
     /**

@@ -44,5 +44,5 @@ public interface Randomizer {
      * @param arrayMax    Preferred array size
      * @return Piece sequence (Piece ID only)
      */
-    public int[] createPieceSequence(boolean[] pieceEnable, Random random, int arrayMax);
+    int[] createPieceSequence(boolean[] pieceEnable, Random random, int arrayMax);
 }

@@ -268,7 +268,7 @@ class AIRanksTool extends JFrame implements ActionListener {
         numPreviewsSpinModel = new SpinnerNumberModel(2, 0, Integer.MAX_VALUE, 1);
         numPreviewsSpinner = new JSpinner(numPreviewsSpinModel);
         if (numPreviews >= 0) {
-            numPreviewsSpinner.setValue((Integer) numPreviews);
+            numPreviewsSpinner.setValue(numPreviews);
         }
         numPreviewsSpinner.setToolTipText(getUIText("Main_Num_Previews_Tip"));
 

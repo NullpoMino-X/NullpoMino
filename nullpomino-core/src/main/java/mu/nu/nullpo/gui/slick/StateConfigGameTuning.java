@@ -159,7 +159,7 @@ public class StateConfigGameTuning extends BaseGameState {
      * State initialization
      */
     @Override
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
         if (container instanceof AppGameContainer) {
             appContainer = (AppGameContainer) container;
         } else {
@@ -205,7 +205,7 @@ public class StateConfigGameTuning extends BaseGameState {
      * Called when entering this state
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
         isPreview = false;
         loadConfig(NullpoMinoSlick.propGlobal);
     }
@@ -214,7 +214,7 @@ public class StateConfigGameTuning extends BaseGameState {
      * Called when leaving the state
      */
     @Override
-    public void leave(GameContainer container, StateBasedGame game) throws SlickException {
+    public void leave(GameContainer container, StateBasedGame game) {
         stopPreviewGame();
     }
 
@@ -309,7 +309,7 @@ public class StateConfigGameTuning extends BaseGameState {
      * Draw the game screen
      */
     @Override
-    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+    protected void renderImpl(GameContainer container, StateBasedGame game, Graphics g) {
         g.drawImage(ResourceHolderSlick.imgMenu, 0, 0);
 
         if (isPreview) {

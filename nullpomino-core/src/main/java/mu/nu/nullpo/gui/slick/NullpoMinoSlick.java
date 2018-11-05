@@ -820,7 +820,7 @@ class NullpoMinoSlick extends StateBasedGame {
      * State (Added) or ne thing of the scene or game title
      */
     @Override
-    public void initStatesList(GameContainer container) throws SlickException {
+    public void initStatesList(GameContainer container) {
         stateLoading = new StateLoading();
         stateTitle = new StateTitle();
         stateInGame = new StateInGame();

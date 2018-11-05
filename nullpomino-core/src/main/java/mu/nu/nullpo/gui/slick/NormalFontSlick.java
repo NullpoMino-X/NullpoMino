@@ -212,9 +212,8 @@ class NormalFontSlick {
      * @param fontColorFalse flagThefalseText color in the case of
      * @param fontColorTrue  flagThetrueText color in the case of
      * @param scale          Enlargement factor
-     * @throws SlickException If I failed to draw
      */
-    private static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue, float scale) throws SlickException {
+    private static void printFont(int fontX, int fontY, String fontStr, boolean flag, int fontColorFalse, int fontColorTrue, float scale) {
         if (!flag)
             printFont(fontX, fontY, fontStr, fontColorFalse, scale);
         else

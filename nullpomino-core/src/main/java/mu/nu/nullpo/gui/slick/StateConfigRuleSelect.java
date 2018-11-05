@@ -200,7 +200,7 @@ public class StateConfigRuleSelect extends DummyMenuScrollState {
      * Called when entering this state
      */
     @Override
-    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+    public void enter(GameContainer container, StateBasedGame game) {
         strFileList = getRuleFileList();
         createRuleEntries(strFileList, style);
         strRuleNameList = extractRuleNameListFromRuleEntries();
@@ -227,7 +227,7 @@ public class StateConfigRuleSelect extends DummyMenuScrollState {
     /*
      * State initialization
      */
-    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+    public void init(GameContainer container, StateBasedGame game) {
     }
 
     /*
