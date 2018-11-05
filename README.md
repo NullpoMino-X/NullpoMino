@@ -15,10 +15,7 @@ The current stable version is 7.5.0, which has the following new features:
 
 ## Download
 
-* Windows (installer): [NullpoMino7.5.0.exe](https://github.com/nullpomino/nullpomino/releases/download/v7.5.0/NullpoMino7.5.0.exe)
-* macOS: [NullpoMino7.5.0.dmg](https://github.com/nullpomino/nullpomino/releases/download/v7.5.0/NullpoMino7.5.0.dmg)
-* Linux: [NullpoMino7.5.0_linux.tar.gz](https://github.com/nullpomino/nullpomino/releases/download/v7.5.0/NullpoMino7.5.0_linux.tar.gz)
-* Any OS (zip): [NullpoMino7.5.0.zip](https://github.com/nullpomino/nullpomino/releases/download/v7.5.0/NullpoMino7.5.0.zip)
+See the GitHub [Releases](https://github.com/NullpoMino-X/NullpoMino/releases) page.
 
 ## How to run
 
