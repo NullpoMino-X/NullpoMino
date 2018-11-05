@@ -6,10 +6,9 @@ install:
   - cmd: java -version
   - sh: sudo apt-get update
   - sh: sudo apt-get install icedtea-netx -y
-  - sh: sudo cp /usr/share/icedtea-web/netx.jar /usr/lib/jvm/java-9-openjdk-amd64/lib/
-  - sh: sudo mv /usr/lib/jvm/java-9-openjdk-amd64/lib/netx.jar /usr/lib/jvm/java-9-openjdk-amd64/lib/javaws.jar
+  - sh: sudo cp /usr/share/icedtea-web/netx.jar /usr/lib/jvm/java-8-openjdk-amd64/lib/
+  - sh: sudo mv /usr/lib/jvm/java-8-openjdk-amd64/lib/netx.jar /usr/lib/jvm/java-8-openjdk-amd64/lib/javaws.jar
   - sh: export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-  - sh: echo $JAVA_HOME
 before_build:
   - cd nullpomino-parent
 build_script:
