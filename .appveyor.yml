@@ -19,5 +19,5 @@ install:
   - sh: sudo apt-get install icedtea-web
 before_build:
   - cd nullpomino-parent
-build:
+build_script:
   - mvn install
