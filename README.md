@@ -1,4 +1,4 @@
-# ![alt text](https://raw.githubusercontent.com/NullpoMino-X/NullpoMino/master/nullpomino-run/res/graphics/logo.png) [![Build status](https://ci.appveyor.com/api/projects/status/wqlv4ee49epnu9qu/branch/master?svg=true)](https://ci.appveyor.com/project/rogersachan/nullpomino/branch/master)
+# ![alt text](https://raw.githubusercontent.com/NullpoMino-X/NullpoMino/master/nullpomino-run/res/graphics/logo.png) [![Build status](https://ci.appveyor.com/api/projects/status/wqlv4ee49epnu9qu/branch/master?svg=true)](https://ci.appveyor.com/project/rogersachan/nullpomino/branch/master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3de8088ba5f04644822ab18c133f059f)](https://www.codacy.com/app/rogersachan/NullpoMino?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NullpoMino-X/NullpoMino&amp;utm_campaign=Badge_Grade)
 **NullpoMino** is an open-source action puzzle game that works on the Java platform. It has a wide variety of single-player modes and netplay to allow players to compete over the Internet or LAN.
 
 ## Current stable version
