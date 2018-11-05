@@ -4,9 +4,10 @@ os:
   - ubuntu
 install:
   - sh: sudo apt-get update
-  - sh: sudo apt-get install icedtea-netx maven
+  - sh: sudo apt-get install icedtea-netx
   - sh: cd /usr/share/icedtea-web
   - sh: ls
+  - sh: sudo update-alternatives --config java
 before_build:
   - cd nullpomino-parent
 build_script:
