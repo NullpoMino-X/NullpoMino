@@ -13,3 +13,6 @@ before_build:
   - cd nullpomino-parent
 build_script:
   - mvn install
+artifacts:
+  - path: nullpomino-run/target/install/
+    type: zip
