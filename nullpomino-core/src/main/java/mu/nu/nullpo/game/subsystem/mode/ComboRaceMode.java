@@ -151,7 +151,7 @@ public class ComboRaceMode extends NetDummyMode {
     };
 
 
-    /** EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
+    /* EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
 
     /**
      * Elapsed time from last line clear (lastscore is displayed to screen until this reaches to 120)

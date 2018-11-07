@@ -51,7 +51,7 @@ import mu.nu.nullpo.util.CustomProperties;
  * Game event Processing and rendering process (SwingVersion)
  */
 public class RendererSwing extends EventReceiver {
-    /** Log */
+    /* Log */
     //static Logger log = Logger.getLogger(RendererSwing.class);
 
     /**

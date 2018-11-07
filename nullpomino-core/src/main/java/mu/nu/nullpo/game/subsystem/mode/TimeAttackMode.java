@@ -272,7 +272,7 @@ public class TimeAttackMode extends NetDummyMode {
      */
     private static final int RANKING_TYPE = 11;
 
-    /** EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
+    /* EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
 
     /**
      * Remaining level time

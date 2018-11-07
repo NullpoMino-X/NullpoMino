@@ -237,7 +237,7 @@ public class SPFMode extends AbstractMode {
      */
     private int bgmno;
 
-    /** Big */
+    /* Big */
     //private boolean[] big;
 
     /**

@@ -89,9 +89,9 @@ public class ScoreAttackMode extends AbstractMode {
      */
     private static final int DEFAULT_SECTION_TIME = 6000;
 
-    /** GameManager object (Manages entire game status) */
+    /* GameManager object (Manages entire game status) */
 
-    /** EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
+    /* EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
 
     /**
      * Current gravity index number (Increases when the level reaches to certain value that defined in tableGravityChangeLevel)

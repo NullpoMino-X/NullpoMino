@@ -245,7 +245,7 @@ public class LegacyNetVSBattleMode extends NetDummyMode {
      */
     private int lastHole = -1;
 
-    /** Tank mode */
+    /* Tank mode */
     //private boolean useTankMode = false;
 
     /**

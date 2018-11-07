@@ -102,10 +102,10 @@ public class PhysicianVSMode extends AbstractMode {
      */
     private final int[] PLAYER_COLOR_FRAME = {GameEngine.FRAME_COLOR_RED, GameEngine.FRAME_COLOR_BLUE};
 
-    /** Has accumulatedojama blockOfcount */
+    /* Has accumulatedojama blockOfcount */
     //private int[] garbage;
 
-    /** Had sentojama blockOfcount */
+    /* Had sentojama blockOfcount */
     //private int[] garbageSent;
 
     /**
@@ -173,7 +173,7 @@ public class PhysicianVSMode extends AbstractMode {
      */
     private int version;
 
-    /** Flag for all clear */
+    /* Flag for all clear */
     //private boolean[] zenKeshi;
 
     /**
@@ -181,7 +181,7 @@ public class PhysicianVSMode extends AbstractMode {
      */
     private int[] lastscore;
 
-    /** Amount of garbage added in current chain */
+    /* Amount of garbage added in current chain */
     //private int[] garbageAdd;
 
     /**

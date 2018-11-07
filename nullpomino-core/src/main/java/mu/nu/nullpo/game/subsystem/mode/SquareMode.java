@@ -85,9 +85,9 @@ public class SquareMode extends AbstractMode {
      */
     private static final int SPRINT_MAX_SCORE = 150;
 
-    /** GameManager object (Manages entire game status) */
+    /* GameManager object (Manages entire game status) */
 
-    /** EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
+    /* EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
 
     /**
      * Current gravity number (When the point reaches tableGravityChangeScore's value, this variable will increase)

@@ -90,9 +90,9 @@ public class PhysicianMode extends AbstractMode {
                     EventReceiver.COLOR_RED
             };
 
-    /** GameManager object (Manages entire game status) */
+    /* GameManager object (Manages entire game status) */
 
-    /** EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
+    /* EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
 
     /**
      * Amount of points you just get from line clears

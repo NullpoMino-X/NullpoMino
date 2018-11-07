@@ -171,7 +171,7 @@ public class Field implements Serializable {
      */
     private ArrayList<Block[]> lastLinesCleared;
 
-    /** Used for TGM garbage, can later be extended to all types */
+    /* Used for TGM garbage, can later be extended to all types */
     //public ArrayList<Block[]> pendingGarbage;
 
     /**

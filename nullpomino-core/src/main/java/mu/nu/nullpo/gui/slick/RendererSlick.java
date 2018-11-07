@@ -48,7 +48,7 @@ import org.newdawn.slick.Image;
  * Game event Processing and rendering process (SlickVersion)
  */
 public class RendererSlick extends EventReceiver {
-    /** Log */
+    /* Log */
     //static Logger log = Logger.getLogger(RendererSlick.class);
 
     /**

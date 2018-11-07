@@ -88,7 +88,7 @@ class ResourceHolderSlick {
      */
     public static Image imgFont, imgFontSmall;
 
-    /** Small image */
+    /* Small image */
     //public static Image imgSprite;
 
     /**

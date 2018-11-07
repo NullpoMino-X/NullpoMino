@@ -104,9 +104,9 @@ public class FinalMode extends AbstractMode {
      */
     private static final int DEFAULT_SECTION_TIME = 1800;
 
-    /** GameManager object (Manages entire game status) */
+    /* GameManager object (Manages entire game status) */
 
-    /** EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
+    /* EventReceiver object (This receives many game events, can also be used for drawing the fonts.) */
 
     /**
      * Next section level

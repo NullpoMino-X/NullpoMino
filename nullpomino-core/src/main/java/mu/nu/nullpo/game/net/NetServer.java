@@ -1641,11 +1641,7 @@ class NetServer {
 
             // And queue the data we want written
             synchronized (this.pendingData) {
-                List<ByteBuffer> queue = this.pendingData.get(client);
-                if (queue == null) {
-                    queue = new ArrayList<>();
-                    this.pendingData.put(client, queue);
-                }
+                List<ByteBuffer> queue = this.pendingData.computeIfAbsent(client, k -> new ArrayList<>());
                 queue.add(ByteBuffer.wrap(bytes));
             }
         }
@@ -3806,9 +3802,9 @@ class NetServer {
         return null;
     }
 
-    /**
-     * Get rated-game rule index
-     * @param style Style ID
+    /*
+      Get rated-game rule index
+      @param style Style ID
      * @param name Rule Name
      * @return Index (-1 if not found)
      */

@@ -117,11 +117,11 @@ public class PoochyBot extends DummyAI implements Runnable {
      * Set to true to print debug information
      */
     static final boolean DEBUG_ALL = false;
-    /** Wait extra frames at low speeds? */
+    /* Wait extra frames at low speeds? */
     //protected static final boolean DELAY_DROP_ON = false;
-    /** # of extra frames to wait */
+    /* # of extra frames to wait */
     //protected static final int DROP_DELAY = 2;
-    /** Number of frames waited */
+    /* Number of frames waited */
     //protected int dropDelay;
     /**
      * Did the thinking thread find a possible position?
