@@ -28,29 +28,17 @@
 */
 package mu.nu.nullpo.gui.swing;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.HeadlessException;
+import mu.nu.nullpo.game.subsystem.ai.AIPlayer;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-
-import mu.nu.nullpo.game.subsystem.ai.AIPlayer;
-
-import org.apache.log4j.Logger;
 
 /**
  * AISelection screen frame

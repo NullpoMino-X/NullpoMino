@@ -28,14 +28,13 @@
 */
 package mu.nu.nullpo.game.component;
 
+import mu.nu.nullpo.game.play.GameEngine;
+import mu.nu.nullpo.util.CustomProperties;
+import org.apache.log4j.Logger;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
-
-import mu.nu.nullpo.game.play.GameEngine;
-import mu.nu.nullpo.util.CustomProperties;
-
-import org.apache.log4j.Logger;
 
 /**
  * Gamefield

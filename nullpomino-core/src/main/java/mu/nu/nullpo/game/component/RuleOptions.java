@@ -28,9 +28,9 @@
 */
 package mu.nu.nullpo.game.component;
 
-import java.io.Serializable;
-
 import mu.nu.nullpo.util.CustomProperties;
+
+import java.io.Serializable;
 
 /**
  * Setting the rules of the game data

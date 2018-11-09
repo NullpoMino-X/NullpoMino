@@ -28,6 +28,8 @@
 */
 package mu.nu.nullpo.gui.net;
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -35,8 +37,6 @@ import java.net.URLConnection;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.log4j.Logger;
 
 /**
  * NewVersionChecker

@@ -28,9 +28,9 @@
 */
 package mu.nu.nullpo.gui.swing;
 
-import java.awt.event.KeyEvent;
-
 import mu.nu.nullpo.gui.GameKeyDummy;
+
+import java.awt.event.KeyEvent;
 
 /**
  * Key input state manager (Only use with Swing. Don't use inside game modes!)

@@ -1,20 +1,14 @@
 package mu.nu.nullpo.gui.slick;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-
 import mu.nu.nullpo.util.CustomProperties;
-
 import org.apache.log4j.Logger;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * Rule select (after mode selection)

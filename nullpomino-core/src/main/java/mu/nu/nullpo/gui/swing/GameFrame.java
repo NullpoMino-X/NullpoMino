@@ -28,13 +28,12 @@
 */
 package mu.nu.nullpo.gui.swing;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.HeadlessException;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Toolkit;
+import mu.nu.nullpo.game.net.NetObserverClient;
+import mu.nu.nullpo.game.play.GameManager;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -46,12 +45,6 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import javax.swing.JFrame;
-
-import mu.nu.nullpo.game.net.NetObserverClient;
-import mu.nu.nullpo.game.play.GameManager;
-
-import org.apache.log4j.Logger;
 
 /**
  * Game screen frame

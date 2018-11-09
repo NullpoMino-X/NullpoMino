@@ -28,13 +28,12 @@
 */
 package mu.nu.nullpo.gui.slick;
 
-import java.util.LinkedList;
-
 import org.apache.log4j.Logger;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+
+import java.util.LinkedList;
 
 /**
  * Mode select screen

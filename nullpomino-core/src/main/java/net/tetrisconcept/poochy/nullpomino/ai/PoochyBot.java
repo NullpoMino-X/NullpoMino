@@ -1,16 +1,11 @@
 package net.tetrisconcept.poochy.nullpomino.ai;
 
-import mu.nu.nullpo.game.component.Controller;
-import mu.nu.nullpo.game.component.Field;
-import mu.nu.nullpo.game.component.Piece;
-import mu.nu.nullpo.game.component.SpeedParam;
-import mu.nu.nullpo.game.component.WallkickResult;
+import mu.nu.nullpo.game.component.*;
 import mu.nu.nullpo.game.event.EventReceiver;
 import mu.nu.nullpo.game.play.GameEngine;
 import mu.nu.nullpo.game.play.GameManager;
 import mu.nu.nullpo.game.subsystem.ai.DummyAI;
 import mu.nu.nullpo.util.GeneralUtil;
-
 import org.apache.log4j.Logger;
 
 /**

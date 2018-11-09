@@ -28,11 +28,11 @@
 */
 package mu.nu.nullpo.game.net;
 
-import java.io.Serializable;
-import java.nio.channels.SocketChannel;
-
 import mu.nu.nullpo.game.component.RuleOptions;
 import mu.nu.nullpo.game.play.GameEngine;
+
+import java.io.Serializable;
+import java.nio.channels.SocketChannel;
 
 /**
  * Player information

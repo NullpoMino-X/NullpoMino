@@ -1,9 +1,5 @@
 package mu.nu.nullpo.game.subsystem.mode;
 
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.Random;
-
 import mu.nu.nullpo.game.component.BGMStatus;
 import mu.nu.nullpo.game.component.Block;
 import mu.nu.nullpo.game.component.Controller;
@@ -17,6 +13,10 @@ import mu.nu.nullpo.game.subsystem.wallkick.Wallkick;
 import mu.nu.nullpo.gui.net.NetLobbyFrame;
 import mu.nu.nullpo.util.GeneralUtil;
 import net.omegaboshi.nullpomino.game.subsystem.randomizer.Randomizer;
+
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * Special base class for netplay VS modes. Up to 6 players supported.

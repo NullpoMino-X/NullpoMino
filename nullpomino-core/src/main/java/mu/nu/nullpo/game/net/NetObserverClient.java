@@ -28,11 +28,10 @@
 */
 package mu.nu.nullpo.game.net;
 
-import java.io.IOException;
-
 import mu.nu.nullpo.game.play.GameManager;
-
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
 
 /**
  * Client(ObserverUse)

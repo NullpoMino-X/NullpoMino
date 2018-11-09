@@ -28,9 +28,8 @@
 */
 package mu.nu.nullpo.tool.musiclisteditor;
 
-import java.io.File;
-
 import javax.swing.filechooser.FileFilter;
+import java.io.File;
 
 /**
  * A simple file filter

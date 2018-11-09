@@ -28,13 +28,12 @@
 */
 package mu.nu.nullpo.game.net;
 
+import mu.nu.nullpo.game.play.GameManager;
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Locale;
-
-import mu.nu.nullpo.game.play.GameManager;
-
-import org.apache.log4j.Logger;
 
 /**
  * Client(PlayerUse)

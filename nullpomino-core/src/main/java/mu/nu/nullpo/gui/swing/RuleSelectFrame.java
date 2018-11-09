@@ -28,9 +28,12 @@
 */
 package mu.nu.nullpo.gui.swing;
 
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.HeadlessException;
+import mu.nu.nullpo.game.play.GameEngine;
+import mu.nu.nullpo.util.CustomProperties;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -38,19 +41,6 @@ import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.util.Arrays;
 import java.util.LinkedList;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-
-import mu.nu.nullpo.game.play.GameEngine;
-import mu.nu.nullpo.util.CustomProperties;
-
-import org.apache.log4j.Logger;
 
 /**
  * Rules of selection screen frame

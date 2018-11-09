@@ -28,20 +28,19 @@
 */
 package mu.nu.nullpo.util;
 
+import mu.nu.nullpo.game.component.Piece;
+import mu.nu.nullpo.game.component.RuleOptions;
+import mu.nu.nullpo.game.subsystem.ai.DummyAI;
+import mu.nu.nullpo.game.subsystem.wallkick.Wallkick;
+import net.omegaboshi.nullpomino.game.subsystem.randomizer.Randomizer;
+import org.apache.log4j.Logger;
+
 import java.io.FileInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-
-import org.apache.log4j.Logger;
-
-import mu.nu.nullpo.game.component.Piece;
-import mu.nu.nullpo.game.component.RuleOptions;
-import mu.nu.nullpo.game.subsystem.ai.DummyAI;
-import mu.nu.nullpo.game.subsystem.wallkick.Wallkick;
-import net.omegaboshi.nullpomino.game.subsystem.randomizer.Randomizer;
 
 /**
  * Generic static utils

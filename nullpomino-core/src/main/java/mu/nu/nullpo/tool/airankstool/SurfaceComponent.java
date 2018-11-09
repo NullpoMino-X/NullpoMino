@@ -1,11 +1,7 @@
 package mu.nu.nullpo.tool.airankstool;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-
-import javax.swing.JComponent;
+import javax.swing.*;
+import java.awt.*;
 
 class SurfaceComponent extends JComponent {
 

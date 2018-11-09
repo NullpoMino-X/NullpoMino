@@ -28,19 +28,15 @@
 */
 package mu.nu.nullpo.game.subsystem.mode;
 
-import java.util.LinkedList;
-import java.util.Random;
-
-import mu.nu.nullpo.game.component.BGMStatus;
-import mu.nu.nullpo.game.component.Block;
-import mu.nu.nullpo.game.component.Controller;
-import mu.nu.nullpo.game.component.Field;
-import mu.nu.nullpo.game.component.Piece;
+import mu.nu.nullpo.game.component.*;
 import mu.nu.nullpo.game.event.EventReceiver;
 import mu.nu.nullpo.game.play.GameEngine;
 import mu.nu.nullpo.game.play.GameManager;
 import mu.nu.nullpo.util.CustomProperties;
 import mu.nu.nullpo.util.GeneralUtil;
+
+import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * VS-BATTLE Mode

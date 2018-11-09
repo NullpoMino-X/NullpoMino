@@ -28,8 +28,6 @@
 */
 package mu.nu.nullpo.game.subsystem.mode;
 
-import java.util.ArrayList;
-
 import mu.nu.nullpo.game.component.Block;
 import mu.nu.nullpo.game.component.Controller;
 import mu.nu.nullpo.game.event.EventReceiver;
@@ -38,6 +36,8 @@ import mu.nu.nullpo.game.play.GameManager;
 import mu.nu.nullpo.game.subsystem.mode.menu.AbstractMenuItem;
 import mu.nu.nullpo.util.CustomProperties;
 import mu.nu.nullpo.util.GeneralUtil;
+
+import java.util.ArrayList;
 
 /**
  * Dummy implementation of game mode. Used as a base of most game modes.

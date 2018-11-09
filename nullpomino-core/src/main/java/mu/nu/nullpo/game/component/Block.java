@@ -28,9 +28,9 @@
 */
 package mu.nu.nullpo.game.component;
 
-import java.io.Serializable;
-
 import mu.nu.nullpo.game.play.GameEngine;
+
+import java.io.Serializable;
 
 /**
  * Block

@@ -1,10 +1,8 @@
 package mu.nu.nullpo.gui.slick;
 
 import mu.nu.nullpo.game.play.GameEngine;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**

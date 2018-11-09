@@ -28,6 +28,9 @@
 */
 package mu.nu.nullpo.game.net;
 
+import biz.source_code.base64Coder.Base64Coder;
+import org.cacas.java.gnu.tools.Crypt;
+
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -36,10 +39,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
-
-import org.cacas.java.gnu.tools.Crypt;
-
-import biz.source_code.base64Coder.Base64Coder;
 
 /**
  * Network utils

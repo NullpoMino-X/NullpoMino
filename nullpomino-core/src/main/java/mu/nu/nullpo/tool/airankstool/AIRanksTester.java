@@ -1,10 +1,11 @@
 package mu.nu.nullpo.tool.airankstool;
 
-import java.util.Random;
-
 import mu.nu.nullpo.game.component.Piece;
 import mu.nu.nullpo.game.subsystem.ai.RanksAI;
-import net.omegaboshi.nullpomino.game.subsystem.randomizer.*;
+import net.omegaboshi.nullpomino.game.subsystem.randomizer.History4RollsRandomizer;
+import net.omegaboshi.nullpomino.game.subsystem.randomizer.Randomizer;
+
+import java.util.Random;
 
 
 class AIRanksTester {

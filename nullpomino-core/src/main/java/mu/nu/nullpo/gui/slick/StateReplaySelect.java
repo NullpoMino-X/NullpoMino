@@ -28,21 +28,19 @@
 */
 package mu.nu.nullpo.gui.slick;
 
+import mu.nu.nullpo.game.component.Statistics;
+import mu.nu.nullpo.util.CustomProperties;
+import mu.nu.nullpo.util.GeneralUtil;
+import org.apache.log4j.Logger;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.state.StateBasedGame;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Arrays;
-
-import mu.nu.nullpo.game.component.Statistics;
-import mu.nu.nullpo.util.CustomProperties;
-import mu.nu.nullpo.util.GeneralUtil;
-
-import org.apache.log4j.Logger;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
 
 /**
  * State selection screen replay

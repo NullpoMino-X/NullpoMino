@@ -28,10 +28,6 @@
 */
 package mu.nu.nullpo.game.subsystem.mode;
 
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.Locale;
-
 import mu.nu.nullpo.game.component.Block;
 import mu.nu.nullpo.game.component.Controller;
 import mu.nu.nullpo.game.component.Piece;
@@ -41,6 +37,10 @@ import mu.nu.nullpo.game.play.GameEngine;
 import mu.nu.nullpo.game.play.GameManager;
 import mu.nu.nullpo.gui.net.NetLobbyFrame;
 import mu.nu.nullpo.util.GeneralUtil;
+
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Locale;
 
 /**
  * NET-VS-BATTLE Mode

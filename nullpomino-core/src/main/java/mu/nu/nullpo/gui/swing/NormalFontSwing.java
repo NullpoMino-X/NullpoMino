@@ -28,7 +28,7 @@
 */
 package mu.nu.nullpo.gui.swing;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 
 /**
  * Normal display class string (SwingFor)

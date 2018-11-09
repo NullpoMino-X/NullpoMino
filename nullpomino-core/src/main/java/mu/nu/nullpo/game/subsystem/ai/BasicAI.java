@@ -34,7 +34,6 @@ import mu.nu.nullpo.game.component.Piece;
 import mu.nu.nullpo.game.component.WallkickResult;
 import mu.nu.nullpo.game.play.GameEngine;
 import mu.nu.nullpo.game.play.GameManager;
-
 import org.apache.log4j.Logger;
 
 /**

@@ -1,10 +1,10 @@
 package mu.nu.nullpo.game.net;
 
-import java.io.Serializable;
-import java.util.LinkedList;
-
 import mu.nu.nullpo.game.component.Statistics;
 import mu.nu.nullpo.util.CustomProperties;
+
+import java.io.Serializable;
+import java.util.LinkedList;
 
 /**
  * Single player mode record

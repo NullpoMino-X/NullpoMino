@@ -28,8 +28,6 @@
 */
 package mu.nu.nullpo.gui.slick;
 
-import java.util.ArrayList;
-
 import mu.nu.nullpo.game.component.Block;
 import mu.nu.nullpo.game.component.Field;
 import mu.nu.nullpo.game.component.Piece;
@@ -38,11 +36,13 @@ import mu.nu.nullpo.game.play.GameEngine;
 import mu.nu.nullpo.game.play.GameManager;
 import mu.nu.nullpo.gui.EffectObject;
 import mu.nu.nullpo.util.CustomProperties;
-
-//import org.apache.log4j.Logger;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+
+import java.util.ArrayList;
+
+//import org.apache.log4j.Logger;
 
 /**
  * Game event Processing and rendering process (SlickVersion)

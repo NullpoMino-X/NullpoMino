@@ -1,14 +1,13 @@
 package mu.nu.nullpo.gui.slick;
 
-import java.util.HashMap;
-
-import org.apache.log4j.Logger;
-import org.newdawn.slick.Input;
-
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 import net.java.games.input.Keyboard;
+import org.apache.log4j.Logger;
+import org.newdawn.slick.Input;
+
+import java.util.HashMap;
 
 /**
  * JInput keyboard input manager

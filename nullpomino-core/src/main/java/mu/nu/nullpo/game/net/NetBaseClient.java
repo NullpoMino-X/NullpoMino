@@ -28,6 +28,8 @@
 */
 package mu.nu.nullpo.game.net;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
@@ -35,8 +37,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import org.apache.log4j.Logger;
 
 /**
  * Client(Basic part)

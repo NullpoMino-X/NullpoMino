@@ -1,11 +1,10 @@
 package mu.nu.nullpo.game.net;
 
+import mu.nu.nullpo.util.GeneralUtil;
+import org.apache.log4j.Logger;
+
 import java.io.Serializable;
 import java.util.Calendar;
-
-import mu.nu.nullpo.util.GeneralUtil;
-
-import org.apache.log4j.Logger;
 
 /**
  * Chat message

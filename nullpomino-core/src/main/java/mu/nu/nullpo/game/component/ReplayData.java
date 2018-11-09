@@ -28,10 +28,10 @@
 */
 package mu.nu.nullpo.game.component;
 
+import mu.nu.nullpo.util.CustomProperties;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import mu.nu.nullpo.util.CustomProperties;
 
 /**
  * Used in the replay button input dataClass of

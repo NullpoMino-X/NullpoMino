@@ -28,21 +28,17 @@
 */
 package mu.nu.nullpo.gui.slick;
 
-import java.awt.Color;
-import java.io.File;
-import java.util.LinkedList;
-
 import mu.nu.nullpo.game.component.BGMStatus;
-
 import org.apache.log4j.Logger;
-import org.newdawn.slick.BigImage;
+import org.newdawn.slick.*;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.font.effects.ShadowEffect;
 import org.newdawn.slick.openal.SoundStore;
+
+import java.awt.Color;
+import java.io.File;
+import java.util.LinkedList;
 
 /**
  * Class to the management of image and sound

@@ -28,22 +28,21 @@
  */
 package mu.nu.nullpo.game.subsystem.ai;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.Arrays;
-
 import mu.nu.nullpo.game.component.Controller;
 import mu.nu.nullpo.game.component.Field;
 import mu.nu.nullpo.game.component.Piece;
 import mu.nu.nullpo.game.play.GameEngine;
 import mu.nu.nullpo.game.play.GameManager;
-import mu.nu.nullpo.tool.airankstool.Ranks;
 import mu.nu.nullpo.tool.airankstool.AIRanksConstants;
+import mu.nu.nullpo.tool.airankstool.Ranks;
 import mu.nu.nullpo.util.CustomProperties;
-
 import org.apache.log4j.Logger;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.Arrays;
 
 public class RanksAI extends DummyAI implements Runnable {
 

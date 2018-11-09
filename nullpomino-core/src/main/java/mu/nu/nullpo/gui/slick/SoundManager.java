@@ -28,11 +28,11 @@
 */
 package mu.nu.nullpo.gui.slick;
 
-import java.net.URL;
-import java.util.HashMap;
-
 import org.apache.log4j.Logger;
 import org.newdawn.slick.Sound;
+
+import java.net.URL;
+import java.util.HashMap;
 
 /**
  * Sound effectsManager

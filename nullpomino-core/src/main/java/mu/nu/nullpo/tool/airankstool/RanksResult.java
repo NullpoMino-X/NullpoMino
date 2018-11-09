@@ -1,6 +1,9 @@
 package mu.nu.nullpo.tool.airankstool;
 
-import java.awt.BorderLayout;
+import org.jdesktop.swingworker.SwingWorker;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -8,16 +11,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.ProgressMonitor;
-
-import org.jdesktop.swingworker.SwingWorker;
 
 class RanksResult extends JDialog implements ActionListener, PropertyChangeListener {
     /**

@@ -28,10 +28,10 @@
 */
 package mu.nu.nullpo.gui.net;
 
-import java.io.IOException;
-
 import mu.nu.nullpo.game.net.NetPlayerClient;
 import mu.nu.nullpo.game.net.NetRoomInfo;
+
+import java.io.IOException;
 
 /**
  * Lobby event interface (also used by netplay modes)

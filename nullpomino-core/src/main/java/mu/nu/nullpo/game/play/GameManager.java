@@ -33,7 +33,6 @@ import mu.nu.nullpo.game.component.BackgroundStatus;
 import mu.nu.nullpo.game.event.EventReceiver;
 import mu.nu.nullpo.game.subsystem.mode.GameMode;
 import mu.nu.nullpo.util.CustomProperties;
-
 import org.apache.log4j.Logger;
 
 /**

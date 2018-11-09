@@ -28,13 +28,12 @@
 */
 package mu.nu.nullpo.util;
 
+import mu.nu.nullpo.game.subsystem.mode.GameMode;
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import mu.nu.nullpo.game.subsystem.mode.GameMode;
-
-import org.apache.log4j.Logger;
 
 /**
  * Mode Management class

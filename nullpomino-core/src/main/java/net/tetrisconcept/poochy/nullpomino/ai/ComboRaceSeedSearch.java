@@ -7,7 +7,6 @@ import mu.nu.nullpo.game.play.GameEngine;
 import mu.nu.nullpo.game.subsystem.ai.DummyAI;
 import mu.nu.nullpo.game.subsystem.wallkick.StandardWallkick;
 import net.omegaboshi.nullpomino.game.subsystem.randomizer.BagNoSZORandomizer;
-
 import org.apache.log4j.Logger;
 
 class ComboRaceSeedSearch extends DummyAI {

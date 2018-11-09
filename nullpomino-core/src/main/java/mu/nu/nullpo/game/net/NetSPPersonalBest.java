@@ -1,9 +1,9 @@
 package mu.nu.nullpo.game.net;
 
+import mu.nu.nullpo.util.CustomProperties;
+
 import java.io.Serializable;
 import java.util.LinkedList;
-
-import mu.nu.nullpo.util.CustomProperties;
 
 /**
  * Single player personal record manager

@@ -1,9 +1,9 @@
 package mu.nu.nullpo.tool.airankstool;
 
+import mu.nu.nullpo.game.component.Piece;
+
 import java.io.Serializable;
 import java.util.Arrays;
-
-import mu.nu.nullpo.game.component.Piece;
 
 public class Ranks implements Serializable {
     /**

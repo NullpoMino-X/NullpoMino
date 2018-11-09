@@ -28,45 +28,6 @@
 */
 package mu.nu.nullpo.gui.swing;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Locale;
-
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.border.EtchedBorder;
-import javax.swing.filechooser.FileFilter;
-
 import mu.nu.nullpo.game.component.RuleOptions;
 import mu.nu.nullpo.game.net.NetObserverClient;
 import mu.nu.nullpo.game.net.NetPlayerClient;
@@ -85,9 +46,18 @@ import mu.nu.nullpo.util.CustomProperties;
 import mu.nu.nullpo.util.GeneralUtil;
 import mu.nu.nullpo.util.ModeManager;
 import net.omegaboshi.nullpomino.game.subsystem.randomizer.Randomizer;
-
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import javax.swing.filechooser.FileFilter;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Locale;
 
 /**
  * NullpoMino SwingVersion

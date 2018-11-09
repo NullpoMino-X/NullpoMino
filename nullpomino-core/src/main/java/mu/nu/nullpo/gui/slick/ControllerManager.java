@@ -28,12 +28,12 @@
 */
 package mu.nu.nullpo.gui.slick;
 
-import java.util.ArrayList;
-
 import org.apache.log4j.Logger;
 import org.lwjgl.input.Controller;
 import org.lwjgl.input.Controllers;
 import org.newdawn.slick.Input;
+
+import java.util.ArrayList;
 
 /**
  * Joystick Related processing

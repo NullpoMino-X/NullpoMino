@@ -28,38 +28,25 @@
 */
 package mu.nu.nullpo.gui.slick;
 
+import mu.nu.nullpo.game.net.NetObserverClient;
+import mu.nu.nullpo.game.play.GameEngine;
+import mu.nu.nullpo.util.CustomProperties;
+import mu.nu.nullpo.util.ModeManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.lwjgl.opengl.Display;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.util.Log;
+
+import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
-import javax.swing.JOptionPane;
-
-import mu.nu.nullpo.game.net.NetObserverClient;
-import mu.nu.nullpo.game.play.GameEngine;
-import mu.nu.nullpo.util.CustomProperties;
-import mu.nu.nullpo.util.ModeManager;
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import org.lwjgl.opengl.Display;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.ScalableGame;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.util.Log;
 
 /**
  * NullpoMino SlickVersion

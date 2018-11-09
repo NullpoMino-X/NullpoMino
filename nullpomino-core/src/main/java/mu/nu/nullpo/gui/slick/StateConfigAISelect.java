@@ -28,19 +28,17 @@
 */
 package mu.nu.nullpo.gui.slick;
 
+import mu.nu.nullpo.game.subsystem.ai.AIPlayer;
+import mu.nu.nullpo.util.GeneralUtil;
+import org.apache.log4j.Logger;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.state.StateBasedGame;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import mu.nu.nullpo.game.subsystem.ai.AIPlayer;
-import mu.nu.nullpo.util.GeneralUtil;
-
-import org.apache.log4j.Logger;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
 
 /**
  * AI config screen state

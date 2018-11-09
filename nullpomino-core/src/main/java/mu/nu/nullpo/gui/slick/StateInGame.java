@@ -28,8 +28,6 @@
 */
 package mu.nu.nullpo.gui.slick;
 
-import org.apache.log4j.Logger;
-
 import mu.nu.nullpo.game.component.RuleOptions;
 import mu.nu.nullpo.game.play.GameManager;
 import mu.nu.nullpo.game.subsystem.ai.DummyAI;
@@ -38,6 +36,7 @@ import mu.nu.nullpo.game.subsystem.wallkick.Wallkick;
 import mu.nu.nullpo.util.CustomProperties;
 import mu.nu.nullpo.util.GeneralUtil;
 import net.omegaboshi.nullpomino.game.subsystem.randomizer.Randomizer;
+import org.apache.log4j.Logger;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

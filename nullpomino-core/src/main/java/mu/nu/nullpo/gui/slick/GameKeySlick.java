@@ -30,7 +30,6 @@ package mu.nu.nullpo.gui.slick;
 
 import mu.nu.nullpo.gui.GameKeyDummy;
 import mu.nu.nullpo.util.CustomProperties;
-
 import org.newdawn.slick.Input;
 
 /**

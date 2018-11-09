@@ -28,16 +28,15 @@
 */
 package mu.nu.nullpo.gui.swing;
 
-import java.awt.Image;
+import org.apache.log4j.Logger;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.LinkedList;
-
-import javax.imageio.ImageIO;
-
-import org.apache.log4j.Logger;
 
 /**
  * Class to the management of image and sound
