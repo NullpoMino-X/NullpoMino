@@ -19,7 +19,7 @@ See the GitHub [Releases](https://github.com/NullpoMino-X/NullpoMino/releases) p
 
 ## How to run
 
-This game needs Java Runtime Environment 1.5 or newer version to run. <https://www.java.com/en/>
+This game needs Java Runtime Environment 1.8 or newer version to run. <https://www.java.com/en/>
 
 ### Windows
 
